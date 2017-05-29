@@ -1,4 +1,6 @@
 \documentclass{article}
+\usepackage{todonotes}
+
 \begin{document}
 
 \title{Here could be a title}\label{here-could-be-a-title}
@@ -15,26 +17,72 @@ In our use case we introduce a version of coordinated multiple views that allows
 \end{abstract}
 
 \section{Introduction}
-In many cases, insights based on visualization techniques like coordinated multiple views are used for strategic decision-making and are made for experts.
-Thus, most data visualizations are made exclusively for professionals.
-There is, however, a big popularity of data visualizations in the media.
-E.g. data journalism is the fastest growing segment in journalism.
-We believe that advanced data visualization techniques like coordinated multiple views can be successfully transferred in to a public environment.
 
-\section{Research}
+\subsection{Motivation}
 
+In many cases, insights based on visualization techniques like coordinated multiple views are used by experts for strategic decision-making.
+Thus, many advanced data visualizations techniques are made exclusively for professionals.
 
-Jan Kriesel states that ``there is only one broadband connection to the
-brain: The eyes``.
+On the other hand, data visualizations widely popular:
+Data journalism is one of the emerging fields in journalism.
+Facts and figures are the strongest evidence for opinionated journalistic reports.
+Not even a football match can do without a number based analysis.
 
-\section{Use case}
+We believe that advanced data visualization techniques can be adopted and used in both an informative and strategic way by professionals as well as lay people.
 
-We use data visualizations in the context of the tool \rufu{}.
-\rufu{} is a web application were payers of German public broadcasting fees can publish how their broadcasting fees should be spent.
-Since 2013 these fees are compulsory for every home in Germany and as a consequence, broadcasting receives €8,000,000,000 annually.
+\subsection{Problem statement}
+
+We use data visualizations in the context of the expenditure of public broadcasting fees in Germany.
+Since the year 2013 these fees are compulsory for every home in Germany and as a consequence, broadcasting receives €8,000,000,000 annually.
 Yet it is subject to little or no public feedback, ranking, or even debate on what constitutes value or quality.
-With \rufu{} we see a win-win situation where payers of the fees and broadcasters can benefit from each other.
-Broadcasters can evaluate their program which in turn creates a public feedback for payers of the broadcasting fees.
+There is neither transparency on how the fees are spent nor a public feedback on how the fees should be spent.
+
+We see a great potential, a win-win situation to be precise, because both payers of the broadcasting fees and broadcasters themselves can benefit from each other.
+As of 2013 there is no legal opt-out anymore and people have a strong interest to say how their fees should be spent.
+Broadcasters on the other hand can evaluate their program based on the interests delivered by the users.
+This reciprocal relationship would create a public feedback for payers and a better program for broadcasters.
+
+This problem is perfectly suitable to be tackled with data visualizations.
+\todo[inline]{Explain why data visualization are good for communication}
+
+\subsubsection{Use case specific problems}
+There is striking discrepancy of intentions between available metrics and the programme mandate of public broadcasting.
+TV ratings are produced by a group of 5000 representative homes equipped with a special TV box, while Radio ratings are carried out by phone surveys over the course of a year.
+Although created differently they share the same intention, i.e.\ to sell advertisements. 
+
+We suspect that public broadcasting suffers from an overfitting problem:
+Since broadcasters have usage data only, they focus too much on people who still listen to the radio and watch TV.
+Young people especially show a decreasing interest in conventional mass media which has been shown in surveys.
+Public broadcasting fails in that respect that everybody has to pay and thus has a right to get access to information.
+
+
+\subsection{Aim of the work}
+Our goal is to create meaningful data.
+This includes to encourage as many people as possible to publish their interests.
+It also involves to provide access to information about the preferred broadcasts.
+We suggest that users actively publish data and passively examine the summary of data of all users.
+Broadcasters on the other side receive the data and evaluate the program and actively change the program according to the interest of the audience.
+\todo[inline]{explain feedback loop}
+The mentioned data visualization need to be interactive to show the user the desired level of detail.
+
+\subsubsection{Use case specific goals}
+We propose the hypothesis that people behave differently when they decide consciously and when they decide with their remote control.
+The hypothesis goes even further, explicit interests may fit to the programme mandate of public broadcasting in contrast to TV and radio ratings which are based on usage data.
+
+As the data is usage independent we want to gain knowledge about the entire population including those who don't use broadcasting at all.
+In this manner we want to tackle the mentioned overfitting problem.
+
+\subsection{Methodological approach}
+Our methodology is to collect real data from existing users.
+To achieve that we develop a web application where payers of German public broadcasting fees can publish how their broadcasting fees should be spent.
+This tool is called \rufu{}.
+The workflow goes like this:
+\begin{enumerate}
+\item Users search for broadcasts
+\item Users select broadcasts they want to support
+\item Users distribute a virtual budget among the selected broadcasts
+\end{enumerate}
+\todo[inline]{explain tool in depth}
 
 Considering data visualizations we are facing two challenges in this scenario:
 \begin{enumerate}
@@ -43,6 +91,18 @@ Visualisations must be easy to understand and intuitive to interact with
 \item
 Visualizations must be detailed enough to evaluate the program
 \end{enumerate}
+
+Make the website user friendly, e.g. guide users as quick as possible to broadcasts they want to support.
+
+\section{State of the art}
+
+\todo[inline]{What are combined multiple views?}
+\todo[inline]{Current drawbacks}
+
+Jan Kriesel states that ``there is only one broadband connection to the
+brain: The eyes``.
+
+
 
 \end{document}
 
