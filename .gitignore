@@ -24,3 +24,5 @@
 *.pdf
 *.fdb_latexmk
 *.fls
+
+!/pdf/*.pdf
