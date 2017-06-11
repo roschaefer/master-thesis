@@ -1,5 +1,7 @@
 \documentclass{article}
 \usepackage{todonotes}
+\usepackage{biblatex}
+\bibliography{bibliography}
 
 \begin{document}
 
@@ -8,19 +10,22 @@
 \maketitle
 
 \newcommand{\rufu}{Rundfunk \textsc{mitbestimmen}}
+\newcommand\hmm[1]{\ifnum\ifhmode\spacefactor\else2000\fi>1000 \uppercase{#1}\else#1\fi}
+\newcommand{\cmv}{\hmm{c}oordinated multiple view}
+\newcommand{\cmvs}{\hmm{c}oordinated multiple views}
 
 \begin{abstract}
 Coordinated multiple views are a well known area of research and it has
 been shown that they create better insights.
-However, coordinated multiple views tend to become increasingly complex.
-In our use case we introduce a version of coordinated multiple views that allows for different levels of detail and therefore targets both experts and lay people.
+However, \cmvs{} tend to become increasingly complex.
+In our use case we introduce a version of \cmvs{} that allows for different levels of detail and therefore targets both experts and lay people.
 \end{abstract}
 
 \section{Introduction}
 
 \subsection{Motivation}
 
-In many cases, insights based on visualization techniques like coordinated multiple views are used by experts for strategic decision-making.
+In many cases, insights based on visualization techniques like \cmvs{} are used by experts for strategic decision-making.
 Thus, many advanced data visualizations techniques are made exclusively for professionals.
 
 On the other hand, data visualizations widely popular:
@@ -48,7 +53,7 @@ This problem is perfectly suitable to be tackled with data visualizations.
 \subsubsection{Use case specific problems}
 There is striking discrepancy of intentions between available metrics and the programme mandate of public broadcasting.
 TV ratings are produced by a group of 5000 representative homes equipped with a special TV box, while Radio ratings are carried out by phone surveys over the course of a year.
-Although created differently they share the same intention, i.e.\ to sell advertisements. 
+Although created differently they share the same intention, i.e.\ to sell advertisements.
 
 We suspect that public broadcasting suffers from an overfitting problem:
 Since broadcasters have usage data only, they focus too much on people who still listen to the radio and watch TV.
@@ -96,14 +101,30 @@ Make the website user friendly, e.g. guide users as quick as possible to broadca
 
 \section{State of the art}
 
+
 \todo[inline]{What are combined multiple views?}
+According to \textcite{cmv:state_of_the_art} \cmvs{} is just ``a specific exploratory visualization technique that enables users to explore their data''.
+\cmvs{} are characterized by the fact, that they show multiple views side-by-side.
+Most multiple coordinated views also provide some kind of brushing technique. 
+``The technique of brushing is the principle approach, where elements are selected (and highlighted) in one display, concurrently the same information in any other linked display is also highlighted.''\cite{cmv:state_of_the_art}
+
+\begin{figure}[h]
+\centering
+  \missingfigure{\Huge state of the art example}
+\caption{Example of a moder \cmvs{} system}
+\label{OneOfMyMissingFigures}
+\end{figure}
+
+
+\todo[inline]{What did work?}
+\todo[inline]{What didn't work?}
 \todo[inline]{Current drawbacks}
 
-Jan Kriesel states that ``there is only one broadband connection to the
-brain: The eyes``.
 
 
 
+
+\printbibliography
 \end{document}
 
 
