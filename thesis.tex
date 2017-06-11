@@ -15,10 +15,12 @@
 \newcommand{\cmvs}{\hmm{c}oordinated multiple views}
 
 \begin{abstract}
-Coordinated multiple views are a well known area of research and it has
-been shown that they create better insights.
-However, \cmvs{} tend to become increasingly complex.
-In our use case we introduce a version of \cmvs{} that allows for different levels of detail and therefore targets both experts and lay people.
+  Visualizing geographical data on a map is both obvious and intuitive.
+  Tree maps allow to visualize arbitrary, hiearchical and multidimensional data using nested rectangles.
+  While tree maps look similar to a map, the represented information may not be as intuitive and comprehensible.
+  There is no predefined layouting for arbitrary data, let alone no well known layouting that everybody feels comfortable with.
+  In this thesis, we propose a coordinated multiple view combining the advantages of both.
+  The user gets easy access and selects information through a geographical map and that same data will be displayed in a tree map.
 \end{abstract}
 
 \section{Introduction}
@@ -100,30 +102,57 @@ Visualizations must be detailed enough to evaluate the program
 Make the website user friendly, e.g. guide users as quick as possible to broadcasts they want to support.
 
 \section{State of the art}
-
-
-\todo[inline]{What are combined multiple views?}
-According to \textcite{cmv:state_of_the_art} \cmvs{} is just ``a specific exploratory visualization technique that enables users to explore their data''.
-\cmvs{} are characterized by the fact, that they show multiple views side-by-side.
-Most multiple coordinated views also provide some kind of brushing technique. 
-``The technique of brushing is the principle approach, where elements are selected (and highlighted) in one display, concurrently the same information in any other linked display is also highlighted.''\cite{cmv:state_of_the_art}
+Visualizing hierarchical data has long tradition.
+The traditional representation of a tree is a rooted, directed graph with the root node at the top.
+An everyday use case is a directory tree example of a file system, e.g. in file browsers or command line utilities like \texttt{tree} in UNIX.
+As \textcite{Shneiderman1992} mentions, this visualization becomes increasingly large when displaying more than one node and soon exceeds the entire screen size.
+\textcite{Johnson1991} proposes the tree map visualization technique, in which each node is a rectangle whose area is proportional to some attribute, thus making 100\% use of the available screen size.
+It is notable that tree maps are structured in the same way like the visualization of a federal state, as seen in figure~\ref{fig:research:treemap}.
+The difference is that there is no predefined algorithm for layouting, which brings up one of the major disadvantages of tree maps:
+As the algorithm determines the order of placement, small changes in the input data can lead to a large change in the layout of the resulting tree map.
+\todo{What are tree maps?}
 
 \begin{figure}[h]
 \centering
-  \missingfigure{\Huge state of the art example}
-\caption{Example of a moder \cmvs{} system}
-\label{OneOfMyMissingFigures}
+  \missingfigure{Random tree map}
+\caption{Example of a tree map}
+\label{fig:research:treemap}
+\end{figure}
+
+In 2004, \textcite{Bladh2004} transfer the concept of tree maps from two dimensional into three dimensional space.
+The introduce StepTree, which is a three dimensional tree map to display a directory layout.
+It ``differs from Treemap in that it employs three dimensions by stacking each subdirectory on top of its parent directory.''\cite{Bladh2004}
+3D tree maps are superior to 2D tree maps for tasks with a pronounced topological challenge.
+Yet, 3D visualizations come with other disadvantages as superimposition of objects and a complex view point navigation.
+\todo{What are 3D tree maps?}
+
+
+\todo[inline]{How do tree maps relate to geographical data?}
+\subsection{Coordinated multiple views}
+According to \textcite{cmv:state_of_the_art} \cmvs{} is just ``a specific exploratory visualization technique that enables users to explore their data''.
+\cmvs{} are characterized by the fact, that they show multiple views side-by-side.
+Most multiple coordinated views also provide some kind of brushing technique.
+``The technique of brushing is the principle approach, where elements are selected (and highlighted) in one display, concurrently the same information in any other linked display is also highlighted.''\cite{cmv:state_of_the_art}
+\todo{What are CMVs?}
+
+\begin{figure}[h]
+\centering
+  \missingfigure{random CMV}
+\caption{Example of a \cmvs{}}
+\label{fig:research:cmv}
 \end{figure}
 
 
 \todo[inline]{What did work?}
 \todo[inline]{What didn't work?}
 \todo[inline]{Current drawbacks}
+\todo[inline]{What's missing}
 
 
 
 
 
+\clearpage
 \printbibliography
 \end{document}
 
