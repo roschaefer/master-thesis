@@ -1,11 +1,46 @@
 \documentclass{article}
 \usepackage{todonotes}
 \usepackage{biblatex}
+\usepackage{listings}
+\usepackage{color}
+\definecolor{lightgray}{rgb}{.9,.9,.9}
+\definecolor{darkgray}{rgb}{.4,.4,.4}
+\definecolor{purple}{rgb}{0.65, 0.12, 0.82}
+\lstdefinelanguage{JavaScript}{
+  keywords={break, case, catch, continue, debugger, default, delete, do, else, false, finally, for, function, if, in, instanceof, new, null, return, switch, this, throw, true, try, typeof, var, void, while, with},
+  morecomment=[l]{//},
+  morecomment=[s]{/*}{*/},
+  morestring=[b]',
+  morestring=[b]",
+  ndkeywords={class, export, boolean, throw, implements, import, this},
+  keywordstyle=\color{blue}\bfseries,
+  ndkeywordstyle=\color{darkgray}\bfseries,
+  identifierstyle=\color{black},
+  commentstyle=\color{purple}\ttfamily,
+  stringstyle=\color{red}\ttfamily,
+  sensitive=true
+}
+
+\lstset{
+   language=JavaScript,
+   backgroundcolor=\color{lightgray},
+   extendedchars=true,
+   basicstyle=\footnotesize\ttfamily,
+   showstringspaces=false,
+   showspaces=false,
+   numbers=left,
+   numberstyle=\footnotesize,
+   numbersep=9pt,
+   tabsize=2,
+   breaklines=true,
+   showtabs=false,
+   captionpos=b
+}
 \bibliography{bibliography}
 
 \begin{document}
 
-\title{Here could be a title}\label{here-could-be-a-title}
+\title{Multiple coordinated views of tree maps on massive geo data}
 \author{Robert Schäfer\\ Department of Computer Graphics, Hasso-Plattner-Institut}
 \maketitle
 
@@ -27,6 +62,7 @@
 
 \subsection{Motivation}
 
+
 In many cases, insights based on visualization techniques like \cmvs{} are used by experts for strategic decision-making.
 Thus, many advanced data visualizations techniques are made exclusively for professionals.
 
@@ -38,6 +74,7 @@ Not even a football match can do without a number based analysis.
 We believe that advanced data visualization techniques can be adopted and used in both an informative and strategic way by professionals as well as lay people.
 
 \subsection{Problem statement}
+\todo[inline]{Start off with the problem of tree map vs geo map}
 
 We use data visualizations in the context of the expenditure of public broadcasting fees in Germany.
 Since the year 2013 these fees are compulsory for every home in Germany and as a consequence, broadcasting receives €8,000,000,000 annually.
@@ -80,28 +117,24 @@ As the data is usage independent we want to gain knowledge about the entire popu
 In this manner we want to tackle the mentioned overfitting problem.
 
 \subsection{Methodological approach}
-Our methodology is to collect real data from existing users.
-To achieve that we develop a web application where payers of German public broadcasting fees can publish how their broadcasting fees should be spent.
-This tool is called \rufu{}.
-The workflow goes like this:
-\begin{enumerate}
-\item Users search for broadcasts
-\item Users select broadcasts they want to support
-\item Users distribute a virtual budget among the selected broadcasts
-\end{enumerate}
-\todo[inline]{explain tool in depth}
 
-Considering data visualizations we are facing two challenges in this scenario:
+We use different visualization techniques on two existing data sets:
 \begin{enumerate}
-\item
-Visualisations must be easy to understand and intuitive to interact with
-\item
-Visualizations must be detailed enough to evaluate the program
+  \item
+    A web application called ``Rundfunk MITBESTIMMEN'' with interactive visualizations of user data.
+  \item
+    A web application with three dimensional visualizations of geographical data provided by the local authorities.
 \end{enumerate}
 
-Make the website user friendly, e.g. guide users as quick as possible to broadcasts they want to support.
 
 \section{State of the art}
+Like every technique, data visualization serves a purpose.
+\textcite{Few2013} mentions sense-making (also called data analysis) and communication.
+Statistical information is abstract and in data visualization ``we must find a way to give form to that which has none.''\cite{Few2013}
+
+
+
+\subsection{Visualization of hierarchical data}
 Visualizing hierarchical data has long tradition.
 The traditional representation of a tree is a rooted, directed graph with the root node at the top.
 An everyday use case is a directory tree example of a file system, e.g. in file browsers or command line utilities like \texttt{tree} in UNIX.
@@ -142,12 +175,68 @@ Most multiple coordinated views also provide some kind of brushing technique.
 \label{fig:research:cmv}
 \end{figure}
 
+\section{Methodology}
+
+\subsection{Data sets}
+We evaluate our research with real data coming from existing software.
+There is an existing visual analytics platform for software analytics and there is our web application called ``Rundfunk MITBESTIMMEN''.
+\todo[inline]{Explain the two different data sets}
+
+\subsubsection{Rundfunk MITBESTIMMEN}
+As the time of writing we have 548 users with 33342 votes.
+
+\begin{figure}[h]
+\centering
+  \includegraphics[width=\textwidth]{images/er}
+  \caption{Database schema of Rundfunk MITBESTIMMEN app}
+  \label{fig:data:rundfunk}
+\end{figure}
+
+Figure~\ref{fig:data:rundfunk} shows how user data is connected to entities, i.e. broadcasts in our use case.
+When the user clicks on the support button on a broadcast, a ``Selection'' will be saved in the database, connecting the user with the broadcast along with a response ``positive''.
+Even if the user sees a broadcast and does not click on the support button,  selection will be saved with the response ``neutral''.
+On both the user and the broadcast model, we have additional data.
+Every user has a \texttt{latitude}, \texttt{longitude} as well as a \texttt{city}, \texttt{postal\_code} and a \texttt{state\_code}.
+The broadcast in turn is connected to a \texttt{Station} model and also has a \texttt{Medium}.
+With this data, we can reason about the following questions:
+\begin{enumerate}
+  \item
+    Which broadcasts are selected together very often?
+  \item
+    Which groups of broadcasts, e.g. all broadcasts of a specific TV station, are performing very well?
+  \item
+    Wich broadcasts are selected in wich region of Germany?
+\end{enumerate}
+
+For the latter, we aggregate the user data with regions and output a geojson file that can be used in our data visualization tool.
+Listing~\ref{lst:geojson:example} shows an example.
+\lstinputlisting[language=JavaScript, label={lst:geojson:example}, caption={Geojson example}]{listings/example.geojson}
+
+
+To achieve that we develop a web application where payers of German public broadcasting fees can publish how their broadcasting fees should be spent.
+This tool is called \rufu{}.
+The workflow goes like this:
+\begin{enumerate}
+\item Users search for broadcasts
+\item Users select broadcasts they want to support
+\item Users distribute a virtual budget among the selected broadcasts
+\end{enumerate}
+\todo[inline]{explain tool in depth}
+
+Considering data visualizations we are facing two challenges in this scenario:
+\begin{enumerate}
+\item
+Visualisations must be easy to understand and intuitive to interact with
+\item
+Visualizations must be detailed enough to evaluate the program
+\end{enumerate}
+
+Make the website user friendly, e.g. guide users as quick as possible to broadcasts they want to support.
 
 \todo[inline]{What did work?}
 \todo[inline]{What didn't work?}
 \todo[inline]{Current drawbacks}
 \todo[inline]{What's missing}
-
 
 
 
