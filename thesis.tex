@@ -179,13 +179,41 @@ Most multiple coordinated views also provide some kind of brushing technique.
 
 \section{Methodology}
 
+Since we deal with real world problems, we aim to evaluate the developed tools on real users and existing data.
+
 \subsection{Data sets}
-We evaluate our research with real data coming from existing software.
-There is an existing visual analytics platform for software analytics and there is our web application called ``Rundfunk MITBESTIMMEN''.
+We have two existing data sets:
+The first one, called ``RISO'', consists of statistical data from various German administrations.
+The second one consists of user data that was collected through a web application called ``Rundfunk MITBESTIMMEN''.
+
 \todo[inline]{Explain the two different data sets}
 
+\subsubsection{RISO}
+
+The RISO data base is used in by local authorities to get insights about governmental KPIs to assist local and regional decision making.
+It is a relational database with the three most important tables listed in figure~\ref{fig:data:riso}.
+\begin{figure}[h]
+\centering
+  \includegraphics[width=\textwidth]{images/riso}
+  \caption{The three most important tables of the RISO database}
+  \label{fig:data:riso}
+\end{figure}
+
+The largest table is called ``data'', with approximately 10,466,600 records, which holds all values along with the survey date.
+This data is connected to a feature table through a foreign key called ``id\_mm''.
+In the feature table we can find the description for every referenced feature, e.g. population density, working population in agriculture, education spending.
+On the other side, the geometry data is stored in the ``regions'' table and in particular the ``geojson'' column.
+The ``data'' and ``regions'' tables are, again, connected via the foreign key ``id\_re''.
+
+The schema of the ``RISO'' database allows to add data of arbitrary size, features and completeness as long as we can store continuous values along withe geometry data.
+
+
 \subsubsection{Rundfunk MITBESTIMMEN}
-As the time of writing we have 548 users with 33342 votes.
+Unlike the ``RISO'' database, the schema of ``Rundfunk MITBESTIMMEN'' follows the requirements of a productive web application.
+This web application allows user to vote on broadcasts.
+Figure~\ref{fig:data:rundfunk} shows how user data is connected to entities, i.e. broadcasts in our use case.
+Consequently, the ``users'' table is connected to the ``broadcasts'' table via the ``selections'' table.
+The selections table stores the response of a user to the broadcast, e.g. ``positive'' or ``neutral'', as well as an amount in Euro in case the user wants to allocate a share of the monhtly budget to that broadcast.
 
 \begin{figure}[h]
 \centering
@@ -194,12 +222,13 @@ As the time of writing we have 548 users with 33342 votes.
   \label{fig:data:rundfunk}
 \end{figure}
 
-Figure~\ref{fig:data:rundfunk} shows how user data is connected to entities, i.e. broadcasts in our use case.
-When the user clicks on the support button on a broadcast, a ``Selection'' will be saved in the database, connecting the user with the broadcast along with a response ``positive''.
-Even if the user sees a broadcast and does not click on the support button,  selection will be saved with the response ``neutral''.
-On both the user and the broadcast model, we have additional data.
+On both the users table and the broadcast table, we have additional data.
 Every user has a \texttt{latitude}, \texttt{longitude} as well as a \texttt{city}, \texttt{postal\_code} and a \texttt{state\_code}.
-The broadcast in turn is connected to a \texttt{Station} model and also has a \texttt{Medium}.
+The broadcast in turn is connected to a \texttt{Station} and also has a \texttt{Medium}.
+A station could be a tv or a radio station.
+The medium of a broadcast can be one of the following: \texttt{TV}, \texttt{Radio}, \texttt{Online} or \texttt{Other}.
+\\
+\\
 With this data, we can reason about the following questions:
 \begin{enumerate}
   \item
