@@ -65,51 +65,51 @@
 
 \section{Introduction}
 The human brain processes visual information better than it processes text.
-According to \textcite{Kusinitz2014}, it processes visual information 60,000 faster than text and visual content makes up even 93\% of all human communication.
-As a result, whenever data analysis needs to be easily understandable, some kind of data visualization is performed.
-One area of application are decision making systems.
-These decision making systems show valuable information, usually performance measures of an organziation, and guide managers to take a decision.
-Data visualizations are essential here, as managers normally do not have the resources to do an in depth analysis with the numbers only.
-It seems plausible, that the impact of data driven decision making systems will increase as first results suggest:
-\textcite{McAfee2012} from the MIT Center of Digital Business showed that organizations driven most by data-based decision making had 4\% higher productivity rates and 6\% higher profits.
-Much research is still needed regarding the effects of combined data visualizations in decision making.
-However back in 1997 \textcite{Mayer1997} conducted eight studies to compare the effect of using multimedia on university students.
-The effect is striking: When using combined visual and verbal explanations the generation of creative problem solutions increased by an average of more than 50\%.
+As a result, whenever a data analysis needs to be presented in a easily understandable manner, usually some kind of data visualization is performed.
+Combined multiple views are a combination of different visualization techniques and exploit the respective advantages of the used visualizations.
+This combination may yield a greater value to the user, but it is unclear what kind visualization techniques work best together and for which kind of data.
+In this thesis, we consider the question how a combination of a geographical visualization with a hierarchical visualization perform and if this combined visualization works in the field of administrative data and other data, that is used for the evaluation of radio and TV broadcasting.
 
-So the application of combined data visualization techniques in decision making is a promising strategy.
-What data visualization techniques in particular work well in combination?
+% Three moves
 %\todo{What is the topic about?}
 \todo{Establish the niche, why is there further research on your topic?}
 \todo{Introduce the current research, what's the hypothesis, the research question?}
 
 \subsection{Motivation}
 
-
-In many cases, insights based on visualization techniques like \cmvs{} are used by experts for strategic decision-making.
-Thus, many advanced data visualizations techniques are made exclusively for professionals.
-
-On the other hand, data visualizations widely popular:
-Data journalism is one of the emerging fields in journalism.
-Facts and figures are the strongest evidence for opinionated journalistic reports.
-Not even a football match can do without a number based analysis.
-
-We believe that advanced data visualization techniques can be adopted and used in both an informative and strategic way by professionals as well as lay people.
+One main task in decision making systems is to deliver appropriate, on-time, interactive and easily to understand data analyses.
+Visualizations are an obvious choice for managers who demand a quick overview on performance data.
+In fact \textcite{Kusinitz2014} explains that the human brain processes visual information 60,000 times faster than text and visual content makes up even 93\% of all human communication.
+Data visualizations are essential here, as managers normally do not have the resources to do an in depth analysis with the numbers only.
+Furthermore, it can be expected that the technology adaption these applications continues along with the applied visualization.
+\textcite{McAfee2012} from the MIT Center of Digital Business showed that organizations driven most by data-based decision making had 4\% higher productivity rates and 6\% higher profits.
+However, there is little research in the performance combined multiple visualizations in the field of evaluation and decision making.
+There might be a great potential.
+Back in 1997 \textcite{Mayer1997} conducted eight studies to compare the effect of using multimedia on university students.
+The studies showed that when using combined visual and verbal explanations the generation of creative problem solutions increased by an average of more than 50\%.
 
 \subsection{Problem statement}
+So the application of combined data visualization techniques in decision making seems to be a promising strategy.
+Nevertheless is is unclear, which visualization techniques are the most suitable to be used in combination.
+If we know what kind of data we are dealing with, what are the best suited visualization techniques?
+Let's say we have multidimensional data, is there an order how people access these multiple dimensions?
+How do these visualizations perform and what are best practices to be considered for their implementation?
+
+
+
+\subsubsection{Tree maps vs. choropleth maps}
 \todo[inline]{Start off with the problem of tree map vs geo map}
 
-We use data visualizations in the context of the expenditure of public broadcasting fees in Germany.
-Since the year 2013 these fees are compulsory for every home in Germany and as a consequence, broadcasting receives €8,000,000,000 annually.
-Yet it is subject to little or no public feedback, ranking, or even debate on what constitutes value or quality.
-There is neither transparency on how the fees are spent nor a public feedback on how the fees should be spent.
+In our particular use cases we have two sets of data for different purposes, but both share geographical and hierarchical features.
 
-We see a great potential, a win-win situation to be precise, because both payers of the broadcasting fees and broadcasters themselves can benefit from each other.
-As of 2013 there is no legal opt-out anymore and people have a strong interest to say how their fees should be spent.
-Broadcasters on the other hand can evaluate their program based on the interests delivered by the users.
-This reciprocal relationship would create a public feedback for payers and a better program for broadcasters.
+Tree maps are a good visualization for hierarchical data but they are not very familiar and lack a stable layouting algorithm.
+Choropleth maps are a natural choice for displaying data that is distributed among regions but they are also restricted on regional data.
+Because of the characteristics of our uses cases, we focus our combined multiple views on these two visualization techniques.
 
-This problem is perfectly suitable to be tackled with data visualizations.
-\todo[inline]{Explain why data visualization are good for communication}
+
+
+
+
 
 \subsubsection{Use case specific problems}
 There is striking discrepancy of intentions between available metrics and the programme mandate of public broadcasting.
@@ -206,8 +206,15 @@ Most multiple coordinated views also provide some kind of brushing technique.
 Since we deal with real world problems, we aim to evaluate the developed tools on real users and existing data.
 
 \subsection{Data sets}
-We have two existing data sets:
-The first one, called ``RISO'', consists of statistical data from various German administrations.
+For our uses cases, we have two different data sets:
+The first one, called ``RISO'', consists of statistical data from various German administrations and is used by the authorities for urban planning and policy strategies.
+The other set of data consists of a user ranking of public broadcasting in Germany, i.e. entities, mostly TV and radio broadcasts, are liked or disliked by people.
+The latter is public data and can be used by media researchers of broadcasting corporations but also targets media journalists and the general audience.
+
+Both data sets share some characteristics.
+The administrative data connects certain features with certain regions of Germany.
+As Germany is a federal state, larger regions consist of many other smaller regions.
+
 The second one consists of user data that was collected through a web application called ``Rundfunk MITBESTIMMEN''.
 
 \todo[inline]{Explain the two different data sets}
@@ -300,6 +307,32 @@ Make the website user friendly, e.g. guide users as quick as possible to broadca
 \printbibliography
 \end{document}
 
+
+
+%In many cases, insights based on visualization techniques like \cmvs{} are used by experts for strategic decision-making.
+%Thus, many advanced data visualizations techniques are made exclusively for professionals.
+%
+%On the other hand, data visualizations widely popular:
+%Data journalism is one of the emerging fields in journalism.
+%Facts and figures are the strongest evidence for opinionated journalistic reports.
+%Not even a football match can do without a number based analysis.
+%
+%We believe that advanced data visualization techniques can be adopted and used in both an informative and strategic way by professionals as well as lay people.
+
+
+
+% We use data visualizations in the context of the expenditure of public broadcasting fees in Germany.
+% Since the year 2013 these fees are compulsory for every home in Germany and as a consequence, broadcasting receives €8,000,000,000 annually.
+% Yet it is subject to little or no public feedback, ranking, or even debate on what constitutes value or quality.
+% There is neither transparency on how the fees are spent nor a public feedback on how the fees should be spent.
+% 
+% We see a great potential, a win-win situation to be precise, because both payers of the broadcasting fees and broadcasters themselves can benefit from each other.
+% As of 2013 there is no legal opt-out anymore and people have a strong interest to say how their fees should be spent.
+% Broadcasters on the other hand can evaluate their program based on the interests delivered by the users.
+% This reciprocal relationship would create a public feedback for payers and a better program for broadcasters.
+% 
+% This problem is perfectly suitable to be tackled with data visualizations.
+% \todo[inline]{Explain why data visualization are good for communication}
 
 %Our use case is creating a tool to publicly evaluate public broadcasting in Germany.
 
