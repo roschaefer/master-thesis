@@ -46,10 +46,14 @@
 \author{Robert Schäfer\\ Department of Computer Graphics, Hasso-Plattner-Institut}
 \maketitle
 
-\newcommand{\rufu}{Rundfunk \textsc{mitbestimmen}}
+\newcommand{\rufu}{``Rundfunk \textsc{MITBESTIMMEN}''}
 \newcommand\hmm[1]{\ifnum\ifhmode\spacefactor\else2000\fi>1000 \uppercase{#1}\else#1\fi}
 \newcommand{\cmv}{\hmm{c}oordinated multiple view}
 \newcommand{\cmvs}{\hmm{c}oordinated multiple views}
+\newcommand{\map}{2D Map}
+\newcommand{\maps}{2D Maps}
+\newcommand{\tmap}{2.5 Tree Map}
+\newcommand{\tmaps}{2.5 Tree Maps}
 
 \begin{abstract}
   Numerous visualization techniques exist for data-driven decision making applications.
@@ -65,10 +69,13 @@
 
 \section{Introduction}
 The human brain processes visual information better than it processes text.
-As a result, whenever a data analysis needs to be presented in a easily understandable manner, usually some kind of data visualization is performed.
-Combined multiple views are a combination of different visualization techniques and exploit the respective advantages of the used visualizations.
+As a result, the most tangible data analyses usually come with some sort of data visualization.
+Data visualizations on a computer allow for user interactions and different levels of granularity according to the customer demands, which provides a great user experience.
+There are a multitude of different techniques.
+\cmvs{} take data visualizations to the next level by exploiting the respective advantages of the used visualizations as much as possible.
 This combination may yield a greater value to the user, but it is unclear what kind visualization techniques work best together and for which kind of data.
-In this thesis, we consider the question how a combination of a geographical visualization with a hierarchical visualization perform and if this combined visualization works in the field of administrative data and other data, that is used for the evaluation of radio and TV broadcasting.
+How a user interact with \cmvs{} and how it differs from the use of single visualizations is another question worth to investigate.
+In this thesis, we consider the question how a combination of a geographical visualization with a hierarchical visualization performs, for what kind of data this combination is suitable and what interaction patterns apply.
 
 % Three moves
 %\todo{What is the topic about?}
@@ -77,6 +84,92 @@ In this thesis, we consider the question how a combination of a geographical vis
 
 \subsection{Motivation}
 
+We create data visualizations of multi-dimensional, hierarchical and geographical data.
+Namely, we develop \rufu{} which is an application for German citizen to publish which public broadcasts should benefit from their broadcasting fees.
+The output of this application is a public user ranking and it can be used by broadcasting corporations to evaluate their program.
+Data visualizations guide media researchers, journalists and the general audience to draw conclusions.
+In this particular use case, the selection and interaction with the data may happen geographically, but the desired visualization could show e.g. changes over time or relationships within the data.
+
+To explain this a little deeper:
+Public broadcasting in Germany is organized federally, a German home belongs to the jurisdiction of a public broadcasting corporation.
+But the produced content can be used all German citizen and it is even required to be free and available to everyone.
+So this means that e.g. a media researcher might want to select all users from within a certain region, but is actually interested into relationships of broadcasts that are preferred by people from that area.
+
+So the interaction and selection of data should happen in another view than the actual data visualization.
+Since we deal with geographical data, we use geometry on a map for selection and interaction.
+For the visualization, we use a different technique, e.g. a tree map if we deal with hierarchical data.
+
+\subsection{Problem statement}
+
+% \todo[inline]{Start off with the problem of tree map vs geo map}
+
+Tree maps visualize hierarchical data on a two dimensional canvas and are particularly suitable if the proportions of the data should be emphasized.
+When dealing with both multidimensional and geographical data, problems arise when other features than geographical features are used for the layouting of the tree map.
+As the order and placement of items depend on their specific values and hierarchy, items that should belong together according to their geographic circumstances may be scattered across the tree map.
+This obstructs the comprehensibility of tree maps and makes it especially difficult to select geographical units of items.
+
+
+\subsection{Research questions}
+
+When dealing with multi-dimensional data, is it helpful to have multiple views for these dimensions?
+What are best practices for the implementation of \cmvs{}?
+Is it great user experience to have one view for interaction and another view for the data visualization to create insights?
+Do people prefer one view for the interaction, e.g. the geographical dimension, or do they use all views for interaction and visualization alternately?
+
+\subsection{Objectives}
+
+\todo[inline]{No section without text}
+
+\paragraph{Literature research and implementation overview}
+In this paper we will give an overview on \cmvs{} and focus on visual analytics as well as massive, geographical data.
+Existing concepts and implementations of \cmvs{} are examined and summarized in an overview.
+
+\paragraph{Development of a basic \cmv{}}
+The existing Visual Analytics platform is supplemented with a basic \cmv{} system.
+Modules, interfaces and functionalities of the \cmv{} system are designed, coordinated and prototypically implemented.
+In particular, a method for arranging multiple \cmv{} widgets in a \cmv{} layout and storing \cmv{} layouts is developed.
+\todo{This is translated from the draft. Honestly I don't understand what this part is about}
+
+\paragraph{Development of a brushing feature}
+We develop coupling mechanisms and interaction mechanisms between \maps{} (for map-based representation) and \tmaps{} (for abstract information representation).
+The functionality includes zoom per object or selection with a bounding box.
+This creates a powerful selection mechanism, which can be used to select the data from the map-based representation in the \tmap{}.
+
+\paragraph{Demonstration and evaluation}
+\cmv{} layouts and suitable views are implemented and tested for the selected test data.
+Based on the test data sets, the \cmv{} implementation is examined and evaluated for design criteria\cite{Baldonado2000}, general usability aspects\cite{Roberts2007} and usage for typical Visual Analytics tasks.
+
+% Our goal is to create meaningful data.
+% This includes to encourage as many people as possible to publish their interests.
+% It also involves to provide access to information about the preferred broadcasts.
+% We suggest that users actively publish data and passively examine the summary of data of all users.
+% Broadcasters on the other side receive the data and evaluate the program and actively change the program according to the interest of the audience.
+% \todo[inline]{explain feedback loop}
+% The mentioned data visualization need to be interactive to show the user the desired level of detail.
+
+%\subsubsection{Use case specific goals}
+%We propose the hypothesis that people behave differently when they decide consciously and when they decide with their remote control.
+%The hypothesis goes even further, explicit interests may fit to the programme mandate of public broadcasting in contrast to TV and radio ratings which are based on usage data.
+
+%As the data is usage independent we want to gain knowledge about the entire population including those who don't use broadcasting at all.
+%In this manner we want to tackle the mentioned overfitting problem.
+
+\subsection{Methodological approach}
+
+In our work on the project \rufu{} we design and prototype visualizations for a very specific use case.
+We fully control the database and the database schema as well as on the user facing application on top of it.
+At the same time, we are developing a general purpose visual analytics platform for geographical and hierarchical data visualizations.
+
+For the scope of this master thesis we therefore compare implemented visualization and views.
+How do both approaches differ in development speed, value for the customer?
+What considerations need to be done regarding the database schema?
+
+\section{Structure of the work}
+
+
+\newpage
+
+\section{State of the art}
 One main task in decision making systems is to deliver appropriate, on-time, interactive and easily to understand data analyses.
 Visualizations are an obvious choice for managers who demand a quick overview on performance data.
 In fact \textcite{Kusinitz2014} explains that the human brain processes visual information 60,000 times faster than text and visual content makes up even 93\% of all human communication.
@@ -88,72 +181,12 @@ There might be a great potential.
 Back in 1997 \textcite{Mayer1997} conducted eight studies to compare the effect of using multimedia on university students.
 The studies showed that when using combined visual and verbal explanations the generation of creative problem solutions increased by an average of more than 50\%.
 
-\subsection{Problem statement}
 So the application of combined data visualization techniques in decision making seems to be a promising strategy.
 Nevertheless is is unclear, which visualization techniques are the most suitable to be used in combination.
 If we know what kind of data we are dealing with, what are the best suited visualization techniques?
 Let's say we have multidimensional data, is there an order how people access these multiple dimensions?
 How do these visualizations perform and what are best practices to be considered for their implementation?
 
-
-
-\subsubsection{Tree maps vs. choropleth maps}
-\todo[inline]{Start off with the problem of tree map vs geo map}
-
-In our particular use cases we have two sets of data for different purposes, but both share geographical and hierarchical features.
-
-Tree maps are a good visualization for hierarchical data but they are not very familiar and lack a stable layouting algorithm.
-Choropleth maps are a natural choice for displaying data that is distributed among regions but they are also restricted on regional data.
-Because of the characteristics of our uses cases, we focus our combined multiple views on these two visualization techniques.
-
-
-
-
-
-
-\subsubsection{Use case specific problems}
-There is striking discrepancy of intentions between available metrics and the programme mandate of public broadcasting.
-TV ratings are produced by a group of 5000 representative homes equipped with a special TV box, while Radio ratings are carried out by phone surveys over the course of a year.
-Although created differently they share the same intention, i.e.\ to sell advertisements.
-
-We suspect that public broadcasting suffers from an overfitting problem:
-Since broadcasters have usage data only, they focus too much on people who still listen to the radio and watch TV.
-Young people especially show a decreasing interest in conventional mass media which has been shown in surveys.
-Public broadcasting fails in that respect that everybody has to pay and thus has a right to get access to information.
-
-
-\subsection{Aim of the work}
-Our goal is to create meaningful data.
-This includes to encourage as many people as possible to publish their interests.
-It also involves to provide access to information about the preferred broadcasts.
-We suggest that users actively publish data and passively examine the summary of data of all users.
-Broadcasters on the other side receive the data and evaluate the program and actively change the program according to the interest of the audience.
-\todo[inline]{explain feedback loop}
-The mentioned data visualization need to be interactive to show the user the desired level of detail.
-
-\subsubsection{Use case specific goals}
-We propose the hypothesis that people behave differently when they decide consciously and when they decide with their remote control.
-The hypothesis goes even further, explicit interests may fit to the programme mandate of public broadcasting in contrast to TV and radio ratings which are based on usage data.
-
-As the data is usage independent we want to gain knowledge about the entire population including those who don't use broadcasting at all.
-In this manner we want to tackle the mentioned overfitting problem.
-
-\subsection{Methodological approach}
-
-We use different visualization techniques on two existing data sets:
-\begin{enumerate}
-  \item
-    A web application called ``Rundfunk MITBESTIMMEN'' with interactive visualizations of user data.
-  \item
-    A web application with three dimensional visualizations of geographical data provided by the local authorities.
-\end{enumerate}
-
-\section{Structure of the work}
-
-
-\newpage
-
-\section{State of the art}
 Like every technique, data visualization serves a purpose.
 \textcite{Few2013} mentions sense-making (also called data analysis) and communication.
 Statistical information is abstract and in data visualization ``we must find a way to give form to that which has none.''\cite{Few2013}
@@ -161,7 +194,7 @@ Statistical information is abstract and in data visualization ``we must find a w
 
 
 \subsection{Visualization of hierarchical data}
-Visualizing hierarchical data has long tradition.
+Due to the hierarchical nature of the of our use cases, we focus on the visualization of hierarchical data which has a long tradition.
 The traditional representation of a tree is a rooted, directed graph with the root node at the top.
 An everyday use case is a directory tree example of a file system, e.g. in file browsers or command line utilities like \texttt{tree} in UNIX.
 As \textcite{Shneiderman1992} mentions, this visualization becomes increasingly large when displaying more than one node and soon exceeds the entire screen size.
@@ -188,10 +221,10 @@ Yet, 3D visualizations come with other disadvantages as superimposition of objec
 
 \todo[inline]{How do tree maps relate to geographical data?}
 \subsection{Coordinated multiple views}
-According to \textcite{cmv:state_of_the_art} \cmvs{} is just ``a specific exploratory visualization technique that enables users to explore their data''.
+According to \textcite{Roberts2007} \cmvs{} is just ``a specific exploratory visualization technique that enables users to explore their data''.
 \cmvs{} are characterized by the fact, that they show multiple views side-by-side.
 Most multiple coordinated views also provide some kind of brushing technique.
-``The technique of brushing is the principle approach, where elements are selected (and highlighted) in one display, concurrently the same information in any other linked display is also highlighted.''\cite{cmv:state_of_the_art}
+``The technique of brushing is the principle approach, where elements are selected (and highlighted) in one display, concurrently the same information in any other linked display is also highlighted.''\cite{Roberts2007}
 \todo{What are CMVs?}
 
 \begin{figure}[h]
@@ -308,6 +341,16 @@ Make the website user friendly, e.g. guide users as quick as possible to broadca
 \end{document}
 
 
+
+%\subsubsection{Use case specific problems}
+%There is striking discrepancy of intentions between available metrics and the programme mandate of public broadcasting.
+%TV ratings are produced by a group of 5000 representative homes equipped with a special TV box, while Radio ratings are carried out by phone surveys over the course of a year.
+%Although created differently they share the same intention, i.e.\ to sell advertisements.
+%
+%We suspect that public broadcasting suffers from an overfitting problem:
+%Since broadcasters have usage data only, they focus too much on people who still listen to the radio and watch TV.
+%Young people especially show a decreasing interest in conventional mass media which has been shown in surveys.
+%Public broadcasting fails in that respect that everybody has to pay and thus has a right to get access to information.
 
 %In many cases, insights based on visualization techniques like \cmvs{} are used by experts for strategic decision-making.
 %Thus, many advanced data visualizations techniques are made exclusively for professionals.
