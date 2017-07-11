@@ -46,15 +46,20 @@
 \author{Robert Schäfer\\ Department of Computer Graphics, Hasso-Plattner-Institut}
 \maketitle
 
-\newcommand{\rufu}{``Rundfunk \textsc{MITBESTIMMEN}''}
+\newcommand{\rufu}{\textsc{Rundfunk MITBESTIMMEN}}
 \newcommand\hmm[1]{\ifnum\ifhmode\spacefactor\else2000\fi>1000 \uppercase{#1}\else#1\fi}
 \newcommand{\cmv}{\hmm{c}oordinated multiple view}
 \newcommand{\cmvs}{\hmm{c}oordinated multiple views}
-\newcommand{\map}{2D Map}
-\newcommand{\maps}{2D Maps}
-\newcommand{\tmap}{2.5 Tree Map}
-\newcommand{\tmaps}{2.5 Tree Maps}
+\newcommand{\map}{\textsc{2D} map}
+\newcommand{\maps}{\textsc{2D} maps}
+\newcommand{\tmap}{\textsc{2.5D} tree map}
+\newcommand{\tmaps}{\textsc{2.5D} tree maps}
+\newcommand{\threedTmap}{\textsc{3D} tree map}
+\newcommand{\threedTmaps}{\textsc{3D} tree maps}
+\newcommand{\twodTmaps}{\textsc{2D} tree maps}
 \newcommand{\dss}{\hmm{d}ecision support systems}
+\newcommand{\riso}{\texttt{RISO}}
+\newcommand{\attr}[1]{\texttt{\detokenize{#1}}}
 
 \begin{abstract}
   Numerous visualization techniques exist for data-driven \dss{}.
@@ -83,7 +88,7 @@ In this thesis, we consider the question how a combination of a geographical vis
 \todo[inline]{Establish the niche, why is there further research on your topic?}
 \todo[inline]{Introduce the current research, what's the hypothesis, the research question?}
 
-\subsection{Motivation}
+\subsection{Motivation}\label{sec:outline}
 
 We create data visualizations of multi-dimensional, hierarchical and geographical data.
 Namely, we develop \rufu{} which is an application for German citizen to publish which public broadcasts should benefit from their broadcasting fees.
@@ -99,6 +104,8 @@ So this means that e.g. a media researcher might want to select all users from w
 So the interaction and selection of data should happen in another view than the actual data visualization.
 Since we deal with geographical data, we use geometry on a map for selection and interaction.
 For the visualization, we use a different technique, e.g. a tree map if we deal with hierarchical data.
+
+\todo[inline]{More scenarios here}
 
 \subsection{Problem statement}
 
@@ -121,24 +128,21 @@ Do people prefer one view for the interaction, e.g. the geographical dimension, 
 
 \todo[inline]{No section without text}
 
-\paragraph{Literature research and implementation overview}
-In this paper we will give an overview on \cmvs{} and focus on visual analytics as well as massive, geographical data.
-Existing concepts and implementations of \cmvs{} are examined and summarized in an overview.
 
-\paragraph{Development of a basic \cmv{}}
-The existing Visual Analytics platform is supplemented with a basic \cmv{} system.
+\paragraph{Basic \cmv{}}
+The existing visual analytics platform is supplemented with a basic \cmv{} system.
 Modules, interfaces and functionalities of the \cmv{} system are designed, coordinated and prototypically implemented.
 In particular, a method for arranging multiple \cmv{} widgets in a \cmv{} layout and storing \cmv{} layouts is developed.
-\todo[inline]{This is translated from the draft. Honestly I don't understand what this part is about}
 
-\paragraph{Development of a brushing feature}
+\paragraph{Interaction with the \cmv{}}
 We develop coupling mechanisms and interaction mechanisms between \maps{} (for map-based representation) and \tmaps{} (for abstract information representation).
 The functionality includes zoom per object or selection with a bounding box.
 This creates a powerful selection mechanism, which can be used to select the data from the map-based representation in the \tmap{}.
 
 \paragraph{Demonstration and evaluation}
 \cmv{} layouts and suitable views are implemented and tested for the selected test data.
-Based on the test data sets, the \cmv{} implementation is examined and evaluated for design criteria\cite{Baldonado2000}, general usability aspects\cite{Roberts2007} and usage for typical Visual Analytics tasks.
+Based on the test data sets, the \cmv{} implementation is examined and evaluated for design criteria\cite{Baldonado2000}, general usability aspects\cite{Roberts2007} and usage for typical visual analytics tasks.
+\todo[inline]{How elaborate is it to conduct a study for the usability of the \cmv{}? Who has done that before?}
 
 % Our goal is to create meaningful data.
 % This includes to encourage as many people as possible to publish their interests.
@@ -165,13 +169,15 @@ For the scope of this master thesis we therefore compare implemented visualizati
 How do both approaches differ in development speed, value for the customer?
 What considerations need to be done regarding the database schema?
 
+\todo[inline]{What is the area(s) of research, in which this thesis can be placed into?}
 \section{Structure of the work}
-\todo[inline]{Got any structure?}
 
+In section~\ref{sec:research} we will give an overview on \cmvs{} and focus on visual analytics as well as massive, geographical data.
+Existing concepts and implementations of \cmvs{} are examined and summarized in an overview.
 
 \newpage
 
-\section{State of the art}
+\section{State of the art}\label{sec:research}
 Data visualizations are a key part in data-driven \dss{}\cite{Nada2007}\cite{Poleto2015}.
 \textcite{Few2013} mentions sense-making (also called data analysis) and communication as some of the most important purposes of data visualization.
 Statistical information is abstract and in data visualization ``we must find a way to give form to that which has none.''\cite{Few2013}
@@ -192,6 +198,8 @@ If we know what kind of data we are dealing with, what are the best suited visua
 Let's say we have multidimensional data, is there an order in how people access these multiple dimensions?
 How do these visualizations perform and what are best practices to be considered for their implementation?
 
+\subsection{Data related challenges}
+\todo[inline]{Add independent section and explain tasks like data cleansing or data reliability regarding different sources here}
 
 
 
@@ -216,22 +224,27 @@ As the order of placement depends on the respective features of the nodes, small
 \label{fig:research:treemap}
 \end{figure}
 
+\subsubsection{\threedTmaps{} and \tmaps}
+
 In 2004, \textcite{Bladh2004} transfer the concept of tree maps from two dimensional into three dimensional space.
 The introduce StepTree, which is a three dimensional tree map to display a directory layout.
 It ``differs from Treemap in that it employs three dimensions by stacking each subdirectory on top of its parent directory.''\cite{Bladh2004}
 3D tree maps are superior to 2D tree maps for tasks with a pronounced topological challenge.
 User perform significantly better in interpreting the hierarchical structure.
-Yet, 3D visualizations come with some disadvantages as superimposition of objects and a complex view point navigation.
-We can see an example of a 3D tree map in figure~\ref{fig:research:ua_treemap}
+However, 3D visualizations also introduce some disadvantages as superimposition of objects and a complex view point navigation.
+
+\textcite{Limberger2016} introduce the concept of a \tmap{} which is a constrained \threedTmap{}.
+A \tmap{} has all items attached to the ground.
+For the rest of this thesis, we will refer to this type of tree map.
+We can see an example of a \tmap{} in figure~\ref{fig:research:ua_treemap}
 
 \begin{figure}[h]
 \centering
-  \includegraphics[width=\textwidth]{images/ua_treemap_example}
-  \caption{User distribution of \rufu{} across German federal states}
+  \copyrightbox[b]{\includegraphics[width=\textwidth]{images/2_5D_treemap_example}}{ \hfill \textcopyright \hspace{1mm} Hasso-Plattner-Institut\cite{Doellner2017}}
+  \caption{Example of a \tmap{}}
 \label{fig:research:ua_treemap}
 \end{figure}
 
-\todo[inline]{What's the difference of 2.5D tree maps and 3D tree maps?}
 
 \subsection{Choropleth map}
 A choropleth map is a thematic map in which areas are shaded or patterned in proportion to the measurement of the statistical variable being displayed on the map.
@@ -242,7 +255,7 @@ They are very helpful when data is attached to enumeration unites like counties,
 
 \begin{figure}[h]
 \centering
-  \copyrightbox[b]{\includegraphics[width=\textwidth]{images/choropleth_example}}{GPLv3 Mike Bostock\cite{Bostock2017:2}}
+  \copyrightbox[b]{\includegraphics[width=\textwidth]{images/choropleth_example}}{ \hfill GPLv3 Mike Bostock\cite{Bostock2017:2}}
   \caption{Unemployment rate in the USA}
 \label{fig:research:choropleth}
 \end{figure}
@@ -264,130 +277,143 @@ As we can see in the example in figure~\ref{fig:research:cmv} there seems to be 
 
 \begin{figure}[h]
 \centering
-  \copyrightbox[b]{\includegraphics[width=\textwidth]{images/cmv_example}}{Crossfilter\cite{Bostock2017}}
+  \copyrightbox[b]{\includegraphics[width=\textwidth]{images/cmv_example}}{\hfill Crossfilter\cite{Bostock2017}}
 \caption{Airline on-time performance: Correlation of time of day with arrival delay. Most recent flight with a delay of more than 100 minutes selected.}
 \label{fig:research:cmv}
 \end{figure}
 
-\section{Methodology}
+\section{Concept}
 
 Since we deal with real world problems, we aim to evaluate the developed tools on real users and existing data.
 
 \subsection{Data sets}
 For our uses cases, we have two different data sets:
-The first one, called ``RISO'', consists of statistical data from various German administrations and is used by the authorities for urban planning and policy strategies.
-The other set of data consists of a user ranking of public broadcasting in Germany, i.e. entities, mostly TV and radio broadcasts, are liked or disliked by people.
-The latter is public data and can be used by media researchers of broadcasting corporations but also targets media journalists and the general audience.
+One data set consists of a user ranking of public broadcasting in Germany, i.e. entities, mostly TV and radio broadcasts, are liked or disliked by people.
+This data is public data and can be used by media researchers of broadcasting corporations but also targets media journalists and the general audience.
+The other set, called \riso{}, consists of statistical data from various German administrations and is used by the authorities for urban planning and policy strategies.
 
 Both data sets share some characteristics.
 The administrative data connects certain features with certain regions of Germany.
 As Germany is a federal state, larger regions consist of many other smaller regions.
 
-The second one consists of user data that was collected through a web application called ``Rundfunk MITBESTIMMEN''.
-
-\todo[inline]{Explain the two different data sets}
+The second one consists of user data that was collected through a web application called \rufu{}.
 
 \subsubsection{RISO}
 
-The RISO data base is used in by local authorities to get insights about governmental KPIs to assist local and regional decision making.
-It is a relational database with the three most important tables listed in figure~\ref{fig:data:riso}.
+The \riso{} data base is used in by local authorities to get insights about governmental KPIs to assist local and regional decision making.
+It is a relational database and a part of the data base schema is shown as an ER diagram in figure~\ref{fig:data:riso}.
 \begin{figure}[h]
 \centering
   \includegraphics[width=\textwidth]{images/riso}
-  \caption{The three most important tables of the RISO database}
+  \caption{Part of the \riso{} database schema. Primary keys are set in bold.}
   \label{fig:data:riso}
 \end{figure}
 
-The largest table is called ``data'', with approximately 10,466,600 records, which holds all values along with the survey date.
+The largest table is called \attr{data} with approximately 10,466,600 records, which holds all values along with the survey date.
 \paragraph{Features}
-This data is connected to a feature table through a foreign key called ``id\_mm''.
+This data is connected to a feature table through a foreign key called \attr{id_mm}.
 In the feature table we can find the description for every referenced feature, e.g. population density, working population in agriculture, education spending.
-The ``RISO'' system groups all features in a 4-level hierarchy:
+The \riso{} system groups all features in a 4-level hierarchy:
 \begin{enumerate}
   \item
-    katalog\_daten\_1\_kategorien
+    \attr{katalog_daten_1_kategorien}
   \item
-    katalog\_daten\_2\_themenfelder
+    \attr{katalog_daten_2_themenfelder}
   \item
-    katalog\_daten\_3\_themen
+    \attr{katalog_daten_3_themen}
   \item
-    katalog\_daten\_4\_merkmale
+    \attr{katalog_daten_4_merkmale}
 \end{enumerate}
 The actual features table is the last one in the list.
-As it is the lowest level within the hierarchy, this features table holds the most records (1234 records).
+At the lowest level within the hierarchy, this is the largest table with 1234 records.
 
 
 \paragraph{Regions}
-On the other side, the geometry data is stored in the ``regions'' table and in particular the ``geojson'' column.
-The ``data'' and ``regions'' tables are, again, connected via the foreign keys ``id\_re'' and ``regs''.
-Unlike the feature table, the regions are grouped through the ``id\_re'' that indicates the hierarchy level.
-This is a foreign key to a table ``katalog\_raumebenen'', so e.g. a region with a ``id\_re'' of 1 is a federal state of Germany.
-Both column ``id\_re'' and ``regs'' belong to the primary key of the regions table, so there will never be two regions on the same hierarchy level with the same ``regs'' id.
+On the other side, the geographical data is stored in the \attr{regions} table.
+The geometry data for each region is stored in the \attr{geojson} column and as the name suggests, the data type is a \attr{geojson}.
+The foreign keys that connect the tables \attr{data} and \attr{regions} are called \attr{id_re} and \attr{regs}.
+Unlike the feature table, the regions are grouped through the \attr{id_re} that indicates the hierarchy level.
+So the values of the \attr{id_re} column denominate the level of the hierarchy.
+E.g. a region with a \attr{id_re} of $1$ is a federal state of Germany, a region with id $13$ is a constituency.
+A textual description for the hierarchy level can be found in the \attr{katalog_raumebenen} table in column \attr{raumebene}.
+Both column \attr{id_re} and \attr{regs} belong to the primary key of the regions table, so there will never be two regions on the same hierarchy level with the same \attr{regs} id.
+
+\paragraph{Characteristics}
+As we can see, the schema of the \riso{} database follows a rather denormalized approach.
+The schema does not make a lot of assumptions regarding the input data.
+It allows to add data of arbitrary size, features and completeness as long as there is some kind of numerical data associated with some kind of geographical unit.
+This approach is suitable for a data base that incorporates data from different sources, as it is the case with the \riso{} data base.
 
 
-The schema of the ``RISO'' database allows to add data of arbitrary size, features and completeness as long as we can store continuous values along withe geometry data.
+\subsubsection{\rufu{}}
+Unlike the \riso{} database, the data base of \rufu{} is used as persistency layer.
+For that reason the data base schema follows the requirements of a productive web application.
 
+As outline in section~\ref{sec:outline} \rufu{} is an evaluation platform for public broadcasting in Germany.
+First, users vote on broadcasts, i.e. they decide if they want to support broadcast or if they do not want to support.
+As a next step, user can then make a priorisation by distributing a virtual, monthly budget among the chosen broadcasts.
 
-\subsubsection{Rundfunk MITBESTIMMEN}
-Unlike the ``RISO'' database, the schema of ``Rundfunk MITBESTIMMEN'' follows the requirements of a productive web application.
-This web application allows user to vote on broadcasts.
-Figure~\ref{fig:data:rundfunk} shows how user data is connected to entities, i.e. broadcasts in our use case.
-Consequently, the ``users'' table is connected to the ``broadcasts'' table via the ``selections'' table.
-The selections table stores the response of a user to the broadcast, e.g. ``positive'' or ``neutral'', as well as an amount in Euro in case the user wants to allocate a share of the monhtly budget to that broadcast.
+Figure~\ref{fig:data:rundfunk} shows the data base schema of the application.
+A \attr{user} is connected to \attr{broadcast} through a \attr{selection}.
+If the \attr{user} supports some a broadcast, the \attr{response} on the given \attr{selection} will be `positive'.
+If the \attr{user} does not wish to support a \attr{broadcast}, the \attr{response} will be `neutral'.
+The \attr{user} can allocate virtual money to supported broadcasts.
+The money will be stored in the column \attr{amount} of the \attr{selection}.
+The sum of all amounts for one user will never exceed the virtual budget of 17.50€.
 
 \begin{figure}[h]
 \centering
   \includegraphics[width=\textwidth]{images/er}
-  \caption{Database schema of Rundfunk MITBESTIMMEN app}
+  \caption{Database schema of the \rufu{} app}
   \label{fig:data:rundfunk}
 \end{figure}
 
-On both the users table and the broadcast table, we have additional data.
-Every user has a \texttt{latitude}, \texttt{longitude} as well as a \texttt{city}, \texttt{postal\_code} and a \texttt{state\_code}.
-The broadcast in turn is connected to a \texttt{Station} and also has a \texttt{Medium}.
-A station could be a tv or a radio station.
-The medium of a broadcast can be one of the following: \texttt{TV}, \texttt{Radio}, \texttt{Online} or \texttt{Other}.
-\\
-\\
-With this data, we can reason about the following questions:
+\paragraph{Features}
+We have both numerical as well as nominal features.
+A numerical feature could be the number of supporters from an area in Germany.
+A nominal feature could be a list of the most supported broadcasts from an area in Germany.
+Numerical and nominal features can be combined, so we could request for every region, a distribution of the desired expenditure for radio, TV, online and other broadcasts.
+
+\paragraph{Regions}
+\rufu{} stores the geometry for each region in \attr{geojson} files.
+This file holds a \attr{FeatureCollection}.
+Every \attr{Feature} is a region, the identifier is stored as a property.
+We merge the geometry data with features for every request.
+To be precise: We get all the user data, group it by the identifier \attr{state_code} and merge it with the geometry in the \attr{geojson}.
+
+\paragraph{Characteristics}
+The data base schema is a result of the specific requirements of a persistency layer.
+Changes in the source code may require a migration of the data base schema.
+
+However, we can ask a lot of questions already with common data base queries or standard data analysis tools:
 \begin{enumerate}
   \item
-    Which broadcasts are selected together very often?
+    How does the actual support of a broadcast compare to the average support of a broadcast?
   \item
-    Which groups of broadcasts, e.g. all broadcasts of a specific TV station, are performing very well?
+    What are the most popular broadcasts in Berlin?
   \item
-    Wich broadcasts are selected in wich region of Germany?
+    What is the desired ratio of genres of supported broadcasts? How important is education compared to sport?
+  \item
+    How does the support of a broadcast change over time?
+  \item
+    According to the user ranking, which broadcasts are similar to each other?
 \end{enumerate}
 
-For the latter, we aggregate the user data with regions and output a geojson file that can be used in our data visualization tool.
-Listing~\ref{lst:geojson:example} shows an example.
+
+\subsection{Implementation}
+
+An example of aggregated user data merged with geometry data can be seen in listing~\ref{lst:geojson:example}.
 \lstinputlisting[language=JavaScript, label={lst:geojson:example}, caption={Geojson example}]{listings/example.geojson}
 
+We can use this data as input for our common visual analytics software, e.g. figure~\ref{fig:implementation:user_distribution} shows the user distribution of \rufu{}.
 
-To achieve that we develop a web application where payers of German public broadcasting fees can publish how their broadcasting fees should be spent.
-This tool is called \rufu{}.
-The workflow goes like this:
-\begin{enumerate}
-\item Users search for broadcasts
-\item Users select broadcasts they want to support
-\item Users distribute a virtual budget among the selected broadcasts
-\end{enumerate}
-\todo[inline]{explain tool in depth}
+\begin{figure}[h]
+\centering
+  \includegraphics[width=\textwidth]{images/ua_example.png}
+  \caption{User distribution of \rufu{} across German federal states}
+\label{fig:implementation:user_distribution}
+\end{figure}
 
-Considering data visualizations we are facing two challenges in this scenario:
-\begin{enumerate}
-\item
-Visualisations must be easy to understand and intuitive to interact with
-\item
-Visualizations must be detailed enough to evaluate the program
-\end{enumerate}
-
-Make the website user friendly, e.g. guide users as quick as possible to broadcasts they want to support.
-
-\todo[inline]{What did work?}
-\todo[inline]{What didn't work?}
-\todo[inline]{Current drawbacks}
-\todo[inline]{What's missing}
 
 
 
