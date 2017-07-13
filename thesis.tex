@@ -47,6 +47,7 @@
 \maketitle
 
 \newcommand{\rufu}{\textsc{Rundfunk MITBESTIMMEN}}
+\newcommand{\visan}{\textsc{visual analytics platform}}
 \newcommand\hmm[1]{\ifnum\ifhmode\spacefactor\else2000\fi>1000 \uppercase{#1}\else#1\fi}
 \newcommand{\cmv}{\hmm{c}oordinated multiple view}
 \newcommand{\cmvs}{\hmm{c}oordinated multiple views}
@@ -124,13 +125,18 @@ What are best practices for the implementation of \cmvs{}?
 Is it great user experience to have one view for interaction and another view for the data visualization to create insights?
 Do people prefer one view for the interaction, e.g. the geographical dimension, or do they use all views for interaction and visualization alternately?
 
+\subsubsection{Hypotheses}
+Linkage and coupling of \cmvs{} can be enabled through visualizations, navigations and interaction techniques.
+The exploration and analysis of multi-dimensional and geographical data can be supported with these \cmvs{}.
+%Hypothese ist, dass durchs Visualisierungs-, Navigations- und Interaktionstechniken eine Kopplung von georäumlichen 2D-Kartendarstellungen und thematisch-orientierten 3D-Treemaps ermöglicht wird und dadurch die Exploration und Analyse von multidimensionalen georäumlichen Daten unterstützt werden kann.
+
 \subsection{Objectives}
 
 \todo[inline]{No section without text}
 
 
 \paragraph{Basic \cmv{}}
-The existing visual analytics platform is supplemented with a basic \cmv{} system.
+The existing \visan{} is supplemented with a basic \cmv{} system.
 Modules, interfaces and functionalities of the \cmv{} system are designed, coordinated and prototypically implemented.
 In particular, a method for arranging multiple \cmv{} widgets in a \cmv{} layout and storing \cmv{} layouts is developed.
 
@@ -161,9 +167,27 @@ Based on the test data sets, the \cmv{} implementation is examined and evaluated
 
 \subsection{Methodological approach}
 
-In our work on the project \rufu{} we design and prototype visualizations for a very specific use case.
-We fully control the database and the database schema as well as on the user facing application on top of it.
-At the same time, we are developing a general purpose visual analytics platform for geographical and hierarchical data visualizations.
+A literature research is used to gather knowledge about the state of the art with respect to \cmvs{}.
+Existing concepts and implementations available on the internet are examined and reused if possible.
+Interviews of people from the target group are conducted and the define the requirements for the application.
+A minimal viable product is developed to further validate the user requirements.
+Also, common user behaviour is observed during user tests.
+The prototype is continuously developed to allow for further experimentation.
+
+\paragraph{Scenarios}
+While implementing more features, we have two scenarios with different kind of data and different user requirements:
+\begin{itemize}
+  \item
+    In our work on the project \rufu{} we design and prototype visualizations for media researchers.
+    We fully control the database and the database schema as well as on the user facing application on top of it.
+    User requirements are tied to journalists, media researchers, broadcasting corporations.
+    The data has geographical, hierarchical, temporal and correlated characteristics.
+  \item
+    The \visan{} for administrative data is used as a more general purpose application.
+    There is no single database schema but combatibility with many sources or services.
+    User requirements are potentially unknown and part of the resarch.
+    The usage focuses especially on geographical and hierarchical data.
+\end{itemize}
 
 For the scope of this master thesis we therefore compare implemented visualization and views.
 How do both approaches differ in development speed, value for the customer?
@@ -405,7 +429,7 @@ However, we can ask a lot of questions already with common data base queries or 
 An example of aggregated user data merged with geometry data can be seen in listing~\ref{lst:geojson:example}.
 \lstinputlisting[language=JavaScript, label={lst:geojson:example}, caption={Geojson example}]{listings/example.geojson}
 
-We can use this data as input for our common visual analytics software, e.g. figure~\ref{fig:implementation:user_distribution} shows the user distribution of \rufu{}.
+We can use this data as input for our common \visan{}, e.g. figure~\ref{fig:implementation:user_distribution} shows the user distribution of \rufu{}.
 
 \begin{figure}[h]
 \centering
