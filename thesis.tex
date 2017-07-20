@@ -439,7 +439,67 @@ We can use this data as input for our common \visan{}, e.g. figure~\ref{fig:impl
 \end{figure}
 
 
+\clearpage
+\section{Implementation}
 
+This section describes the implementation details for the described concepts.
+We start with a list of to be implemented features.
+Next, we describe the architecture of the software and why we chose this architecture.
+What requirements and considerations lead to this particular architecture.
+
+\subsection{Interaction techniques}
+\textcite{Yi2007} lists seven categories of interation in information visualization:
+\begin{enumerate}
+  \item
+    \textbf{Select} mark something as interesting
+  \item
+    \textbf{Explore} show me something else
+  \item
+    \textbf{Reconfigure} show me a different arrangement
+  \item
+    \textbf{Encode} show me a different representation
+  \item
+    \textbf{Abstract/Elaborate} show me more or less detail
+  \item
+    \textbf{Filter} show me something conditionally
+  \item
+    \textbf{Connect} show me related items
+\end{enumerate}
+
+\subsubsection{Existing interactions}
+The possible inteactions in our current \visan{} can be categorized \emph{select}, \emph{explore}, \emph{reconfigure}, \emph{encode} and \emph{filter}.
+As seen in figure~\ref{fig:implementation:interaction:existing} the user can \emph{select} one item in the view by clicking on it.
+The user can reveal a tooltip showing the item properties by hovering with the mouse on the item, which is another \emph{selection}.
+The user can \emph{explore} the map in the usual manner:
+If the user drags with the mouse on the map, a panning operation is performed with the viewpoint focused on Germany, i.e. the camere moves around like a turntable.
+The zoom factor can be changed by scrolling on the canvas of the map.
+\emph{Encode} and \emph{reconfigure} techniques are performed through the menu on the left side:
+Under the ``features'' tab, the user can \emph{reconfigure} different data sets and the displayed diagram, e.g. a tree map visualization based on the geometry shape, cubes or voronoi regions.
+The tab ``Dimensions'' allows the user to \emph{encode} properties of a data set to visual attributes, e.g. the height, color and texture of an item.
+The tab ``Filter'' can be used to reduce the displayed data set along a range of continuous values.
+Figure~\ref{fig:implementation:interation:existing:filter} shows the range of visible values in the left menu.
+When the user drags the slider, the items in the map on the right side are updated interactively.
+
+\begin{figure}[h]
+\centering
+  \includegraphics[width=\textwidth]{images/implementation-interaction-existing.png}
+  \caption{
+    Items can be highlighted with a click, Bavaria is currently highlighted.
+    A mouse over reveals a tooltip showing item properties.
+    The menu on the left side allows to change the data set and the specific base visualization.}
+  \label{fig:implementation:interaction:existing:filter}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+  \includegraphics[width=\textwidth]{images/implementation-interaction-existing-filter.png}
+  \caption{ Only gas stations with a price for E10 within 1.349 Euro and 1.589 Euro are displaeyd in the map}
+  \label{fig:implementation:interaction:existing:filter}
+\end{figure}
+
+\subsubsection{Implemented interaction}
+
+During the course of this master thesis, we implemented
 
 
 \clearpage
