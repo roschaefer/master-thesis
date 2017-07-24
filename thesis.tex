@@ -487,7 +487,7 @@ When the user drags the slider, the items in the map on the right side are updat
     Items can be highlighted with a click, Bavaria is currently highlighted.
     A mouse over reveals a tooltip showing item properties.
     The menu on the left side allows to change the data set and the specific base visualization.}
-  \label{fig:implementation:interaction:existing:filter}
+  \label{fig:implementation:interaction:existing}
 \end{figure}
 
 \begin{figure}[h]
@@ -497,9 +497,53 @@ When the user drags the slider, the items in the map on the right side are updat
   \label{fig:implementation:interaction:existing:filter}
 \end{figure}
 
-\subsubsection{Implemented interaction}
+\subsubsection{Implemented interactions}
 
-During the course of this master thesis, we implemented
+In the course of this thesis we want to implement the following interactions:
+\begin{itemize}
+  \item
+    \emph{Select}: The user clicks on a building or region in a geographical map and all affected properties in the \tmap{} will be highlighted.
+  \item
+    \emph{Explore}: The user clicks on a block in the \tmap{} and the viewpoint in the geographical map will be centered on relevant area.
+  \item
+    \emph{Abstract/Elaborate}: The user selects a different granularity in the geographical map (e.g. postal code regions instead of federal states) and the change is reflected in the \tmap{}.
+  \item
+    \emph{Filter}: The user double-clicks on a region in a geographical map and the \tmap{} will be based on data of only that region.
+\end{itemize}
+
+\paragraph{Component pattern}
+State-of-the-art javascript frameworks like ReactJS and EmberJS follow the component pattern for the architecture of a single page web application.
+The component pattern imposes a hierarchical structure on a website.
+Each component is responsible for a task and may contain other components.
+The components are joined at the root node of the page.
+
+This pattern is very applicable to \cmvs{}.
+The different views of \cmvs{} share state, i.e. the feature, that is currently highlighted or the applied filter on the data.
+So the views are components and their closest common ancestor is the \cmv{} itself, controlling state and passing user interaction down to it's children. can be viewed as a component and the \cmv{} itself as the component that controls the user interaction and passes it down to all contained views.
+
+\paragraph{Actions up - Data down}
+
+Version 2.0 of Ember introduced a common phrase how to use this pattern effectively: ``Data down, actions up''\cite{Emberigniter2017}
+In the domain of \cmvs{} actions would mean user interactions, e.g. a click on a feature.
+The action will notify the controlling \cmv{} component.
+Actions may change data, and the changes will be passed to to all dependen views.
+These views are then rerendered.
+
+Examples for the kind of data that might trigger a rerendering of a view:
+\begin{itemize}
+  \item
+    The selected feature or a list of selected features
+  \item
+    A list of thresholds for certain features as a filter
+\end{itemize}
+
+\paragraph{Web components}
+
+Web components is a recent standard of the W3C\cite{W3C2017} to bring component-based software engineering to the world wide web.
+They look perfectly suited to be used in \cmvs{}.
+However the attributes of web components are string based.
+If arbitrary javascript objects need to be passed into the web component it is suggested to use one of the common javascript frameworks that allow for data binding.
+
 
 
 \clearpage
