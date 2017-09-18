@@ -202,7 +202,7 @@ How do both approaches differ in development speed, value for the customer?
 What considerations need to be done regarding the database schema?
 
 \todo[inline]{What is the area(s) of research, in which this thesis can be placed into?}
-\section{Structure of the work}
+\subsection{Structure of the work}
 
 In section~\ref{sec:research} we will give an overview on \cmvs{} and focus on visual analytics as well as massive, geographical data.
 Existing concepts and implementations of \cmvs{} are examined and summarized in an overview.
@@ -342,7 +342,7 @@ As we can see in the example in figure~\ref{fig:research:cmv} there seems to be 
 \todo[inline]{No section without text}
 
 
-\subsubsection{Existing interactions}
+\subsection{Existing interactions}
 The possible inteactions in our current \visan{} can be categorized \emph{select}, \emph{explore}, \emph{reconfigure}, \emph{encode} and \emph{filter}.
 As seen in figure~\ref{fig:analysis:interaction:existing} the user can \emph{select} one item in the view by clicking on it.
 The user can reveal a tooltip showing the item properties by hovering with the mouse on the item, which is another \emph{selection}.
@@ -495,33 +495,116 @@ However, we can ask a lot of questions already with common data base queries or 
 
 Since we deal with real world problems, we aim to evaluate the developed tools on real users and existing data.
 
-\subsection{Use-case specific interactions}
+\subsection{Common language}
+
+\subsubsection{Use-case specific interactions}
+
+
 
 We have a strong focus on coordinated multiple views consisting of a tree map and a geographical map.
+Let's have some examples how an interaction between a \tmap{} and a \map{} might work:
 
+    \begin{enumerate}
+      \item
+        User selects a feature set from the drop down in the menu. This will trigger a \emph{Reconfigure} interaction. A data set consisting of all features and their ids, geometries and metadata is transferred. The receiving components are both the \tmap{} and the \map{} which will rerender the entire visualization.
+      \item
+        User hovers with a mouse over a polygon in the \map{}. This will trigger a \emph{Select} interaction. The data is a single feature id that will be transferred to the \tmap{}, which will change the color of an box.
+      \item
+        Rotate or zoom the \tmap{}. This will also rotate or zoom the \map{}. The interaction would fall into \emph{Explore} and the shared information is the orientation of the camera and the zoom level.
+      \item
+        A click in the \tmap{} will trigger an \emph{Explore} interaction. The data is a single feature id sent to the \map{}. The map will center the viewport on the center of geometry of the respective feature.
+      \item
+        The user selects many features at once in the \map{} by dragging a rectangle. The ids of all features within the rectangle are sent to the \tmap{}. All features will be highlighted with a different color, which is therefore a \emph{Select} interaction.
+      \item
+        \emph{Reconfigure} the layouting of the \tmap{} by choosing a different hierarchy level. This increased granularity may lead to an increased granularity in the \map{}, e.g. show postal codes instead of federal states. The changed data are additional items, that are nested in the former items.
+      \item
+        \emph{Encode} the \tmap{} by a different attribute mapping like color, height or texture. If the \map{} has no geometry data that defines the shape of a feature, it can also display a larger point marker. 
+      \item
+        Apply a \emph{Filter} and reduce the data set by choosing only items with metadata beyond a certain treshold. The reduced data leads to a full re-render of all data visualizations. The message contains the updated item list
+  \item
+    Show a \emph{Connect} by highlighting boxes of the same subtree in the \tmap{}. The respective connected items would be highlighted in the \map{} as well. Here the data is a relation between items.
+    \end{enumerate}
 \todo[inline]{What are the key interactions in our use case?}
 
 
+\subsubsection{Interaction message flow}
 
-\subsection{Interaction techniques}
+From the examples we can distinguish visualization specific information and events as well as general information:
+Any kind of mouse interaction, like hover or click, is tied to the respective visualization and therefore implementation specific.
+But the transferred data, i.e. the selected feature ids are obviously abstract information independent of the specific visualization.
+Also the semantics of the interaction lies on a higher level. 
+From here on out we call the low-level interaction events like mousedown a \emph{trigger} and the corresponding change, e.g. a cange of the background color of the item, an \emph{effect}.
 
-For \tmaps{} and \maps{} we can categorize the interaction techniques according to the schema:
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=\textwidth]{images/trigger-effect.png}
+  \caption{Schema of message flow in \cmvs{}}
+  \label{fig:concept:trigger-effect}
+\end{figure}
 
-\begin{table}
-  \begin{tabular}{p{0.2\textwidth} p{0.4\textwidth} p{0.4\textwidth}}
-    \toprule
-    Interaction        & \tmaps{} & \maps{}  \\
-    \cmidrule(r){1-3}
-    Select              & Click one box or click on a group of boxes                                                     & Click on a building, an area or a point \\
-    Explore             & Rotate the \tmap{}, focus on a box                                                             & Move, rotate, pan or zoom the viewpoint, focus on an area \\
-    Reconfigure         & Choose a different feature for layouting                                                       & Place different polygons on the map \\
-    Encode              & Choose a different feature for data mapping of visual attributes like color, height or texture & Choose a different color for polygons \\
-    Abstract/ Elaborate & Increase the level of hierarchy, .ie increase maximal nesting                                  & Increase the level of detail, e.g. shwo postal codes instead of federal states \\
-    Filter              & Filter data by an attribute but do the layouting with another attribute                        & Filter data by an attribute and color data based on another attribute  \\
-    Connect             & Highlight boxes in the same subtree                                                            & Highlight neighboring regions \\
-    \bottomrule
-  \end{tabular}
-\end{table}
+
+Figure~\ref{fig:concept:trigger-effect} shows this concept.
+Note that many triggers from different views can be connected to the same interaction.
+This interaction can have many effects in different views.
+The interaction itself might be a highlighting of a feature, so the feature id is supplied.
+In turn, the interaction will trigger an effect in all dependent data visualization, i.e. a polygon will change its background color.
+
+
+\subsection{Abstraction of visualizations}
+The problem here is that the central controller defines the interface between the different data visualizations.
+Every interaction needs to be implemented in the controller and the controller is defining the API.
+This requires a lot of effort regarding the implementation and is not very flexible.
+
+We ask ourselves: Is there any way how we can abstract from the specific data visualization?
+Abstraction usually leads to more flexibility in software design.
+Would it also be possible to more more logic into the shared component?
+More logic in the shared component reduces redundancy and therefore source of errors.
+Less redundancy also leads to fewer lines of code.
+
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=\textwidth]{images/view-transformation-language.png}
+  \caption{An abstract data visualization serves as a common language between arbitrary many data visualizations. Instead of implementing $N*M$ tranformations, only $2*N$ transformations need to be implemented}
+  \label{fig:concept:view-transformation}
+\end{figure}
+
+How can we abstract from a specific visualization?
+What are the shared concepts in all data visualizations?
+Figure~\ref{fig:concept:visual-variables} shows the seven visual variables introduced by \textcite{Bertin2010}.
+These visual variables are used in cartography but can also be applied to data visualization in general.
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=\textwidth]{images/visual-variables.png}
+  \caption{\textcite{Bertin2010} original visual variables.}
+  \label{fig:concept:visual-variables}
+\end{figure}
+
+
+\subsection{Abstract visualization}
+Furthermore we invent the concept of an {abstract visualization}.
+The abstract visualization is the combination of items with visual attributes.
+It is abstract because it does not need or define a particular view.
+If we would want to visualize it, we could probably do so with a graph visualization.
+A graph visualization contains the item set as an ordered list.
+Every item has a position and a shape in the two dimensional space of the screen.
+The default shape could be a circle.
+Since a circle has an area, it would have a color and a size.
+It is said that items are related to each other, e.g. the treemap visualizes a hierarchical relation.
+So the abstract visualization comes with a property graph among the set of nodes.
+
+All data visualization have access to the abstract visualization.
+They implement a population of changes from the specific visualization into the abstract visualization and vice versa.
+Therefore not $N^2$ transformation need to implemented, but only $2*N$ tranformations.
+
+To give an example:
+The highlighting of an item works by a change of color in the abstract visualization.
+Both \tmap{} and \map{} would mirror the change of color.
+A little more tricky is the change of the viewport in the \map{}.
+What we see is a change of the camera position.
+We can simulate the same behaviour in other visualizations by moving all items at once in one direction.
+The center of the \map{} is defined as the center of the item that is nearest to the center of the abstract visualization.
+
 
 
 \clearpage
@@ -533,7 +616,7 @@ Next, we describe the architecture of the software and why we chose this archite
 What requirements and considerations lead to this particular architecture.
 
 
-\subsubsection{Implemented interactions}
+\subsection{Implemented interactions}
 
 In the course of this thesis we want to implement the following interactions:
 \begin{itemize}
