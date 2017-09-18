@@ -5,6 +5,7 @@
 \usepackage{color}
 \usepackage{copyrightbox}
 \usepackage{ccicons}
+\usepackage{booktabs}
 \definecolor{lightgray}{rgb}{.9,.9,.9}
 \definecolor{darkgray}{rgb}{.4,.4,.4}
 \definecolor{purple}{rgb}{0.65, 0.12, 0.82}
@@ -24,7 +25,7 @@
 }
 
 \lstset{
-   language=JavaScript,
+  language=JavaScript,
    backgroundcolor=\color{lightgray},
    extendedchars=true,
    basicstyle=\footnotesize\ttfamily,
@@ -37,14 +38,8 @@
    breaklines=true,
    showtabs=false,
    captionpos=b
-}
+ }
 \bibliography{bibliography}
-
-\begin{document}
-
-\title{Multiple coordinated views of massive geo data using tree maps and choropleth maps}
-\author{Robert Schäfer\\ Department of Computer Graphics, Hasso-Plattner-Institut}
-\maketitle
 
 \newcommand{\rufu}{\textsc{Rundfunk MITBESTIMMEN}}
 \newcommand{\visan}{\textsc{visual analytics platform}}
@@ -62,6 +57,18 @@
 \newcommand{\riso}{\texttt{RISO}}
 \newcommand{\attr}[1]{\texttt{\detokenize{#1}}}
 
+\begin{document}
+
+\title{Multiple coordinated views of massive geo data using tree maps and choropleth maps}
+\author{Robert Schäfer\\ Department of Computer Graphics, Hasso-Plattner-Institut}
+\maketitle
+\clearpage
+
+\tableofcontents
+\clearpage
+ 
+
+
 \begin{abstract}
   Numerous visualization techniques exist for data-driven \dss{}.
   Two of which, namely tree maps and choropleth maps are especially useful when dealing with hierarchical and geographical data respectively.
@@ -73,6 +80,7 @@
   In one view, the user gets an easy access with a familiar geographical map, while in the other view the same data is displayed in a tree map.
   \todo[inline]{Should we mention the combination of multiple data sets here?}
 \end{abstract}
+\clearpage
 
 \section{Introduction}
 The human brain processes visual information better than it processes text.
@@ -242,10 +250,10 @@ As the order of placement depends on the respective features of the nodes, small
 %\todo{What are tree maps?}
 
 \begin{figure}[h]
-\centering
+  \centering
   \copyrightbox[b]{\includegraphics[width=\textwidth]{images/treemap_example}}{ \hfill \ccAttribution \ccShareAlike \hspace{1mm} Observatory of Economic Complexity\cite{Macro2017}}
-\caption{German exports visualized as a tree map}
-\label{fig:research:treemap}
+  \caption{German exports visualized as a tree map}
+  \label{fig:research:treemap}
 \end{figure}
 
 \subsubsection{\threedTmaps{} and \tmaps}
@@ -263,10 +271,10 @@ For the rest of this thesis, we will refer to this type of tree map.
 We can see an example of a \tmap{} in figure~\ref{fig:research:ua_treemap}
 
 \begin{figure}[h]
-\centering
+  \centering
   \copyrightbox[b]{\includegraphics[width=\textwidth]{images/2_5D_treemap_example}}{ \hfill \textcopyright \hspace{1mm} Hasso-Plattner-Institut\cite{Doellner2017}}
   \caption{Example of a \tmap{}}
-\label{fig:research:ua_treemap}
+  \label{fig:research:ua_treemap}
 \end{figure}
 
 
@@ -278,10 +286,10 @@ Choropleth maps are extremely popular and so the audience is likely to understan
 They are very helpful when data is attached to enumeration unites like counties, provinces and countries.
 
 \begin{figure}[h]
-\centering
+  \centering
   \copyrightbox[b]{\includegraphics[width=\textwidth]{images/choropleth_example}}{ \hfill GPLv3 Mike Bostock\cite{Bostock2017:2}}
   \caption{Unemployment rate in the USA}
-\label{fig:research:choropleth}
+  \label{fig:research:choropleth}
 \end{figure}
 
 \todo[inline]{How do tree maps relate to geographical data?}
@@ -300,15 +308,71 @@ All visualizations are then updated in real time.
 As we can see in the example in figure~\ref{fig:research:cmv} there seems to be a correlation of a long delay with a later time of the day.
 
 \begin{figure}[h]
-\centering
+  \centering
   \copyrightbox[b]{\includegraphics[width=\textwidth]{images/cmv_example}}{\hfill Crossfilter\cite{Bostock2017}}
-\caption{Airline on-time performance: Correlation of time of day with arrival delay. Most recent flight with a delay of more than 100 minutes selected.}
-\label{fig:research:cmv}
+  \caption{Airline on-time performance: Correlation of time of day with arrival delay. Most recent flight with a delay of more than 100 minutes selected.}
+  \label{fig:research:cmv}
 \end{figure}
 
-\section{Concept}
+\subsubsection{Key interaction techniques for \cmvs{}}
 
-Since we deal with real world problems, we aim to evaluate the developed tools on real users and existing data.
+\textcite{Yi2007} lists seven categories of interation in information visualization:
+\begin{enumerate}
+  \item
+    \textbf{Select} mark something as interesting
+  \item
+    \textbf{Explore} show me something else
+  \item
+    \textbf{Reconfigure} show me a different arrangement
+  \item
+    \textbf{Encode} show me a different representation
+  \item
+    \textbf{Abstract/Elaborate} show me more or less detail
+  \item
+    \textbf{Filter} show me something conditionally
+  \item
+    \textbf{Connect} show me related items
+\end{enumerate}
+
+\todo[inline]{Give examples for every category}
+
+\clearpage
+\section{Analysis}\label{sec:analysis}
+
+\todo[inline]{No section without text}
+
+
+\subsubsection{Existing interactions}
+The possible inteactions in our current \visan{} can be categorized \emph{select}, \emph{explore}, \emph{reconfigure}, \emph{encode} and \emph{filter}.
+As seen in figure~\ref{fig:analysis:interaction:existing} the user can \emph{select} one item in the view by clicking on it.
+The user can reveal a tooltip showing the item properties by hovering with the mouse on the item, which is another \emph{selection}.
+The user can \emph{explore} the map in the usual manner:
+If the user drags with the mouse on the map, a panning operation is performed with the viewpoint focused on Germany, i.e. the camere moves around like a turntable.
+The zoom factor can be changed by scrolling on the canvas of the map.
+\emph{Encode} and \emph{reconfigure} techniques are performed through the menu on the left side:
+Under the ``features'' tab, the user can \emph{reconfigure} different data sets and the displayed diagram, e.g. a tree map visualization based on the geometry shape, cubes or voronoi regions.
+The tab ``Dimensions'' allows the user to \emph{encode} properties of a data set to visual attributes, e.g. the height, color and texture of an item.
+The tab ``Filter'' can be used to reduce the displayed data set along a range of continuous values.
+Figure~\ref{fig:analysis:interaction:existing:filter} shows the range of visible values in the left menu.
+When the user drags the slider, the items in the map on the right side are updated interactively.
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=\textwidth]{images/existing-interactions.png}
+  \caption{
+    Items can be highlighted with a click, Bavaria is currently highlighted.
+    A mouse over reveals a tooltip showing item properties.
+    The menu on the left side allows to change the data set and the specific base visualization.}
+  \label{fig:analysis:interaction:existing}
+\end{figure}
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=\textwidth]{images/existing-interactions-filter.png}
+  \caption{ Only gas stations with a price for E10 within 1.349 Euro and 1.589 Euro are displayed in the map}
+  \label{fig:analysis:interaction:existing:filter}
+\end{figure}
+
 
 \subsection{Data sets}
 For our uses cases, we have two different data sets:
@@ -326,8 +390,9 @@ The second one consists of user data that was collected through a web applicatio
 
 The \riso{} data base is used in by local authorities to get insights about governmental KPIs to assist local and regional decision making.
 It is a relational database and a part of the data base schema is shown as an ER diagram in figure~\ref{fig:data:riso}.
-\begin{figure}[h]
-\centering
+
+\begin{figure}[h!]
+  \centering
   \includegraphics[width=\textwidth]{images/riso}
   \caption{Part of the \riso{} database schema. Primary keys are set in bold.}
   \label{fig:data:riso}
@@ -385,8 +450,8 @@ The \attr{user} can allocate virtual money to supported broadcasts.
 The money will be stored in the column \attr{amount} of the \attr{selection}.
 The sum of all amounts for one user will never exceed the virtual budget of 17.50€.
 
-\begin{figure}[h]
-\centering
+\begin{figure}[h!]
+  \centering
   \includegraphics[width=\textwidth]{images/er}
   \caption{Database schema of the \rufu{} app}
   \label{fig:data:rundfunk}
@@ -424,19 +489,39 @@ However, we can ask a lot of questions already with common data base queries or 
 \end{enumerate}
 
 
-\subsection{Implementation}
+\clearpage
 
-An example of aggregated user data merged with geometry data can be seen in listing~\ref{lst:geojson:example}.
-\lstinputlisting[language=JavaScript, label={lst:geojson:example}, caption={Geojson example}]{listings/example.geojson}
+\section{Concept}
 
-We can use this data as input for our common \visan{}, e.g. figure~\ref{fig:implementation:user_distribution} shows the user distribution of \rufu{}.
+Since we deal with real world problems, we aim to evaluate the developed tools on real users and existing data.
 
-\begin{figure}[h]
-\centering
-  \includegraphics[width=\textwidth]{images/ua_example.png}
-  \caption{User distribution of \rufu{} across German federal states}
-\label{fig:implementation:user_distribution}
-\end{figure}
+\subsection{Use-case specific interactions}
+
+We have a strong focus on coordinated multiple views consisting of a tree map and a geographical map.
+
+\todo[inline]{What are the key interactions in our use case?}
+
+
+
+\subsection{Interaction techniques}
+
+For \tmaps{} and \maps{} we can categorize the interaction techniques according to the schema:
+
+\begin{table}
+  \begin{tabular}{p{0.2\textwidth} p{0.4\textwidth} p{0.4\textwidth}}
+    \toprule
+    Interaction        & \tmaps{} & \maps{}  \\
+    \cmidrule(r){1-3}
+    Select              & Click one box or click on a group of boxes                                                     & Click on a building, an area or a point \\
+    Explore             & Rotate the \tmap{}, focus on a box                                                             & Move, rotate, pan or zoom the viewpoint, focus on an area \\
+    Reconfigure         & Choose a different feature for layouting                                                       & Place different polygons on the map \\
+    Encode              & Choose a different feature for data mapping of visual attributes like color, height or texture & Choose a different color for polygons \\
+    Abstract/ Elaborate & Increase the level of hierarchy, .ie increase maximal nesting                                  & Increase the level of detail, e.g. shwo postal codes instead of federal states \\
+    Filter              & Filter data by an attribute but do the layouting with another attribute                        & Filter data by an attribute and color data based on another attribute  \\
+    Connect             & Highlight boxes in the same subtree                                                            & Highlight neighboring regions \\
+    \bottomrule
+  \end{tabular}
+\end{table}
 
 
 \clearpage
@@ -447,55 +532,6 @@ We start with a list of to be implemented features.
 Next, we describe the architecture of the software and why we chose this architecture.
 What requirements and considerations lead to this particular architecture.
 
-\subsection{Interaction techniques}
-\textcite{Yi2007} lists seven categories of interation in information visualization:
-\begin{enumerate}
-  \item
-    \textbf{Select} mark something as interesting
-  \item
-    \textbf{Explore} show me something else
-  \item
-    \textbf{Reconfigure} show me a different arrangement
-  \item
-    \textbf{Encode} show me a different representation
-  \item
-    \textbf{Abstract/Elaborate} show me more or less detail
-  \item
-    \textbf{Filter} show me something conditionally
-  \item
-    \textbf{Connect} show me related items
-\end{enumerate}
-
-\subsubsection{Existing interactions}
-The possible inteactions in our current \visan{} can be categorized \emph{select}, \emph{explore}, \emph{reconfigure}, \emph{encode} and \emph{filter}.
-As seen in figure~\ref{fig:implementation:interaction:existing} the user can \emph{select} one item in the view by clicking on it.
-The user can reveal a tooltip showing the item properties by hovering with the mouse on the item, which is another \emph{selection}.
-The user can \emph{explore} the map in the usual manner:
-If the user drags with the mouse on the map, a panning operation is performed with the viewpoint focused on Germany, i.e. the camere moves around like a turntable.
-The zoom factor can be changed by scrolling on the canvas of the map.
-\emph{Encode} and \emph{reconfigure} techniques are performed through the menu on the left side:
-Under the ``features'' tab, the user can \emph{reconfigure} different data sets and the displayed diagram, e.g. a tree map visualization based on the geometry shape, cubes or voronoi regions.
-The tab ``Dimensions'' allows the user to \emph{encode} properties of a data set to visual attributes, e.g. the height, color and texture of an item.
-The tab ``Filter'' can be used to reduce the displayed data set along a range of continuous values.
-Figure~\ref{fig:implementation:interation:existing:filter} shows the range of visible values in the left menu.
-When the user drags the slider, the items in the map on the right side are updated interactively.
-
-\begin{figure}[h]
-\centering
-  \includegraphics[width=\textwidth]{images/implementation-interaction-existing.png}
-  \caption{
-    Items can be highlighted with a click, Bavaria is currently highlighted.
-    A mouse over reveals a tooltip showing item properties.
-    The menu on the left side allows to change the data set and the specific base visualization.}
-  \label{fig:implementation:interaction:existing}
-\end{figure}
-
-\begin{figure}[h]
-\centering
-  \includegraphics[width=\textwidth]{images/implementation-interaction-existing-filter.png}
-  \caption{ Only gas stations with a price for E10 within 1.349 Euro and 1.589 Euro are displaeyd in the map}
-  \label{fig:implementation:interaction:existing:filter}
-\end{figure}
 
 \subsubsection{Implemented interactions}
 
@@ -511,7 +547,20 @@ In the course of this thesis we want to implement the following interactions:
     \emph{Filter}: The user double-clicks on a region in a geographical map and the \tmap{} will be based on data of only that region.
 \end{itemize}
 
-\paragraph{Component pattern}
+\subsection{Observer pattern}
+\todo[inline]{Explain observer pattern}
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=\textwidth]{images/sequence-diagram.png}
+  \caption{The sequence diagram shows the notification of different components.
+  The user first chooses a feature set and hovers over a polygon in the geographical map.}
+  \label{fig:implementation:sequence-diagram}
+\end{figure}
+
+\paragraph{Publisher subscriber}
+\todo[inline]{How can multiview subscribe to the multiview controller}
+
+\subsection{Component pattern}
 State-of-the-art javascript frameworks like ReactJS and EmberJS follow the component pattern for the architecture of a single page web application.
 The component pattern imposes a hierarchical structure on a website.
 Each component is responsible for a task and may contain other components.
@@ -520,6 +569,15 @@ The components are joined at the root node of the page.
 This pattern is very applicable to \cmvs{}.
 The different views of \cmvs{} share state, i.e. the feature, that is currently highlighted or the applied filter on the data.
 So the views are components and their closest common ancestor is the \cmv{} itself, controlling state and passing user interaction down to it's children.
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=\textwidth]{images/data-down-actions-up.png}
+  \caption{Implementation of the component pattern in EmberJS.
+  The example shows a page of a webshop.
+  The customer is about to order the items in the shopping cart.}
+  \label{fig:implementation:frontend-frameworks}
+\end{figure}
 
 \paragraph{Actions up - Data down}
 
@@ -537,13 +595,46 @@ Examples for the kind of data that might trigger a rerendering of a view:
     A list of thresholds for certain features as a filter
 \end{itemize}
 
-\paragraph{Web components}
+\subsection{Web components W3C specification}
 
 Web components is a recent standard of the W3C\cite{W3C2017} to bring component-based software engineering to the world wide web.
 They look perfectly suited to be used in \cmvs{}.
 However the attributes of web components are string based.
 If arbitrary javascript objects need to be passed into the web component it is suggested to use one of the common javascript frameworks that allow for data binding.
 
+\subsection{Frontend framework comparison}
+\todo[inline]{Pros/cons of GlimmerJS, Polymer, React}
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=\textwidth]{images/frontend-frameworks.png}
+  \caption{Comparison of frontend frameworks}
+  \label{fig:implementation:frontend-frameworks}
+\end{figure}
+
+\subsection{Observer pattern and component pattern in \cmvs{}}
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=\textwidth]{images/both-patterns-implemented.png}
+  \caption{Both observer pattern and component pattern applied in the field of \cmvs{}}
+  \label{fig:implementation:both-patterns}
+\end{figure}
+
+
+\subsection{GeoJSON}
+
+An example of aggregated user data merged with geometry data can be seen in listing~\ref{lst:geojson:example}.
+\lstinputlisting[language=JavaScript, label={lst:geojson:example}, caption={Geojson example}]{listings/example.geojson}
+
+We can use this data as input for our common \visan{}, e.g. figure~\ref{fig:implementation:user_distribution} shows the user distribution of \rufu{}.
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=\textwidth]{images/ua_example.png}
+  \caption{User distribution of \rufu{} across German federal states}
+  \label{fig:implementation:user_distribution}
+\end{figure}
 
 
 \clearpage
