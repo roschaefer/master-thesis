@@ -576,34 +576,9 @@ These visual variables are used in cartography but can also be applied to data v
 \begin{figure}[h!]
   \centering
   \includegraphics[width=\textwidth]{images/visual-variables.png}
-  \caption{\textcite{Bertin2010} original visual variables.}
+  \caption{Bertin's\cite{Bertin2010} original visual variables.}
   \label{fig:concept:visual-variables}
 \end{figure}
-
-
-\subsection{Abstract visualization}
-Furthermore we invent the concept of an {abstract visualization}.
-The abstract visualization is the combination of items with visual attributes.
-It is abstract because it does not need or define a particular view.
-If we would want to visualize it, we could probably do so with a graph visualization.
-A graph visualization contains the item set as an ordered list.
-Every item has a position and a shape in the two dimensional space of the screen.
-The default shape could be a circle.
-Since a circle has an area, it would have a color and a size.
-It is said that items are related to each other, e.g. the treemap visualizes a hierarchical relation.
-So the abstract visualization comes with a property graph among the set of nodes.
-
-All data visualization have access to the abstract visualization.
-They implement a population of changes from the specific visualization into the abstract visualization and vice versa.
-Therefore not $N^2$ transformation need to implemented, but only $2*N$ tranformations.
-
-To give an example:
-The highlighting of an item works by a change of color in the abstract visualization.
-Both \tmap{} and \map{} would mirror the change of color.
-A little more tricky is the change of the viewport in the \map{}.
-What we see is a change of the camera position.
-We can simulate the same behaviour in other visualizations by moving all items at once in one direction.
-The center of the \map{} is defined as the center of the item that is nearest to the center of the abstract visualization.
 
 
 
