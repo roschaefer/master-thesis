@@ -6,6 +6,8 @@
 \usepackage{copyrightbox}
 \usepackage{ccicons}
 \usepackage{booktabs}
+\usepackage{wrapfig}
+\usepackage{subfig}
 \definecolor{lightgray}{rgb}{.9,.9,.9}
 \definecolor{darkgray}{rgb}{.4,.4,.4}
 \definecolor{purple}{rgb}{0.65, 0.12, 0.82}
@@ -561,14 +563,6 @@ Would it also be possible to more more logic into the shared component?
 More logic in the shared component reduces redundancy and therefore source of errors.
 Less redundancy also leads to fewer lines of code.
 
-
-\begin{figure}[h!]
-  \centering
-  \includegraphics[width=\textwidth]{images/view-transformation-language.png}
-  \caption{An abstract data visualization serves as a common language between arbitrary many data visualizations. Instead of implementing $N*M$ tranformations, only $2*N$ transformations need to be implemented}
-  \label{fig:concept:view-transformation}
-\end{figure}
-
 How can we abstract from a specific visualization?
 What are the shared concepts in all data visualizations?
 Figure~\ref{fig:concept:visual-variables} shows the seven visual variables introduced by \textcite{Bertin2010}.
@@ -580,7 +574,96 @@ These visual variables are used in cartography but can also be applied to data v
   \label{fig:concept:visual-variables}
 \end{figure}
 
+\subsection{Common interface}
 
+We want to exchange information between different views.
+Different views have different interactions.
+Therefore, every view may have its own abilities and events in other views may lead to a change in the view.
+In order to coordinate interactions, specific information needs to be exchanged between views.
+E.g. for a \emph{select} we need all the selected ids.
+If the user filters a certain subset, this subset of visible features shall be communicated to all views.
+Sometimes a view is not able to make use of a certain information, so a views does not always need the entire information.
+So e.g. the order of features may play a role in some views, e.g. bar charts.
+A reordering of features in a bar chart will not lead to a change in a geographical map.
+
+In order to achieve maximal flexibility and to avoid $N*N$ transformations for $N$ visible views, we define a common interface.
+This interface is capable of communicating all necessary interaction information for all variations of chart types.
+
+\subsection{Application examples of the common interface}
+
+
+\subsubsection{Bar chart}
+
+\begin{figure}
+  \begin{center}
+    \includegraphics[width=0.5\textwidth]{images/chartTypes/bar-chart.png}
+  \end{center}
+  \caption{An ordinary bar chart}
+  \label{fig:concept:chart-types:bar-chart}
+\end{figure}
+
+
+\begin{figure}
+  \begin{center}
+    \begin{tabular}{l l l l}
+      Interaction & Action & Effect & Information \\
+      \hline
+      Select & Click bar & Highlight features & Feature Ids \\
+      Re-order & Drag mouse & Re-arraged features & Ordered list of feature ids \\
+    \end{tabular}
+  \end{center}
+  \caption{Possible interactions for a bar chart}
+  \label{tab:concept:chart-types:bar-chart}
+\end{figure}
+
+\subsubsection{Bubble charts and scatter plots}
+
+\begin{figure}
+  \centering
+    \subfloat[Bubble chart]{{\includegraphics[width=0.4\textwidth]{images/chartTypes/bubble-chart.png} }}%
+    \qquad
+    \subfloat[Scatter plot]{{\includegraphics[width=0.4\textwidth]{images/chartTypes/scatter-plot.png} }}%
+    \caption{Bubble charts and scatter plots are very similar in terms of interactivity}%
+    \label{fig:concept:chart-types:bubble-chart}
+\end{figure}
+
+\begin{figure}
+  \begin{center}
+    \begin{tabular}{l l l l}
+      Interaction & Action & Effect & Information \\
+      \hline
+      Select & Click bubble & Highlight features & Feature Ids \\
+      Encode & Map data value to size  & Resizing of features     & Feature metadata  \\
+      Encode & Map data value to color & Re-colouring of features & Feature metadata  \\
+    \end{tabular}
+  \end{center}
+  \caption{Possible interactions for a bubble chart}
+  \label{tab:concept:chart-types:bar-chart}
+\end{figure}
+
+\subsubsection{Stacked bar charts and baselines}
+
+
+\begin{figure}
+  \centering
+    \subfloat[Stacked bar chart]{{\includegraphics[width=0.4\textwidth]{images/chartTypes/stacked-bar-without-baseline.png} }}%
+    \qquad
+    \subfloat[Stacked bar chart with baseline]{{\includegraphics[width=0.4\textwidth]{images/chartTypes/stacked-bar-with-baseline.png} }}%
+    \caption{Stacked bar charts can be ordered along a baseline or stretch to 100\% width to show the percentage-of-the-whole of each group}%
+    \label{fig:concept:chart-types:stacked-bar-chart}
+\end{figure}
+
+\begin{figure}
+  \begin{center}
+    \begin{tabular}{l l l l}
+      Interaction & Action & Effect & Information \\
+      \hline
+      Reconfigure & Arrow keys  & Re-arrange stacking     &  Attribute baseline  \\
+    \end{tabular}
+  \end{center}
+  \caption{Possible interactions for stacked bar charts}
+  \label{tab:concept:chart-types:bar-chart}
+\end{figure}
 
 \clearpage
 \section{Implementation}
