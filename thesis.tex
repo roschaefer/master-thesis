@@ -744,7 +744,42 @@ However the attributes of web components are string based.
 If arbitrary javascript objects need to be passed into the web component it is suggested to use one of the common javascript frameworks that allow for data binding.
 
 \subsection{Frontend framework comparison}
+
+We evaluated three javascript frontend frameworks for our application: \emph{GlimmerJS}, \emph{Google Polymer} and \emph{ReactJS}.
+Figure~\ref{fig:implementation:frontend-frameworks} shows the pros and cons of each framework for our use case.
+
+GlimmerJS is the rendering enginge of EmberJS\cite{Ember2017}.
+In 2017 it was released as a standalone framework.
+Applications written in GlimmerJS can be exported as web components.
+These web components can be included in any website, which makes GlimmerJS a reasonable choice to build high-quality widgets for user interfaces.
+GlimmerJS also uses handlebars\cite{Handlebars2017}, a user-friendly templating language.
+The downside of GlimmerJS is the current lack of documentation and immaturity due to the recent first release this year.
+
+Another popular framework to build web components is Google's Polymer library\cite{Polymer2017}.
+With 18,469 stars on Github it is the most popular framework for web components at the time of writing.
+Polymer has a large community and comprehensive documentation and therefore more suitable than GlimmerJS for our task.
+
+Unfortunately, the web component standard does not specify how arbitrary Javascript objects can be passed to web components.
+This raises some problems in legacy apps:
+Usually, legacy apps are written in plain javascript without the use of a component-based frontend framework.
+Any part of the code may call any other part of the code, leading to the dreaded ``spaghetti code''.
+Refactoring the existing app requires the framework to have a reliable way of communication with the legacy parts. 
+E.g. parts of the legacy code call the backend in order to load data.
+This data needs to be passed to the compponents of the user interface.
+Web components do not have a designated interface
+Because of that, libraries like Polymer come back on proprietary solutions.
+But those proprietary solutions defeat the main advantageof developing against a standard, as it is unclear how components may interact with each other.
+
+Lifting the constraint to implement against web components, we finally decided to go for ReactJS\cite{React2017}.
+ReactJS does not have the ability to export web components.
+It has, in return, an ascertained way of integrating the framework into a legacy app built with jQuery.
+Along with its major advantage of easy integration, it has a striving community, heaps of documentation and tutorials and is well tested.
+
+All of these reasons make us choose ReactJS for the task of coordinating multiple views in our existing \visan{}.
+
+
 \todo[inline]{Pros/cons of GlimmerJS, Polymer, React}
+
 
 \begin{figure}[h!]
   \centering
