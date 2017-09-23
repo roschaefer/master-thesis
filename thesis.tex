@@ -586,20 +586,41 @@ Sometimes a view is not able to make use of a certain information, so a views do
 So e.g. the order of features may play a role in some views, e.g. bar charts.
 A reordering of features in a bar chart will not lead to a change in a geographical map.
 
-In order to achieve maximal flexibility and to avoid $N*N$ transformations for $N$ visible views, we define a common interface.
-This interface is capable of communicating all necessary interaction information for all variations of chart types.
+In order to achieve maximal flexibility and to avoid $N*N$ transformations for $N$ visible views, we define a universal interface.
+This interface is basically a superset of all abilities and able to deliver all information for any kind of interaction.
 
 \subsection{Application examples of the common interface}
 
+The data visualization cataloge by Severino Ribecca list many of the most used data visualizations\cite{VisualizationCatalogue2017}.
+Let's pick some of those and derive a number of possible interactions.
 
-\subsubsection{Bar chart}
+%\begin{tabular}{l l l l}
+    %Comparisons & Proportions & Relationships & Hierarchy \\
+    %Concepts & Location & Part-to-a-whole & Distribution \\
+    %How things work & Processes \& methods & Movement or flow & Patterns \\
+    %Range & Data over time & Analysing text & Reference tool \\
+%\end{tabular}
+
+
+\subsubsection{Bar charts and similar diagrams}
 
 \begin{figure}
   \begin{center}
-    \includegraphics[width=0.5\textwidth]{images/chartTypes/bar-chart.png}
+    \subfloat[Bar chart]{{\includegraphics[width=0.4\textwidth]{images/chartTypes/bar-chart.png} }}%
+    \qquad
+    \subfloat[Multiset bar chart]{{\includegraphics[width=0.4\textwidth]{images/chartTypes/multiset-bar-chart.png} }}%
   \end{center}
-  \caption{An ordinary bar chart}
-  \label{fig:concept:chart-types:bar-chart}
+  \caption{A multiset bar charts is a variation of a bar chart}
+  \label{fig:concept:chart-types:bar-charts}
+\end{figure}
+
+\begin{figure}
+  \centering
+    \subfloat[Histogram]{{\includegraphics[width=0.4\textwidth]{images/chartTypes/histogram.png} }}%
+    \qquad
+    \subfloat[Population pyramid]{{\includegraphics[width=0.4\textwidth]{images/chartTypes/population-pyramid.png} }}%
+    \caption{A population pyramid is a pair of histograms for each sex}%
+    \label{fig:concept:chart-types:histograms}
 \end{figure}
 
 
@@ -641,14 +662,13 @@ This interface is capable of communicating all necessary interaction information
   \label{tab:concept:chart-types:bar-chart}
 \end{figure}
 
-\subsubsection{Stacked bar charts and baselines}
-
+\subsubsection{Stacked bar charts}
 
 \begin{figure}
   \centering
-    \subfloat[Stacked bar chart]{{\includegraphics[width=0.4\textwidth]{images/chartTypes/stacked-bar-without-baseline.png} }}%
+    \subfloat[Stacked bar chart]{{\includegraphics[width=0.3\textwidth]{images/chartTypes/stacked-bar-without-baseline.png} }}%
     \qquad
-    \subfloat[Stacked bar chart with baseline]{{\includegraphics[width=0.4\textwidth]{images/chartTypes/stacked-bar-with-baseline.png} }}%
+    \subfloat[Stacked bar chart with baseline]{{\includegraphics[width=0.3\textwidth]{images/chartTypes/stacked-bar-with-baseline.png} }}%
     \caption{Stacked bar charts can be ordered along a baseline or stretch to 100\% width to show the percentage-of-the-whole of each group}%
     \label{fig:concept:chart-types:stacked-bar-chart}
 \end{figure}
@@ -662,7 +682,39 @@ This interface is capable of communicating all necessary interaction information
     \end{tabular}
   \end{center}
   \caption{Possible interactions for stacked bar charts}
-  \label{tab:concept:chart-types:bar-chart}
+  \label{tab:concept:chart-types:bar-charts}
+\end{figure}
+
+\subsubsection{Hierarchical data}
+
+\begin{figure}
+  \centering
+    \subfloat[Tree map]{{\includegraphics[width=0.4\textwidth]{images/chartTypes/treemap.png} }}%
+    \qquad
+    \subfloat[Sunburst diagram]{{\includegraphics[width=0.4\textwidth]{images/chartTypes/sunburst.png} }}%
+    \caption{Tree maps and sunburst diagrams are ideal to show hierarchies}%
+    \label{fig:concept:chart-types:hierarchies}
+\end{figure}
+
+\subsubsection{Geographical data}
+
+\begin{figure}
+  \centering
+    \subfloat[Choropleth map]{{\includegraphics[width=0.4\textwidth]{images/chartTypes/choropleth-map.png} }}%
+    \qquad
+    \subfloat[Flow map]{{\includegraphics[width=0.4\textwidth]{images/chartTypes/flow-map.png} }}%
+    \caption{Choropleth maps focus on a density while flow maps show a migration of data}%
+    \label{fig:concept:chart-types:geographical}
+\end{figure}
+
+\subsubsection{Activity diagrams} 
+\begin{figure}
+  \centering
+    \subfloat[Calendar]{{\includegraphics[width=0.4\textwidth]{images/chartTypes/calendar.png} }}%
+    \qquad
+    \subfloat[Gantt chart]{{\includegraphics[width=0.4\textwidth]{images/chartTypes/gantt-chart.png} }}%
+    \caption{Similar to a calendar, a gantt chart shows activities and the progress along a time line}%
+    \label{fig:concept:chart-types:geographical}
 \end{figure}
 
 \clearpage
