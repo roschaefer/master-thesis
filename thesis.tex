@@ -492,7 +492,7 @@ However, we can ask a lot of questions already with common data base queries or 
 
 \clearpage
 
-\section{Concept}
+\section{Concept}\label{sec:concept}
 
 Since we deal with real world problems, we aim to evaluate the developed tools on real users and existing data.
 
@@ -815,7 +815,20 @@ In the course of this thesis we want to implement the following interactions:
   \label{fig:implementation:sequence-diagram}
 \end{figure}
 
+
+Figure \ref{fig:implementation:sequence-diagram} shows how \cmvs{} can be automatically updated even if the environment lacks a native update-mechanism.
+We use the observer pattern:
+The root of our views is an observable implementation of the common interface described in section\ref{sec:concept}.
+If one of the views updates the view state, it will send the necessary information to the observable.
+The observable will then broadcast the change to all it's observers.
+
+
 \paragraph{Publisher subscriber}
+In our particular case we apply a special form of the observer pattern, the so called ``Publish-subscribe'' pattern\cite{Eugster2003}.
+Publish-subsribe is a messaging pattern which is widely used in message queues.
+In this scenario, senders of messages simply categorize their messages which will be consumed by subscribers of the category.
+The scenario has very low coupling, publishers do not even need to know the existence of subscribers.
+
 \todo[inline]{How can multiview subscribe to the multiview controller}
 
 \subsection{Component pattern}
