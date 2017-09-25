@@ -105,16 +105,16 @@ We create data visualizations of multi-dimensional, hierarchical and geographica
 Namely, we develop \rufu{} which is an application for German citizen to publish which public broadcasts should benefit from their broadcasting fees.
 The output of this application is a public user ranking and it can be used by broadcasting corporations to evaluate their program.
 Data visualizations guide media researchers, journalists and the general audience to draw conclusions.
-In this particular use case, the selection and interaction with the data may happen geographically, but the desired visualization could show e.g. changes over time or relationships within the data.
+In this particular use case, the selection and interaction with the data may happen geographically, but the desired visualization could show e.g.\ changes over time or relationships within the data.
 
 To explain this a little deeper:
 Public broadcasting in Germany is organized federally, a German home belongs to the jurisdiction of a public broadcasting corporation.
 But the produced content can be used all German citizen and it is even required to be free and available to everyone.
-So this means that e.g. a media researcher might want to select all users from within a certain region, but is actually interested into relationships of broadcasts that are preferred by people from that area.
+So this means that e.g.\ a media researcher might want to select all users from within a certain region, but is actually interested into relationships of broadcasts that are preferred by people from that area.
 
 So the interaction and selection of data should happen in another view than the actual data visualization.
 Since we deal with geographical data, we use geometry on a map for selection and interaction.
-For the visualization, we use a different technique, e.g. a tree map if we deal with hierarchical data.
+For the visualization, we use a different technique, e.g.\ a tree map if we deal with hierarchical data.
 
 \todo[inline]{More scenarios here}
 
@@ -133,7 +133,7 @@ This obstructs the comprehensibility of map and makes it especially difficult to
 When dealing with multi-dimensional data, is it helpful to have multiple views for these dimensions?
 What are best practices for the implementation of \cmvs{}?
 Is it great user experience to have one view for interaction and another view for the data visualization to create insights?
-Do people prefer one view for the interaction, e.g. the geographical dimension, or do they use all views for interaction and visualization alternately?
+Do people prefer one view for the interaction, e.g.\ the geographical dimension, or do they use all views for interaction and visualization alternately?
 
 \subsubsection{Hypotheses}
 Linkage and coupling of \cmvs{} can be enabled through visualizations, navigations and interaction techniques.
@@ -241,7 +241,7 @@ How do these visualizations perform and what are best practices to be considered
 Due to the hierarchical nature of the of our use cases, we focus on the visualization of hierarchical and geographical data
 The visualization of hierarchical data has a long tradition.
 The traditional representation of a tree is a rooted, directed graph with the root node at the top.
-An everyday use case is a directory tree example of a file system, e.g. in file browsers or command line utilities like \texttt{tree} in UNIX.
+An everyday use case is a directory tree example of a file system, e.g.\ in file browsers or command line utilities like \texttt{tree} in UNIX\@.
 As \textcite{Shneiderman1992} mentions, this visualization becomes increasingly large when displaying more than one node and soon exceeds the entire screen size.
 \textcite{Johnson1991} proposes the tree map visualization technique, in which each node is a rectangle whose area is proportional to some attribute, thus making 100\% use of the available screen size.
 As we can see in figure~\ref{fig:research:treemap} large boxes are labeled with generic tems like ``cars'' and ``medicaments'' and include smaller boxes with more specific meanings.
@@ -253,8 +253,7 @@ As the order of placement depends on the respective features of the nodes, small
 
 \begin{figure}[h]
   \centering
-  \copyrightbox[b]{\includegraphics[width=\textwidth]{images/treemap_example}}{ \hfill \ccAttribution \ccShareAlike \hspace{1mm} Observatory of Economic Complexity\cite{Macro2017}}
-  \caption{German exports visualized as a tree map}
+  \copyrightbox[b]{\includegraphics[width=\textwidth]{images/treemap_example}}{ \hfill \ccAttribution \ccShareAlike \hspace{1mm} Observatory of Economic Complexity\cite{Macro2017}} \caption{German exports visualized as a tree map}
   \label{fig:research:treemap}
 \end{figure}
 
@@ -349,11 +348,11 @@ The possible inteactions in our current \visan{} can be categorized \emph{select
 As seen in figure~\ref{fig:analysis:interaction:existing} the user can \emph{select} one item in the view by clicking on it.
 The user can reveal a tooltip showing the item properties by hovering with the mouse on the item, which is another \emph{selection}.
 The user can \emph{explore} the map in the usual manner:
-If the user drags with the mouse on the map, a panning operation is performed with the viewpoint focused on Germany, i.e. the camere moves around like a turntable.
+If the user drags with the mouse on the map, a panning operation is performed with the viewpoint focused on Germany, i.e.\ the camere moves around like a turntable.
 The zoom factor can be changed by scrolling on the canvas of the map.
 \emph{Encode} and \emph{reconfigure} techniques are performed through the menu on the left side:
-Under the ``features'' tab, the user can \emph{reconfigure} different data sets and the displayed diagram, e.g. a tree map visualization based on the geometry shape, cubes or voronoi regions.
-The tab ``Dimensions'' allows the user to \emph{encode} properties of a data set to visual attributes, e.g. the height, color and texture of an item.
+Under the ``features'' tab, the user can \emph{reconfigure} different data sets and the displayed diagram, e.g.\ a tree map visualization based on the geometry shape, cubes or voronoi regions.
+The tab ``Dimensions'' allows the user to \emph{encode} properties of a data set to visual attributes, e.g.\ the height, color and texture of an item.
 The tab ``Filter'' can be used to reduce the displayed data set along a range of continuous values.
 Figure~\ref{fig:analysis:interaction:existing:filter} shows the range of visible values in the left menu.
 When the user drags the slider, the items in the map on the right side are updated interactively.
@@ -378,7 +377,7 @@ When the user drags the slider, the items in the map on the right side are updat
 
 \subsection{Data sets}
 For our uses cases, we have two different data sets:
-One data set consists of a user ranking of public broadcasting in Germany, i.e. entities, mostly TV and radio broadcasts, are liked or disliked by people.
+One data set consists of a user ranking of public broadcasting in Germany, i.e.\ entities, mostly TV and radio broadcasts, are liked or disliked by people.
 This data is public data and can be used by media researchers of broadcasting corporations but also targets media journalists and the general audience.
 The other set, called \riso{}, consists of statistical data from various German administrations and is used by the authorities for urban planning and policy strategies.
 
@@ -602,7 +601,26 @@ Let's pick some of those and derive a number of possible interactions.
 %\end{tabular}
 
 
-\subsubsection{Bar charts and similar diagrams}
+\subsubsection{Line diagrams}
+\begin{figure}
+  \begin{center}
+    \subfloat[Line diagram]{{\includegraphics[width=0.4\textwidth]{images/chartTypes/line-diagram.png} }}%
+    \qquad
+  \end{center}
+  \caption{Line charts are used to display trends}
+  \label{fig:concept:chart-types:line-diagrams}
+\end{figure}
+
+Line diagrams are multiple sets of data, displayed along the x-axis.
+An highighting of the data set as a whole and with certain points of a dataset coulde be possible.
+
+Data format: Tabular data, many data sets along the x-axis.
+
+Fixed visual attributes: Position, orientation, texture.
+
+Free visual attributes: Color, shape, size. 
+
+\subsubsection{Bar charts and multiset bar charts}
 
 \begin{figure}
   \begin{center}
@@ -614,6 +632,23 @@ Let's pick some of those and derive a number of possible interactions.
   \label{fig:concept:chart-types:bar-charts}
 \end{figure}
 
+Bar charts and multiset bar charts show one or many attributes per feature along an axis.
+They have in common that they encode the data attribute into the height of the eponymous bars.
+Colors might be used to better distinuish between the different data attributes.
+Features can be arbitrarily ordered along the axis, although multiset bar charts group features along a series of categories.
+
+Therefore, bar charts need to be initialized with the set of features and their values as well as the groups of features for the multiset bar chart.
+The supplied colors would color each feature in a group in turn.
+The set of possible ineractions include the highlighting of features, the reordering of features and a change in encoding of color values.
+
+Data format: Tabular data, many data sets along the x-axis.
+
+Fixed visual attributes: Size, orientation.
+
+Free visual attributes: Position, color, shape, texture. 
+
+\subsubsection{Histograms}
+
 \begin{figure}
   \centering
     \subfloat[Histogram]{{\includegraphics[width=0.4\textwidth]{images/chartTypes/histogram.png} }}%
@@ -623,19 +658,17 @@ Let's pick some of those and derive a number of possible interactions.
     \label{fig:concept:chart-types:histograms}
 \end{figure}
 
+Histograms visualise the distribution of data over a continuous interval or certain time period.
+A special type is the population pyramid, which is a pair of back-to-back histograms, one for each sex.
+The difference of histograms to bar charts lies in the type of data itself, not the representation.
+Therefore these charts need to be initialized with the same data and the same interactions can be applied.
 
-\begin{figure}
-  \begin{center}
-    \begin{tabular}{l l l l}
-      Interaction & Action & Effect & Information \\
-      \hline
-      Select & Click bar & Highlight features & Feature Ids \\
-      Re-order & Drag mouse & Re-arraged features & Ordered list of feature ids \\
-    \end{tabular}
-  \end{center}
-  \caption{Possible interactions for a bar chart}
-  \label{tab:concept:chart-types:bar-chart}
-\end{figure}
+Data format: Tabular data, (many) ordered data sets along a common axis.
+
+Fixed visual attributes: Size, position, orientation.
+
+Free visual attributes: Color, shape, texture. 
+
 
 \subsubsection{Bubble charts and scatter plots}
 
@@ -648,19 +681,16 @@ Let's pick some of those and derive a number of possible interactions.
     \label{fig:concept:chart-types:bubble-chart}
 \end{figure}
 
-\begin{figure}
-  \begin{center}
-    \begin{tabular}{l l l l}
-      Interaction & Action & Effect & Information \\
-      \hline
-      Select & Click bubble & Highlight features & Feature Ids \\
-      Encode & Map data value to size  & Resizing of features     & Feature metadata  \\
-      Encode & Map data value to color & Re-colouring of features & Feature metadata  \\
-    \end{tabular}
-  \end{center}
-  \caption{Possible interactions for a bubble chart}
-  \label{tab:concept:chart-types:bar-chart}
-\end{figure}
+Bubble charts are popular choices to display a distribution of features.
+The chart is initialized with coordinates for each feature, a color and a size in case of a bubble charts. 
+Possible interactions include the highlighting of features, a different color encoding, a reconfiguration to map another attribute to size.
+Bubble charts may show only a window of the available data and allow to zoom in, zoom out or move the window along the axes.
+
+Data format: Tabular data, single data set along x- and y-axis.
+
+Fixed visual attributes: Size, position.
+
+Free visual attributes: Color, shape, texture, orientation. 
 
 \subsubsection{Stacked bar charts}
 
@@ -673,17 +703,15 @@ Let's pick some of those and derive a number of possible interactions.
     \label{fig:concept:chart-types:stacked-bar-chart}
 \end{figure}
 
-\begin{figure}
-  \begin{center}
-    \begin{tabular}{l l l l}
-      Interaction & Action & Effect & Information \\
-      \hline
-      Reconfigure & Arrow keys  & Re-arrange stacking     &  Attribute baseline  \\
-    \end{tabular}
-  \end{center}
-  \caption{Possible interactions for stacked bar charts}
-  \label{tab:concept:chart-types:bar-charts}
-\end{figure}
+Unlike a multi-set bar graph which displays their bars side-by-side, stacked bar graphs segment their bars of multiple datasets on top of each other.
+A baseline, as shown in figure\ref{fig:concept:chart-types:stacked-bar-chart} might be modeled as two back-to-back multi-set bar graphs. A reordering would e.g.\ move one data set from the left side to the right side.
+Possible interactions include the highlighting of a feature, a change of color mapping, reordering of the baseline.
+
+Data format: Tabular data, multiple data sets along one axis.
+
+Fixed visual attributes: Size, shape, orientation.
+
+Free visual attributes: Color, position, texture. 
 
 \subsubsection{Hierarchical data}
 
@@ -696,6 +724,23 @@ Let's pick some of those and derive a number of possible interactions.
     \label{fig:concept:chart-types:hierarchies}
 \end{figure}
 
+Treemaps are great to show hierarchical data without ever exceeding the availabe screen.
+Each feature is a assigned a rectangle according to a layouting algorithm.
+Unlike a tree map a hiearchical ring diagram or sunburst diagram shows each level of the tree as a series of rings.
+
+Therefore, both tree map and ring diagram need the feature set as a tree, with each node having a data attribute for layouting. Every node may be assigned a color.
+As we are describing hierarchies, the maximal depth of tree may be increased or decreased. 
+Again, interactions could include a highlighting of features and a change of color encoding.
+Both visualizations may show only a subtree.
+E.g. a click on a box in the treemap opens another treemap focused on the subtree.
+Similarly a click on a slice of the ring would surround the most external ring with the children of the feature.
+
+Data format: Tree, each feature must have at least one value for layouting.
+
+Fixed visual attributes: Position, Size, shape, orientation.
+
+Free visual attributes: Color, texture. 
+
 \subsubsection{Geographical data}
 
 \begin{figure}
@@ -707,6 +752,17 @@ Let's pick some of those and derive a number of possible interactions.
     \label{fig:concept:chart-types:geographical}
 \end{figure}
 
+Choropleth maps and flow maps are specialized diagrams focused on geographical data.
+Size, position and shape of a feature is defined by the geometry data of a feature.
+In choropleth maps the color of each feature is based on a data attribute.
+Flow maps may display connections between features, a data value defining the size of each arrow.
+
+Data format: Graph data with edges, each feature must have geometry data.
+
+Fixed visual attributes: Position, Size, shape, orientation.
+
+Free visual attributes: Color, texture. 
+
 \subsubsection{Activity diagrams} 
 \begin{figure}
   \centering
@@ -716,6 +772,15 @@ Let's pick some of those and derive a number of possible interactions.
     \caption{Similar to a calendar, a gantt chart shows activities and the progress along a time line}%
     \label{fig:concept:chart-types:geographical}
 \end{figure}
+
+In activity diagrams, each feature is represented as a rectangle, with the duration of the activity mapped to size and position.
+Calendars and gantt charts could not only read the data from the data source, but also add new features to the data set or update metadata of a feature, e.g.\ the progress of the activity.
+
+Data format: Temporal data, each feature has a start time and end time.
+
+Fixed visual attributes: Position, Size, orientation.
+
+Free visual attributes: Color, shape, texture. 
 
 \clearpage
 \section{Implementation}
@@ -735,7 +800,7 @@ In the course of this thesis we want to implement the following interactions:
   \item
     \emph{Explore}: The user clicks on a block in the \tmap{} and the viewpoint in the geographical map will be centered on relevant area.
   \item
-    \emph{Abstract/Elaborate}: The user selects a different granularity in the geographical map (e.g. postal code regions instead of federal states) and the change is reflected in the \tmap{}.
+    \emph{Abstract/Elaborate}: The user selects a different granularity in the geographical map (e.g.\ postal code regions instead of federal states) and the change is reflected in the \tmap{}.
   \item
     \emph{Filter}: The user double-clicks on a region in a geographical map and the \tmap{} will be based on data of only that region.
 \end{itemize}
