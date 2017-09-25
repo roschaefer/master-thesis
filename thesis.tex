@@ -919,6 +919,13 @@ All of these reasons make us choose ReactJS for the task of coordinating multipl
 \end{figure}
 
 \subsection{Observer pattern and component pattern in \cmvs{}}
+Figure~\ref{fig:implementation:both-patterns} shows the final result.
+We try to put as much code as possible under the root node of ReactJS.
+By that we eliminate the amount of custom updating implementation.
+The root node of the DOM-tree of our react application is connected with the existing app through the common interface.
+Both urban analytics controller and the multiview map component will observe changes to the common interface. 
+Also sub-components may communicate with the common interface.
+
 
 \begin{figure}[h!]
   \centering
