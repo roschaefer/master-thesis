@@ -494,15 +494,8 @@ However, we can ask a lot of questions already with common data base queries or 
 
 \section{Concept}\label{sec:concept}
 
-Since we deal with real world problems, we aim to evaluate the developed tools on real users and existing data.
 
-\subsection{Common language}
-
-\subsubsection{Use-case specific interactions}
-
-
-
-We have a strong focus on coordinated multiple views consisting of a tree map and a geographical map.
+We have a focus on coordinated multiple views consisting of a tree map and a geographical map.
 Let's have some examples how an interaction between a \tmap{} and a \map{} might work:
 
     \begin{enumerate}
@@ -528,7 +521,7 @@ Let's have some examples how an interaction between a \tmap{} and a \map{} might
 \todo[inline]{What are the key interactions in our use case?}
 
 
-\subsubsection{Interaction message flow}
+\subsection{Interaction message flow}
 
 From the examples we can distinguish visualization specific information and events as well as general information:
 Any kind of mouse interaction, like hover or click, is tied to the respective visualization and therefore implementation specific.
@@ -567,7 +560,7 @@ If there are shared concepts, we might be able to model common interface for all
 Multiple views would only need to implement to adapter to this interface.
 With this interface we would reduce the currently $N*N$ transformations down to $N$ adapters and reduce the overall development costs.
 
-\subsection{Trigger, effect and interaction information}
+\subsection{Trigger, effect and information semantics}
 
 Let's have a closer look what steps a coordinated interaction actually performs.
 First of all, different visualizations have different capabilities and different degrees of freedom how to interact with and display the data.
@@ -586,7 +579,7 @@ We will face some issues in coordinating the semantics to other views, because:
     \item
         The effect of the interaction cannot be applied to other views.
     \item 
-        The relevant interaction information is ambiguous.
+        The relevant information semantics is ambiguous.
     \item 
         The low level event that is used as a trigger for the interaction is different.
 \end{enumerate}
@@ -597,17 +590,22 @@ Another example for the first case:
 The data sets of a bar chart could be ordered according to a user interaction.
 But the ordering cannot be reflected with a change of position in a scatter plot, as the position is tied to a data attribute.
 
-For the second case, we can see an ambiguity of interaction information if we look at line diagrams and a bar charts.
+For the second case, we can see an ambiguity of information semantics if we look at line diagrams and a bar charts.
 A user might click on a line in the line diagram to highlight the \emph{entire series of data}.
 But in a bar chart a user would click on a bar to select a \emph{feature} of a series, not the entire series of data.
 
 A geographical map might use the mouse drag event to move the viewpoint, which would be an \emph{explore} interaction.
 But the drag of a mouse could be used in an activity diagram to change metadata, like the start and end time of an activity.
 
-It is possible to describe interactions in any type of data visualization by looking on the \emph{trigger}, the \emph{effect} and the exchanged \emph{interaction information}.
-Coordinating interactions across multiple views then means to make a reasonable choice of \emph{trigger} and \emph{effect} for every view and then define what data is included in the \emph{interaction information}.
+It is possible to describe interactions in any type of data visualization by looking on the \emph{trigger}, the \emph{effect} and the exchanged \emph{information semantics}.
+Coordinating interactions across multiple views then means to make a reasonable choice of \emph{trigger} and \emph{effect} for every view and then define what data is included in the \emph{information semantics}.
 
 
+\subsubsection{Free visual variables allow for interaction effects}
+
+In order to communicate the interaction to the user, the effect of the visualization must be communicated back to the user by a visual change.
+Most of data visualizations are defined in a way that ties one or more visual variables to the data.
+These constrained visual attributes are \emph{fixed} while those visual variables that are not tied to the data are therefore \emph{free} to use for a visual feedback of an interaction.
 Figure~\ref{fig:concept:visual-variables} shows the seven visual variables introduced by \textcite{Bertin2010}.
 These visual variables are used in cartography but can also be applied to data visualization in general.
 \begin{figure}[h!]
@@ -617,8 +615,35 @@ These visual variables are used in cartography but can also be applied to data v
   \label{fig:concept:visual-variables}
 \end{figure}
 
+\subsubsection{List events as candidates for interaction triggers}
 
-\subsection{Application examples of the common interface}
+Interaction can be triggered by any input of a human-computer-interaction device, like the keyboard or the mouse.
+Because users are in the habit of expecting certain interactions to be triggered from certain events, we also have constraints here.
+E.g. the viewpoint in geographical maps is moved by mouse drag events and the zoom level is controlled by the mouse wheel.
+So we should not use those already occupied events as triggers for our coordinated interactions.
+Nevertheless, consistency in user interfaces is crucial for great user experience, because users can reuse the learned knowledge.
+Therefore, we need to list all availabe events as candidates and connect them to our interactions in a preferrably consistent manner.
+
+On the other hand, we might have special controls in visualizations, in order to change the encoding.
+E.g. a \tmap{} shows a menu where the user can define how attributes are mapped to visual variables.
+
+\subsubsection{Specify the information semantics}
+
+The semantics of a interaction can be manifold.
+\emph{Select}, \emph{Explore}, and \emph{Filter} interactions affect data items.
+For that reason, the semantics of the interaction is the type of interaction plus the identifier of the affected data item.
+A highlighting of a bar in a bar chart would consist of the interaction type \emph{select} and the respective \emph{feature id}.
+But sometimes, groups of data are selected, like an entire series of data or a subtree in case of hierarchical data.
+
+\emph{\emph{Reconfigure}} and \emph{encode} interactions do not affect data items but the data visualization itself.
+The semantics of these interaction can be arbitrary, e.g.\ an ordered list of feature ids to define the order or a data object that models the mapping of data attributes to visual variables.
+
+\emph{Abstract/elaborate} and \emph{connect} interactions are special interactions which expect a certain type of data.
+Increasing the level of detail expects a tree of data with the level of detail determining the maximum depth of the visualized tree.
+Showing connections between features expects a graph of data, with edges between features and properties on these edges.
+
+
+\subsection{Visualization catalogue}
 
 The data visualization cataloge by Severino Ribecca list many of the most used data visualizations\cite{VisualizationCatalogue2017}.
 Let's pick some of those and derive a number of possible interactions.
