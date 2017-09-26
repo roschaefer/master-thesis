@@ -8,6 +8,7 @@
 \usepackage{booktabs}
 \usepackage{wrapfig}
 \usepackage{subfig}
+\usepackage{tabulary}
 \definecolor{lightgray}{rgb}{.9,.9,.9}
 \definecolor{darkgray}{rgb}{.4,.4,.4}
 \definecolor{purple}{rgb}{0.65, 0.12, 0.82}
@@ -58,6 +59,20 @@
 \newcommand{\dss}{\hmm{d}ecision support systems}
 \newcommand{\riso}{\texttt{RISO}}
 \newcommand{\attr}[1]{\texttt{\detokenize{#1}}}
+
+\newcommand{\conceptTable}[3]{%
+    \begin{center}
+    {\small
+        \begin{tabulary}{\textwidth}{ll}
+            \bf Data structure & #1 \\
+
+            \bf Fixed visual attributes & #2 \\
+
+            \bf Free visual attributes & #3  \\
+        \end{tabulary}
+    }
+    \end{center}
+}
 
 \begin{document}
 
@@ -667,13 +682,10 @@ Let's pick some of those and derive a number of possible interactions.
 \end{figure}
 
 Line diagrams are multiple sets of data, displayed along the x-axis.
-An highighting of the data set as a whole and with certain points of a dataset coulde be possible.
+They are used to display quantitative value over a continuous interval or time span.
+It is possible to highlight an entire series of data or just a feature within that series.
 
-Data format: Tabular data, many data sets along the x-axis.
-
-Fixed visual attributes: Position, orientation, texture.
-
-Free visual attributes: Color, shape, size. 
+\conceptTable{Tabular data, many data sets as series.}{Position, orientation, texture.}{Color, shape, size.}
 
 \subsubsection{Bar charts and multiset bar charts}
 
@@ -696,11 +708,7 @@ Therefore, bar charts need to be initialized with the set of features and their 
 The supplied colors would color each feature in a group in turn.
 The set of possible ineractions include the highlighting of features, the reordering of features and a change in encoding of color values.
 
-Data format: Tabular data, many data sets along the x-axis.
-
-Fixed visual attributes: Size, orientation.
-
-Free visual attributes: Position, color, shape, texture. 
+\conceptTable{Tabular data, many data sets as series}{Size, orientation.}{Position, color, shape, texture.}
 
 \subsubsection{Histograms}
 
@@ -718,12 +726,7 @@ A special type is the population pyramid, which is a pair of back-to-back histog
 The difference of histograms to bar charts lies in the type of data itself, not the representation.
 Therefore these charts need to be initialized with the same data and the same interactions can be applied.
 
-Data format: Tabular data, (many) ordered data sets along a common axis.
-
-Fixed visual attributes: Size, position, orientation.
-
-Free visual attributes: Color, shape, texture. 
-
+\conceptTable{Tabular data, many data sets as series}{Size, orientation, position.}{Color, shape, texture.}
 
 \subsubsection{Bubble charts and scatter plots}
 
@@ -741,11 +744,7 @@ The chart is initialized with coordinates for each feature, a color and a size i
 Possible interactions include the highlighting of features, a different color encoding, a reconfiguration to map another attribute to size.
 Bubble charts may show only a window of the available data and allow to zoom in, zoom out or move the window along the axes.
 
-Data format: Tabular data, single data set along x- and y-axis.
-
-Fixed visual attributes: Size, position.
-
-Free visual attributes: Color, shape, texture, orientation. 
+\conceptTable{Tabular data, single data set with x- and y-coordinates}{Size, position.}{Color, shape, texture, orientation.}
 
 \subsubsection{Stacked bar charts}
 
@@ -762,11 +761,7 @@ Unlike a multi-set bar graph which displays their bars side-by-side, stacked bar
 A baseline, as shown in figure\ref{fig:concept:chart-types:stacked-bar-chart} might be modeled as two back-to-back multi-set bar graphs. A reordering would e.g.\ move one data set from the left side to the right side.
 Possible interactions include the highlighting of a feature, a change of color mapping, reordering of the baseline.
 
-Data format: Tabular data, multiple data sets along one axis.
-
-Fixed visual attributes: Size, shape, orientation.
-
-Free visual attributes: Color, position, texture. 
+\conceptTable{Tabular data, multiple date sets as series}{Size, shape, orientation.}{Color, position, texture.}
 
 \subsubsection{Hierarchical data}
 
@@ -790,11 +785,7 @@ Both visualizations may show only a subtree.
 E.g. a click on a box in the treemap opens another treemap focused on the subtree.
 Similarly a click on a slice of the ring would surround the most external ring with the children of the feature.
 
-Data format: Tree, each feature must have at least one value for layouting.
-
-Fixed visual attributes: Position, Size, shape, orientation.
-
-Free visual attributes: Color, texture. 
+\conceptTable{Tree, each feature has a value for layouting.}{Position, Size, shape, orientation.}{Color, texture.}
 
 \subsubsection{Geographical data}
 
@@ -812,11 +803,7 @@ Size, position and shape of a feature is defined by the geometry data of a featu
 In choropleth maps the color of each feature is based on a data attribute.
 Flow maps may display connections between features, a data value defining the size of each arrow.
 
-Data format: Graph data with edges, each feature must have geometry data.
-
-Fixed visual attributes: Position, Size, shape, orientation.
-
-Free visual attributes: Color, texture. 
+\conceptTable{Graph data with edges, each feature has geometry data.}{Position, Size, shape, orientation.}{Color, texture.}
 
 \subsubsection{Activity diagrams} 
 \begin{figure}
@@ -831,11 +818,7 @@ Free visual attributes: Color, texture.
 In activity diagrams, each feature is represented as a rectangle, with the duration of the activity mapped to size and position.
 Calendars and gantt charts could not only read the data from the data source, but also add new features to the data set or update metadata of a feature, e.g.\ the progress of the activity.
 
-Data format: Temporal data, each feature has a start time and end time.
-
-Fixed visual attributes: Position, Size, orientation.
-
-Free visual attributes: Color, shape, texture. 
+\conceptTable{Temporal data, each feature has a time interval.}{Position, Size, orientation.}{Color, shape, texture.}
 
 \clearpage
 \section{Implementation}
