@@ -820,6 +820,51 @@ Calendars and gantt charts could not only read the data from the data source, bu
 
 \conceptTable{Temporal data, each feature has a time interval.}{Position, Size, orientation.}{Color, shape, texture.}
 
+
+\subsection{Interface implementation}
+
+In order to achieve maximum flexibility, we model the data structure of features as a property graph.
+There are some dedicated properties in the graph to give consideration to data structures like data series (bar charts, line charts) and hierarchical data: 
+
+\begin{description}
+\item[series] 
+    A feature belongs to another feature as part of a data series
+\item[vector]
+    A data series has named attribute, that can be used as an axis
+\item[order]
+    A feature is the successor of a feature regarding a certain order
+\item[hierarchy]
+    A feature has another feature as a parent in a hierarchy
+\item[edge]
+    A feature is an edge connecting two features
+\item[edgeIn]
+    A feature is the source of an edge
+\item[edgeOut]
+    A feature is the target of an edge
+\item[begin]
+    A feature has a temporal start time
+\item[end]
+    A feature has a temporal end time
+\item[mapping]
+    A named attribute of a data series (by a vector) is mapped to a visual variable
+\end{description}
+
+All other properties are considered metadata of features.
+Here are some examples how the exchanged semantics for an interaction could look like, based on this data structure:
+An interaction is \emph{selecting} many features.
+An interaction \emph{elaborates} a feature, which is a subtree.
+An interaction \emph{reconfigures} the order by changing all successor properties. 
+An interation \emph{encodes} a different visual variable by changing the property mapping.
+An interation \emph{connects} features by adding metadata to the connecting edge feature. 
+
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=\textwidth]{images/interaction-semantics.png}
+  \caption{A model of the exchanged interaction semantics}
+  \label{fig:implementation:interaction-semantics}
+\end{figure}
+
 \clearpage
 \section{Implementation}
 
