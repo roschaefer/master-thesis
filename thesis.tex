@@ -687,6 +687,24 @@ It is possible to highlight an entire series of data or just a feature within th
 
 \conceptTable{Tabular data, many data sets as series.}{Position, orientation, texture.}{Color, shape, size.}
 
+\begin{figure}
+    \begin{center}
+        \caption{Interactions for line charts}
+        \label{fig:concept:chart-types:line-diagrams:interactions}
+        {\small
+            \begin{tabulary}{\textwidth}{ll}
+                \bf Select & Highlight a data point (id of data point) \\
+                \bf Select & Highlight a data series (id of data series) \\
+                \bf Encode & Change colours of data series (dictionary of data series \rightarrow \ colour) \\
+                \bf Filter & Restrict interval on x-axis (filter function of data attribute) \\
+                \bf Filter & Hide a data series (id of data series) \\
+            \end{tabulary}
+        }
+    \end{center}
+\end{figure}
+
+
+
 \subsubsection{Bar charts and multiset bar charts}
 
 \begin{figure}
@@ -705,20 +723,33 @@ Colors might be used to better distinuish between the different data attributes.
 Features can be arbitrarily ordered along the axis, although multiset bar charts group features along a series of categories.
 
 Therefore, bar charts need to be initialized with the set of features and their values as well as the groups of features for the multiset bar chart.
-The supplied colors would color each feature in a group in turn.
-The set of possible ineractions include the highlighting of features, the reordering of features and a change in encoding of color values.
+The supplied colours would colour each feature in a group in turn.
+The set of possible ineractions include the highlighting of features, the reordering of features and a change in encoding of colour values.
 
-\conceptTable{Tabular data, many data sets as series}{Size, orientation.}{Position, color, shape, texture.}
+\conceptTable{Tabular data, many data sets as series}{Size, orientation.}{Position, colour, shape, texture.}
 
-\subsubsection{Histograms}
+\begin{figure}
+    \begin{center}
+        \caption{Interactions for bar charts}
+        \label{fig:concept:chart-types:bar-diagrams:interactions}
+        {\small
+            \begin{tabulary}{\textwidth}{ll}
+                \bf Select & Highlight a bar (id of data point) \\
+                \bf Encode & Change colours of data series (dictionary of colours \rightarrow \ data series) \\
+                \bf Reconfigure & Sort by attribute (data attribute) \\
+                \bf Reconfigure & Drag bars to reorder data series (ordered list of ids of data points) \\
+                \bf Filter & Hide a data series (id of data series) \\
+            \end{tabulary}
+        }
+    \end{center}
+\end{figure}
+
 
 \begin{figure}
   \centering
-    \subfloat[Histogram]{{\includegraphics[width=0.4\textwidth]{images/chartTypes/histogram.png} }}%
-    \qquad
-    \subfloat[Population pyramid]{{\includegraphics[width=0.4\textwidth]{images/chartTypes/population-pyramid.png} }}%
-    \caption{A population pyramid is a pair of histograms for each sex}%
+    \includegraphics[width=0.4\textwidth]{images/chartTypes/histogram.png}%
     \label{fig:concept:chart-types:histograms}
+    \caption{A histogram is a bar chart over a continuous interval}%
 \end{figure}
 
 Histograms visualise the distribution of data over a continuous interval or certain time period.
@@ -735,16 +766,37 @@ Therefore these charts need to be initialized with the same data and the same in
     \subfloat[Bubble chart]{{\includegraphics[width=0.4\textwidth]{images/chartTypes/bubble-chart.png} }}%
     \qquad
     \subfloat[Scatter plot]{{\includegraphics[width=0.4\textwidth]{images/chartTypes/scatter-plot.png} }}%
-    \caption{Bubble charts and scatter plots are very similar in terms of interactivity}%
+    \caption{Bubble charts and scatter plots are similar regarding interactions}%
     \label{fig:concept:chart-types:bubble-chart}
 \end{figure}
 
 Bubble charts are popular choices to display a distribution of features.
-The chart is initialized with coordinates for each feature, a color and a size in case of a bubble charts. 
-Possible interactions include the highlighting of features, a different color encoding, a reconfiguration to map another attribute to size.
+The chart is initialized with coordinates for each feature, a colour and a size in case of a bubble charts. 
+Possible interactions include the highlighting of features, a different colour encoding, a reconfiguration to map another attribute to size.
 Bubble charts may show only a window of the available data and allow to zoom in, zoom out or move the window along the axes.
 
 \conceptTable{Tabular data, single data set with x- and y-coordinates}{Size, position.}{Color, shape, texture, orientation.}
+
+\begin{figure}
+    \begin{center}
+        \caption{Interactions for bubble charts}
+        \label{fig:concept:chart-types:bubble-chart:interactions}
+        {\small
+            \begin{tabulary}{\textwidth}{ll}
+                \bf Select & Highlight a bubble (id of data point) \\
+                \bf Explore & Zoom in, zoom out (width and height of window) \\
+                \bf Explore & Move viewport position (x- and y-coordinates of viewport) \\
+                \bf Encode & Change mapping of colour to category (dictionary of data series \rightarrow \ colour) \\
+                \bf Encode & Change colour function (function value \rightarrow \ colour) \\
+                \bf Encode & Change data attribute to for colour (data attribute) \\
+                \bf Encode & Change data attribute to for size \\
+                \bf Reconfigure & Sort by attribute (data attribute) \\
+                \bf Reconfigure & Drag bars to reorder data series (ordered list of ids of data points) \\
+                \bf Filter & Hide a data series (id of data series) \\
+            \end{tabulary}
+        }
+    \end{center}
+\end{figure}
 
 \subsubsection{Stacked bar charts}
 
@@ -756,10 +808,35 @@ Bubble charts may show only a window of the available data and allow to zoom in,
     \caption{Stacked bar charts can be ordered along a baseline or stretch to 100\% width to show the percentage-of-the-whole of each group}%
     \label{fig:concept:chart-types:stacked-bar-chart}
 \end{figure}
+\begin{figure}
+  \centering
+    \includegraphics[width=0.4\textwidth]{images/chartTypes/population-pyramid.png}%
+    \label{fig:concept:chart-types:population-pyramid}
+    \caption{A population pyramid can be modeled as a stacked bar chart}%
+\end{figure}
 
 Unlike a multi-set bar graph which displays their bars side-by-side, stacked bar graphs segment their bars of multiple datasets on top of each other.
-A baseline, as shown in figure\ref{fig:concept:chart-types:stacked-bar-chart} might be modeled as two back-to-back multi-set bar graphs. A reordering would e.g.\ move one data set from the left side to the right side.
+A baseline, as shown in figure~\ref{fig:concept:chart-types:stacked-bar-chart} might be modeled as two back-to-back multi-set bar graphs. A reordering would e.g.\ move one data set from the left side to the right side.
 Possible interactions include the highlighting of a feature, a change of color mapping, reordering of the baseline.
+
+\begin{figure}
+    \begin{center}
+        \caption{Interactions for stacked bar charts}
+        \label{fig:concept:chart-types:stacked-bar-chart:interactions}
+        {\small
+            \begin{tabulary}{\textwidth}{ll}
+                \bf Select & Highlight a bar (id of data point) \\
+                \bf Encode & Change mapping of category to colour (dictionary of data series \rightarrow \ colour) \\
+                \bf Reconfigure & Sort by attribute (data attribute) \\
+                \bf Reconfigure & Reorder Y axis (ordered list of ids of data points) \\
+                \bf Reconfigure & Sort stacking order by attribute (data attribute) \\
+                \bf Reconfigure & Specify the stacking order data series (ordered list of ids of data series) \\
+                \bf Reconfigure & Specify a negative data series (list of ids of data series) \\
+                \bf Filter & Hide a data series (id of data series) \\
+            \end{tabulary}
+        }
+    \end{center}
+\end{figure}
 
 \conceptTable{Tabular data, multiple date sets as series}{Size, shape, orientation.}{Color, position, texture.}
 
@@ -787,6 +864,24 @@ Similarly a click on a slice of the ring would surround the most external ring w
 
 \conceptTable{Tree, each feature has a value for layouting.}{Position, Size, shape, orientation.}{Color, texture.}
 
+\begin{figure}
+    \begin{center}
+        \caption{Interactions for hierarchical visualizations}
+        \label{fig:concept:chart-types:hierarchies:interactions}
+        {\small
+            \begin{tabulary}{\textwidth}{ll}
+                \bf Select & Highlight a feature (id of data point) \\
+                \bf Explore & Use another node as root of the visible tree (id of data point) \\
+                \bf Encode & Change mapping of category to colour (dictionary of data series \rightarrow \ colour) \\
+                \bf Reconfigure & Change data attribute used for layouting (data attribute) \\
+                \bf Reconfigure & Sort by attribute (data attribute) \\
+                \bf Reconfigure & Specify order (ordered list of ids of data points) \\
+                \bf Abstract/Elaborate & Specify maximum depth of visible tree (number of levels) \\
+            \end{tabulary}
+        }
+    \end{center}
+\end{figure}
+
 \subsubsection{Geographical data}
 
 \begin{figure}
@@ -804,6 +899,26 @@ In choropleth maps the color of each feature is based on a data attribute.
 Flow maps may display connections between features, a data value defining the size of each arrow.
 
 \conceptTable{Graph data with edges, each feature has geometry data.}{Position, Size, shape, orientation.}{Color, texture.}
+
+\begin{figure}
+    \begin{center}
+        \caption{Interactions for geographical visualizations}
+        \label{fig:concept:chart-types:geographical:interactions}
+        {\small
+            \begin{tabulary}{\textwidth}{ll}
+                \bf Select & Highlight a feature (id of data point) \\
+                \bf Explore & Move viewport (latitude and longitude of viewport)\\
+                \bf Explore & Zoom in, zoom out (zoom factor) \\
+                \bf Encode & Change shape of marker (data id \rightarrow \ shape) \\
+                \bf Encode & Change mapping of category to colour (dictionary of data series \rightarrow \ colour) \\
+                \bf Encode & Change colour function (value \rightarrow \ colour) \\
+                \bf Encode & Change data attribute used for colour (data attribute) \\
+                \bf Connect & Show relations of a feature (id of data point)  \\
+                \bf Abstract/Elaborate & Change granularity of displayed regions (number of levels) \\
+            \end{tabulary}
+        }
+    \end{center}
+\end{figure}
 
 \subsubsection{Activity diagrams} 
 \begin{figure}
@@ -862,7 +977,7 @@ An interation \emph{connects} features by adding metadata to the connecting edge
   \centering
   \includegraphics[width=\textwidth]{images/interaction-semantics.png}
   \caption{A model of the exchanged interaction semantics}
-  \label{fig:implementation:interaction-semantics}
+  \label{fig:implementation:}
 \end{figure}
 
 \clearpage
