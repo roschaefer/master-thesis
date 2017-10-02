@@ -937,16 +937,17 @@ Calendars and gantt charts could not only read the data from the data source, bu
 \todo[inline]{No section without text}
 
 \subsection{Abstract data model}
-To account for the various data structures, we develop an abstract data structure that is powerful enough to include tabular, hierarchical and relational data.
+To account for the various data structures, we use an abstract data model that is powerful enough to include tabular, hierarchical and relational data.
 You can see a class diagram in figure~\ref{fig:concept:meta-data-structure}.
 The \emph{entity} class is used to model the smallest distinguishable unit.
 All entities can be identified and retrieved via the \emph{id}.
-It can have arbitrary many attributes and the attributes can be identified via the name.
+An entity is just any object that can have data attached as attributes.
+It can have arbitrary many attributes and each value can be accessed by the name of the attribute.
 So if you want to get the \emph{latitude} value of an entity, you can retrieve the value with a call to the named attribute \emph{latitude}.
 An entity can also be a \emph{series}.
-Every series contains an ordered list of entities.
-Because a series can also contain other series, we can model a hierarchy relation with series.
-There is always one series without a parent series, this series is the root node of the hierarchy.
+Every series contains an ordered list of contained entities.
+Series can also contain other series, so we can model a hierarchy relation with series contained in other series.
+There is always one particular series without a parent, this series is the root node of the hierarchy.
 If we only want to display tabular data, we just have one or two levels of hierarchy, for single or multiple data series respectively.
 Furthermore, if we want to display arbitrary relations among entities, we can model these as \emph{relations}.
 Since every \emph{relation} is a \emph{entity} we can add \emph{attributes} to the relation.
@@ -960,7 +961,7 @@ These attributes on a relation can e.g.\ store the weight of an edge in a flow m
   \label{fig:concept:meta-data-structure}
 \end{figure}
 
-\subsection{Interaction semantics expressed as functions}
+\subsection{Interaction semantics expressed as functions}\label{sec:concept:semantics}
 
 It turns out that we can describe the semantics of an interaction as a mathematical function.
 Every visual effect of the interaction will be preceded by a change of the respective describing function.
@@ -1060,27 +1061,42 @@ If many attributes are chosen from a dropdown menu and some thresholds are speci
 The \emph{FilterAttributes} will return the ordered list of chosen attributes of the dropdown menu.
 The updated \emph{FilterByValues} function will expect these arguments and return either true or false based on the values of these attributes.
 
-\subsection{Publish-subscribe pattern}
+\subsection{Publish and subscribe to interactions}
 
-From the examples we can distinguish visualization specific information and events as well as general information:
-Any kind of mouse interaction, like hover or click, is tied to the respective visualization and therefore implementation specific.
-But the transferred data, i.e. the selected feature ids are obviously abstract information independent of the specific visualization.
-Also the semantics of the interaction lies on a higher level. 
-From here on out we call the low-level interaction events like mousedown a \emph{trigger} and the corresponding change, e.g. a cange of the background color of the item, an \emph{effect}.
-
+In section~\ref{sec:concept:semantics} we discussed how we can describe the semantics of the interaction.
+We still need to describe how we can model the coordination of the interaction, i.e.\ the actual message flow of interactions.
+Obviously, the semantics is somehow the payload of a message.
+But what is the framework to exchange the these messages?
+How is one action in one view coupled with a visual effect in another view?
 \begin{figure}[h!]
   \centering
   \includegraphics[width=\textwidth]{images/trigger-effect.png}
   \caption{Schema of message flow in \cmvs{}}
   \label{fig:concept:trigger-effect}
 \end{figure}
+Figure~\ref{fig:concept:trigger-effect} shows a model of the coordination.
+We introduce two new terms, \emph{trigger} and \emph{effect}.
+
+A trigger is e.g. a mouse interaction, like hover or click.
+This low-level action is an implementation detail and therefore tied to the specific visualization.
+
+In order to be perceivable by the user, the interaction must have some visual effect.
+E.g.\ a feature of the visualization is changed, e.g.\ a colour of a bar in a bar chart.
+The choice of the visual effect to express the interaction is an implementation detail as well.
+
+Sometimes a visualization may not be able to interpret an interaction.
+E.g.\ a bar chart can re-arrange the bars along the x-axis in case of a \emph{Reconfigure} interaction. 
+But a scatter plot connects both x- and y-coordinates of an entitiy to a certain data attribute.
+Therefore, not only the \emph{trigger} and \emph{effect} but also the handling of the interaction itself is implementation specific.
+
+Every view decides for its own, whether to react or not to a certain interaction.
+So we have distinguishable named interactions, and every view can subscribe to certain interactions.
+If a view wants to trigger an interaction it can publish to the named interaction.
+
+This pattern is known as the \emph{Publish-subscribe pattern} and widely used in message queues.
+The term \emph{interaction} in our case is equivalent to the termn \emph{channel} or \emph{topic} used in message queues.
 
 
-Figure~\ref{fig:concept:trigger-effect} shows this concept.
-Note that many triggers from different views can be connected to the same interaction.
-This interaction can have many effects in different views.
-The interaction itself might be a highlighting of a feature, so the feature id is supplied.
-In turn, the interaction will trigger an effect in all dependent data visualization, i.e. a polygon will change its background color.
 
 \clearpage
 \section{Implementation}
