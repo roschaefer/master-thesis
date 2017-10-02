@@ -9,6 +9,7 @@
 \usepackage{wrapfig}
 \usepackage{subfig}
 \usepackage{tabulary}
+\usepackage{amssymb}
 \definecolor{lightgray}{rgb}{.9,.9,.9}
 \definecolor{darkgray}{rgb}{.4,.4,.4}
 \definecolor{purple}{rgb}{0.65, 0.12, 0.82}
@@ -253,7 +254,7 @@ How do these visualizations perform and what are best practices to be considered
 
 
 \subsection{Visualization of hierarchical data}
-Due to the hierarchical nature of the of our use cases, we focus on the visualization of hierarchical and geographical data
+Due to the hierarchical nature of the use cases, we focus on the visualization of hierarchical and geographical data
 The visualization of hierarchical data has a long tradition.
 The traditional representation of a tree is a rooted, directed graph with the root node at the top.
 An everyday use case is a directory tree example of a file system, e.g.\ in file browsers or command line utilities like \texttt{tree} in UNIX\@.
@@ -788,8 +789,8 @@ Bubble charts may show only a window of the available data and allow to zoom in,
                 \bf Explore & Move viewport position (x- and y-coordinates of viewport) \\
                 \bf Encode & Change mapping of colour to category (data series \rightarrow\ colour) \\
                 \bf Encode & Change colour function (function value \rightarrow\ colour) \\
-                \bf Encode & Change data attribute to for colour (data attribute) \\
-                \bf Encode & Change data attribute to for size \\
+                \bf Encode & Change data attribute to colour (data attribute) \\
+                \bf Encode & Change data attribute to size \\
                 \bf Reconfigure & Sort by attribute (data attribute) \\
                 \bf Reconfigure & Drag bars to reorder data series (ordered list of ids of data points) \\
                 \bf Filter & Hide a data series (id of data series) \\
@@ -955,47 +956,101 @@ Calendars and gantt charts could not only read the data from the data source, bu
 
 \subsection{Interface implementation}
 
-In order to achieve maximum flexibility, we model the data structure of features as a property graph.
-There are some dedicated properties in the graph to give consideration to data structures like data series (bar charts, line charts) and hierarchical data: 
-
-\begin{description}
-\item[series] 
-    A feature belongs to another feature as part of a data series
-\item[vector]
-    A data series has named attribute, that can be used as an axis
-\item[order]
-    A feature is the successor of a feature regarding a certain order
-\item[hierarchy]
-    A feature has another feature as a parent in a hierarchy
-\item[edge]
-    A feature is an edge connecting two features
-\item[edgeIn]
-    A feature is the source of an edge
-\item[edgeOut]
-    A feature is the target of an edge
-\item[begin]
-    A feature has a temporal start time
-\item[end]
-    A feature has a temporal end time
-\item[mapping]
-    A named attribute of a data series (by a vector) is mapped to a visual variable
-\end{description}
-
-All other properties are considered metadata of features.
-Here are some examples how the exchanged semantics for an interaction could look like, based on this data structure:
-An interaction is \emph{selecting} many features.
-An interaction \emph{elaborates} a feature, which is a subtree.
-An interaction \emph{reconfigures} the order by changing all successor properties. 
-An interation \emph{encodes} a different visual variable by changing the property mapping.
-An interation \emph{connects} features by adding metadata to the connecting edge feature. 
-
+To account for the various data structures, we develop an abstract data structure that is powerful enough to include tabular, hierarchical and relational data.
+You can see a class diagram in figure~\ref{fig:concept:meta-data-structure}.
 
 \begin{figure}[h!]
   \centering
-  \includegraphics[width=\textwidth]{images/interaction-semantics.png}
-  \caption{A model of the exchanged interaction semantics}
-  \label{fig:implementation:}
+  \includegraphics[width=0.5\textwidth]{images/meta-data-structure.png}
+  \caption{A data structure for tabular, hierarchichal and relational data}
+  \label{fig:concept:meta-data-structure}
 \end{figure}
+
+If a view wants to coordinate an interaction, it can exchange this information via a dedicated function. 
+
+Let's go through the list:
+
+\begin{enumerate}
+    \item 
+        $ Highlight: \varnothing \rightarrow \mathbb{N}$
+
+        A highlighting is a function with no input parameters that is returning a list of highlighted entities
+    \item 
+        $ Filter: \varnothing \rightarrow \mathbb{N} $
+
+        The $Filter$ function takes no arguments and returns a subset of entities that should be displayed.
+    \item 
+        $ FilterByValue: \mathbb{N^*} \rightarrow \{ \bot, \top \} $
+
+        The $FilterByValue$ function returns whether an entity belongs to the displayed set based on a list of attribute values.
+    \item 
+        $ FilterAttributes: \varnothing \rightarrow \sum^* $
+
+        The $FilterByAttributes$ returns a arbitrary long, ordered list of names of attributes that are taken as input for the $ FilterByValue $ function.
+    \item 
+        $ Focus: \varnothing \rightarrow \mathbb{N} $
+
+        The $ Focus $ function returns a single id of the entity that should in the center of the viewport.
+        A tree map or a sunburst map can use the focused entity as the root node of the visible subtree.
+    \item 
+        $ Screen: \varnothing \rightarrow \mathbb{N}* $
+
+        This function returns a list of entities that must be in between the current boundaries of the diagram window.
+        The list can be used to implicitly derive the zoom level in different visualizations like bubble chart or geographical map.
+        It can also be used to implicitly derive the visible hierarchy levels in a tree map.
+    \item 
+        $ Colour: \mathbb{N} \rightarrow \mathbb{C} $
+
+        A colour function assigns an entity or a data series to a color c with $ c \in \mathbb{C} $ the set $C$ of all colours.
+        A colour typically consists of three values $R$, $G$ and $B$.
+    \item 
+        $ ColourByValue: \mathbb{R} \rightarrow \mathbb{C} $
+
+        A colour function assigns a continuous value to a color c with $ c \in \mathbb{C} $ the set $C$ of all colours
+        This function is e.g.\ used by a choropleth map.
+    \item 
+        $ ColourAttributes: \mathbb{R} \rightarrow \mathbb{C} $
+
+        The names of the attributes used as input for the $ ColourByValue $ function. 
+    \item 
+        $ Order: \mathbb{N} \rightarrow \mathbb{N} $
+
+        An order function assigning each entity to an index.
+        This index will be used in bar charts to order bars along the x-axis or stacked bar charts, to order the stacking of data series.
+    \item 
+        $ Sort: (\mathbb{R} \times \mathbb{R})^* \rightarrow \mathbb{R} $
+
+        This sort function will return a continuous value based on a arbitrary long list of pairs of attribute values.
+        It's an implicit order function based on one or many data attributes.
+    \item 
+        $ SortAttributes: \varnothing \rightarrow \sum^* $
+
+        The ordered list of names of attributes which will be used as input for the $Sort$ function.
+    \item 
+        $ X: \varnothing \rightarrow \sum $
+
+        The $X$ function denotes the name of the attribute used for the x-axis of the diagram.
+        In bar charts, the categories are displayed along the x-axis.
+        In a population pyramid the x-axis is the age of people.
+    \item 
+        $ Y: \varnothing \rightarrow \sum $
+
+        The $Y$ function denotes the name of the attribute used for the y-axis of the diagram.
+        Bar charts map a data attribute to the length of a bar along the y-axis.
+    \item 
+        $ Size: \varnothing \rightarrow \sum $
+
+        This function denominates the name of the attribute used to encode the $ Size $ of the feature.
+        Bubble charts can encode the data attribute to the area of the bubble.
+    \item 
+        $ LayoutAttribute : \varnothing \rightarrow \sum $
+        This specialized function returns the name of the attribute that should be used for layouting in hierarchical visualizations. 
+    \item 
+        $ Shape : \mathbb{N} \rightarrow \mathbb{S} $
+        For visualizations, that display a shape per data point, $Shape$ will return a shape $ s \in S $ with $S$ the set of all discrete shapes. 
+\end{enumerate}
+
+
 
 \clearpage
 \section{Implementation}
