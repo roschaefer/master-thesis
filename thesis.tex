@@ -939,19 +939,26 @@ Calendars and gantt charts could not only read the data from the data source, bu
 \subsection{Abstract data model}
 To account for the various data structures, we use an abstract data model that is powerful enough to include tabular, hierarchical and relational data.
 You can see a class diagram in figure~\ref{fig:concept:meta-data-structure}.
+
 The \emph{entity} class is used to model the smallest distinguishable unit.
 All entities can be identified and retrieved via the \emph{id}.
-An entity is just any object that can have data attached as attributes.
+An entity is defined to be any object that can have data attached as attributes.
 It can have arbitrary many attributes and each value can be accessed by the name of the attribute.
 So if you want to get the \emph{latitude} value of an entity, you can retrieve the value with a call to the named attribute \emph{latitude}.
-An entity can also be a \emph{series}.
-Every series contains an ordered list of contained entities.
-Series can also contain other series, so we can model a hierarchy relation with series contained in other series.
-There is always one particular series without a parent, this series is the root node of the hierarchy.
-If we only want to display tabular data, we just have one or two levels of hierarchy, for single or multiple data series respectively.
-Furthermore, if we want to display arbitrary relations among entities, we can model these as \emph{relations}.
-Since every \emph{relation} is a \emph{entity} we can add \emph{attributes} to the relation.
-These attributes on a relation can e.g.\ store the weight of an edge in a flow map.
+
+Entities can also be \emph{series} of other entities.
+A series contains an ordered list of contained entities.
+As series can also contain other series, so we can model a hierarchy relation.
+
+There is always one particular series without a parent.
+This is the root node of the hierarchy.
+If we just want to display tabular data, we just have one or two levels of hierarchy.
+E.g.\ one level of hierarchy for a histogram and two levels of hierarchy for a stacked bar chart.
+
+Other relations than hierarchical relations can be modeled as a \emph{relation} entity.
+It represents a directed edge in a graph and must have incoming and outgoing entity.
+Since every \emph{relation} is an \emph{entity} as well, we can add \emph{attributes} to the relation.
+These attributes may describe e.g.\ the weight of an edge in a flow map.
 
 
 \begin{figure}[h!]
@@ -964,11 +971,13 @@ These attributes on a relation can e.g.\ store the weight of an edge in a flow m
 \subsection{Interaction semantics expressed as functions}\label{sec:concept:semantics}
 
 It turns out that we can describe the semantics of an interaction as a mathematical function.
-Every visual effect of the interaction will be preceded by a change of the respective describing function.
-In order to coordinate the effect of an interaction, a view can populate the changed function to all related views.
+These functions operates on the ids of \emph{entities}, \emph{series}, and \emph{relations} or their respective \emph{attributes}.
+The change of the function describes the interaction but ignores implementation details of specific visualizations.
+To coordinate interactions across views, one view sends the new function as a message to its companioning views.
 
 
-Based on the examples in section~\ref{sec:analysis:examples} we can describe interactions as follows:
+The function declarations are derived from specific interactions of the examples in section~\ref{sec:analysis:examples}.
+We describe them as follows:
 \begin{enumerate}
     \item 
         $ Highlight: \varnothing \rightarrow \mathbb{N}$
@@ -985,11 +994,11 @@ Based on the examples in section~\ref{sec:analysis:examples} we can describe int
     \item 
         $ FilterAttributes: \varnothing \rightarrow \sum^* $
 
-        The $FilterByAttributes$ returns a arbitrary long, ordered list of names of attributes that are taken as input for the $ FilterByValue $ function.
+        The $FilterByAttributes$ returns an arbitrary long, ordered list of names of attributes that are taken as input for the $ FilterByValue $ function.
     \item 
         $ Focus: \varnothing \rightarrow \mathbb{N} $
 
-        The $ Focus $ function returns a single id of the entity that should in the center of the viewport.
+        The $ Focus $ function returns a single id of the entity that should be in the center of the viewport.
         A tree map or a sunburst map can use the focused entity as the root node of the visible subtree.
     \item 
         $ Screen: \varnothing \rightarrow \mathbb{N}* $
@@ -1019,7 +1028,7 @@ Based on the examples in section~\ref{sec:analysis:examples} we can describe int
     \item 
         $ Sort: \big( \mathbb{R} \times \mathbb{R} \big)^* \rightarrow \mathbb{R} $
 
-        This sort function will return a continuous value based on a arbitrary long list of pairs of attribute values.
+        This sort function will return a continuous value based on an arbitrary long list of pairs of attribute values.
         It's an implicit order function based on one or many data attributes and returns a negative value if the first element is orderd before the second element.
     \item 
         $ SortAttributes: \varnothing \rightarrow \sum^* $
@@ -1049,17 +1058,19 @@ Based on the examples in section~\ref{sec:analysis:examples} we can describe int
         For visualizations, that display a shape per data point, $Shape$ will return a shape $ s \in S $ with $S$ the set of all discrete shapes. 
 \end{enumerate}
 
-Let's have some examples how these functions can be applied to coordinate interactions:
+Let's have some examples how these functions can be applied on coordinated interactions:
 
-A user clicks on feature in a bar chart and this feature is then highlighted.
-To coordinate the highlighting, the bar chart visualization changes the \emph{Highlight} which will return only the id of the highlighted entity of the feature.
+A user clicks on a bar in a bar chart and this feature then changes its background colour.
+To coordinate the highlighting, the bar chart visualization replaces the \emph{Highlight} function.
+The function now returns the id of the entity of the feature with the new background colour.
 
-When a region in a geographical map is clicked, the \emph{Focus} function will return the id of the clicked entity.
-A corresponding tree map can show the subtree with the focused entity as root node.
+When a region in a geographical map is clicked, the new \emph{Focus} function will return the id of the clicked entity.
+A coordinated tree map next to the geographical map now shows a subtree with the focused entity as root node.
 
 If many attributes are chosen from a dropdown menu and some thresholds are specified with a slider, both the \emph{FilterAttributes} and the \emph{FilterByValues} functions are changed.
 The \emph{FilterAttributes} will return the ordered list of chosen attributes of the dropdown menu.
-The updated \emph{FilterByValues} function will expect these arguments and return either true or false based on the values of these attributes.
+The updated \emph{FilterByValues} function will now expect a new argument list, based on $ FilterAttributes $.
+It then yields either true or false based on the values of these attributes.
 
 \subsection{Publish and subscribe to interactions}
 
@@ -1081,21 +1092,21 @@ A trigger is e.g. a mouse interaction, like hover or click.
 This low-level action is an implementation detail and therefore tied to the specific visualization.
 
 In order to be perceivable by the user, the interaction must have some visual effect.
-E.g.\ a feature of the visualization is changed, e.g.\ a colour of a bar in a bar chart.
+A feature of the visualization is changed, e.g.\ a colour of a bar in a bar chart.
 The choice of the visual effect to express the interaction is an implementation detail as well.
 
 Sometimes a visualization may not be able to interpret an interaction.
 E.g.\ a bar chart can re-arrange the bars along the x-axis in case of a \emph{Reconfigure} interaction. 
-But a scatter plot connects both x- and y-coordinates of an entitiy to a certain data attribute.
-Therefore, not only the \emph{trigger} and \emph{effect} but also the handling of the interaction itself is implementation specific.
+But a scatter plot constrains x- and y-coordinates of an entity on a certain data attribute.
+Therefore, not only the \emph{trigger} and \emph{effect} is implementation specific, but also the handling of the interaction itself.
 
-Every view decides for its own, whether to react or not to a certain interaction.
-So we have distinguishable named interactions, and every view can subscribe to certain interactions.
-If a view wants to trigger an interaction it can publish to the named interaction.
+Every visualization decides on its own, how to react to a certain interaction.
+That leads us to distinguishable, named interactions.
+Every view can subscribe to certain interactions and receive messages in form of changed interaction semantics.
+In order trigger an interaction, the visualization simply publishes to the named interaction.
 
 This pattern is known as the \emph{Publish-subscribe pattern} and widely used in message queues.
-The term \emph{interaction} in our case is equivalent to the termn \emph{channel} or \emph{topic} used in message queues.
-
+The term \emph{interaction} in our case is equivalent to the term \emph{channel} or \emph{topic} commonly used in message queues.
 
 
 \clearpage
