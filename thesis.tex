@@ -359,38 +359,6 @@ As we can see in the example in figure~\ref{fig:research:cmv} there seems to be 
 \todo[inline]{No section without text}
 
 
-\subsection{Existing interactions}
-The possible inteactions in our current \visan{} can be categorized \emph{select}, \emph{explore}, \emph{reconfigure}, \emph{encode} and \emph{filter}.
-As seen in figure~\ref{fig:analysis:interaction:existing} the user can \emph{select} one item in the view by clicking on it.
-The user can reveal a tooltip showing the item properties by hovering with the mouse on the item, which is another \emph{selection}.
-The user can \emph{explore} the map in the usual manner:
-If the user drags with the mouse on the map, a panning operation is performed with the viewpoint focused on Germany, i.e.\ the camere moves around like a turntable.
-The zoom factor can be changed by scrolling on the canvas of the map.
-\emph{Encode} and \emph{reconfigure} techniques are performed through the menu on the left side:
-Under the ``features'' tab, the user can \emph{reconfigure} different data sets and the displayed diagram, e.g.\ a tree map visualization based on the geometry shape, cubes or voronoi regions.
-The tab ``Dimensions'' allows the user to \emph{encode} properties of a data set to visual attributes, e.g.\ the height, color and texture of an item.
-The tab ``Filter'' can be used to reduce the displayed data set along a range of continuous values.
-Figure~\ref{fig:analysis:interaction:existing:filter} shows the range of visible values in the left menu.
-When the user drags the slider, the items in the map on the right side are updated interactively.
-
-\begin{figure}[h!]
-  \centering
-  \includegraphics[width=\textwidth]{images/existing-interactions.png}
-  \caption{
-    Items can be highlighted with a click, Bavaria is currently highlighted.
-    A mouse over reveals a tooltip showing item properties.
-    The menu on the left side allows to change the data set and the specific base visualization.}
-  \label{fig:analysis:interaction:existing}
-\end{figure}
-
-\begin{figure}[h!]
-  \centering
-  \includegraphics[width=\textwidth]{images/existing-interactions-filter.png}
-  \caption{ Only gas stations with a price for E10 within 1.349 Euro and 1.589 Euro are displayed in the map}
-  \label{fig:analysis:interaction:existing:filter}
-\end{figure}
-
-
 \subsection{Data sets}
 For our uses cases, we have two different data sets:
 One data set consists of a user ranking of public broadcasting in Germany, i.e.\ entities, mostly TV and radio broadcasts, are liked or disliked by people.
@@ -506,9 +474,40 @@ However, we can ask a lot of questions already with common data base queries or 
 \end{enumerate}
 
 
-\clearpage
+\subsection{Existing interactions}
+The possible inteactions in our current \visan{} can be categorized \emph{select}, \emph{explore}, \emph{reconfigure}, \emph{encode} and \emph{filter}.
+As seen in figure~\ref{fig:analysis:interaction:existing} the user can \emph{select} one item in the view by clicking on it.
+The user can reveal a tooltip showing the item properties by hovering with the mouse on the item, which is another \emph{selection}.
+The user can \emph{explore} the map in the usual manner:
+If the user drags with the mouse on the map, a panning operation is performed with the viewpoint focused on Germany, i.e.\ the camera moves around like a turntable.
+The zoom factor can be changed by scrolling on the canvas of the map.
+\emph{Encode} and \emph{reconfigure} techniques are performed through the menu on the left side:
+Under the ``features'' tab, the user can \emph{reconfigure} different data sets and the displayed diagram, e.g.\ a tree map visualization based on the geometry shape, cubes or voronoi regions.
+The tab ``Dimensions'' allows the user to \emph{encode} properties of a data set to visual attributes, e.g.\ the height, color and texture of an item.
+The tab ``Filter'' can be used to reduce the displayed data set along a range of continuous values.
+Figure~\ref{fig:analysis:interaction:existing:filter} shows the range of visible values in the left menu.
+When the user drags the slider, the items in the map on the right side are updated interactively.
 
-\section{Concept}\label{sec:concept}
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=\textwidth]{images/existing-interactions.png}
+  \caption{
+    Items can be highlighted with a click, Bavaria is currently highlighted.
+    A mouse over reveals a tooltip showing item properties.
+    The menu on the left side allows to change the data set and the specific base visualization.}
+  \label{fig:analysis:interaction:existing}
+\end{figure}
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=\textwidth]{images/existing-interactions-filter.png}
+  \caption{ Only gas stations with a price for E10 within 1.349 Euro and 1.589 Euro are displayed in the map}
+  \label{fig:analysis:interaction:existing:filter}
+\end{figure}
+
+
+
+\subsection{Interaction to be implemented}
 
 
 We have a focus on coordinated multiple views consisting of a tree map and a geographical map.
@@ -535,29 +534,6 @@ Let's have some examples how an interaction between a \tmap{} and a \map{} might
     Show a \emph{Connect} by highlighting boxes of the same subtree in the \tmap{}. The respective connected items would be highlighted in the \map{} as well. Here the data is a relation between items.
     \end{enumerate}
 \todo[inline]{What are the key interactions in our use case?}
-
-
-\subsection{Interaction message flow}
-
-From the examples we can distinguish visualization specific information and events as well as general information:
-Any kind of mouse interaction, like hover or click, is tied to the respective visualization and therefore implementation specific.
-But the transferred data, i.e. the selected feature ids are obviously abstract information independent of the specific visualization.
-Also the semantics of the interaction lies on a higher level. 
-From here on out we call the low-level interaction events like mousedown a \emph{trigger} and the corresponding change, e.g. a cange of the background color of the item, an \emph{effect}.
-
-\begin{figure}[h!]
-  \centering
-  \includegraphics[width=\textwidth]{images/trigger-effect.png}
-  \caption{Schema of message flow in \cmvs{}}
-  \label{fig:concept:trigger-effect}
-\end{figure}
-
-
-Figure~\ref{fig:concept:trigger-effect} shows this concept.
-Note that many triggers from different views can be connected to the same interaction.
-This interaction can have many effects in different views.
-The interaction itself might be a highlighting of a feature, so the feature id is supplied.
-In turn, the interaction will trigger an effect in all dependent data visualization, i.e. a polygon will change its background color.
 
 
 \subsection{Common interface}
@@ -659,7 +635,7 @@ Increasing the level of detail expects a tree of data with the level of detail d
 Showing connections between features expects a graph of data, with edges between features and properties on these edges.
 
 
-\subsection{Visualization catalogue}\label{sec:concept:visualization-catalogue}
+\subsection{Interaction examples in other visualizations}\label{sec:analysis:examples}
 
 The data visualization cataloge by Severino Ribecca list many of the most used data visualizations\cite{VisualizationCatalogue2017}.
 Let's pick some of those and derive a number of possible interactions.
@@ -732,7 +708,7 @@ The set of possible ineractions include the highlighting of features, the reorde
 \begin{figure}
     \begin{center}
         \caption{Interactions for bar charts}
-        \label{fig:concept:chart-types:bar-diagrams:interactions}
+        \label{fig:concept:chart-types:bar-charts:interactions}
         {\small
             \begin{tabulary}{\textwidth}{ll}
                 \bf Select & Highlight a bar (id of data point) \\
@@ -939,7 +915,7 @@ Calendars and gantt charts could not only read the data from the data source, bu
 \begin{figure}
     \begin{center}
         \caption{Interactions for temporal visualizations}%
-        \label{fig:concept:chart-types:temporal}
+        \label{fig:concept:chart-types:temporal:interactions}
         {\small
             \begin{tabulary}{\textwidth}{ll}
                 \bf Select & Highlight a feature (id of data point) \\
@@ -954,8 +930,13 @@ Calendars and gantt charts could not only read the data from the data source, bu
 \end{figure}
 
 
-\subsection{Interface implementation}
+\clearpage
+\section{Concept}\label{sec:concept}
 
+
+\todo[inline]{No section without text}
+
+\subsection{Abstract data model}
 To account for the various data structures, we develop an abstract data structure that is powerful enough to include tabular, hierarchical and relational data.
 You can see a class diagram in figure~\ref{fig:concept:meta-data-structure}.
 The \emph{entity} class is used to model the smallest distinguishable unit.
@@ -979,12 +960,14 @@ These attributes on a relation can e.g.\ store the weight of an edge in a flow m
   \label{fig:concept:meta-data-structure}
 \end{figure}
 
+\subsection{Interaction semantics expressed as functions}
+
 It turns out that we can describe the semantics of an interaction as a mathematical function.
 Every visual effect of the interaction will be preceded by a change of the respective describing function.
 In order to coordinate the effect of an interaction, a view can populate the changed function to all related views.
 
 
-Based on the examples in section~\ref{sec:concept:visualization-catalogue} we can describe interactions as follows:
+Based on the examples in section~\ref{sec:analysis:examples} we can describe interactions as follows:
 \begin{enumerate}
     \item 
         $ Highlight: \varnothing \rightarrow \mathbb{N}$
@@ -1024,7 +1007,7 @@ Based on the examples in section~\ref{sec:concept:visualization-catalogue} we ca
         A colour function assigns a continuous value to a color c with $ c \in \mathbb{C} $ the set $C$ of all colours
         This function is e.g.\ used by a choropleth map.
     \item 
-        $ ColourAttributes: \mathbb{R} \rightarrow \mathbb{C} $
+        $ ColourAttributes: \varnothing \rightarrow \sum^* $
 
         The names of the attributes used as input for the $ ColourByValue $ function. 
     \item 
@@ -1077,6 +1060,27 @@ If many attributes are chosen from a dropdown menu and some thresholds are speci
 The \emph{FilterAttributes} will return the ordered list of chosen attributes of the dropdown menu.
 The updated \emph{FilterByValues} function will expect these arguments and return either true or false based on the values of these attributes.
 
+\subsection{Publish-subscribe pattern}
+
+From the examples we can distinguish visualization specific information and events as well as general information:
+Any kind of mouse interaction, like hover or click, is tied to the respective visualization and therefore implementation specific.
+But the transferred data, i.e. the selected feature ids are obviously abstract information independent of the specific visualization.
+Also the semantics of the interaction lies on a higher level. 
+From here on out we call the low-level interaction events like mousedown a \emph{trigger} and the corresponding change, e.g. a cange of the background color of the item, an \emph{effect}.
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=\textwidth]{images/trigger-effect.png}
+  \caption{Schema of message flow in \cmvs{}}
+  \label{fig:concept:trigger-effect}
+\end{figure}
+
+
+Figure~\ref{fig:concept:trigger-effect} shows this concept.
+Note that many triggers from different views can be connected to the same interaction.
+This interaction can have many effects in different views.
+The interaction itself might be a highlighting of a feature, so the feature id is supplied.
+In turn, the interaction will trigger an effect in all dependent data visualization, i.e. a polygon will change its background color.
 
 \clearpage
 \section{Implementation}
@@ -1143,7 +1147,7 @@ So the views are components and their closest common ancestor is the \cmv{} itse
   \caption{Implementation of the component pattern in EmberJS.
   The example shows a page of a webshop.
   The customer is about to order the items in the shopping cart.}
-  \label{fig:implementation:frontend-frameworks}
+  \label{fig:implementation:data-down-actions-up}
 \end{figure}
 
 \paragraph{Actions up - Data down}
