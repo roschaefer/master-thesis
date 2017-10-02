@@ -659,7 +659,7 @@ Increasing the level of detail expects a tree of data with the level of detail d
 Showing connections between features expects a graph of data, with edges between features and properties on these edges.
 
 
-\subsection{Visualization catalogue}
+\subsection{Visualization catalogue}\label{sec:concept:visualization-catalogue}
 
 The data visualization cataloge by Severino Ribecca list many of the most used data visualizations\cite{VisualizationCatalogue2017}.
 Let's pick some of those and derive a number of possible interactions.
@@ -958,6 +958,16 @@ Calendars and gantt charts could not only read the data from the data source, bu
 
 To account for the various data structures, we develop an abstract data structure that is powerful enough to include tabular, hierarchical and relational data.
 You can see a class diagram in figure~\ref{fig:concept:meta-data-structure}.
+The \emph{entity} class is used to model the smallest distinguishable unit.
+All entities can be identified and retrieved via the \emph{id}.
+It can have arbitrary many attributes and the attributes can be identified via the name.
+So if you want to get the \emph{latitude} value of an entity, you can retrieve the value with a call to the named attribute \emph{latitude}.
+An entity can also be a series.
+Every series contains an ordered list of entities.
+Because a series can also contain other series, we can model a hierarchy relation with series.
+There is always one series without a parent series, this series is the root node of the hierarchy.
+If we only want to display tabular data, we just have one or two levels of hierarchy, for single or multiple data series respectively.
+
 
 \begin{figure}[h!]
   \centering
@@ -966,10 +976,12 @@ You can see a class diagram in figure~\ref{fig:concept:meta-data-structure}.
   \label{fig:concept:meta-data-structure}
 \end{figure}
 
-If a view wants to coordinate an interaction, it can exchange this information via a dedicated function. 
+It turns out that we can describe the semantics of an interaction as a mathematical function.
+Every visual effect of the interaction will be preceded by a change of the respective describing function.
+In order to coordinate the effect of an interaction, a view can populate the changed function to all related views.
 
-Let's go through the list:
 
+Based on the examples in section~\ref{sec:concept:visualization-catalogue} we can describe interactions as follows:
 \begin{enumerate}
     \item 
         $ Highlight: \varnothing \rightarrow \mathbb{N}$
@@ -1018,10 +1030,10 @@ Let's go through the list:
         An order function assigning each entity to an index.
         This index will be used in bar charts to order bars along the x-axis or stacked bar charts, to order the stacking of data series.
     \item 
-        $ Sort: (\mathbb{R} \times \mathbb{R})^* \rightarrow \mathbb{R} $
+        $ Sort: \big( \mathbb{R} \times \mathbb{R} \big)^* \rightarrow \mathbb{R} $
 
         This sort function will return a continuous value based on a arbitrary long list of pairs of attribute values.
-        It's an implicit order function based on one or many data attributes.
+        It's an implicit order function based on one or many data attributes and returns a negative value if the first element is orderd before the second element.
     \item 
         $ SortAttributes: \varnothing \rightarrow \sum^* $
 
