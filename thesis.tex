@@ -962,11 +962,14 @@ The \emph{entity} class is used to model the smallest distinguishable unit.
 All entities can be identified and retrieved via the \emph{id}.
 It can have arbitrary many attributes and the attributes can be identified via the name.
 So if you want to get the \emph{latitude} value of an entity, you can retrieve the value with a call to the named attribute \emph{latitude}.
-An entity can also be a series.
+An entity can also be a \emph{series}.
 Every series contains an ordered list of entities.
 Because a series can also contain other series, we can model a hierarchy relation with series.
 There is always one series without a parent series, this series is the root node of the hierarchy.
 If we only want to display tabular data, we just have one or two levels of hierarchy, for single or multiple data series respectively.
+Furthermore, if we want to display arbitrary relations among entities, we can model these as \emph{relations}.
+Since every \emph{relation} is a \emph{entity} we can add \emph{attributes} to the relation.
+These attributes on a relation can e.g.\ store the weight of an edge in a flow map.
 
 
 \begin{figure}[h!]
@@ -1062,6 +1065,17 @@ Based on the examples in section~\ref{sec:concept:visualization-catalogue} we ca
         For visualizations, that display a shape per data point, $Shape$ will return a shape $ s \in S $ with $S$ the set of all discrete shapes. 
 \end{enumerate}
 
+Let's have some examples how these functions can be applied to coordinate interactions:
+
+A user clicks on feature in a bar chart and this feature is then highlighted.
+To coordinate the highlighting, the bar chart visualization changes the \emph{Highlight} which will return only the id of the highlighted entity of the feature.
+
+When a region in a geographical map is clicked, the \emph{Focus} function will return the id of the clicked entity.
+A corresponding tree map can show the subtree with the focused entity as root node.
+
+If many attributes are chosen from a dropdown menu and some thresholds are specified with a slider, both the \emph{FilterAttributes} and the \emph{FilterByValues} functions are changed.
+The \emph{FilterAttributes} will return the ordered list of chosen attributes of the dropdown menu.
+The updated \emph{FilterByValues} function will expect these arguments and return either true or false based on the values of these attributes.
 
 
 \clearpage
