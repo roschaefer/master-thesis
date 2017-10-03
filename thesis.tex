@@ -10,10 +10,11 @@
 \usepackage{subfig}
 \usepackage{tabulary}
 \usepackage{amssymb}
-\definecolor{lightgray}{rgb}{.9,.9,.9}
-\definecolor{darkgray}{rgb}{.4,.4,.4}
+\usepackage[inline]{enumitem}
+\definecolor{lightgray}{rgb}{.9,.9,.9}%
+\definecolor{darkgray}{rgb}{.4,.4,.4}%
 \definecolor{purple}{rgb}{0.65, 0.12, 0.82}
-\lstdefinelanguage{JavaScript}{
+\lstdefinelanguage{JavaScript}{%
   keywords={break, case, catch, continue, debugger, default, delete, do, else, false, finally, for, function, if, in, instanceof, new, null, return, switch, this, throw, true, try, typeof, var, void, while, with},
   morecomment=[l]{//},
   morecomment=[s]{/*}{*/},
@@ -28,7 +29,7 @@
   sensitive=true
 }
 
-\lstset{
+\lstset{%
   language=JavaScript,
    backgroundcolor=\color{lightgray},
    extendedchars=true,
@@ -84,7 +85,7 @@
 
 \tableofcontents
 \clearpage
- 
+
 
 
 \begin{abstract}
@@ -225,31 +226,8 @@ What considerations need to be done regarding the database schema?
 In section~\ref{sec:related-work} we will give an overview on \cmvs{} and focus on visual analytics as well as massive, geographical data.
 Existing concepts and implementations of \cmvs{} are examined and summarized in an overview.
 
-\newpage
-
-\section{Related Work}\label{sec:related-work}
-According to \textcite{Ho2013} even though interactions are a crucial part of data visualizations, most research in the area of data visualization focuses on visual representations.
-Roughly speaking, research on interaction falls into these groups:
-How to categorize interaction techniques?
-How to find new interaction techniques?
-How to apply them to visualizations?
-
-
-\todo[inline]{Give a rough overview of this section}
-\paragraph{ITlib\cite{Figueroa2001}} is an architecture and a framework of interaction techniques for virtual reality applications, designed to be extensible and flexible.
-New interaction techniques can easily be added and application specific code is seamlessly integrated.
-On a low level an interaction technique ``is modeled as a set of filters connected in a small data flow''\cite[Basic concept, p.~2]{Figueroa2001}.
-These filters are the smallest process unit in the data flow.
-Composed of input and output ports, they communicate with other filters, to receive data input from predecessors and send data output to successors.
-The framework specifies and stores the interaction techniques along with its filters, the execution model and the scene in XML documents.
-The authors chose XML because it can be parsed easily and they generate code in order to target various virtual reality toolkits and environments.
-
-Even though the system describes interactions in an abstract way, the domain of the framework is clearly the interaction of a human body within a 3D virtual reality.
-Certain assumptions are made, including the data model, which is the 3D scene, and human computer interaction devices, like the user's hand or the user's head. 
-The goal is not to better understand the data, as the data model in this case is the 3D scene, and not statistical data.
-Most important, the framework describes interaction techniques for a single viewpoint but not for coordinated multiple views.
-
-
+\clearpage
+\section{Theoretical background}\label{sec:related-work}
 Data visualizations are a key part in data-driven \dss{}\cite{Nada2007}\cite{Poleto2015}.
 \textcite{Few2013} mentions sense-making (also called data analysis) and communication as some of the most important purposes of data visualization.
 Statistical information is abstract and in data visualization ``we must find a way to give form to that which has none.''\cite{Few2013}
@@ -353,27 +331,112 @@ As we can see in the example in figure~\ref{fig:research:cmv} there seems to be 
   \label{fig:research:cmv}
 \end{figure}
 
-\subsubsection{Key interaction techniques for \cmvs{}}
+\clearpage
+\section{Related Work}\label{sec:related-work}
+According to \textcite{Ho2013} interactions are a crucial part of data visualizations, nevertheless most research in the area of data visualization focuses on visual representations.
+Roughly speaking, research on interaction falls into these groups:
+How to categorize interaction techniques?
+How to find new interaction techniques and apply those to visualizations?
 
-\textcite{Yi2007} lists seven categories of interation in information visualization:
-\begin{enumerate}
+\todo[inline]{Give a rough overview of this section}
+\subsection{Interaction categories}
+\textcite{Shneiderman1996} classifies interactions into these groups:
+\begin{enumerate*}[label=(\arabic*)]
   \item
-    \textbf{Select} mark something as interesting
+    Gain an \emph{overview} of the entire collection,
   \item
-    \textbf{Explore} show me something else
+    \emph{zoom} in on items of interest,
   \item
-    \textbf{Reconfigure} show me a different arrangement
+    select an item or group and get \emph{details} when needed,
   \item
-    \textbf{Encode} show me a different representation
+    view \emph{relationships} among items,
   \item
-    \textbf{Abstract/Elaborate} show me more or less detail
+    keep a \emph{history} of actions to support undo,
   \item
-    \textbf{Filter} show me something conditionally
-  \item
-    \textbf{Connect} show me related items
-\end{enumerate}
+    allow \emph{extraction} of sub-collections and of the query parameters.
+\end{enumerate*}
 
-\todo[inline]{Give examples for every category}
+In 1997 \textcite{Shneiderman1996} classified interactions into these groups:
+\begin{enumerate*}[label=(\arabic*)]
+  \item
+    Gain an \emph{overview} of the entire collection,
+  \item
+    \emph{zoom} in on items of interest,
+  \item
+    select an item or group and get \emph{details} when needed,
+  \item
+    view \emph{relationships} among items,
+  \item
+    keep a \emph{history} of actions to support undo,
+  \item
+    allow \emph{extraction} of sub-collections and of the query parameters.
+\end{enumerate*}
+
+Two years later, \textcite{Dix1998} identified these categories:
+\begin{enumerate*}[label=(\arabic*)]
+  \item
+    \emph{Highlight and focus} particular subsets of the data,
+  \item
+    instead of displaying everything simultaneously \emph{access extra information} by drilling down the data,
+  \item
+    zoom in and out to give an \emph{overview and context},
+  \item
+    \emph{change parameters} of the \emph{same representation}, e.g.\ another baseline of a stacked bar char,
+  \item
+    \emph{change representation} of the \emph{same data} by switching the chart type,
+  \item 
+    \emph{link representations} to determine the relationship between items.
+\end{enumerate*}
+
+In 2002, \textcite{Keim2002} comes up with the following classification:
+\begin{enumerate*}[label=(\arabic*)]
+  \item
+    Dynamic \emph{projection} to show all combination of data attributes mapped to the axis of a diagram,
+  \item 
+    focus on a smaller subsets by \emph{filtering} out parts of the data,
+  \item 
+    \emph{zoom} into a subset of the data and get a higher level of detail,
+  \item 
+    preserve an overview of the data during drill-down operations is called \emph{distortion}
+  \item 
+    and finally \emph{link and brush} visualizations, to highlight the same data points in multiple visualizations.
+\end{enumerate*}
+
+The most recent classification was done in 2007 by \textcite{Yi2007} listing seven categories:
+\begin{enumerate*}[label=(\arabic*)]
+  \item
+    \emph{Select} to mark something as interesting,
+  \item
+    \emph{explore} to show something else,
+  \item
+    \emph{reconfigure} to show a different arrangement,
+  \item
+    \emph{encode} to show a different representation,
+  \item
+    \emph{abstract/elaborate} show more or less detail,
+  \item
+    \emph{filter} show something conditionally,
+  \item
+    \emph{connect} show related items.
+\end{enumerate*}
+
+\todo[inline]{The classifications are all redundant! Explain why and choose one classification for later use}
+\todo[inline]{Give one example for each category of the chosen classification}
+
+\subsection{Modeling interactions}
+\paragraph{ITlib\cite{Figueroa2001}} is an architecture and a framework of interaction techniques for virtual reality applications, designed to be extensible and flexible.
+New interaction techniques can easily be added and application specific code is seamlessly integrated.
+On a low level an interaction technique ``is modeled as a set of filters connected in a small data flow''\cite[Basic concept, p.~2]{Figueroa2001}.
+These filters are the smallest process unit in the data flow.
+Composed of input and output ports, they communicate with other filters, to receive data input from predecessors and send data output to successors.
+The framework specifies and stores the interaction techniques along with its filters, the execution model and the scene in XML documents.
+The authors chose XML because it can be parsed easily and they generate code in order to target various virtual reality toolkits and environments.
+
+Even though the system describes interactions in an abstract way, the domain of the framework is clearly the interaction of a human body within a 3D virtual reality.
+Certain assumptions are made, including the data model, which is the 3D scene, and human computer interaction devices, like the user's hand or the user's head.
+The goal is not to better understand the data, as the data model in this case is the 3D scene, and not statistical data.
+Most important, the framework describes interaction techniques for a single viewpoint but not for coordinated multiple views.
+
 
 \clearpage
 \section{Analysis}\label{sec:analysis}
@@ -549,7 +612,7 @@ Let's have some examples how an interaction between a \tmap{} and a \map{} might
       \item
         \emph{Reconfigure} the layouting of the \tmap{} by choosing a different hierarchy level. This increased granularity may lead to an increased granularity in the \map{}, e.g. show postal codes instead of federal states. The changed data are additional items, that are nested in the former items.
       \item
-        \emph{Encode} the \tmap{} by a different attribute mapping like color, height or texture. If the \map{} has no geometry data that defines the shape of a feature, it can also display a larger point marker. 
+        \emph{Encode} the \tmap{} by a different attribute mapping like color, height or texture. If the \map{} has no geometry data that defines the shape of a feature, it can also display a larger point marker.
       \item
         Apply a \emph{Filter} and reduce the data set by choosing only items with metadata beyond a certain treshold. The reduced data leads to a full re-render of all data visualizations. The message contains the updated item list
   \item
@@ -581,7 +644,7 @@ First of all, different visualizations have different capabilities and different
 We choose a \emph{highlight} interaction in our \tmap{} as an example.
 The interaction is started by a low level mouse click event inside the visualization.
 We call this a \emph{trigger.}
-The change of the color of a box is perceived by the user. 
+The change of the color of a box is perceived by the user.
 We call this change an \emph{effect.}
 Both trigger and effect have a certain \emph{semantic} to the user, i.e.\ the highlighting of the feature id.
 
@@ -592,9 +655,9 @@ We will face some issues in coordinating the semantics to other views, because:
 \begin{enumerate}
     \item
         The effect of the interaction cannot be applied to other views.
-    \item 
+    \item
         The relevant information semantics is ambiguous.
-    \item 
+    \item
         The low level event that is used as a trigger for the interaction is different.
 \end{enumerate}
 An example for the first case is to express a highlight interaction with a change of colour.
@@ -770,7 +833,7 @@ Therefore these charts need to be initialized with the same data and the same in
 \end{figure}
 
 Bubble charts are popular choices to display a distribution of features.
-The chart is initialized with coordinates for each feature, a colour and a size in case of a bubble charts. 
+The chart is initialized with coordinates for each feature, a colour and a size in case of a bubble charts.
 Possible interactions include the highlighting of features, a different colour encoding, a reconfiguration to map another attribute to size.
 Bubble charts may show only a window of the available data and allow to zoom in, zoom out or move the window along the axes.
 
@@ -855,7 +918,7 @@ Each feature is a assigned a rectangle according to a layouting algorithm.
 Unlike a tree map a hiearchical ring diagram or sunburst diagram shows each level of the tree as a series of rings.
 
 Therefore, both tree map and ring diagram need the feature set as a tree, with each node having a data attribute for layouting. Every node may be assigned a color.
-As we are describing hierarchies, the maximal depth of tree may be increased or decreased. 
+As we are describing hierarchies, the maximal depth of tree may be increased or decreased.
 Again, interactions could include a highlighting of features and a change of color encoding.
 Both visualizations may show only a subtree.
 E.g. a click on a box in the treemap opens another treemap focused on the subtree.
@@ -919,7 +982,7 @@ Flow maps may display connections between features, a data value defining the si
     \end{center}
 \end{figure}
 
-\subsubsection{Activity diagrams} 
+\subsubsection{Activity diagrams}
 \begin{figure}
   \centering
     \subfloat[Calendar]{{\includegraphics[width=0.4\textwidth]{images/chartTypes/calendar.png} }}%
@@ -1001,83 +1064,83 @@ To coordinate interactions across views, one view sends the new function as a me
 The function declarations are derived from specific interactions of the examples in section~\ref{sec:analysis:examples}.
 We describe them as follows:
 \begin{enumerate}
-    \item 
+    \item
         $ Highlight: \varnothing \rightarrow \mathbb{N}$
 
         A highlighting is a function with no input parameters that is returning a list of highlighted entities
-    \item 
+    \item
         $ Filter: \varnothing \rightarrow \mathbb{N} $
 
         The $Filter$ function takes no arguments and returns a subset of entities that should be displayed.
-    \item 
+    \item
         $ FilterByValue: \mathbb{N^*} \rightarrow \{ \bot, \top \} $
 
         The $FilterByValue$ function returns whether an entity belongs to the displayed set based on a list of attribute values.
-    \item 
+    \item
         $ FilterAttributes: \varnothing \rightarrow \sum^* $
 
         The $FilterByAttributes$ returns an arbitrary long, ordered list of names of attributes that are taken as input for the $ FilterByValue $ function.
-    \item 
+    \item
         $ Focus: \varnothing \rightarrow \mathbb{N} $
 
         The $ Focus $ function returns a single id of the entity that should be in the center of the viewport.
         A tree map or a sunburst map can use the focused entity as the root node of the visible subtree.
-    \item 
+    \item
         $ Screen: \varnothing \rightarrow \mathbb{N}* $
 
         This function returns a list of entities that must be in between the current boundaries of the diagram window.
         The list can be used to implicitly derive the zoom level in different visualizations like bubble chart or geographical map.
         It can also be used to implicitly derive the visible hierarchy levels in a tree map.
-    \item 
+    \item
         $ Colour: \mathbb{N} \rightarrow \mathbb{C} $
 
         A colour function assigns an entity or a data series to a color c with $ c \in \mathbb{C} $ the set $C$ of all colours.
         A colour typically consists of three values $R$, $G$ and $B$.
-    \item 
+    \item
         $ ColourByValue: \mathbb{R} \rightarrow \mathbb{C} $
 
         A colour function assigns a continuous value to a color c with $ c \in \mathbb{C} $ the set $C$ of all colours
         This function is e.g.\ used by a choropleth map.
-    \item 
+    \item
         $ ColourAttributes: \varnothing \rightarrow \sum^* $
 
-        The names of the attributes used as input for the $ ColourByValue $ function. 
-    \item 
+        The names of the attributes used as input for the $ ColourByValue $ function.
+    \item
         $ Order: \mathbb{N} \rightarrow \mathbb{N} $
 
         An order function assigning each entity to an index.
         This index will be used in bar charts to order bars along the x-axis or stacked bar charts, to order the stacking of data series.
-    \item 
+    \item
         $ Sort: \big( \mathbb{R} \times \mathbb{R} \big)^* \rightarrow \mathbb{R} $
 
         This sort function will return a continuous value based on an arbitrary long list of pairs of attribute values.
         It's an implicit order function based on one or many data attributes and returns a negative value if the first element is orderd before the second element.
-    \item 
+    \item
         $ SortAttributes: \varnothing \rightarrow \sum^* $
 
         The ordered list of names of attributes which will be used as input for the $Sort$ function.
-    \item 
+    \item
         $ X: \varnothing \rightarrow \sum $
 
         The $X$ function denotes the name of the attribute used for the x-axis of the diagram.
         In bar charts, the categories are displayed along the x-axis.
         In a population pyramid the x-axis is the age of people.
-    \item 
+    \item
         $ Y: \varnothing \rightarrow \sum $
 
         The $Y$ function denotes the name of the attribute used for the y-axis of the diagram.
         Bar charts map a data attribute to the length of a bar along the y-axis.
-    \item 
+    \item
         $ Size: \varnothing \rightarrow \sum $
 
         This function denominates the name of the attribute used to encode the $ Size $ of the feature.
         Bubble charts can encode the data attribute to the area of the bubble.
-    \item 
+    \item
         $ LayoutAttribute : \varnothing \rightarrow \sum $
-        This specialized function returns the name of the attribute that should be used for layouting in hierarchical visualizations. 
-    \item 
+        This specialized function returns the name of the attribute that should be used for layouting in hierarchical visualizations.
+    \item
         $ Shape : \mathbb{N} \rightarrow \mathbb{S} $
-        For visualizations, that display a shape per data point, $Shape$ will return a shape $ s \in S $ with $S$ the set of all discrete shapes. 
+        For visualizations, that display a shape per data point, $Shape$ will return a shape $ s \in S $ with $S$ the set of all discrete shapes.
 \end{enumerate}
 
 Let's have some examples how these functions can be applied on coordinated interactions:
@@ -1118,7 +1181,7 @@ A feature of the visualization is changed, e.g.\ a colour of a bar in a bar char
 The choice of the visual effect to express the interaction is an implementation detail as well.
 
 Sometimes a visualization may not be able to interpret an interaction.
-E.g.\ a bar chart can re-arrange the bars along the x-axis in case of a \emph{Reconfigure} interaction. 
+E.g.\ a bar chart can re-arrange the bars along the x-axis in case of a \emph{Reconfigure} interaction.
 But a scatter plot constrains x- and y-coordinates of an entity on a certain data attribute.
 Therefore, not only the \emph{trigger} and \emph{effect} is implementation specific, but also the handling of the interaction itself.
 
@@ -1242,7 +1305,7 @@ Unfortunately, the web component standard does not specify how arbitrary Javascr
 This raises some problems in legacy apps:
 Usually, legacy apps are written in plain javascript without the use of a component-based frontend framework.
 Any part of the code may call any other part of the code, leading to the dreaded ``spaghetti code''.
-Refactoring the existing app requires the framework to have a reliable way of communication with the legacy parts. 
+Refactoring the existing app requires the framework to have a reliable way of communication with the legacy parts.
 E.g. parts of the legacy code call the backend in order to load data.
 This data needs to be passed to the compponents of the user interface.
 Web components do not have a designated interface
@@ -1272,7 +1335,7 @@ Figure~\ref{fig:implementation:both-patterns} shows the final result.
 We try to put as much code as possible under the root node of ReactJS.
 By that we eliminate the amount of custom updating implementation.
 The root node of the DOM-tree of our react application is connected with the existing app through the common interface.
-Both urban analytics controller and the multiview map component will observe changes to the common interface. 
+Both urban analytics controller and the multiview map component will observe changes to the common interface.
 Also sub-components may communicate with the common interface.
 
 
@@ -1311,6 +1374,8 @@ We can use this data as input for our common \visan{}, e.g. figure~\ref{fig:impl
 \todo[inline]{Future Work}
 
 
+\clearpage
+
 \printbibliography
 \end{document}
 
@@ -1342,12 +1407,12 @@ We can use this data as input for our common \visan{}, e.g. figure~\ref{fig:impl
 % Since the year 2013 these fees are compulsory for every home in Germany and as a consequence, broadcasting receives €8,000,000,000 annually.
 % Yet it is subject to little or no public feedback, ranking, or even debate on what constitutes value or quality.
 % There is neither transparency on how the fees are spent nor a public feedback on how the fees should be spent.
-% 
+%
 % We see a great potential, a win-win situation to be precise, because both payers of the broadcasting fees and broadcasters themselves can benefit from each other.
 % As of 2013 there is no legal opt-out anymore and people have a strong interest to say how their fees should be spent.
 % Broadcasters on the other hand can evaluate their program based on the interests delivered by the users.
 % This reciprocal relationship would create a public feedback for payers and a better program for broadcasters.
-% 
+%
 % This problem is perfectly suitable to be tackled with data visualizations.
 % \todo[inline]{Explain why data visualization are good for communication}
 
