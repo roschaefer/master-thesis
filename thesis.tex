@@ -333,7 +333,7 @@ As we can see in the example in figure~\ref{fig:research:cmv} there seems to be 
 
 \clearpage
 \section{Related Work}\label{sec:related-work}
-According to \textcite{Ho2013} interactions are a crucial part of data visualizations, nevertheless most research in the area of data visualization focuses on visual representations.
+According to \textcite{Ho2013} interactions are a crucial part of data visualizations, yet most research in the area of data visualization still focuses on visual representations.
 Roughly speaking, research on interaction falls into these groups:
 How to categorize interaction techniques?
 How to find new interaction techniques and apply those to visualizations?
@@ -423,7 +423,23 @@ The most recent classification was done in 2007 by \textcite{Yi2007} listing sev
 \todo[inline]{The classifications are all redundant! Explain why and choose one classification for later use}
 \todo[inline]{Give one example for each category of the chosen classification}
 
-\subsection{Modeling interactions}
+\subsection{Application of interactions}
+
+\paragraph{Space-Time Cube Operations}
+is a concept introduced in 2014 by \textcite{Bach2014} to map temporal data into two dimensional visualizations.
+Space-time-cubes are used to model two attributes of continuous data with temporal data along a third axis, therefore the name \emph{cube}.
+While the transformations are rather static it is also possible to introduce activity into the transformations.
+The authors describe user-independent \emph{animations} and user-controlled \emph{interactions}.
+E.g.\ a transformation may display a given slice of the cube.
+An animation would display one slice at a time and display the next slice every second.
+Whereas the interaction would show the slice determined by a user-controlled slider.
+Various transformations and their best use in practice are evaluated in this work.
+The work focuses on temporal data and otherwise continuous data.
+Interactions are not seen as an abstract entity, that need to be agnostic of the underlying data structure and visualization.
+The authors admit ``our framework does not provide much guidance for interaction design: the design space for interactive operations has only been partially explored.''\cite[Other limitations, p.~15]{Bach2014}
+
+
+
 \paragraph{ITlib\cite{Figueroa2001}} is an architecture and a framework of interaction techniques for virtual reality applications, designed to be extensible and flexible.
 New interaction techniques can easily be added and application specific code is seamlessly integrated.
 On a low level an interaction technique ``is modeled as a set of filters connected in a small data flow''\cite[Basic concept, p.~2]{Figueroa2001}.
@@ -1365,13 +1381,17 @@ We can use this data as input for our common \visan{}, e.g. figure~\ref{fig:impl
 \clearpage
 
 \section{Evaluation}
-\todo[inline]{Write Evaluation}
+\todo[inline]{How and what can we evaluate?}
+\todo[inline]{The performance?}
+\todo[inline]{The flexibility?}
 
 \section{Conclusion}
-\todo[inline]{Write Conclusion}
+\todo[inline]{Did we achieve our goals?}
+\todo[inline]{Is the concept sane in regarding the implementation?}
 
 \section{Future Work}
-\todo[inline]{Future Work}
+\todo[inline]{List stuff which was not accomplished in this master thesis}
+
 
 
 \clearpage
