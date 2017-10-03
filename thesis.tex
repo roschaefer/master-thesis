@@ -222,12 +222,26 @@ What considerations need to be done regarding the database schema?
 \todo[inline]{What is the area(s) of research, in which this thesis can be placed into?}
 \subsection{Structure of the work}
 
-In section~\ref{sec:research} we will give an overview on \cmvs{} and focus on visual analytics as well as massive, geographical data.
+In section~\ref{sec:related-work} we will give an overview on \cmvs{} and focus on visual analytics as well as massive, geographical data.
 Existing concepts and implementations of \cmvs{} are examined and summarized in an overview.
 
 \newpage
 
-\section{State of the art}\label{sec:research}
+\section{Related Work}\label{sec:related-work}
+\paragraph{ITlib\cite{Figueroa2001}} is an architecture and a framework of interaction techniques for virtual reality applications, designed to be extensible and flexible.
+New interaction techniques can easily be added and application specific code is seamlessly integrated.
+On a low level an interaction technique ``is modeled as a set of filters connected in a small data flow''\cite[Basic concept, p.~2]{Figueroa2001}.
+These filters are the smallest process unit in the data flow.
+Composed of input and output ports, they communicate with other filters, to receive data input from predecessors and send data output to successors.
+The framework specifies and stores the interaction techniques along with its filters, the execution model and the scene in XML documents.
+The authors chose XML because it can be parsed easily and they generate code in order to target various virtual reality toolkits and environments.
+
+Even though the system describes interactions in an abstract way, the domain of the framework is clearly the interaction of a human body within a 3D virtual reality.
+Certain assumptions are made, including the data model, which is the 3D scene, and human computer interaction devices, like the user's hand or the user's head. 
+The goal is not to better understand the data, as the data model in this case is the 3D scene and not statistical data.
+Most important, the framework describes interaction techniques for a single viewpoint but not for coordinated multiple views.
+
+
 Data visualizations are a key part in data-driven \dss{}\cite{Nada2007}\cite{Poleto2015}.
 \textcite{Few2013} mentions sense-making (also called data analysis) and communication as some of the most important purposes of data visualization.
 Statistical information is abstract and in data visualization ``we must find a way to give form to that which has none.''\cite{Few2013}
@@ -1278,6 +1292,17 @@ We can use this data as input for our common \visan{}, e.g. figure~\ref{fig:impl
 
 
 \clearpage
+
+\section{Evaluation}
+\todo[inline]{Write Evaluation}
+
+\section{Conclusion}
+\todo[inline]{Write Conclusion}
+
+\section{Future Work}
+\todo[inline]{Future Work}
+
+
 \printbibliography
 \end{document}
 
