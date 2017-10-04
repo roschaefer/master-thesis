@@ -384,7 +384,7 @@ Two years later, \textcite{Dix1998} identified these categories:
     \emph{change parameters} of the \emph{same representation}, e.g.\ another baseline of a stacked bar char,
   \item
     \emph{change representation} of the \emph{same data} by switching the chart type,
-  \item 
+  \item
     \emph{link representations} to determine the relationship between items.
 \end{enumerate*}
 
@@ -392,13 +392,13 @@ In 2002, \textcite{Keim2002} comes up with the following classification:
 \begin{enumerate*}[label=(\arabic*)]
   \item
     Dynamic \emph{projection} to show all combination of data attributes mapped to the axis of a diagram,
-  \item 
+  \item
     focus on a smaller subsets by \emph{filtering} out parts of the data,
-  \item 
+  \item
     \emph{zoom} into a subset of the data and get a higher level of detail,
-  \item 
+  \item
     preserve an overview of the data during drill-down operations is called \emph{distortion}
-  \item 
+  \item
     and finally \emph{link and brush} visualizations, to highlight the same data points in multiple visualizations.
 \end{enumerate*}
 
@@ -1037,7 +1037,7 @@ Calendars and gantt charts could not only read the data from the data source, bu
 
 \todo[inline]{No section without text}
 
-\subsection{Abstract data model}
+\subsection{Interaction subject space}\label{sec:concept:space}
 To account for the various data structures, we use an abstract data model that is powerful enough to include tabular, hierarchical and relational data.
 You can see a class diagram in figure~\ref{fig:concept:meta-data-structure}.
 
@@ -1065,98 +1065,127 @@ These attributes may describe e.g.\ the weight of an edge in a flow map.
 \begin{figure}[h!]
   \centering
   \includegraphics[width=0.5\textwidth]{images/meta-data-structure.png}
-  \caption{A data structure for tabular, hierarchichal and relational data}
+  \caption{A data structure for tabular, hierarchical and relational data}
   \label{fig:concept:meta-data-structure}
 \end{figure}
 
-\subsection{Interaction semantics expressed as functions}\label{sec:concept:semantics}
+\subsection{Interaction semantics}\label{sec:concept:semantics}
 
 It turns out that we can describe the semantics of an interaction as a mathematical function.
 These functions operates on the ids of \emph{entities}, \emph{series}, and \emph{relations} or their respective \emph{attributes}.
-The change of the function describes the interaction but ignores implementation details of specific visualizations.
-To coordinate interactions across views, one view sends the new function as a message to its companioning views.
+The name of the function is the \emph{intention} of the interaction and the function domain being the \emph{subject} of the interaction.
+Thus, we can describe interaction through a change of its semantic but we ignore implementation details of specific visualizations.
 
 
-The function declarations are derived from specific interactions of the examples in section~\ref{sec:analysis:examples}.
-We describe them as follows:
+These function are derived from specific interactions of the examples in section~\ref{sec:analysis:examples}.
+Domain and codomain of these functions refer to the objects defined in the data model in section~\ref{sec:concept:space}.
+For the sake of explicitly, we define a couple of sets:
 \begin{enumerate}
     \item
-        $ Highlight: \varnothing \rightarrow \mathbb{N}$
+        $ \mathbb{I} : \mathbb{I} \subseteq \mathbb{N} $
 
-        A highlighting is a function with no input parameters that is returning a list of highlighted entities
+        The set of ids of all entities in our subject space.
     \item
-        $ Filter: \varnothing \rightarrow \mathbb{N} $
+        $ \mathbb{A} : \mathbb{A} \subseteq \mathbb{\sum^*} $
 
-        The $Filter$ function takes no arguments and returns a subset of entities that should be displayed.
+        The set of names of all attributes in our subject space.
     \item
-        $ FilterByValue: \mathbb{N^*} \rightarrow \{ \bot, \top \} $
+        $ \mathbb{V} $
 
-        The $FilterByValue$ function returns whether an entity belongs to the displayed set based on a list of attribute values.
+        The set of possible values of any attribute in our subject space. Those values could be e.g.\ numbers, strings, ordinal values, dates or geometries.
     \item
-        $ FilterAttributes: \varnothing \rightarrow \sum^* $
+        $ \mathbb{C}: \{ (r,g,b) \in \mathbb{C} | r \in \mathbb{R} \land g \in \mathbb{R} \land b \in \mathbb{R} \}$
 
-        The $FilterByAttributes$ returns an arbitrary long, ordered list of names of attributes that are taken as input for the $ FilterByValue $ function.
+        The set of colours, we assume $R$, $G$ and $B$ values.
     \item
-        $ Focus: \varnothing \rightarrow \mathbb{N} $
+        $ \mathbb{S} $
 
-        The $ Focus $ function returns a single id of the entity that should be in the center of the viewport.
-        A tree map or a sunburst map can use the focused entity as the root node of the visible subtree.
-    \item
-        $ Screen: \varnothing \rightarrow \mathbb{N}* $
+        The set of all discrete shapes.
+\end{enumerate}
 
-        This function returns a list of entities that must be in between the current boundaries of the diagram window.
-        The list can be used to implicitly derive the zoom level in different visualizations like bubble chart or geographical map.
-        It can also be used to implicitly derive the visible hierarchy levels in a tree map.
+The following is a list of functions describing the semantics based on the aforementioned sets:
+\begin{enumerate}
     \item
-        $ Colour: \mathbb{N} \rightarrow \mathbb{C} $
+        $ Highlight: \varnothing \rightarrow \mathcal{P}(\mathbb{I})$
 
-        A colour function assigns an entity or a data series to a color c with $ c \in \mathbb{C} $ the set $C$ of all colours.
-        A colour typically consists of three values $R$, $G$ and $B$.
+        A $ Highlight $ is a function without arguments returning a subset of highlighted entities.
     \item
-        $ ColourByValue: \mathbb{R} \rightarrow \mathbb{C} $
+        $ FilterById: \varnothing \rightarrow \mathcal{P}(\mathbb{I}) $
 
-        A colour function assigns a continuous value to a color c with $ c \in \mathbb{C} $ the set $C$ of all colours
-        This function is e.g.\ used by a choropleth map.
+        The $FilterById$ function takes no arguments and returns a subset of entities that are used as input for the visualization.
     \item
-        $ ColourAttributes: \varnothing \rightarrow \sum^* $
+        $ FilterByValue: \mathbb{V^*} \rightarrow \{ \bot, \top \} $
 
-        The names of the attributes used as input for the $ ColourByValue $ function.
+        The $FilterByValue$ function takes an ordered list of attribute values and returns whether or not the associated entity should be part of the visualization input.
     \item
-        $ Order: \mathbb{N} \rightarrow \mathbb{N} $
+        $ FilterAttributes: \varnothing \rightarrow \mathbb{A^*} $
 
-        An order function assigning each entity to an index.
-        This index will be used in bar charts to order bars along the x-axis or stacked bar charts, to order the stacking of data series.
+        The $FilterByAttributes$ returns an ordered list of attributes names.
+        Retrieving the values of an entity in order produces the input that can be used as input for the $ FilterByValue $ function.
     \item
-        $ Sort: \big( \mathbb{R} \times \mathbb{R} \big)^* \rightarrow \mathbb{R} $
+        $ Focus: \varnothing \rightarrow \mathbb{I} $
+
+        The $ Focus $ function returns a single id of the entity that should be in the center of the viewpoint.
+        Different visualizations can have different interpretations of the semantic:
+        A geographical map will move the viewpoint position on the geometric center of the focused entity.
+        Hierarchical visualizations, e.g.\  tree maps or sunburst maps, may choose the focused entity to be the root node of the currently displayed subtree.
+    \item
+        $ Extent: \varnothing \rightarrow \mathcal{P}(\mathbb{I}) $
+
+        This function returns a subset of entities that must be within the current boundaries of the diagram window.
+        Again, different visualizations can have different interpretations of the semantic:
+        In scatter plots and geographical visualizations the set may be used to implicitly derive the zoom level.
+        It can also be used to implicitly derive the maximum depth of the currently visible subtree in a tree map.
+    \item
+        $ ColourById: \mathbb{I} \rightarrow \mathbb{C} $
+
+        A colour function assigns each entity, data series or relation to a color.
+    \item
+        $ ColourByValue: \mathbb{V} \rightarrow \mathbb{C} $
+
+        A colour function assigns a continuous value to a color.
+        This function can be used by e.g.\ choropleth maps for the background color of regions.
+    \item
+        $ ColourAttributes: \varnothing \rightarrow \mathbb{A^*} $
+
+        The ordered list of names of attributes used as input for the $ ColourByValue $ function.
+    \item
+        $ Order: \rightarrow \mathbb{I^*} $
+
+        The $Order$ function defines how a subset of entities should be ordered.
+        Note that not the entire collection of entities need to be ordered.
+        This sequence will be used in bar charts to order bars along the x-axis or stacked bar charts, to order the stacking of data series.
+    \item
+        $ Sort: \big( \mathbb{V^*} \times \mathbb{V^*} \big) \rightarrow \mathbb{R} $
 
         This sort function will return a continuous value based on an arbitrary long list of pairs of attribute values.
         It's an implicit order function based on one or many data attributes and returns a negative value if the first element is orderd before the second element.
     \item
-        $ SortAttributes: \varnothing \rightarrow \sum^* $
+        $ SortAttributes: \varnothing \rightarrow \mathbb{A^*} $
 
         The ordered list of names of attributes which will be used as input for the $Sort$ function.
     \item
-        $ X: \varnothing \rightarrow \sum $
+        $ X: \varnothing \rightarrow \mathbb{A} $
 
         The $X$ function denotes the name of the attribute used for the x-axis of the diagram.
         In bar charts, the categories are displayed along the x-axis.
         In a population pyramid the x-axis is the age of people.
     \item
-        $ Y: \varnothing \rightarrow \sum $
+        $ Y: \varnothing \rightarrow \mathbb{A} $
 
         The $Y$ function denotes the name of the attribute used for the y-axis of the diagram.
         Bar charts map a data attribute to the length of a bar along the y-axis.
     \item
-        $ Size: \varnothing \rightarrow \sum $
+        $ Size: \varnothing \rightarrow \mathbb{A} $
 
         This function denominates the name of the attribute used to encode the $ Size $ of the feature.
         Bubble charts can encode the data attribute to the area of the bubble.
     \item
-        $ LayoutAttribute : \varnothing \rightarrow \sum $
+        $ LayoutAttribute : \varnothing \rightarrow \mathbb{A} $
         This specialized function returns the name of the attribute that should be used for layouting in hierarchical visualizations.
     \item
-        $ Shape : \mathbb{N} \rightarrow \mathbb{S} $
-        For visualizations, that display a shape per data point, $Shape$ will return a shape $ s \in S $ with $S$ the set of all discrete shapes.
+        $ Shape : \mathbb{I} \rightarrow \mathbb{S} $
+        Visualizations displaying a shape per data point, $Shape$ will return a shape for every entity.
 \end{enumerate}
 
 Let's have some examples how these functions can be applied on coordinated interactions:
@@ -1173,20 +1202,21 @@ The \emph{FilterAttributes} will return the ordered list of chosen attributes of
 The updated \emph{FilterByValues} function will now expect a new argument list, based on $ FilterAttributes $.
 It then yields either true or false based on the values of these attributes.
 
-\subsection{Publish and subscribe to interactions}
+\subsection{Coordination of interactions}
 
 In section~\ref{sec:concept:semantics} we discussed how we can describe the semantics of the interaction.
-We still need to describe how we can model the coordination of the interaction, i.e.\ the actual message flow of interactions.
-Obviously, the semantics is somehow the payload of a message.
-But what is the framework to exchange the these messages?
-How is one action in one view coupled with a visual effect in another view?
+While semantics describe the \emph{intention} of the interaction and the \emph{subject}, they do not describe the actual \emph{coordination} of views.
+E.g.\ what action in one view should lead to what kind of changes in what other views?
+In addition to the coordination, we need a pattern to exchange messages \cmvs{}.
+
+We regard the messages exchanged between views as a change of those interaction semantics defined in~\ref{sec:concept:semantics}
+Figure~\ref{fig:concept:trigger-effect} gives a rough overview on our coordination model.
 \begin{figure}[h!]
   \centering
   \includegraphics[width=\textwidth]{images/trigger-effect.png}
   \caption{Schema of message flow in \cmvs{}}
   \label{fig:concept:trigger-effect}
 \end{figure}
-Figure~\ref{fig:concept:trigger-effect} shows a model of the coordination.
 We introduce two new terms, \emph{trigger} and \emph{effect}.
 
 A trigger is e.g. a mouse interaction, like hover or click.
