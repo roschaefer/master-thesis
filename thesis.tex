@@ -135,7 +135,7 @@ For the visualization, we use a different technique, e.g.\ a tree map if we deal
 
 \todo[inline]{More scenarios here}
 
-\subsection{Problem statement}
+\subsection{Problem Statement}
 
 % \todo[inline]{Start off with the problem of tree map vs geo map}
 
@@ -145,14 +145,14 @@ As the order and placement of items depend on their specific values and hierarch
 This obstructs the comprehensibility of map and makes it especially difficult to select geographical units of items.
 
 
-\subsection{Research questions}
+\subsection{Research Questions}
 
 When dealing with multi-dimensional data, is it helpful to have multiple views for these dimensions?
 What are best practices for the implementation of \cmvs{}?
 Is it great user experience to have one view for interaction and another view for the data visualization to create insights?
 Do people prefer one view for the interaction, e.g.\ the geographical dimension, or do they use all views for interaction and visualization alternately?
 
-\subsubsection{Hypotheses}
+\subsection{Hypotheses}
 Linkage and coupling of \cmvs{} can be enabled through visualizations, navigations and interaction techniques.
 The exploration and analysis of multi-dimensional and geographical data can be supported with these \cmvs{}.
 %Hypothese ist, dass durchs Visualisierungs-, Navigations- und Interaktionstechniken eine Kopplung von georäumlichen 2D-Kartendarstellungen und thematisch-orientierten 3D-Treemaps ermöglicht wird und dadurch die Exploration und Analyse von multidimensionalen georäumlichen Daten unterstützt werden kann.
@@ -192,7 +192,7 @@ Based on the test data sets, the \cmv{} implementation is examined and evaluated
 %As the data is usage independent we want to gain knowledge about the entire population including those who don't use broadcasting at all.
 %In this manner we want to tackle the mentioned overfitting problem.
 
-\subsection{Methodological approach}
+\subsection{Methodological Approach}
 
 A literature research is used to gather knowledge about the state of the art with respect to \cmvs{}.
 Existing concepts and implementations available on the internet are examined and reused if possible.
@@ -221,13 +221,16 @@ How do both approaches differ in development speed, value for the customer?
 What considerations need to be done regarding the database schema?
 
 \todo[inline]{What are the areas of research, in which this thesis can be placed into?}
-\subsection{Structure of the work}
+\subsection{Structure of the Work}
 
 In Section~\ref{sec:related-work} we will give an overview on \cmvs{} and focus on visual analytics as well as massive, geographical data.
 Existing concepts and implementations of \cmvs{} are examined and summarized in an overview.
 
 \clearpage
-\section{Theoretical background}\label{sec:related-work}
+\section{Theoretical background}\label{sec:theory}
+\todo[inline]{no section without text}
+
+\subsection{Data Visualization}
 Data visualizations are a key part in data-driven \dss{}\cite{Nada2007}\cite{Poleto2015}.
 \textcite{Few2013} mentions sense-making (also called data analysis) and communication as some of the most important purposes of data visualization.
 Statistical information is abstract and in data visualization ``we must find a way to give form to that which has none.''\cite{Few2013}
@@ -248,12 +251,17 @@ If we know what kind of data we are dealing with, what are the best suited visua
 Let's say we have multidimensional data, is there an order in how people access these multiple dimensions?
 How do these visualizations perform and what are best practices to be considered for their implementation?
 
-\subsection{Data related challenges}
-\todo[inline]{Add independent section and explain tasks like data cleansing or data reliability regarding different sources here}
 
+\subsection{Visual Variables}\label{sec:theory:visual-variables}
+Figure~\ref{fig:theory:visual-variables} shows the seven visual variables introduced by \textcite{Bertin2010}.
+These visual variables are used in cartography but can also be applied to data visualization in general.
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=\textwidth]{images/visual-variables.png}
+  \caption{Bertin's\cite{Bertin2010} original visual variables.}\label{fig:theory:visual-variables}
+\end{figure}
 
-
-\subsection{Visualization of hierarchical data}
+\subsection{Treemaps}
 Due to the hierarchical nature of the use cases, we focus on the visualization of hierarchical and geographical data
 The visualization of hierarchical data has a long tradition.
 The traditional representation of a tree is a rooted, directed graph with the root node at the top.
@@ -276,11 +284,10 @@ As the order of placement depends on the respective features of the nodes, small
     \caption{German exports visualized as a tree map}\label{fig:research:treemap}
 \end{figure}
 
-\subsubsection{\threedTmaps{} and \tmaps}
-
-In 2004, \textcite{Bladh2004} transfer the concept of tree maps from two dimensional into three dimensional space.
-The introduce StepTree, which is a three dimensional tree map to display a directory layout.
-It ``differs from Treemap in that it employs three dimensions by stacking each subdirectory on top of its parent directory.''\cite{Bladh2004}
+\paragraph{\threedTmaps{} and \tmaps} is a concept introduced by \textcite{Bladh2004} in 2004.
+The authors transfer the concept of tree maps from two dimensional into three dimensional space.
+They introduce StepTree~\cite{Bladh2004}, which is a three dimensional tree map to display a directory layout.
+It ``differs from Treemap in that it employs three dimensions by stacking each subdirectory on top of its parent directory.''
 3D tree maps are superior to 2D tree maps for tasks with a pronounced topological challenge.
 User perform significantly better in interpreting the hierarchical structure.
 However, 3D visualizations also introduce some disadvantages as superimposition of objects and a complex view point navigation.
@@ -300,7 +307,7 @@ We can see an example of a \tmap{} in figure~\ref{fig:research:ua_treemap}
 \end{figure}
 
 
-\subsection{Choropleth map}
+\subsection{Geographical Maps}
 A choropleth map is a thematic map in which areas are shaded or patterned in proportion to the measurement of the statistical variable being displayed on the map.
 A popular use case is the display of population density or per-capita income.
 We can see an example of a choropleth map in figure~\ref{fig:research:choropleth}.
@@ -318,7 +325,7 @@ They are very helpful when data is attached to enumeration unites like counties,
 
 \todo[inline]{How do tree maps relate to geographical data?}
 
-\subsection{Coordinated multiple views}
+\subsection{Coordinated Multiple Views}
 According to \textcite{Roberts2007} \cmvs{} is just ``a specific exploratory visualization technique that enables users to explore their data''.
 \cmvs{} are characterized by the fact, that they show multiple views side-by-side.
 Most multiple coordinated views also provide some kind of brushing technique.
@@ -337,14 +344,6 @@ As we can see in the example in figure~\ref{fig:research:cmv} there seems to be 
   \caption{Airline on-time performance: Correlation of time of day with arrival delay. Most recent flight with a delay of more than 100 minutes selected.}\label{fig:research:cmv}
 \end{figure}
 
-\subsection{Visual variables}\label{sec:theory:visual-variables}
-Figure~\ref{fig:theory:visual-variables} shows the seven visual variables introduced by \textcite{Bertin2010}.
-These visual variables are used in cartography but can also be applied to data visualization in general.
-\begin{figure}[h!]
-  \centering
-  \includegraphics[width=\textwidth]{images/visual-variables.png}
-  \caption{Bertin's\cite{Bertin2010} original visual variables.}\label{fig:theory:visual-variables}
-\end{figure}
 
 \clearpage
 \section{Related Work}\label{sec:related-work}
@@ -354,7 +353,7 @@ How to categorize interaction techniques?
 How to find new interaction techniques and apply those to visualizations?
 
 \todo[inline]{Give a rough overview of this section}
-\subsection{Interaction categories}
+\subsection{Categories}
 \textcite{Shneiderman1996} classifies interactions into these groups:
 \begin{enumerate*}[label=(\arabic*)]
   \item
@@ -438,7 +437,7 @@ The most recent classification was done in 2007 by \textcite{Yi2007} listing sev
 \todo[inline]{The classifications are all redundant! Explain why and choose one classification for later use}
 \todo[inline]{Give one example for each category of the chosen classification}
 
-\subsection{Application of interactions}
+\subsection{Interaction Models}
 
 \paragraph{Space-Time Cube Operations}
 is a concept introduced in 2014 by \textcite{Bach2014} to map temporal data into two dimensional visualizations.
@@ -472,7 +471,7 @@ Most important, the framework describes interaction techniques for a single view
 \section{Use case}\label{sec:use-case}
 \todo[inline]{No section without text}
 
-\subsection{Data sets}
+\subsection{Data Sets}
 For our uses cases, we have two different data sets:
 One data set consists of a user ranking of public broadcasting in Germany, i.e.\ entities, mostly TV and radio broadcasts, are liked or disliked by people.
 This data is public data and can be used by media researchers of broadcasting corporations but also targets media journalists and the general audience.
@@ -585,7 +584,7 @@ However, we can ask a lot of questions already with common data base queries or 
 \end{enumerate}
 
 
-\subsection{Existing interactions}
+\subsection{Existing Interactions}
 The possible inteactions in our current \visan{} can be categorized \emph{select}, \emph{explore}, \emph{reconfigure}, \emph{encode} and \emph{filter}.
 As seen in figure~\ref{fig:analysis:interaction:existing} the user can \emph{select} one item in the view by clicking on it.
 The user can reveal a tooltip showing the item properties by hovering with the mouse on the item, which is another \emph{selection}.
@@ -648,7 +647,7 @@ Let's have some examples how an interaction between a \tmap{} and a \map{} might
 \section{Analysis}\label{sec:analysis}
 \todo[inline]{No section without text}
 
-\subsection{Singular visualization interactions}\label{sec:analysis:examples}
+\subsection{Singular Visualization Interactions}\label{sec:analysis:examples}
 
 The data visualization cataloge by Severino Ribecca list many of the most used data visualizations\cite{VisualizationCatalogue2017}.
 Let's pick some of those and derive a number of possible interactions.
@@ -869,7 +868,7 @@ Similarly a click on a slice of the ring would surround the most external ring w
     \end{center}
 \end{figure}
 
-\paragraph{Geographical data}
+\paragraph{Geographical Data}
 
 \begin{figure}
   \centering
@@ -939,7 +938,7 @@ Calendars and gantt charts could not only read the data from the data source, bu
     \end{center}
 \end{figure}
 
-\subsection{Multiple view interactions}\label{sec:analysis:examples}
+\subsection{Multiple View Interactions}\label{sec:analysis:examples}
 
 \paragraph{Detail view}
 \begin{figure}
