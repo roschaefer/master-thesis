@@ -78,7 +78,7 @@
 
 \begin{document}
 
-\title{Multiple coordinated views of massive geo data using tree maps and choropleth maps}
+\title{Multiple coordinated views on massive geo data}
 \author{Robert Schäfer\\ Department of Computer Graphics, Hasso-Plattner-Institut}
 \maketitle
 \clearpage
@@ -97,16 +97,19 @@
   In this thesis, we evaluate \cmvs{} to combine the capabilities of both data visualizations.
   We describe a framework to coordinate arbitrary data visualizations in theoretical terms and we give a reference implementation.
 
-  \todo[inline]{Should we mention the combination of multiple data sets here?}
 \end{abstract}
 \clearpage
 
 \section{Introduction}
 The human brain processes visual information better than it processes text.
 As a result, the most tangible data analyses usually come with some sort of data visualization.
-Data visualizations on a computer allow for user interactions and different levels of granularity according to the customer demands, which provides a great user experience.
-There are a multitude of different techniques.
-\cmvs{} take data visualizations to the next level by exploiting the respective advantages of the used visualizations as much as possible.
+On a computer, the user can interact with the data and explore different levels of granularity.
+The visualization changes and the user can iteratively perform another interaction.
+In many cases a great interactivity results in a great user experience.
+
+There is a wide range of options, techniques and implementations for this purpose.
+\cmvs{} are interesting, as they try to combine the various advantages of different visualizations as much as possible.
+\todo[inline]{Bullshit ahead}
 This combination may yield a greater value to the user, but it is unclear what kind visualization techniques work best together and for which kind of data.
 How a user interact with \cmvs{} and how it differs from the use of single visualizations is another question worth to investigate.
 In this thesis, we consider the question how a combination of a geographical visualization with a hierarchical visualization performs, for what kind of data this combination is suitable and what interaction patterns apply.
@@ -140,10 +143,13 @@ For the visualization, we use a different technique, e.g.\ a tree map if we deal
 % \todo[inline]{Start off with the problem of tree map vs geo map}
 
 \tmaps{} visualize hierarchical data on a two dimensional canvas and are particularly suitable if the proportions of the data should be emphasized.
-When dealing with both multidimensional and geographical data, problems arise when other features than geographical features are used for the layouting of the \tmap{}.
-As the order and placement of items depend on their specific values and hierarchy, items that should belong together according to their geographic circumstances may be scattered across the \tmap{}.
-This obstructs the comprehensibility of map and makes it especially difficult to select geographical units of items.
+When dealing with both multidimensional and geographical data, problems arise when features other than geographical features are used as input of the tiling algorithm.
+Items that should belong together according to their geographic circumstances may be scattered across the \tmap{}.
+This impairs the comprehensibility and complicates the selection of geographical units of items.
 
+A second problem is the coordination of interactions among arbitrary data visualizations.
+Until today, there is no framework that allows communication between data visualizations of any kind and that simplifies the implementation of coordinated interactions.
+Neither is there a specification of the interfaces and their requirements, a shared language or a messaging pattern for coordination. 
 
 \subsection{Research Questions}
 
