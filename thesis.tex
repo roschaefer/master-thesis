@@ -181,23 +181,32 @@ Data visualizations share certain characteristics and so should interactions on 
 
 \subsection{Objectives}
 
-\todo[inline]{No section without text}
+To address our research questions we develop a reference implementation of the theoretical framework.
+This reference implementation gives proof to the feasibility of the specification.
+We subdivide the development effort into the following work-packages:
 
+\begin{enumerate}
+  \item
+    Basic multiple view layout
 
-\paragraph{Basic \cmv{}}
-The existing \visan{} is supplemented with a basic \cmv{} system.
-Modules, interfaces and functionalities of the \cmv{} system are designed, coordinated and prototypically implemented.
-In particular, a method for arranging multiple \cmv{} widgets in a \cmv{} layout and storing \cmv{} layouts is developed.
+    The existing \visan{} is complemented with a basic \cmv{} system.
+    Modules, interfaces and functionalities of the \cmv{} system are designed, coordinated and prototypically implemented.
+    In particular, a method for arranging multiple \cmv{} widgets in a \cmv{} layout and storing \cmv{} layouts is developed.
 
-\paragraph{Interaction with the \cmv{}}
-We develop coupling mechanisms and interaction mechanisms between \maps{} (for map-based representation) and \tmaps{} (for abstract information representation).
-The functionality includes zoom per object or selection with a bounding box.
-This creates a powerful selection mechanism, which can be used to select the data from the map-based representation in the \tmap{}.
+  \item
+    Interactions within \cmvs{}
 
-\paragraph{Demonstration and evaluation}
-\cmv{} layouts and suitable views are implemented and tested for the selected test data.
-Based on the test data sets, the \cmv{} implementation is examined and evaluated for design criteria\cite{Baldonado2000}, general usability aspects\cite{Roberts2007} and usage for typical visual analytics tasks.
-\todo[inline]{How elaborate is it to conduct a study for the usability of the \cmv{}? Who has done that before?}
+    We develop linking and interaction mechanisms between \maps{} (for map-based representation) and \tmaps{} (for abstract information representation).
+    The functionality includes zoom per object or selection with a bounding box.
+    This creates a powerful selection mechanism, which can be used to select data in map-based representations and highlight the data in the \tmap{}.
+
+  \item
+    Demonstration and evaluation
+
+    \cmv{} layouts and suitable views are implemented and tested for the selected test data.
+    Based on the test data sets, the \cmv{} implementation is examined and evaluated for design criteria~\cite{Baldonado2000}, general usability aspects~\cite{Roberts2007} and usage for typical visual analytics tasks.
+\end{enumerate}
+
 
 % Our goal is to create meaningful data.
 % This includes to encourage as many people as possible to publish their interests.
