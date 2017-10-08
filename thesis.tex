@@ -108,7 +108,7 @@ The visualization changes and the user can iteratively perform another interacti
 In many cases a great interactivity results in a great user experience.
 
 There is a wide range of options, techniques and implementations for this purpose.
-\cmvs{} are interesting, as they try to combine the various advantages of different visualizations as much as possible.
+\cmvs{} are interesting, as they try to make the most out of the various advantages of different visualizations.
 \todo[inline]{Bullshit ahead}
 This combination may yield a greater value to the user, but it is unclear what kind visualization techniques work best together and for which kind of data.
 How a user interact with \cmvs{} and how it differs from the use of single visualizations is another question worth to investigate.
@@ -153,10 +153,23 @@ Neither is there a specification of the interfaces and their requirements, a sha
 
 \subsection{Research Questions}
 
-When dealing with multi-dimensional data, is it helpful to have multiple views for these dimensions?
-What are best practices for the implementation of \cmvs{}?
-Is it great user experience to have one view for interaction and another view for the data visualization to create insights?
-Do people prefer one view for the interaction, e.g.\ the geographical dimension, or do they use all views for interaction and visualization alternately?
+Based on the preceding problem statement, we take up the following research questions:
+\begin{enumerate}
+  \item
+    Are \cmvs{} an effective way to select data geographically and display it hiearchically and vice versa?
+  \item
+    Does it significantly improve the comprehensibility and facilitate the understanding of the data in our use case? 
+  \item
+    Is it possible to theoretically describe the substantial characteristics of every interaction?
+  \item
+    What is the smallest interface possible to connect data visualizations of any kind?
+  \item
+    How should multiple views be organized and how do they exchange information efficiently?
+  \item
+    What gives the best user experience:
+    Master- and slave coordinations with one visualization to interact with and another view to show changes or should all views be on an equal footing?
+\end{enumerate}
+
 
 \subsection{Hypotheses}
 Linkage and coupling of \cmvs{} can be enabled through visualizations, navigations and interaction techniques.
