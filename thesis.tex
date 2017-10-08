@@ -220,10 +220,10 @@ For the scope of this master thesis we therefore compare implemented visualizati
 How do both approaches differ in development speed, value for the customer?
 What considerations need to be done regarding the database schema?
 
-\todo[inline]{What is the area(s) of research, in which this thesis can be placed into?}
+\todo[inline]{What are the areas of research, in which this thesis can be placed into?}
 \subsection{Structure of the work}
 
-In section~\ref{sec:related-work} we will give an overview on \cmvs{} and focus on visual analytics as well as massive, geographical data.
+In Section~\ref{sec:related-work} we will give an overview on \cmvs{} and focus on visual analytics as well as massive, geographical data.
 Existing concepts and implementations of \cmvs{} are examined and summarized in an overview.
 
 \clearpage
@@ -268,9 +268,12 @@ As the order of placement depends on the respective features of the nodes, small
 %\todo{What are tree maps?}
 
 \begin{figure}[h]
-  \centering
-  \copyrightbox[b]{\includegraphics[width=\textwidth]{images/treemap_example}}{ \hfill \ccAttribution \ccShareAlike \hspace{1mm} Observatory of Economic Complexity\cite{Macro2017}} \caption{German exports visualized as a tree map}
-  \label{fig:research:treemap}
+    \centering
+    \copyrightbox[b]{%
+        \includegraphics[width=\textwidth]{images/treemap_example}}{%
+        \hfill \ccAttribution{} \ccShareAlike{} Observatory of Economic Complexity~\cite{Macro2017}
+    }
+    \caption{German exports visualized as a tree map}\label{fig:research:treemap}
 \end{figure}
 
 \subsubsection{\threedTmaps{} and \tmaps}
@@ -289,9 +292,11 @@ We can see an example of a \tmap{} in figure~\ref{fig:research:ua_treemap}
 
 \begin{figure}[h]
   \centering
-  \copyrightbox[b]{\includegraphics[width=\textwidth]{images/2_5D_treemap_example}}{ \hfill \textcopyright \hspace{1mm} Hasso-Plattner-Institut\cite{Doellner2017}}
-  \caption{Example of a \tmap{}}
-  \label{fig:research:ua_treemap}
+  \copyrightbox[b]{%
+    \includegraphics[width=\textwidth]{images/2_5D_treemap_example}}{%
+    \hfill \textcopyright{} Hasso-Plattner-Institut\cite{Doellner2017}
+  }
+  \caption{Example of a \tmap{}}\label{fig:research:ua_treemap}
 \end{figure}
 
 
@@ -304,9 +309,11 @@ They are very helpful when data is attached to enumeration unites like counties,
 
 \begin{figure}[h]
   \centering
-  \copyrightbox[b]{\includegraphics[width=\textwidth]{images/choropleth_example}}{ \hfill GPLv3 Mike Bostock\cite{Bostock2017:2}}
-  \caption{Unemployment rate in the USA}
-  \label{fig:research:choropleth}
+  \copyrightbox[b]{%
+    \includegraphics[width=\textwidth]{images/choropleth_example}}{%
+    \hfill GPLv3 Mike Bostock\cite{Bostock2017:2}
+  }
+  \caption{Unemployment rate in the USA}\label{fig:research:choropleth}
 \end{figure}
 
 \todo[inline]{How do tree maps relate to geographical data?}
@@ -327,8 +334,7 @@ As we can see in the example in figure~\ref{fig:research:cmv} there seems to be 
 \begin{figure}[h]
   \centering
   \copyrightbox[b]{\includegraphics[width=\textwidth]{images/cmv_example}}{\hfill Crossfilter\cite{Bostock2017}}
-  \caption{Airline on-time performance: Correlation of time of day with arrival delay. Most recent flight with a delay of more than 100 minutes selected.}
-  \label{fig:research:cmv}
+  \caption{Airline on-time performance: Correlation of time of day with arrival delay. Most recent flight with a delay of more than 100 minutes selected.}\label{fig:research:cmv}
 \end{figure}
 
 \subsection{Visual variables}\label{sec:theory:visual-variables}
@@ -337,8 +343,7 @@ These visual variables are used in cartography but can also be applied to data v
 \begin{figure}[h!]
   \centering
   \includegraphics[width=\textwidth]{images/visual-variables.png}
-  \caption{Bertin's\cite{Bertin2010} original visual variables.}
-  \label{fig:theory:visual-variables}
+  \caption{Bertin's\cite{Bertin2010} original visual variables.}\label{fig:theory:visual-variables}
 \end{figure}
 
 \clearpage
@@ -487,14 +492,13 @@ It is a relational database and a part of the data base schema is shown as an ER
 \begin{figure}[h!]
   \centering
   \includegraphics[width=\textwidth]{images/riso}
-  \caption{Part of the \riso{} database schema. Primary keys are set in bold.}
-  \label{fig:data:riso}
+  \caption{Part of the \riso{} database schema. Primary keys are set in bold.}\label{fig:data:riso}
 \end{figure}
 
 The largest table is called \attr{data} with approximately 10,466,600 records, which holds all values along with the survey date.
 \paragraph{Features}
 This data is connected to a feature table through a foreign key called \attr{id_mm}.
-In the feature table we can find the description for every referenced feature, e.g. population density, working population in agriculture, education spending.
+In the feature table we can find the description for every referenced feature, e.g.\ population density, working population in agriculture, education spending.
 The \riso{} system groups all features in a 4-level hierarchy:
 \begin{enumerate}
   \item
@@ -516,7 +520,7 @@ The geometry data for each region is stored in the \attr{geojson} column and as 
 The foreign keys that connect the tables \attr{data} and \attr{regions} are called \attr{id_re} and \attr{regs}.
 Unlike the feature table, the regions are grouped through the \attr{id_re} that indicates the hierarchy level.
 So the values of the \attr{id_re} column denominate the level of the hierarchy.
-E.g. a region with a \attr{id_re} of $1$ is a federal state of Germany, a region with id $13$ is a constituency.
+E.g.\ a region with a \attr{id_re} of $1$ is a federal state of Germany, a region with id $13$ is a constituency.
 A textual description for the hierarchy level can be found in the \attr{katalog_raumebenen} table in column \attr{raumebene}.
 Both column \attr{id_re} and \attr{regs} belong to the primary key of the regions table, so there will never be two regions on the same hierarchy level with the same \attr{regs} id.
 
@@ -531,8 +535,8 @@ This approach is suitable for a data base that incorporates data from different 
 Unlike the \riso{} database, the data base of \rufu{} is used as persistency layer.
 For that reason the data base schema follows the requirements of a productive web application.
 
-As outline in section~\ref{sec:outline} \rufu{} is an evaluation platform for public broadcasting in Germany.
-First, users vote on broadcasts, i.e. they decide if they want to support broadcast or if they do not want to support.
+As outline in Section~\ref{sec:outline} \rufu{} is an evaluation platform for public broadcasting in Germany.
+First, users vote on broadcasts, i.e.\ they decide if they want to support broadcast or if they do not want to support.
 As a next step, user can then make a priorisation by distributing a virtual, monthly budget among the chosen broadcasts.
 
 Figure~\ref{fig:data:rundfunk} shows the data base schema of the application.
@@ -546,8 +550,7 @@ The sum of all amounts for one user will never exceed the virtual budget of 17.5
 \begin{figure}[h!]
   \centering
   \includegraphics[width=\textwidth]{images/er}
-  \caption{Database schema of the \rufu{} app}
-  \label{fig:data:rundfunk}
+  \caption{Database schema of the \rufu{} app}\label{fig:data:rundfunk}
 \end{figure}
 
 \paragraph{Features}
@@ -599,21 +602,22 @@ When the user drags the slider, the items in the map on the right side are updat
 \begin{figure}[h!]
   \centering
   \includegraphics[width=\textwidth]{images/existing-interactions.png}
-  \caption{
+  \caption{%
     Items can be highlighted with a click, Bavaria is currently highlighted.
     A mouse over reveals a tooltip showing item properties.
-    The menu on the left side allows to change the data set and the specific base visualization.}
-  \label{fig:analysis:interaction:existing}
+    The menu on the left side allows to change the data set and the specific base visualization.
+  }\label{fig:analysis:interaction:existing}
 \end{figure}
 
 \begin{figure}[h!]
   \centering
   \includegraphics[width=\textwidth]{images/existing-interactions-filter.png}
-  \caption{ Only gas stations with a price for E10 within 1.349 Euro and 1.589 Euro are displayed in the map}
-  \label{fig:analysis:interaction:existing:filter}
+  \caption{%
+    Only gas stations with a price for E10 within 1.349 Euro and 1.589 Euro are displayed in the map
+  }\label{fig:analysis:interaction:existing:filter}
 \end{figure}
 
-\subsection{Interaction to be implemented}
+\subsection{Planned Interactions}
 We have a focus on coordinated multiple views consisting of a tree map and a geographical map.
 Let's have some examples how an interaction between a \tmap{} and a \map{} might work:
 
@@ -629,7 +633,7 @@ Let's have some examples how an interaction between a \tmap{} and a \map{} might
       \item
         The user selects many features at once in the \map{} by dragging a rectangle. The ids of all features within the rectangle are sent to the \tmap{}. All features will be highlighted with a different color, which is therefore a \emph{Select} interaction.
       \item
-        \emph{Reconfigure} the layouting of the \tmap{} by choosing a different hierarchy level. This increased granularity may lead to an increased granularity in the \map{}, e.g. show postal codes instead of federal states. The changed data are additional items, that are nested in the former items.
+        \emph{Reconfigure} the layouting of the \tmap{} by choosing a different hierarchy level. This increased granularity may lead to an increased granularity in the \map{}, e.g.\ show postal codes instead of federal states. The changed data are additional items, that are nested in the former items.
       \item
         \emph{Encode} the \tmap{} by a different attribute mapping like color, height or texture. If the \map{} has no geometry data that defines the shape of a feature, it can also display a larger point marker.
       \item
@@ -663,8 +667,7 @@ Let's pick some of those and derive a number of possible interactions.
     \subfloat[Line diagram]{{\includegraphics[width=0.4\textwidth]{images/chartTypes/line-diagram.png} }}%
     \qquad
   \end{center}
-  \caption{Line charts are used to display trends}
-  \label{fig:concept:chart-types:line-diagrams}
+  \caption{Line charts are used to display trends}\label{fig:concept:chart-types:line-diagrams}
 \end{figure}
 
 Line diagrams are multiple sets of data, displayed along the x-axis.
@@ -699,8 +702,7 @@ It is possible to highlight an entire series of data or just a feature within th
     \qquad
     \subfloat[Multiset bar chart]{{\includegraphics[width=0.4\textwidth]{images/chartTypes/multiset-bar-chart.png} }}%
   \end{center}
-  \caption{A multiset bar charts is a variation of a bar chart}
-  \label{fig:concept:chart-types:bar-charts}
+  \caption{A multiset bar charts is a variation of a bar chart}\label{fig:concept:chart-types:bar-charts}
 \end{figure}
 
 Bar charts and multiset bar charts show one or many attributes per feature along an axis.
@@ -716,12 +718,11 @@ The set of possible ineractions include the highlighting of features, the reorde
 
 \begin{figure}
     \begin{center}
-        \caption{Interactions for bar charts}
-        \label{fig:concept:chart-types:bar-charts:interactions}
+        \caption{Interactions for bar charts}\label{fig:concept:chart-types:bar-charts:interactions}
         {\small
             \begin{tabulary}{\textwidth}{ll}
                 \bf Select & Highlight a bar (id of data point) \\
-                \bf Encode & Change colours of data series (colours \rightarrow \ data series) \\
+                \bf Encode & Change colours of data series (colours \rightarrow{} data series) \\
                 \bf Reconfigure & Sort by attribute (data attribute) \\
                 \bf Reconfigure & Drag bars to reorder data series (ordered list of ids of data points) \\
                 \bf Filter & Hide a data series (id of data series) \\
@@ -845,7 +846,7 @@ Therefore, both tree map and ring diagram need the feature set as a tree, with e
 As we are describing hierarchies, the maximal depth of tree may be increased or decreased.
 Again, interactions could include a highlighting of features and a change of color encoding.
 Both visualizations may show only a subtree.
-E.g. a click on a box in the treemap opens another treemap focused on the subtree.
+E.g.\ a click on a box in the treemap opens another treemap focused on the subtree.
 Similarly a click on a slice of the ring would surround the most external ring with the children of the feature.
 
 \conceptTable{Tree, each feature has a value for layouting.}{Position, Size, shape, orientation.}{Color, texture.}
@@ -944,8 +945,7 @@ Calendars and gantt charts could not only read the data from the data source, bu
 \begin{figure}
   \centering
   \includegraphics[width=0.4\textwidth]{images/chartTypes/multi/detail-view}
-  \label{fig:concept:chart-types:detail}
-  \caption{The screenshot-tool ``shutter'' shows a magnified detail view of the area around the mouse cursor in the lower right corner of the screen}
+  \caption{The screenshot-tool ``shutter'' shows a magnified detail view of the area around the mouse cursor in the lower right corner of the screen}\label{fig:concept:chart-types:detail}
 \end{figure}
 
 \clearpage
@@ -997,7 +997,7 @@ We will face some issues in coordinating the types to other views, because:
         The low level event that is used as a trigger for the interaction is different.
 \end{enumerate}
 An example for the first case is to express a highlight interaction with a change of colour.
-E.g. a bubble chart might encode a certain data attribute to the colour of a bubble.
+E.g.\ a bubble chart might encode a certain data attribute to the colour of a bubble.
 Therefore the colour cannot be changed.
 Another example for the first case:
 The data sets of a bar chart could be ordered according to a user interaction.
@@ -1025,13 +1025,13 @@ These constrained visual attributes are unavailable while independent visual var
 
 Interaction can be triggered by any input of a human-computer-interaction device, like the keyboard or the mouse.
 Because users are in the habit of expecting certain interactions to be triggered from certain events, we also have constraints here.
-E.g. the viewpoint in geographical maps is moved by mouse drag events and the zoom level is controlled by the mouse wheel.
+E.g.\ the viewpoint in geographical maps is moved by mouse drag events and the zoom level is controlled by the mouse wheel.
 So we should not use those already occupied events as triggers for our coordinated interactions.
 Nevertheless, consistency in user interfaces is crucial for great user experience, because users can reuse the learned knowledge.
 Therefore, we need to list all availabe events as candidates and connect them to our interactions in a preferrably consistent manner.
 
 On the other hand, we might have special controls in visualizations, in order to change the encoding.
-E.g. a \tmap{} shows a menu where the user can define how attributes are mapped to visual variables.
+E.g.\ a \tmap{} shows a menu where the user can define how attributes are mapped to visual variables.
 
 \subsubsection{Specify the interaction type}
 
@@ -1080,8 +1080,9 @@ These attributes may describe e.g.\ the weight of an edge in a flow map.
 \begin{figure}[h!]
   \centering
   \includegraphics[width=0.5\textwidth]{images/meta-data-structure.png}
-  \caption{A data structure for tabular, hierarchical and relational data}
-  \label{fig:concept:meta-data-structure}
+  \caption{%
+    A data structure for tabular, hierarchical and relational data
+  }\label{fig:concept:meta-data-structure}
 \end{figure}
 
 \subsection{Interaction types}\label{sec:concept:types}
@@ -1092,8 +1093,8 @@ The name of the function is the \emph{type} of the interaction and the function 
 Thus, we can describe interaction through a change of its semantic but we ignore implementation details of specific visualizations.
 
 
-These function are derived from specific interactions of the examples in section~\ref{sec:analysis:examples}.
-Domain and codomain of these functions refer to the objects defined in the data model in section~\ref{sec:concept:space}.
+These function are derived from specific interactions of the examples in Section~\ref{sec:analysis:examples}.
+Domain and codomain of these functions refer to the objects defined in the data model in Section~\ref{sec:concept:space}.
 To declare the functions explicitly, we define a couple of sets:
 \begin{enumerate}
     \item
@@ -1115,7 +1116,7 @@ To declare the functions explicitly, we define a couple of sets:
     \item
         $ \mathbb{V} $
 
-        The set of visual variables position, size, orientation, texture, colour and shape, as described in section~\ref{sec:theory:visual-variables}.
+        The set of visual variables position, size, orientation, texture, colour and shape, as described in Section~\ref{sec:theory:visual-variables}.
         Elements of this set include the name for $x-axis$ and $y-axis$ as well as the name of shapes.
         Thus, an \emph{encoding} interaction can change the mapping of a data attribute to another coordinate axis.
 \end{enumerate}
@@ -1190,7 +1191,7 @@ The following is a list of functions describing the types based on the aforement
         $ Encode: \mathbb{A} \rightarrow \mathbb{V} $
 
         The $Encode$ function can be used to change any mapping of attribute to any visual variable.
-        E.g. bar charts can change the attribute mapped to the \emph{height} of bars.
+        E.g.\ bar charts can change the attribute mapped to the \emph{height} of bars.
         Histograms and scatter plots can change the name attribute that is mapped along the \emph{x-axis}.
         Bubble charts can encode a different data attribute in the \emph{area} of the bubbles.
         A specialized version of this function may return the attribute that is used for the layout algorithm in tree maps. 
@@ -1212,7 +1213,7 @@ It then yields either true or false based on the values of these attributes.
 
 \subsection{Coordination of interactions}
 
-In section~\ref{sec:concept:types} we discussed how we can describe the types of the interaction.
+In Section~\ref{sec:concept:types} we discussed how we can describe the types of the interaction.
 While a type describes the interaction itself and what \emph{subject} it operates on, a type does not describe the actual \emph{coordination} of views.
 E.g.\ what action in one view should lead to what kind of changes in what other views?
 In addition to the coordination, we need a pattern to exchange messages \cmvs{}.
@@ -1222,12 +1223,11 @@ Figure~\ref{fig:concept:trigger-effect} gives a rough overview on our coordinati
 \begin{figure}[h!]
   \centering
   \includegraphics[width=\textwidth]{images/trigger-effect.png}
-  \caption{Schema of message flow in \cmvs{}}
-  \label{fig:concept:trigger-effect}
+  \caption{Schema of message flow in \cmvs{}}\label{fig:concept:trigger-effect}
 \end{figure}
 We introduce two new terms, \emph{trigger} and \emph{effect}.
 
-A trigger is e.g. a mouse interaction, like hover or click.
+A trigger is e.g.\ a mouse interaction, like hover or click.
 This low-level action is an implementation detail and therefore tied to the specific visualization.
 
 In order to be perceivable by the user, the interaction must have some visual effect.
@@ -1276,13 +1276,14 @@ In the course of this thesis we want to implement the following interactions:
 \begin{figure}[h!]
   \centering
   \includegraphics[width=\textwidth]{images/sequence-diagram.png}
-  \caption{The sequence diagram shows the notification of different components.
-  The user first chooses a feature set and hovers over a polygon in the geographical map.}
-  \label{fig:implementation:sequence-diagram}
+  \caption{%
+    The sequence diagram shows the notification of different components.
+  The user first chooses a feature set and hovers over a polygon in the geographical map.
+  }\label{fig:implementation:sequence-diagram}
 \end{figure}
 
 
-Figure \ref{fig:implementation:sequence-diagram} shows how \cmvs{} can be automatically updated even if the environment lacks a native update-mechanism.
+Figure~\ref{fig:implementation:sequence-diagram} shows how \cmvs{} can be automatically updated even if the environment lacks a native update-mechanism.
 We use the observer pattern:
 The root of our views is an observable implementation of the common interface described in section\ref{sec:concept}.
 If one of the views updates the view state, it will send the necessary information to the observable.
@@ -1304,22 +1305,23 @@ Each component is responsible for a task and may contain other components.
 The components are joined at the root node of the page.
 
 This pattern is very applicable to \cmvs{}.
-The different views of \cmvs{} share state, i.e. the feature, that is currently highlighted or the applied filter on the data.
+The different views of \cmvs{} share state, i.e.\ the feature, that is currently highlighted or the applied filter on the data.
 So the views are components and their closest common ancestor is the \cmv{} itself, controlling state and passing user interaction down to it's children.
 
 \begin{figure}[h!]
   \centering
   \includegraphics[width=\textwidth]{images/data-down-actions-up.png}
-  \caption{Implementation of the component pattern in EmberJS.
-  The example shows a page of a webshop.
-  The customer is about to order the items in the shopping cart.}
-  \label{fig:implementation:data-down-actions-up}
+  \caption{%
+    Implementation of the component pattern in EmberJS\@.
+    The example shows a page of a webshop.
+    The customer is about to order the items in the shopping cart.
+  }\label{fig:implementation:data-down-actions-up}
 \end{figure}
 
-\paragraph{Actions up - Data down}
+\paragraph{Actions up --- Data down}
 
 Version 2.0 of Ember introduced a common phrase how to use this pattern effectively: ``Data down, actions up''\cite{Emberigniter2017}
-In the domain of \cmvs{} actions would mean user interactions, e.g. a click on a feature.
+In the domain of \cmvs{} actions would mean user interactions, e.g.\ a click on a feature.
 The action will notify the controlling \cmv{} component.
 Actions may change data, and the changes will be passed to to all dependen views.
 These views are then rerendered.
@@ -1360,7 +1362,7 @@ This raises some problems in legacy apps:
 Usually, legacy apps are written in plain javascript without the use of a component-based frontend framework.
 Any part of the code may call any other part of the code, leading to the dreaded ``spaghetti code''.
 Refactoring the existing app requires the framework to have a reliable way of communication with the legacy parts.
-E.g. parts of the legacy code call the backend in order to load data.
+E.g.\ parts of the legacy code call the backend in order to load data.
 This data needs to be passed to the compponents of the user interface.
 Web components do not have a designated interface
 Because of that, libraries like Polymer come back on proprietary solutions.
@@ -1380,13 +1382,12 @@ All of these reasons make us choose ReactJS for the task of coordinating multipl
 \begin{figure}[h!]
   \centering
   \includegraphics[width=\textwidth]{images/frontend-frameworks.png}
-  \caption{Comparison of frontend frameworks}
-  \label{fig:implementation:frontend-frameworks}
+  \caption{Comparison of frontend frameworks}\label{fig:implementation:frontend-frameworks}
 \end{figure}
 
 \subsection{Observer pattern and component pattern in \cmvs{}}
 Figure~\ref{fig:implementation:both-patterns} shows the final result.
-We try to put as much code as possible under the root node of ReactJS.
+We try to put as much code as possible under the root node of ReactJS\@.
 By that we eliminate the amount of custom updating implementation.
 The root node of the DOM-tree of our react application is connected with the existing app through the common interface.
 Both urban analytics controller and the multiview map component will observe changes to the common interface.
@@ -1396,8 +1397,9 @@ Also sub-components may communicate with the common interface.
 \begin{figure}[h!]
   \centering
   \includegraphics[width=\textwidth]{images/both-patterns-implemented.png}
-  \caption{Both observer pattern and component pattern applied in the field of \cmvs{}}
-  \label{fig:implementation:both-patterns}
+  \caption{%
+    Both observer pattern and component pattern applied in the field of \cmvs{}
+  }\label{fig:implementation:both-patterns}
 \end{figure}
 
 
@@ -1406,13 +1408,14 @@ Also sub-components may communicate with the common interface.
 An example of aggregated user data merged with geometry data can be seen in listing~\ref{lst:geojson:example}.
 \lstinputlisting[language=JavaScript, label={lst:geojson:example}, caption={Geojson example}]{listings/example.geojson}
 
-We can use this data as input for our common \visan{}, e.g. figure~\ref{fig:implementation:user_distribution} shows the user distribution of \rufu{}.
+We can use this data as input for our common \visan{}, e.g.\ figure~\ref{fig:implementation:user_distribution} shows the user distribution of \rufu{}.
 
 \begin{figure}[h!]
   \centering
   \includegraphics[width=\textwidth]{images/ua_example.png}
-  \caption{User distribution of \rufu{} across German federal states}
-  \label{fig:implementation:user_distribution}
+  \caption{%
+    User distribution of \rufu{} across German federal states
+  }\label{fig:implementation:user_distribution}
 \end{figure}
 
 
@@ -1434,7 +1437,7 @@ We can use this data as input for our common \visan{}, e.g. figure~\ref{fig:impl
 
 \clearpage
 
-\printbibliography
+\printbibliography{}
 \end{document}
 
 
