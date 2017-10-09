@@ -1050,7 +1050,11 @@ Calendars and gantt charts could not only read the data from the data source, bu
 
 \clearpage
 \section{Concept}\label{sec:concept}
-\todo[inline]{No section without text}
+Based on the findings in Section~\ref{sec:analysis} we specify a formal language and a framework for \cmvs{} in this section.
+Our approach involves defining the shared data model on which all visualizations must agree on.
+We formalize each interaction from Section~\ref{sec:analyis} as a mathematical function and group these functions together if they have the same input and output.
+As a last step, we specify the communication pattern of the formalized language.
+
 
 \subsection{Common interface}
 
@@ -1149,7 +1153,7 @@ Increasing the level of detail expects a tree of data with the level of detail d
 Showing connections between features expects a graph of data, with edges between features and properties on these edges.
 
 
-\subsection{Interaction subject space}\label{sec:concept:space}
+\subsection{Shared data model}\label{sec:concept:data-model}
 To account for the various data structures, we use an abstract data model that is powerful enough to include tabular, hierarchical and relational data.
 You can see a class diagram in figure~\ref{fig:concept:meta-data-structure}.
 
@@ -1194,7 +1198,7 @@ Thus, we can describe interaction through a change of its semantic but we ignore
 
 
 These function are derived from specific interactions of the examples in Section~\ref{sec:analysis:examples}.
-Domain and codomain of these functions refer to the objects defined in the data model in Section~\ref{sec:concept:space}.
+Domain and codomain of these functions refer to the objects defined in the data model in Section~\ref{sec:concept:data-model}.
 To declare the functions explicitly, we define a couple of sets:
 \begin{enumerate}
     \item
