@@ -357,7 +357,7 @@ We can see an example of a \tmap{} in figure~\ref{fig:research:ua_treemap}
 \todo[inline]{introduction}
 \paragraph{Flow maps} place stroked lines on top of a geographic map.
 They often display the flow of goods or the migration of people.
-Charles Minard’s depiction of Napoleon’s ill-fated march on Moscow in 1861, as we can see in Figure~\ref{fig:theory:flow-map} is an early example of a flow map~\cite{Corbett2001}.
+As we can see in Figure~\ref{fig:theory:flow-map}, an early example of a flow map is Charles Minard’s depiction of Napoleon’s ill-fated march on Moscow in 1861~\cite{Corbett2001}.
 \begin{figure}[h]
   \centering
   \includegraphics[width=\textwidth]{images/theory/minard}
@@ -370,7 +370,7 @@ Charles Minard’s depiction of Napoleon’s ill-fated march on Moscow in 1861, 
 
 \paragraph{Chloropleth maps} is a thematic map in which areas are shaded or patterned in proportion to the statistical variable being displayed on the map.
 A popular use case is the display of population density or per-capita income.
-We can see an example of a choropleth map in figure~\ref{fig:theory:choropleth}, showing the percentage of obese population in the US.
+We can see an example of a choropleth map in figure~\ref{fig:theory:choropleth}, showing the percentage of obese population in the US\@.
 Choropleth maps are widely popular and likely to understand them.
 They are very helpful when data is attached to enumeration unites like counties, provinces and countries.
 
@@ -399,9 +399,6 @@ Area cartograms may be contiguous or noncontiguous, depending on the applied lay
 \subsection{Coordinated Multiple Views}
 According to \textcite{Roberts2007} \cmvs{} is just ``a specific exploratory visualization technique that enables users to explore their data''.
 \cmvs{} are characterized by the fact, that they show multiple views side-by-side.
-Most multiple coordinated views also provide some kind of brushing technique.
-``The technique of brushing is the principle approach, where elements are selected (and highlighted) in one display, concurrently the same information in any other linked display is also highlighted.''\cite{Roberts2007}
-%\todo{What are CMVs?}
 We can see an example in figure~\ref{fig:research:cmv}.
 It displays an on-time performance of airlines, visualized with the ``Crossfilter'' javascript library.
 The user can set the borders of an interval with the mouse in each of the views.
@@ -415,6 +412,9 @@ As we can see in the example in figure~\ref{fig:research:cmv} there seems to be 
   \caption{Airline on-time performance: Correlation of time of day with arrival delay. Most recent flight with a delay of more than 100 minutes selected.}\label{fig:research:cmv}
 \end{figure}
 
+\paragraph{Brushing and Linking}
+Most multiple coordinated views also provide some kind of brushing technique.
+``The technique of brushing is the principle approach, where elements are selected (and highlighted) in one display, concurrently the same information in any other linked display is also highlighted.''\cite{Roberts2007}
 
 \clearpage
 \section{Related Work}\label{sec:related-work}
@@ -509,6 +509,7 @@ The most recent classification was done in 2007 by \textcite{Yi2007} listing sev
 \todo[inline]{Give one example for each category of the chosen classification}
 
 \subsection{Interaction Models}
+\todo[inline]{no section without text}
 
 \paragraph{Space-Time Cube Operations}
 is a concept introduced in 2014 by \textcite{Bach2014} to map temporal data into two dimensional visualizations.
@@ -523,8 +524,6 @@ The work focuses on temporal data and otherwise continuous data.
 Interactions are not seen as an abstract entity, that need to be agnostic of the underlying data structure and visualization.
 The authors admit ``our framework does not provide much guidance for interaction design: the design space for interactive operations has only been partially explored.''\cite[Other limitations, p.~15]{Bach2014}
 
-
-
 \paragraph{ITlib\cite{Figueroa2001}} is an architecture and a framework of interaction techniques for virtual reality applications, designed to be extensible and flexible.
 New interaction techniques can easily be added and application specific code is seamlessly integrated.
 On a low level an interaction technique ``is modeled as a set of filters connected in a small data flow''\cite[Basic concept, p.~2]{Figueroa2001}.
@@ -537,6 +536,16 @@ Even though the system describes interactions in an abstract way, the domain of 
 Certain assumptions are made, including the data model, which is the 3D scene, and human computer interaction devices, like the user's hand or the user's head.
 The goal is not to better understand the data, as the data model in this case is the 3D scene, and not statistical data.
 Most important, the framework describes interaction techniques for a single viewpoint but not for coordinated multiple views.
+
+\paragraph{Focus+Context Visualization} by \textcite{Bjork1999} is one of the very few formal descriptions of information visualization.
+The authors structure the process into three parts:
+\subparagraph{Visualizations} referred to as $IV$, are triples of a set $[D]$ of underlying data, a visual representation $V$ and $I$ which is the interactivity. 
+\begin{equation}
+  IV([D], V, I)
+\end{equation}
+If $I$ affects $[D]$ we can manipulate the underlying data set.
+Examples would be changes in a spreadsheet editor, or a change of the start and end date of an appointment in a calendar.
+When $V$ is affected by $I$ the user can manipulate $IV$ in order to change the way $[D]$ is represented, e.g.\ choosing a different level of detail as in Figures~\ref{fig:theory:treemap-german-exports-1} and~\ref{fig:theory:treemap-german-exports-2}.
 
 \clearpage
 \section{Use case}\label{sec:use-case}
