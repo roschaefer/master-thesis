@@ -292,7 +292,7 @@ French cartographer Jaques Bertin introduced seven visual varables in 1967~\cite
 We can see an example for each in Figure~\ref{fig:theory:visual-variables}.
 These visual variables are used in cartography but can also be applied to data visualization in general.
 \textcite{Carpendale2003} explains in detail their use in terms of computational information instead of printed cartography.
-\textcite{Garlandi2009} put these visual variables under systematical validation procedures.
+\textcite{Garlandini2009} put these visual variables under systematical validation procedures.
 The authors conclude that the variable size provides the most accurate and efficent performance while the variable orientation provides the least performance.
 \begin{figure}[h!]
   \centering
@@ -301,27 +301,35 @@ The authors conclude that the variable size provides the most accurate and effic
 \end{figure}
 
 \subsection{Treemaps}
-Due to the hierarchical nature of the use cases, we focus on the visualization of hierarchical and geographical data
 The visualization of hierarchical data has a long tradition.
 The traditional representation of a tree is a rooted, directed graph with the root node at the top.
-An everyday use case is a directory tree example of a file system, e.g.\ in file browsers or command line utilities like \texttt{tree} in UNIX\@.
+An everyday use case is a directory tree example of a file system, e.g.\ in file browsers or command line utilities like \texttt{tree} in UNIX based operating systems.
 As \textcite{Shneiderman1992} mentions, this visualization becomes increasingly large when displaying more than one node and soon exceeds the entire screen size.
-\textcite{Johnson1991} proposes the tree map visualization technique, in which each node is a rectangle whose area is proportional to some attribute, thus making 100\% use of the available screen size.
-As we can see in figure~\ref{fig:research:treemap} large boxes are labeled with generic tems like ``cars'' and ``medicaments'' and include smaller boxes with more specific meanings.
-We apply the same rules to ordinary maps.
-The world can be divided into continents, which can be divided into countries, which can be divided into provinces and so on.
-The difference is that there is no predefined algorithm for layouting, which brings up one of the major disadvantages of tree maps:
-As the order of placement depends on the respective features of the nodes, small changes in the input data can lead to a large change in the layout of the resulting tree map.
-%\todo{What are tree maps?}
+\textcite{Johnson1991} proposes the tree map visualization technique, in which each node is a rectangle whose area is proportional to a specified dimension.
+Rectangles contain sub-branches of the node as tiles, thereby expressing hierarchy information.
+\begin{figure}[h]
+    \centering
+    \copyrightbox[b]{%
+        \includegraphics[width=\textwidth]{images/theory/german-exports-1}}{%
+        \hfill \ccAttribution{} \ccShareAlike{} Observatory of Economic Complexity~\cite{Macro2017}
+    }
+    \caption{First hierarchy level of German exports}\label{fig:theory:treemap-german-exports-1}
+\end{figure}
 
 \begin{figure}[h]
     \centering
     \copyrightbox[b]{%
-        \includegraphics[width=\textwidth]{images/treemap_example}}{%
+        \includegraphics[width=\textwidth]{images/theory/german-exports-2}}{%
         \hfill \ccAttribution{} \ccShareAlike{} Observatory of Economic Complexity~\cite{Macro2017}
     }
-    \caption{German exports visualized as a tree map}\label{fig:research:treemap}
+    \caption{Second hierarchy level of German exports}\label{fig:theory:treemap-german-exports-2}
 \end{figure}
+We can see an example of an interactive treemap in Figures~\ref{fig:theory:treemap-german-exports-1} and~\ref{fig:theory:treemap-german-exports-2}.
+German exports are divided in generic groups like ``Machines'' and ``Chemical Products'' and include more specific groups like ``Cars'' and ``Packaged Medicaments''.
+The level of hiearchy can be selected with a dropdown menu, so only leaf nodes are displayed at a time.
+Treemaps are space-filling visualizations, i.e.\ they make 100\% use of the available screen size.
+
+Note that as the order and placement of the nodes depends on the value of their specified dimension, geographical units of data may may be placed separately on the treemap.
 
 \paragraph{\threedTmaps{} and \tmaps} is a concept introduced by \textcite{Bladh2004} in 2004.
 The authors transfer the concept of tree maps from two dimensional into three dimensional space.
