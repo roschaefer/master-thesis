@@ -537,15 +537,27 @@ Certain assumptions are made, including the data model, which is the 3D scene, a
 The goal is not to better understand the data, as the data model in this case is the 3D scene, and not statistical data.
 Most important, the framework describes interaction techniques for a single viewpoint but not for coordinated multiple views.
 
-\paragraph{Focus+Context Visualization} by \textcite{Bjork1999} is one of the very few formal descriptions of information visualization.
-The authors structure the process into three parts:
-\subparagraph{Visualizations} referred to as $IV$, are triples of a set $[D]$ of underlying data, a visual representation $V$ and $I$ which is the interactivity. 
+\paragraph{Focus+Context Visualization} by \textcite{Bjork1999} is one of the few formalizations of information visualization.
+The authors describe this formalization based on first-level and second-level visualization:
+\subparagraph{Visualizations} referred to as $IV$, are triples of a set $[D]$ of underlying data, a visual representation $V$ and $I$ which is the possible interaction or manipulation. 
 \begin{equation}
   IV([D], V, I)
 \end{equation}
 If $I$ affects $[D]$ we can manipulate the underlying data set.
 Examples would be changes in a spreadsheet editor, or a change of the start and end date of an appointment in a calendar.
-When $V$ is affected by $I$ the user can manipulate $IV$ in order to change the way $[D]$ is represented, e.g.\ choosing a different level of detail as in Figures~\ref{fig:theory:treemap-german-exports-1} and~\ref{fig:theory:treemap-german-exports-2}.
+When $V$ is affected by $I$ the user can manipulate $IV$ in order to change the way $[D]$ is represented, e.g.\ choosing a different level of detail as shown in Figures~\ref{fig:theory:treemap-german-exports-1} and~\ref{fig:theory:treemap-german-exports-2}.
+
+\subparagraph{Second-level Visualizations} are information visualizations consecutively applied.
+The underlying data set $[D]$ of the previous formula is replaced with some information visualization.
+\begin{equation}
+  IV'(IV, V', I')
+\end{equation}
+
+Focus+context visualizations are second-level visualizations.
+One example is the so-called rubbersheet visualization, that visually distorts a first-level visualization similar to a magnifier.
+
+
+
 
 \clearpage
 \section{Use case}\label{sec:use-case}
