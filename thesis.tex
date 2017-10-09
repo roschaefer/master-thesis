@@ -297,7 +297,7 @@ The authors conclude that the variable size provides the most accurate and effic
 \begin{figure}[h!]
   \centering
   \includegraphics[width=\textwidth]{images/visual-variables.png}
-  \caption{Bertin's\cite{Bertin2010} original visual variables.}\label{fig:theory:visual-variables}
+  \caption{Bertin's~\cite{Bertin2010} original visual variables.}\label{fig:theory:visual-variables}
 \end{figure}
 
 \subsection{Treemaps}
@@ -354,20 +354,37 @@ We can see an example of a \tmap{} in figure~\ref{fig:research:ua_treemap}
 
 
 \subsection{Geographical Maps}
-A choropleth map is a thematic map in which areas are shaded or patterned in proportion to the measurement of the statistical variable being displayed on the map.
+\todo[inline]{introduction}
+\paragraph{Flow maps} place stroked lines on top of a geographic map.
+They often display the flow of goods or the migration of people.
+Charles Minard’s depiction of Napoleon’s ill-fated march on Moscow in 1861, as we can see in Figure~\ref{fig:theory:flow-map} is an early example of a flow map~\cite{Corbett2001}.
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=\textwidth]{images/theory/minard}
+  \caption{%
+  }\label{fig:theory:flow-map}
+\end{figure}
+
+\paragraph{Chloropleth maps} is a thematic map in which areas are shaded or patterned in proportion to the statistical variable being displayed on the map.
 A popular use case is the display of population density or per-capita income.
-We can see an example of a choropleth map in figure~\ref{fig:research:choropleth}.
+We can see an example of a choropleth map in figure~\ref{fig:theory:choropleth}.
 Choropleth maps are extremely popular and so the audience is likely to understand them.
 They are very helpful when data is attached to enumeration unites like counties, provinces and countries.
 
 \begin{figure}[h]
   \centering
   \copyrightbox[b]{%
-    \includegraphics[width=\textwidth]{images/choropleth_example}}{%
-    \hfill GPLv3 Mike Bostock\cite{Bostock2017:2}
+    \includegraphics[width=\textwidth]{images/theory/choropleth}}{%
+    \hfill National Center for Chronic Disease Prevention and Health Promotion~\cite{NCCDPHP2017}
   }
-  \caption{Unemployment rate in the USA}\label{fig:research:choropleth}
+  \caption{%
+    Choropleth Map of Obesity in the United States in 2008.
+    Present of population classified as ``Obese'' (Body Mass Index in excess of 30), by state.
+  }\label{fig:theory:choropleth}
 \end{figure}
+
+\paragraph{Graduated Symbol Maps}
+\paragraph{Cartograms}
 
 \todo[inline]{How do tree maps relate to geographical data?}
 
@@ -922,7 +939,7 @@ Similarly a click on a slice of the ring would surround the most external ring w
     \qquad
     \subfloat[Flow map]{{\includegraphics[width=0.4\textwidth]{images/chartTypes/flow-map.png} }}%
     \caption{Choropleth maps focus on a density while flow maps show a migration of data}%
-    \label{fig:concept:chart-types:geographical}
+    \label{fig:analysis:chart-types:geographical}
 \end{figure}
 
 Choropleth maps and flow maps are specialized diagrams focused on geographical data.
