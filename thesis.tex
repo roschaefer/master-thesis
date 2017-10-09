@@ -1052,25 +1052,25 @@ Calendars and gantt charts could not only read the data from the data source, bu
 \section{Concept}\label{sec:concept}
 Based on the findings in Section~\ref{sec:analysis} we specify a formal language and a framework for \cmvs{} in this section.
 Our approach involves defining the shared data model on which all visualizations must agree on.
-We formalize each interaction from Section~\ref{sec:analyis} as a mathematical function and group these functions together if they have the same input and output.
+We formalize each interaction from Section~\ref{sec:analysis} as a mathematical function and group these functions together if they have the same input and output.
 As a last step, we specify the communication pattern of the formalized language.
 
 
-\subsection{Common interface}
-
-Having a central controller be responsible for the entire coordination of views can lead to maintainability issues.
-If a new interaction needs to be implemented, a change in the multiview controller is required.
-This low flexibility leads to higher development costs and is therefore not desirable.
-
-The question here is:
-Is there a way to anticipate what kind of data any interaction might affect?
-What kind of visual changes are possible at all in which types of visualization?
-What is the expected data structure for which types of visualization?
-Are there any other shared concepts in all data visualizations?
-
-If there are shared concepts, we might be able to model common interface for all types of visualizations.
-Multiple views would only need to implement to adapter to this interface.
-With this interface we would reduce the currently $N*N$ transformations down to $N$ adapters and reduce the overall development costs.
+% \subsection{Common interface}
+%
+% Having a central controller be responsible for the entire coordination of views can lead to maintainability issues.
+% If a new interaction needs to be implemented, a change in the multiview controller is required.
+% This low flexibility leads to higher development costs and is therefore not desirable.
+%
+% The question here is:
+% Is there a way to anticipate what kind of data any interaction might affect?
+% What kind of visual changes are possible at all in which types of visualization?
+% What is the expected data structure for which types of visualization?
+% Are there any other shared concepts in all data visualizations?
+%
+% If there are shared concepts, we might be able to model common interface for all types of visualizations.
+% Multiple views would only need to implement to adapter to this interface.
+% With this interface we would reduce the currently $N*N$ transformations down to $N$ adapters and reduce the overall development costs.
 
 \subsection{Trigger, effect and interaction type}
 
@@ -1208,7 +1208,8 @@ To declare the functions explicitly, we define a couple of sets:
     \item
         $ \mathbb{A} : \mathbb{A} \subseteq \mathbb{\sum^*} $
 
-        The set of names of all attributes in our subject space.
+        The set of names of all attributes in our shared data model.
+        Attributes are the exact same thing as the dimensions of the underlying data set.
     \item
         $ \mathbb{D} $
 
@@ -1315,14 +1316,22 @@ The \emph{FilterAttributes} will return the ordered list of chosen attributes of
 The updated \emph{FilterByValues} function will now expect a new argument list, based on $ FilterAttributes $.
 It then yields either true or false based on the values of these attributes.
 
-\subsection{Coordination of interactions}
+\subsection{Communication pattern}
 
 In Section~\ref{sec:concept:types} we discussed how we can describe the types of the interaction.
-While a type describes the interaction itself and what \emph{subject} it operates on, a type does not describe the actual \emph{coordination} of views.
+The interaction type determines the signature of the function and describes the interaction itself.
+However a type does not define how interactions are \emph{coordinated} among views.
 E.g.\ what action in one view should lead to what kind of changes in what other views?
-In addition to the coordination, we need a pattern to exchange messages \cmvs{}.
+What is the communication pattern or what is the protocol how messages are exchanged in the framework?
 
-We regard the messages exchanged between views as a change of those interaction types defined in~\ref{sec:concept:types}
+We define a message $M$ as:
+\begin{equation}
+  M(AC, T, F)
+\end{equation}
+With $AC$ as an application context, an interaction type $T$ and a function $F$.
+The interaction type is one out of the names in Section~\ref{sec:concept:types} and defines the function signature.
+$F$ is the actual definition of the function, i.e.\ a call of this function with the provided parameters defined by $T$ returns an expected value.
+
 Figure~\ref{fig:concept:trigger-effect} gives a rough overview on our coordination model.
 \begin{figure}[h!]
   \centering
