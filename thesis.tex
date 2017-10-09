@@ -1072,7 +1072,17 @@ As a last step, we specify the communication pattern of the formalized language.
 % Multiple views would only need to implement to adapter to this interface.
 % With this interface we would reduce the currently $N*N$ transformations down to $N$ adapters and reduce the overall development costs.
 
-\subsection{Trigger, effect and interaction type}
+\subsection{Trigger and Effect}
+We introduce two new terms: \emph{trigger} and \emph{effect}.
+
+As we have seen in Section~\ref{sec:analysis} every interaction is started by a user action.
+The user e.g.\ clicks on a shape in the view, hovers over an area, selects an item from a dropdown menu, turns around a mobile device, speaks into the microphone or makes a particular gesture. 
+If the event of action is handled by a view and causes an interaction, we call this handling a \emph{trigger}. 
+Every view is responsible of its \emph{triggers}, these are implementation details and not part of the interaction framework.
+
+In order to be perceivable by the user, the interaction must have some visual effect.
+A feature of the visualization is changed, e.g.\ a colour of a bar in a bar chart.
+The choice of the visual effect to express the interaction is an implementation detail as well.
 
 Let's have a closer look what steps a coordinated interaction actually performs.
 First of all, different visualizations have different capabilities and different degrees of freedom how to interact with and display the data.
@@ -1084,6 +1094,9 @@ We call this change an \emph{effect.}
 
 Both trigger and effect have a certain meaning for the user.
 In this case, the user is selecting a particular feature in order to highlight it.
+
+\subsection{Trigger, effect and interaction type}
+
 
 We want to coordinate this interaction in multiple views.
 In order to do so, we need to extract the abstract meaning, the \emph{type} of an interaction.
@@ -1332,20 +1345,16 @@ With $AC$ as an application context, an interaction type $T$ and a function $F$.
 The interaction type is one out of the names in Section~\ref{sec:concept:types} and defines the function signature.
 $F$ is the actual definition of the function, i.e.\ a call of this function with the provided parameters defined by $T$ returns an expected value.
 
-Figure~\ref{fig:concept:trigger-effect} gives a rough overview on our coordination model.
+Figure~\ref{fig:concept:communication-pattern} gives an overview on the message flow in the communication pattern.
 \begin{figure}[h!]
   \centering
-  \includegraphics[width=\textwidth]{images/trigger-effect.png}
-  \caption{Schema of message flow in \cmvs{}}\label{fig:concept:trigger-effect}
+  \includegraphics[width=\textwidth]{images/concept/communication-pattern.png}
+  \caption{%
+    Message flow of the communication pattern.
+    Every view can decide for itself whether to trigger an interaction or respond to an interaction with a visual effect.
+    This is done by a user-defined application context.
+  }\label{fig:concept:communication-pattern}
 \end{figure}
-We introduce two new terms, \emph{trigger} and \emph{effect}.
-
-A trigger is e.g.\ a mouse interaction, like hover or click.
-This low-level action is an implementation detail and therefore tied to the specific visualization.
-
-In order to be perceivable by the user, the interaction must have some visual effect.
-A feature of the visualization is changed, e.g.\ a colour of a bar in a bar chart.
-The choice of the visual effect to express the interaction is an implementation detail as well.
 
 Sometimes a visualization may not be able to interpret an interaction.
 E.g.\ a bar chart can re-arrange the bars along the x-axis in case of a \emph{Reconfigure} interaction.
