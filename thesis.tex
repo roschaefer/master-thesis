@@ -363,7 +363,7 @@ As we can see in Figure~\ref{fig:theory:flow-map}, an early example of a flow ma
   \includegraphics[width=\textwidth]{images/theory/minard}
   \caption{%
     Charles Minard's map of Napoleon's disastrous Russian campaign of 1812.
-    Minard accomplished to represent six values in two graphical dimensions:
+    Minard managed to represent six values in two graphical dimensions:
     The number of Napoleon's troops, the travelled direction and distance, latitude and longitude relative to specific dates and the temperature.
   }\label{fig:theory:flow-map}
 \end{figure}
@@ -424,7 +424,7 @@ How to categorize interaction techniques?
 How to find new interaction techniques and apply those to visualizations?
 
 \todo[inline]{Give a rough overview of this section}
-\subsection{Categories}
+\subsection{Categories}\label{sec:related-work:categories}
 \textcite{Shneiderman1996} classifies interactions into these groups:
 \begin{enumerate*}[label=(\arabic*)]
   \item
@@ -508,7 +508,7 @@ The most recent classification was done in 2007 by \textcite{Yi2007} listing sev
 \todo[inline]{The classifications are all redundant! Explain why and choose one classification for later use}
 \todo[inline]{Give one example for each category of the chosen classification}
 
-\subsection{Interaction Models}
+\subsection{Interaction Theory}
 \todo[inline]{no section without text}
 
 \paragraph{Space-Time Cube Operations}
@@ -537,7 +537,7 @@ Certain assumptions are made, including the data model, which is the 3D scene, a
 The goal is not to better understand the data, as the data model in this case is the 3D scene, and not statistical data.
 Most important, the framework describes interaction techniques for a single viewpoint but not for coordinated multiple views.
 
-\paragraph{Focus+Context Visualization} by \textcite{Bjork1999} is one of the few formalizations of information visualization.
+\paragraph{Focus+Context Visualization} by \textcite{Bjork1999} is one of the few formalizations of information visualizations.
 The authors describe this formalization based on first-level and second-level visualization:
 \subparagraph{Visualizations} referred to as $IV$, are triples of a set $[D]$ of underlying data, a visual representation $V$ and $I$ which is the possible interaction or manipulation. 
 \begin{equation}
@@ -548,13 +548,14 @@ Examples would be changes in a spreadsheet editor, or a change of the start and 
 When $V$ is affected by $I$ the user can manipulate $IV$ in order to change the way $[D]$ is represented, e.g.\ choosing a different level of detail as shown in Figures~\ref{fig:theory:treemap-german-exports-1} and~\ref{fig:theory:treemap-german-exports-2}.
 
 \subparagraph{Second-level Visualizations} are information visualizations consecutively applied.
-The underlying data set $[D]$ of the previous formula is replaced with some information visualization.
+The underlying data set $[D]$ of the previous formula is replaced with some information visualization $IV$, which is compatible with $IV'$.
 \begin{equation}
   IV'(IV, V', I')
 \end{equation}
 
+
 Focus+context visualizations are second-level visualizations.
-One example is the so-called rubbersheet visualization, that visually distorts a first-level visualization similar to a magnifier.
+An example given by the authors is the  ``rubbersheet'' visualization, that visually distorts a first-level visualization similar to a magnifier.
 
 
 
@@ -623,12 +624,12 @@ This approach is suitable for a data base that incorporates data from different 
 
 
 \subsubsection{\rufu{}}
-Unlike the \riso{} database, the data base of \rufu{} is used as persistency layer.
-For that reason the data base schema follows the requirements of a productive web application.
+Unlike the \riso{} database, the data base of \rufu{} is used as persistence layer.
+For that reason the data base schema follows the requirements of a web application in production.
 
-As outline in Section~\ref{sec:outline} \rufu{} is an evaluation platform for public broadcasting in Germany.
+As outlined in Section~\ref{sec:outline} \rufu{} is an evaluation platform for public broadcasting in Germany.
 First, users vote on broadcasts, i.e.\ they decide if they want to support broadcast or if they do not want to support.
-As a next step, user can then make a priorisation by distributing a virtual, monthly budget among the chosen broadcasts.
+As a next step, user can define a weighting by distributing a virtual, monthly budget among the chosen broadcasts.
 
 Figure~\ref{fig:data:rundfunk} shows the data base schema of the application.
 A \attr{user} is connected to \attr{broadcast} through a \attr{selection}.
@@ -652,13 +653,13 @@ Numerical and nominal features can be combined, so we could request for every re
 
 \paragraph{Regions}
 \rufu{} stores the geometry for each region in \attr{geojson} files.
-This file holds a \attr{FeatureCollection}.
+These files hold a \attr{FeatureCollection}.
 Every \attr{Feature} is a region, the identifier is stored as a property.
 We merge the geometry data with features for every request.
 To be precise: We get all the user data, group it by the identifier \attr{state_code} and merge it with the geometry in the \attr{geojson}.
 
 \paragraph{Characteristics}
-The data base schema is a result of the specific requirements of a persistency layer.
+The data base schema is a result of the specific requirements of the persistence layer.
 Changes in the source code may require a migration of the data base schema.
 
 However, we can ask a lot of questions already with common data base queries or standard data analysis tools:
@@ -677,7 +678,9 @@ However, we can ask a lot of questions already with common data base queries or 
 
 
 \subsection{Existing Interactions}
-The possible inteactions in our current \visan{} can be categorized \emph{select}, \emph{explore}, \emph{reconfigure}, \emph{encode} and \emph{filter}.
+We will now classify the implemented interactions of our two applications according to the classification by \textcite{Yi2007} in Section~\ref{sec:related-work:categories}.
+
+\paragraph{In our \visan{}} possible interactions can be categorized into the classes \emph{select}, \emph{explore}, \emph{reconfigure}, \emph{encode} and \emph{filter}.
 As seen in figure~\ref{fig:analysis:interaction:existing} the user can \emph{select} one item in the view by clicking on it.
 The user can reveal a tooltip showing the item properties by hovering with the mouse on the item, which is another \emph{selection}.
 The user can \emph{explore} the map in the usual manner:
@@ -737,11 +740,17 @@ Let's have some examples how an interaction between a \tmap{} and a \map{} might
 
 \clearpage
 \section{Analysis}\label{sec:analysis}
-\todo[inline]{No section without text}
+In this section, we list several interaction examples in singular views as well as in multiple views.
+We list the expected data structure of each visualization and the respective dependent and independent visual variables according to~\cite{Bertin2010}.
+In addition we classify each interaction according to \textcite{Yi2007}.
+Finally, we describe the relevant subject of the interaction.
+I.e.\ what would be exchanged, if the interaction should be mirrored in an entirely different visualization on the underlying data set.
+
+The goal of this procedure is to abstract and deduce the essential characteristics of any interaction, to pave the way for a formalized language of \cmvs{}.
 
 \subsection{Singular Visualization Interactions}\label{sec:analysis:examples}
 
-The data visualization cataloge by Severino Ribecca list many of the most used data visualizations\cite{VisualizationCatalogue2017}.
+The data visualization catalogue by Severino Ribecca list many of the most used data visualizations\cite{VisualizationCatalogue2017}.
 Let's pick some of those and derive a number of possible interactions.
 
 %\begin{tabular}{l l l l}
