@@ -1135,12 +1135,18 @@ E.g.\ the user desires to select a detail view of an item under the mouse cursor
 Therefore we allow for a user-defined \emph{application context}.
 The application context describes the interaction in the context of a task or an intention that is intrinsic to the application the interaction happens in. 
 
+\subsubsection{Message}
+A message is the information that is send from one view to another in order to coordinate an interaction.
+It contains everything necessary to ensure the interaction is reflected in the other view.
 
-\subsubsection{Formalization of an interaction}
+
+
+\newpage
+\subsection{Formalization of an interaction}
 
 We formalize an interaction $I$ as follows:
 \begin{equation}
-  I(T, AC(IT, F(IS)), E)
+  I(T, M(AC, IT, F(IS)), E)
 \end{equation}
 For a trigger $T$, an application context $AC$, an interaction type $IT$, a function definition $F$, an interaction subject $IS$ and the effect $E$.
 The part of the interaction which is shared among multiple views is the application context $AC$.
