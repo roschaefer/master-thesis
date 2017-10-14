@@ -1111,13 +1111,13 @@ The aforementioned explicit meaning of the interaction is the smallest unit of i
 This meaning is shared among multiple views, it is agnostic of how the interaction is implemented.
 Therefore the meaning is shared between multiple views.
 We call this meaning the \emph{interaction type}.
-Some examples of interaction types include: Highlighting, Deletion, Point-of-Interest, Filtering, Reordering, Re-encoding.
+Some examples of interaction types include: Selection, Deletion, Point-of-Interest, Filtering, Reordering, Re-encoding.
 Interaction types can be classified with the interaction categories of \textcite{Yi2007}.
 
 Note that different information visualizations implement an interaction types in a different way or maybe not at all:
 
 E.g.\ a bubble chart might encode a certain data attribute to the colour of a bubble.
-Therefore the colour would not be changed for an interaction of type \emph{Highlighting} but the texture of the bubble.
+Therefore the colour would not be changed for an interaction of type \emph{Selection} but the texture of the bubble.
 
 A user may perform an interaction of type \emph{Reordering} on the series of a stacked bar chart.
 This can have no effect on a coordinated scatter plot, as the position of each data point depends on its dimension.
@@ -1220,23 +1220,23 @@ To declare the functions explicitly, we define a couple of sets:
 
         The set of possible data values of any attribute in our subject space. Those values could be e.g.\ numbers, strings, ordinal values, dates or geometries.
     \item
-        $ \mathbb{C}: \{ (r,g,b) \in \mathbb{C} | r \in \mathbb{R} \land g \in \mathbb{R} \land b \in \mathbb{R} \}$
-
-        The set of colours, we assume a triple of $R$, $G$ and $B$ values.
-    \item
         $ \mathbb{V} $
 
         The set of visual variables position, size, orientation, texture, colour and shape, as described in Section~\ref{sec:theory:visual-variables}.
-        Elements of this set include the name for $x-axis$ and $y-axis$ as well as the name of shapes.
+        Elements of this set may include the name for $x-axis$ and $y-axis$ or the name of shapes, like $star$ or $circle$.
         Thus, an \emph{encoding} interaction can change the mapping of a data attribute to another coordinate axis.
 \end{enumerate}
+
+Note about notation:
+The power set of all entities in $E$ is written as $ \mathbb{P(\mathbb{E})}$ and is the set of all subsets of $E$.
+The list of all sequences of all entities in $E$ is written as $ \mathbb{E^*} $ and includes all subsets of $E$ with a given order.
 
 The following is a list of functions describing the types based on the aforementioned sets:
 \begin{enumerate}
     \item
-        $ Highlight: \varnothing \rightarrow \mathcal{P}(\mathbb{E})$
+        $ Select: \varnothing \rightarrow \mathcal{P}(\mathbb{E})$
 
-        A $ Highlight $ is a function without arguments returning a subset of highlighted entities.
+        A $ Select $ is a function without arguments returning a subset of selected entities.
     \item
         $ FilterById: \varnothing \rightarrow \mathcal{P}(\mathbb{E}) $
 
@@ -1264,19 +1264,6 @@ The following is a list of functions describing the types based on the aforement
         Again, different visualizations can have different interpretations of the semantic:
         In scatter plots and geographical visualizations the set may be used to implicitly derive the zoom level.
         It can also be used to implicitly derive the maximum depth of the currently visible subtree in a tree map.
-    \item
-        $ ColourById: \mathbb{I} \rightarrow \mathbb{C} $
-
-        A colour function assigns each entity, data series or relation to a color.
-    \item
-        $ ColourByValue: \mathbb{D} \rightarrow \mathbb{C} $
-
-        A colour function assigns a continuous value to a color.
-        This function can be used by e.g.\ choropleth maps for the background color of regions.
-    \item
-        $ ColourAttributes: \varnothing \rightarrow \mathbb{A^*} $
-
-        The ordered list of names of attributes used as input for the $ ColourByValue $ function.
     \item
         $ Reorder\rightarrow \mathbb{E^*} $
 
