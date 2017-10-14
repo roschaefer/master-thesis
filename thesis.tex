@@ -1203,7 +1203,7 @@ Thus, we can describe interaction through a change of its semantic but we ignore
 
 
 These function are derived from specific interactions of the examples in Section~\ref{sec:analysis:examples}.
-Domain and codomain of these functions refer to the objects defined in the data model in Section~\ref{sec:concept:data-model}.
+Domain and range of these functions refer to the objects defined in the data model in Section~\ref{sec:concept:data-model}.
 To declare the functions explicitly, we define a couple of sets:
 \begin{enumerate}
     \item
@@ -1238,54 +1238,45 @@ The following is a list of functions describing the types based on the aforement
     \item
         $ Select: \varnothing \rightarrow \mathcal{P}(\mathbb{E})$
 
-        A $ Select $ is a function without arguments returning a subset of selected entities.
+        The constant $Select$ takes no arguments and returns a subset of selected entities.
     \item
-        $ FilterById: \varnothing \rightarrow \mathcal{P}(\mathbb{E}) $
+        $ Filter: \mathbb{E} \rightarrow \{ \bot, \top \} $
 
-        The $FilterById$ function takes no arguments and returns a subset of entities that are used as input for the visualization.
-    \item
-        $ FilterByValue: \mathbb{D^*} \rightarrow \{ \bot, \top \} $
-
-        The $FilterByValue$ function takes an ordered list of data values and returns whether or not the associated entity should be part of the visualization input.
-    \item
-        $ FilterAttributes: \varnothing \rightarrow \mathbb{A^*} $
-
-        The $FilterByAttributes$ returns an ordered list of attributes names.
-        Retrieving the values of an entity in order produces the input that can be used as input for the $ FilterByValue $ function.
+        The $Filter$ function describes which entities are part of the visualization.
+        It can either be implemented as a function which returns \attr{true} or \attr{false} if an entity is part of an already known set.
+        It can also be implemented based on the values in $\mathbb{D}$ of attached attributes in $\mathbb{A}$ of the entity.
+        E.g.\ a threshold function would be an example of the latter.
     \item
         $ Focus: \varnothing \rightarrow \mathbb{E} $
 
-        The $ Focus $ function returns a single id of the entity that should be in the center of the viewpoint.
-        Different visualizations can have different interpretations of the semantic:
+        The constant function $Focus$ returns a single entity that should be in the center of the viewpoint.
+        Different visualizations can have different interpretations of this: 
         A geographical map will move the viewpoint position on the geometric center of the focused entity.
         Hierarchical visualizations, e.g.\  tree maps or sunburst maps, may choose the focused entity to be the root node of the currently displayed subtree.
     \item
         $ Extent: \varnothing \rightarrow \mathcal{P}(\mathbb{E}) $
 
-        This function returns a subset of entities that must be within the current boundaries of the diagram window.
+        This function returns a subset of entities that are supposed to be within the current boundaries of the diagram window.
         Again, different visualizations can have different interpretations of the semantic:
         In scatter plots and geographical visualizations the set may be used to implicitly derive the zoom level.
         It can also be used to implicitly derive the maximum depth of the currently visible subtree in a tree map.
     \item
-        $ Reorder\rightarrow \mathbb{E^*} $
+        $ Reorder: \varnothing \rightarrow \mathbb{E^*} $
 
         The $Reorder$ function defines how a subset of entities should be ordered.
         Note that not the entire collection of entities need to be ordered.
         This sequence will be used in bar charts to order bars along the x-axis or stacked bar charts, to order the stacking of data series.
     \item
-        $ Sort: \big( \mathbb{D^*} \times \mathbb{D^*} \big) \rightarrow \mathbb{R} $
-
-        This sort function will return a continuous value based on an arbitrary long list of pairs of data values.
-        It's an implicit order function based on one or many data attributes and returns a negative value if the first element is orderd before the second element.
-    \item
-        $ SortAttributes: \varnothing \rightarrow \mathbb{A^*} $
-
-        The ordered list of names of attributes which will be used as input for the $Sort$ function.
-    \item
         $ ReorderAttributes: \varnothing \rightarrow \mathbb{A^*} $
 
         This ordered list of attributes define in which order visualizations display many coordinate axes.
         E.g.\ a parallel plot can reorder the attributes along the x-axis.
+    \item
+        $ Sort: \mathbb{E} \times \mathbb{E} \rightarrow \mathbb{R} $
+
+        The $Sort$ function is used to order two arbitrary entities $e1, e2 \in \mathbb{E}$.
+        If $e1 < e2$ then the return value $r$ will be $ r < 0 $.
+        For $e1 = e2$ the statement $r = 0$ holds and for $e1 > e2$ then $r > 0$.
     \item
         $ Encode: \mathbb{A} \rightarrow \mathbb{V} $
 
