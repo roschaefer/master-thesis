@@ -1079,17 +1079,16 @@ We formalize each interaction from Section~\ref{sec:analysis} as a mathematical 
 As a last step, we specify the communication pattern of the formalized language.
 
 \subsection{Terminology}
-\todo[inline]{no section without text}
+We introduce a couple of new terms in order to give a formal definition of the framework
 
-\subsubsection{Trigger and Effect}
-We introduce two new terms: \emph{trigger} and \emph{effect}.
-
+\paragraph{Trigger} describes the event that starts an interaction.
 As we have seen in Section~\ref{sec:analysis} every interaction is started by a user action.
 The user e.g.\ clicks on a shape in the view, hovers over an area, selects an item from a dropdown menu, turns around a mobile device, speaks into the microphone or makes a particular gesture.
 If the event of action is handled by a view and causes an interaction, we call this handling a \emph{trigger}.
 Every view is responsible of its \emph{triggers}.
 These are implementation details and are not shared by other views.
 
+\paragraph{Effect} is the change of the visual representation subsequent to the interaction.
 In order to be perceivable by the user, the interaction must have some visual effect, i.e.\ a change in the visual representation of the data.
 Examples are:
 A change of colour of a selected bubble, a movement of the viewpoint, a rearrangement of attributes in a parallel plot or a higher level of detail in a \tmap{}.
@@ -1103,10 +1102,22 @@ In singular visualizations, interactions consist of at least of a trigger and an
 \end{equation}
 The meaning of the interaction in a singular view can be implicit.
 E.g.\ hovering over a geographic area changes the background colour of the polygon and the user can identify the interaction as a \emph{highlighting}.
-Note that this implicit meaning must be explicit in \cmvs{} so that other views are able to understand it.
+Note that this implicit meaning must be explicit in \cmvs{} so that other views are able to process it.
 
-\subsubsection{Interaction type}
 
+\paragraph{Subject} refers to the target of the interaction.
+We must define what data or meta-data is affected by the interaction.
+E.g.\ when a user moves the mouse cursor on a line in the line diagram, that could highlight the \emph{data point} under the cursor as well as the entire \emph{data series}.
+Therefore we call the object affected of an interaction the interaction \emph{subject}.
+A subject can be a data point, a list of data points, a position of the viewpoint, a certain order of attributes or a mapping of attributes to visual variables.
+
+\paragraph{Verb} refers to the application specific context and purpose of the interaction.
+A developer may want to have many \emph{select} interactions.
+E.g.\ the user desires to select a detail view of an item under the mouse cursor from a previously selected set of already highlighted items.
+Therefore we allow for a user-defined \emph{verb}.
+The verb describes the interaction in the context of a task or an intention that is intrinsic to the application the interaction happens in.
+
+\paragraph{Interaction function} is the declaration and definition how the subject of the interaction should be changed.
 The aforementioned explicit meaning of the interaction is the smallest unit of information of the interaction.
 This meaning is shared among multiple views, it is agnostic of how the interaction is implemented.
 Therefore the meaning is shared between multiple views.
@@ -1122,28 +1133,16 @@ Therefore the colour would not be changed for an interaction of type \emph{Selec
 A user may perform an interaction of type \emph{Reordering} on the series of a stacked bar chart.
 This can have no effect on a coordinated scatter plot, as the position of each data point depends on its dimension.
 
-\subsubsection{Interaction subject}
-The interaction \emph{type} is not sufficient enough to describe an interaction.
-We must define what data or meta-data is affected by the interaction.
-E.g.\ when a user moves the mouse cursor on a line in the line diagram, that could highlight the \emph{data point} under the cursor as well as the entire \emph{data series}.
-Therefore we call the object affected of an interaction the interaction \emph{subject}.
-A subject can be a data point, a list of data points, a position of the viewpoint, a certain order of attributes or a mapping of attributes to visual variables.
-
-Interaction type and interaction subject are interrelated in the same way like the name and the list of arguments of a function signature.
-
-\subsubsection{Verb}
-A developer may want to have many \emph{select} interactions.
-E.g.\ the user desires to select a detail view of an item under the mouse cursor from a previously selected set of already highlighted items.
-Therefore we allow for a user-defined \emph{verb}.
-The verb describes the interaction in the context of a task or an intention that is intrinsic to the application the interaction happens in.
-
-\subsubsection{Sentence}
-A sentence is the information that is send from one view to another in order to coordinate an interaction.
-It contains everything necessary to ensure the interaction is reflected in the other view.
+\paragraph{Sentence} is the minimal set of information to coordinate an interaction across multiple views.
+We define a sentence $S$ as:
+\begin{equation}
+    S(V, F(IS))
+\end{equation}
+With $V$ as a verb, an interaction function $F$ and the interaction subject $IS$.
+See Section~\ref{sec:concept:types} for a list of interaction functions.
+A sentence contains everything necessary to ensure the interaction can be reflected in another view.
 
 
-
-\newpage
 \subsection{Formalization of an interaction}
 
 We formalize an interaction $I$ as follows:
@@ -1197,7 +1196,7 @@ These attributes may describe e.g.\ the weight of an edge in a flow map.
   }\label{fig:concept:shared-data-model}
 \end{figure}
 
-\subsubsection{Predefined Interaction Types}\label{sec:concept:types}
+\subsubsection{Predefined Interaction Functions}\label{sec:concept:types}
 
 It turns out that we can describe the types of an interaction as a mathematical function.
 These functions operates on the ids of \emph{entities}, \emph{series}, and \emph{relations} or their respective \emph{attributes}.
@@ -1208,30 +1207,26 @@ Thus, we can describe interaction through a change of its semantic but we ignore
 These function are derived from specific interactions of the examples in Section~\ref{sec:analysis:examples}.
 Domain and range of these functions refer to the objects defined in the data model in Section~\ref{sec:concept:data-model}.
 To declare the functions explicitly, we define a couple of sets:
-\begin{enumerate}
-    \item
-        $ \mathbb{E} : \mathbb{E} \subseteq \mathbb{N} $
 
-        The set of all entities in our subject space.
-        Each entity can be represented by its \attr{id}, so for simplicity $\mathbb{E}$ is a subset all natural numbers in $\mathbb{N}$.
-    \item
-        $ \mathbb{D} : \mathbb{D} \subseteq \mathbb{\sum^*} $
+\begin{equation} \mathbb{E} : \mathbb{E} \subseteq \mathbb{N}  \end{equation}
+  The set of all entities in our subject space.
+  Each entity can be represented by its \attr{id}, so for simplicity $\mathbb{E}$ is a subset all natural numbers in $\mathbb{N}$.
 
-        The set of all dimensions in our shared data model.
-        Dimensions of a data set are the attributes of our data model and both terms are used synonymously in the following.
-    \item
-        $ Space(\mathbb{D}) $ the range of values of a dimension $d \in \mathbb{D}$
+\begin{equation} \mathbb{D} : \mathbb{D} \subseteq \Sigma^* \end{equation}
+  The set of all dimensions in our shared data model.
+  Dimensions of a data set are the attributes of our data model and both terms are used synonymously in the following.
 
-        For convenience, we define this set with a function $Space$ which maps the name of a dimension $d$ to its set of possible data values.
-        So for an attribute \attr{name} that would be the set of all strings.
-        For continuous values, that would be the set of all real numbers $\mathbb{R}$.
-        But $Space(D)$ also includes the set of all possible discrete values of dimension. 
-    \item
-        $ \mathbb{V} = \{x,y,y2,y3...yn,z,height,colour,size,shape,orientation .... \}$
+\begin{equation} Space(\mathbb{D}) \end{equation}
+  Where $Space$ is the range of values of a dimension $d \in \mathbb{D}$.
 
-        A discrete set to capture visual variables position, size, orientation, texture, colour and shape, as described in Section~\ref{sec:theory:visual-variables}.
-        It is required to allow for \emph{encoding} interactions, that change the mapping of a dimension to a visual variable.
-\end{enumerate}
+  For convenience, we define this set with a function $Space$ which maps the name of a dimension $d$ to its set of possible data values.
+  So for an attribute \attr{name} that would be the set of all strings.
+  For continuous values, that would be the set of all real numbers $\mathbb{R}$.
+  But $Space(D)$ also includes the set of all possible discrete values of dimension. 
+
+\begin{equation} \mathbb{V} = \{x,y,y2,y3\ldots{}yn,z,height,colour,size,shape,orientation\ldots{}\} \end{equation}
+  A discrete set to capture visual variables position, size, orientation, texture, colour and shape, as described in Section~\ref{sec:theory:visual-variables}.
+  It is required to allow for \emph{encoding} interactions, that change the mapping of a dimension to a visual variable.
 
 Note about notation:
 The power set of all entities in $E$ is written as $ \mathcal{P}(\mathbb{E})$ and is the set of all subsets of $E$.
@@ -1241,66 +1236,59 @@ If a function has the empty set as its domain, it expects no arguments.
 Such a function is also called a constant.
 
 The following is a list of functions describing the types based on the aforementioned sets:
-\begin{enumerate}
-    \item
-        $ Select: \varnothing \rightarrow \mathcal{P}(\mathbb{E})$
 
-        The constant $Select$ takes no arguments and returns a subset of selected entities.
-        A $Select$ can be used to highlight entities or to show details of entities.
-        It can be used to mark entities for deletion or to temporarily hide entities.
-        In addition it possible to focus the visualization on these entities.
+\begin{equation} Select: \varnothing \rightarrow \mathcal{P}(\mathbb{E}) \end{equation}
+  The constant $Select$ takes no arguments and returns a subset of selected entities.
+  A $Select$ can be used to highlight entities or to show details of entities.
+  It can be used to mark entities for deletion or to temporarily hide entities.
+  In addition it possible to focus the visualization on these entities.
 
-        An example of the latter:
-        A geographical map could move the viewpoint position and the zoom level such that all focused entities in $Select()$ are visible.
-        Hierarchical visualizations, e.g.\ tree maps or sunburst maps, may choose a single focused entity to be the root node of the currently displayed subtree.
-    \item
-        $ Filter: \mathbb{E} \rightarrow \{ \bot, \top \} $
+  An example of the latter:
+  A geographical map could move the viewpoint position and the zoom level such that all focused entities in $Select()$ are visible.
+  Hierarchical visualizations, e.g.\ tree maps or sunburst maps, may choose a single focused entity to be the root node of the currently displayed subtree.
 
-        The $Filter$ function describes which entities are part of the visualization.
-        It can be implemented explicitly or implicitly.
-        An explicit implementation would returns \attr{true} or \attr{false} based on the fact if an entity is part of an already known set.
-        Implicit implementations would be based on the values of the dimensions of the entity.
-        A threshold function is a good example of an implicit implementation.
-    \item
-        $ Window: \mathbb{D} \rightarrow \mathcal{P}(Space(\mathbb{D}))$
+\begin{equation} Filter: \mathbb{E} \rightarrow \{ \bot, \top \} \end{equation}
+  The $Filter$ function describes which entities are part of the visualization.
+  It can be implemented explicitly or implicitly.
+  An explicit implementation would returns \attr{true} or \attr{false} based on the fact if an entity is part of an already known set.
+  Implicit implementations would be based on the values of the dimensions of the entity.
+  A threshold function is a good example of an implicit implementation.
 
-        This function defines the currently visible section of the vector space of the dimensions in $\mathbb{D}$.
-        For each of the dimensions in $\mathbb{D}$, the function returns the currently visible subset.
+\begin{equation} Window: \mathbb{D} \rightarrow \mathcal{P}(Space(\mathbb{D})) \end{equation}
+  This function defines the currently visible section of the vector space of the dimensions in $\mathbb{D}$.
+  For each of the dimensions in $\mathbb{D}$, the function returns the currently visible subset.
 
-        The subset can be defined implicitly or explicitly:
-        For charts with continuous values along the x- and y-axes, the function returns the representatives \attr{from} and \attr{to}.
-        These representatives implicitly define the interval in $Space(\mathbb{D})$.
-        If a dimension has discrete values, this function can also return an explicit set of values.
+  The subset can be defined implicitly or explicitly:
+  For charts with continuous values along the x- and y-axes, the function returns the representatives \attr{from} and \attr{to}.
+  These representatives implicitly define the interval in $Space(\mathbb{D})$.
+  If a dimension has discrete values, this function can also return an explicit set of values.
 
-        Scatter plots, bar charts, line diagrams, bubble charts all have two coordinate axes.
-        Therefore \attr{x} and \attr{y} will each be mapped to a pair of values $(from,to) \in \mathbb{R}$.
-        Geographical visualizations have the camera pointing to the center of the earth.
-        We have three degrees of freedom, so we would map \attr{latitude}, \attr{longitude} and \attr{zoom} to three values in $(lat,long,z) \in \mathbb{R}$.
-        In a calendar we map \attr{fromDay}, \attr{toDay}, \attr{fromHour} and \attr{toHour} to define the currently visible time section.
-        A special attribute of our shared data model is the height of the subtree of an entity, i.e.\ how many nested series we have below that entity.
-        Therefore we can also map \attr{height} to a single value to define the maximum depth of the currently visible subtree in a tree map.
-    \item
-        $ Order: \mathbb{E} \times \mathbb{E} \rightarrow \mathbb{R} $
+  Scatter plots, bar charts, line diagrams, bubble charts all have two coordinate axes.
+  Therefore \attr{x} and \attr{y} will each be mapped to a pair of values $(from,to) \in \mathbb{R}$.
+  Geographical visualizations have the camera pointing to the center of the earth.
+  We have three degrees of freedom, so we would map \attr{latitude}, \attr{longitude} and \attr{zoom} to three values in $(lat,long,z) \in \mathbb{R}$.
+  In a calendar we map \attr{fromDay}, \attr{toDay}, \attr{fromHour} and \attr{toHour} to define the currently visible time section.
+  A special attribute of our shared data model is the height of the subtree of an entity, i.e.\ how many nested series we have below that entity.
+  Therefore we can also map \attr{height} to a single value to define the maximum depth of the currently visible subtree in a tree map.
 
-        The $Order$ function is used to order two arbitrary entities $e1, e2 \in \mathbb{E}$.
-        If $e1 < e2$ then the return value $r$ will be $ r < 0 $.
-        For $e1 = e2$ the statement $r = 0$ holds and for $e1 > e2$ then $r > 0$.
+\begin{equation} Order: \mathbb{E} \times \mathbb{E} \rightarrow \mathbb{R} \end{equation}
+  The $Order$ function is used to order two arbitrary entities $e1, e2 \in \mathbb{E}$.
+  If $e1 < e2$ then the return value $r$ will be $ r < 0 $.
+  For $e1 = e2$ the statement $r = 0$ holds and for $e1 > e2$ then $r > 0$.
 
-        Similar to $Filter$, the $Order$ function can either be implemented explicity or implicitly.
-        An explicit implementation returns a value $r$ based on the relative position of $e1$ to $e1$ in a given sequence.
-        An implicit implementation would return a value $r$ based on some computation of dimensions of $e1$ and $e2$.
-        E.g.\ ordering entities based on the alphabetical order of their name would be an example of the latter.
-    \item
-        $ Encode: \mathbb{D} \rightarrow \mathbb{V} $
+  Similar to $Filter$, the $Order$ function can either be implemented explicity or implicitly.
+  An explicit implementation returns a value $r$ based on the relative position of $e1$ to $e1$ in a given sequence.
+  An implicit implementation would return a value $r$ based on some computation of dimensions of $e1$ and $e2$.
+  E.g.\ ordering entities based on the alphabetical order of their name would be an example of the latter.
 
-        The $Encode$ function can be used to change any mapping of dimension to any visual variable.
-        E.g.\ bar charts, line diagrams, histograms and bubble charts can change the attribute mapped to the \attr{y} and \attr{x} axes.
-        Bubble charts can encode a different data attribute in the \attr{size} of the bubbles.
-        Choropleth maps, treemaps and bubble charts can map a different attribute to the \attr{colour}.
-        A specialized version of this function may return the attribute that is used for the \attr{layout} of the tiling algorithm in tree maps.
-        Note that parallel plots have arbitrary many \attr{y} axes.
-        To define the order of dimensions displayed in a parallel plot, each dimension will be mapped to a named \attr{y} axis, e.g. $y1, y2 ... y3$ and so on.
-\end{enumerate}
+\begin{equation} Encode: \mathbb{D} \rightarrow \mathbb{V} \end{equation}
+  The $Encode$ function can be used to change any mapping of dimension to any visual variable.
+  E.g.\ bar charts, line diagrams, histograms and bubble charts can change the attribute mapped to the \attr{y} and \attr{x} axes.
+  Bubble charts can encode a different data attribute in the \attr{size} of the bubbles.
+  Choropleth maps, treemaps and bubble charts can map a different attribute to the \attr{colour}.
+  A specialized version of this function may return the attribute that is used for the \attr{layout} of the tiling algorithm in tree maps.
+  Note that parallel plots have arbitrary many \attr{y} axes.
+  To define the order of dimensions displayed in a parallel plot, each dimension will be mapped to a named \attr{y} axis, e.g. $y1, y2 ... y3$ and so on.
 
 Let's have some examples how these functions can be applied on coordinated interactions:
 
@@ -1324,13 +1312,6 @@ However a type does not define how interactions are \emph{coordinated} among vie
 E.g.\ what action in one view should lead to what kind of changes in what other views?
 What is the communication pattern or what is the protocol how sentences are exchanged in the framework?
 
-We define a sentence $S$ as:
-\begin{equation}
-  S(V, T, F)
-\end{equation}
-With $V$ as a verb, an interaction type $T$ and a function $F$.
-The interaction type is one out of the names in Section~\ref{sec:concept:types} and defines the function signature.
-$F$ is the actual definition of the function, i.e.\ a call of this function with the provided parameters defined by $T$ returns an expected value.
 
 Figure~\ref{fig:concept:communication-pattern} gives an overview on the message flow in the communication pattern.
 \begin{figure}[h!]
