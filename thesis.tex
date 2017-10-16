@@ -149,7 +149,7 @@ This impairs the comprehensibility and complicates the selection of geographical
 
 A second problem is the coordination of interactions among arbitrary data visualizations.
 Until today, there is no framework that allows communication between data visualizations of any kind and that simplifies the implementation of coordinated interactions.
-Neither is there a specification of the interfaces and their requirements, a shared language or a messaging pattern for coordination. 
+Neither is there a specification of the interfaces and their requirements, a shared language or a messaging pattern for coordination.
 
 \subsection{Research Questions}
 
@@ -158,7 +158,7 @@ Based on the preceding problem statement, we take up the following research ques
   \item
     Are \cmvs{} an effective way to select data geographically and display it hiearchically and vice versa?
   \item
-    Does it significantly improve the comprehensibility and facilitate the understanding of the data in our use case? 
+    Does it significantly improve the comprehensibility and facilitate the understanding of the data in our use case?
   \item
     Is it possible to theoretically describe the substantial characteristics of every interaction?
   \item
@@ -174,7 +174,7 @@ Based on the preceding problem statement, we take up the following research ques
 \paragraph{We hypothesize} that most of our research questions can be answered positively.
 The theory of interactions is not very well researched, for this reason we see a great potential.
 Even if not all visualizations ever to be invented can be coordinated with one common language.
-Data visualizations share certain characteristics and so should interactions on data visualizations.  
+Data visualizations share certain characteristics and so should interactions on data visualizations.
 
 
 %Hypothese ist, dass durchs Visualisierungs-, Navigations- und Interaktionstechniken eine Kopplung von georäumlichen 2D-Kartendarstellungen und thematisch-orientierten 3D-Treemaps ermöglicht wird und dadurch die Exploration und Analyse von multidimensionalen georäumlichen Daten unterstützt werden kann.
@@ -541,7 +541,7 @@ Most important, the framework describes interaction techniques for a single view
 
 \paragraph{Focus+Context Visualization} by \textcite{Bjork1999} is one of the few formalizations of information visualizations.
 The authors describe this formalization based on first-level and second-level visualization:
-\subparagraph{Visualizations} referred to as $IV$, are triples of a set $[D]$ of underlying data, a visual representation $V$ and $I$ which is the possible interaction or manipulation. 
+\subparagraph{Visualizations} referred to as $IV$, are triples of a set $[D]$ of underlying data, a visual representation $V$ and $I$ which is the possible interaction or manipulation.
 \begin{equation}
   IV([D], V, I)
 \end{equation}
@@ -1085,8 +1085,8 @@ As a last step, we specify the communication pattern of the formalized language.
 We introduce two new terms: \emph{trigger} and \emph{effect}.
 
 As we have seen in Section~\ref{sec:analysis} every interaction is started by a user action.
-The user e.g.\ clicks on a shape in the view, hovers over an area, selects an item from a dropdown menu, turns around a mobile device, speaks into the microphone or makes a particular gesture. 
-If the event of action is handled by a view and causes an interaction, we call this handling a \emph{trigger}. 
+The user e.g.\ clicks on a shape in the view, hovers over an area, selects an item from a dropdown menu, turns around a mobile device, speaks into the microphone or makes a particular gesture.
+If the event of action is handled by a view and causes an interaction, we call this handling a \emph{trigger}.
 Every view is responsible of its \emph{triggers}.
 These are implementation details and are not shared by other views.
 
@@ -1135,7 +1135,7 @@ Interaction type and interaction subject are interrelated in the same way like t
 A developer may want to have many \emph{select} interactions.
 E.g.\ the user desires to select a detail view of an item under the mouse cursor from a previously selected set of already highlighted items.
 Therefore we allow for a user-defined \emph{application context}.
-The application context describes the interaction in the context of a task or an intention that is intrinsic to the application the interaction happens in. 
+The application context describes the interaction in the context of a task or an intention that is intrinsic to the application the interaction happens in.
 
 \subsubsection{Message}
 A message is the information that is send from one view to another in order to coordinate an interaction.
@@ -1216,7 +1216,14 @@ To declare the functions explicitly, we define a couple of sets:
         The set of all dimensions in our shared data model.
         Dimensions of a data set are the attributes of our data model and both terms are used synonymously in the following.
     \item
-        $ \mathbb{V} : \{x,y,y2,y3...yn,z,height,colour,size,shape,orientation .... \}$
+        $ Space(\mathbb{D}) $ the range of values of a dimension $d \in \mathbb{D}$
+
+        For convenience, we define this set with a function $Space$ which maps the name of a dimension $d$ to its set of possible data values.
+        So for an attribute \attr{name} that would be the set of all strings.
+        For continuous values, that would be the set of all real numbers $\mathbb{R}$.
+        But $Space(D)$ also includes the set of all possible discrete values of dimension. 
+    \item
+        $ \mathbb{V} = \{x,y,y2,y3...yn,z,height,colour,size,shape,orientation .... \}$
 
         A discrete set to capture visual variables position, size, orientation, texture, colour and shape, as described in Section~\ref{sec:theory:visual-variables}.
         It is required to allow for \emph{encoding} interactions, that change the mapping of a dimension to a visual variable.
@@ -1224,7 +1231,7 @@ To declare the functions explicitly, we define a couple of sets:
 
 Note about notation:
 The power set of all entities in $E$ is written as $ \mathcal{P}(\mathbb{E})$ and is the set of all subsets of $E$.
-The list of all sequences of all entities in $E$ is written as $ \mathbb{E^*} $ and includes all subsets of $E$ with a given order.
+The list of all sequences of all entities in $E$ is written as $ \mathbb{E^*} $ and includes all enumerations of $\mathcal{P}(E)$.
 The empty set is written as $\varnothing$.
 If a function has the empty set as its domain, it expects no arguments.
 Such a function is also called a constant.
@@ -1236,10 +1243,11 @@ The following is a list of functions describing the types based on the aforement
 
         The constant $Select$ takes no arguments and returns a subset of selected entities.
         A $Select$ can be used to highlight entities or to show details of entities.
-        It can be used to mark entities for deletion as well as to open an edit dialog.
+        It can be used to mark entities for deletion or to temporarily hide entities.
+        In addition it possible to focus the visualization on these entities.
 
-        This function is also used to focus the visualization on an entity.
-        During a focusing $Select$ a geographical map will move the viewpoint position and the zoom level such that all focused entities are visible.
+        An example of the latter:
+        A geographical map could move the viewpoint position and the zoom level such that all focused entities in $Select()$ are visible.
         Hierarchical visualizations, e.g.\ tree maps or sunburst maps, may choose a single focused entity to be the root node of the currently displayed subtree.
     \item
         $ Filter: \mathbb{E} \rightarrow \{ \bot, \top \} $
@@ -1247,21 +1255,25 @@ The following is a list of functions describing the types based on the aforement
         The $Filter$ function describes which entities are part of the visualization.
         It can be implemented explicitly or implicitly.
         An explicit implementation would returns \attr{true} or \attr{false} based on the fact if an entity is part of an already known set.
-        Implicit implementations would be based on the values of the dimensions in $\mathbb{D}$ of the entity.
+        Implicit implementations would be based on the values of the dimensions of the entity.
         A threshold function is a good example of an implicit implementation.
     \item
-        $ Window: \mathbb{D} \rightarrow \mathbb{R^*} $
+        $ Window: \mathbb{D} \rightarrow \mathcal{P}(Space(\mathbb{D}))$
 
         This function defines the currently visible section of the vector space of the dimensions in $\mathbb{D}$.
         For each of the dimensions in $\mathbb{D}$, the function returns the currently visible subset.
+
         The subset can be defined implicitly or explicitly:
-        For charts with continuous values along the x- and y-axes, the function returns the \attr{from} and \attr{to} of the interval, which is an implicitly defined set in $\mathbb{R}$.
+        For charts with continuous values along the x- and y-axes, the function returns the representatives \attr{from} and \attr{to}.
+        These representatives implicitly define the interval in $Space(\mathbb{D})$.
         If a dimension has discrete values, this function can also return an explicit set of values.
 
-        Scatter plots, bar charts, line diagrams, bubble charts all have two coordinate axes, so \attr{x} and \attr{y} will each be mapped to a pair of values.
-        In geographical visualizations we would map the \attr{latitude}, \attr{longitude} and \attr{altitude} to three values in $\mathbb{R}$.
+        Scatter plots, bar charts, line diagrams, bubble charts all have two coordinate axes.
+        Therefore \attr{x} and \attr{y} will each be mapped to a pair of values $(from,to) \in \mathbb{R}$.
+        Geographical visualizations have the camera pointing to the center of the earth.
+        We have three degrees of freedom, so we would map \attr{latitude}, \attr{longitude} and \attr{zoom} to three values in $(lat,long,z) \in \mathbb{R}$.
         In a calendar we map \attr{fromDay}, \attr{toDay}, \attr{fromHour} and \attr{toHour} to define the currently visible time section.
-        A special attribute of our shared data model is the height of the subtree of an entity.
+        A special attribute of our shared data model is the height of the subtree of an entity, i.e.\ how many nested series we have below that entity.
         Therefore we can also map \attr{height} to a single value to define the maximum depth of the currently visible subtree in a tree map.
     \item
         $ Order: \mathbb{E} \times \mathbb{E} \rightarrow \mathbb{R} $
@@ -1281,7 +1293,7 @@ The following is a list of functions describing the types based on the aforement
         E.g.\ bar charts, line diagrams, histograms and bubble charts can change the attribute mapped to the \attr{y} and \attr{x} axes.
         Bubble charts can encode a different data attribute in the \attr{size} of the bubbles.
         Choropleth maps, treemaps and bubble charts can map a different attribute to the \attr{colour}.
-        A specialized version of this function may return the attribute that is used for the \attr{layout} of the tiling algorithm in tree maps. 
+        A specialized version of this function may return the attribute that is used for the \attr{layout} of the tiling algorithm in tree maps.
         Note that parallel plots have arbitrary many \attr{y} axes.
         To define the order of dimensions displayed in a parallel plot, each dimension will be mapped to a named \attr{y} axis, e.g. $y1, y2 ... y3$ and so on.
 \end{enumerate}
