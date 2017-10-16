@@ -1216,9 +1216,9 @@ To declare the functions explicitly, we define a couple of sets:
         The set of all dimensions in our shared data model.
         Dimensions of a data set are the attributes of our data model and both terms are used synonymously in the following.
     \item
-        $ \mathbb{V} $
+        $ \mathbb{V} : \{x,y,y2,y3...yn,z,height,colour,size,shape,orientation .... \}$
 
-        The set of visual variables position, size, orientation, texture, colour and shape, as described in Section~\ref{sec:theory:visual-variables}.
+        A discrete set to capture visual variables position, size, orientation, texture, colour and shape, as described in Section~\ref{sec:theory:visual-variables}.
         It is required to allow for \emph{encoding} interactions, that change the mapping of a dimension to a visual variable.
 \end{enumerate}
 
@@ -1279,7 +1279,7 @@ The following is a list of functions describing the types based on the aforement
 
         The $Encode$ function can be used to change any mapping of dimension to any visual variable.
         E.g.\ bar charts, line diagrams, histograms and bubble charts can change the attribute mapped to the \attr{y} and \attr{x} axes.
-        Bubble charts can encode a different data attribute in the \attr{area} of the bubbles.
+        Bubble charts can encode a different data attribute in the \attr{size} of the bubbles.
         Choropleth maps, treemaps and bubble charts can map a different attribute to the \attr{colour}.
         A specialized version of this function may return the attribute that is used for the \attr{layout} of the tiling algorithm in tree maps. 
         Note that parallel plots have arbitrary many \attr{y} axes.
