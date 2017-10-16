@@ -1209,26 +1209,21 @@ To declare the functions explicitly, we define a couple of sets:
     \item
         $ \mathbb{E} : \mathbb{E} \subseteq \mathbb{N} $
 
-        The set of ids of all entities in our subject space.
+        The set of all entities in our subject space.
     \item
-        $ \mathbb{A} : \mathbb{A} \subseteq \mathbb{\sum^*} $
+        $ \mathbb{D} : \mathbb{D} \subseteq \mathbb{\sum^*} $
 
-        The set of names of all attributes in our shared data model.
-        Attributes are the exact same thing as the dimensions of the underlying data set.
-    \item
-        $ \mathbb{D} $
-
-        The set of possible data values of any attribute in our subject space. Those values could be e.g.\ numbers, strings, ordinal values, dates or geometries.
+        The set of all dimensions in our shared data model.
+        Dimensions of a data set are the attributes of our data model and both terms are used synonymously in the following.
     \item
         $ \mathbb{V} $
 
         The set of visual variables position, size, orientation, texture, colour and shape, as described in Section~\ref{sec:theory:visual-variables}.
-        Elements of this set may include the name for $x-axis$ and $y-axis$ or the name of shapes, like $star$ or $circle$.
-        Thus, an \emph{encoding} interaction can change the mapping of a data attribute to another coordinate axis.
+        It is required to allow for \emph{encoding} interactions, that change the mapping of a dimension to a visual variable.
 \end{enumerate}
 
 Note about notation:
-The power set of all entities in $E$ is written as $ \mathbb{P(\mathbb{E})}$ and is the set of all subsets of $E$.
+The power set of all entities in $E$ is written as $ \mathcal{P}(\mathbb{E})$ and is the set of all subsets of $E$.
 The list of all sequences of all entities in $E$ is written as $ \mathbb{E^*} $ and includes all subsets of $E$ with a given order.
 The empty set is written as $\varnothing$.
 A function with the empty set as its domain corresponds to a function without arguments, also called constant.
@@ -1244,8 +1239,8 @@ The following is a list of functions describing the types based on the aforement
 
         The $Filter$ function describes which entities are part of the visualization.
         It can either be implemented as a function which returns \attr{true} or \attr{false} if an entity is part of an already known set.
-        It can also be implemented based on the values in $\mathbb{D}$ of attached attributes in $\mathbb{A}$ of the entity.
-        E.g.\ a threshold function would be an example of the latter.
+        It can also be implemented based on the values of the dimensions in $\mathbb{D}$ of the entity.
+        A threshold function would be an example of the latter.
     \item
         $ Focus: \varnothing \rightarrow \mathbb{E} $
 
@@ -1254,37 +1249,40 @@ The following is a list of functions describing the types based on the aforement
         A geographical map will move the viewpoint position on the geometric center of the focused entity.
         Hierarchical visualizations, e.g.\  tree maps or sunburst maps, may choose the focused entity to be the root node of the currently displayed subtree.
     \item
-        $ Extent: \varnothing \rightarrow \mathcal{P}(\mathbb{E}) $
+        $ Window: \mathbb{D} \rightarrow \mathbb{R^*} $
 
-        This function returns a subset of entities that are supposed to be within the current boundaries of the diagram window.
-        Again, different visualizations can have different interpretations of the semantic:
-        In scatter plots and geographical visualizations the set may be used to implicitly derive the zoom level.
-        It can also be used to implicitly derive the maximum depth of the currently visible subtree in a tree map.
+        This function defines the currently visible section of the vector space of the dimensions in $\mathbb{D}$.
+        For each of the dimensions in $\mathbb{D}$, the function returns the currently visible subset.
+        The subset can be defined implicitly or explicitly:
+        For charts with continuous values along the x- and y-axes, the function returns the \attr{from} and \attr{to} of the interval, which is an implicitly defined set in $\mathbb{R}$.
+        If a dimension has discrete values, this function can also return an explicit set of values.
+
+        Scatter plots, bar charts, line diagrams, bubble charts all have two coordinate axes, so \attr{x} and \attr{y} will each be mapped to a pair of values.
+        In geographical visualizations we would map the \attr{latitude}, \attr{longitude} and \attr{altitude} to three values in $\mathbb{R}$.
+        In a calendar we map \attr{fromDay}, \attr{toDay}, \attr{fromHour} and \attr{toHour} to define the currently visible time section.
+        A special attribute of our shared data model is the height of the subtree of an entity.
+        Therefore we can also map \attr{height} to a single value to define the maximum depth of the currently visible subtree in a tree map.
     \item
-        $ Reorder: \varnothing \rightarrow \mathbb{E^*} $
+        $ Order: \mathbb{E} \times \mathbb{E} \rightarrow \mathbb{R} $
 
-        The $Reorder$ function defines how a subset of entities should be ordered.
-        Note that not the entire collection of entities need to be ordered.
-        This sequence will be used in bar charts to order bars along the x-axis or stacked bar charts, to order the stacking of data series.
-    \item
-        $ ReorderAttributes: \varnothing \rightarrow \mathbb{A^*} $
-
-        This ordered list of attributes define in which order visualizations display many coordinate axes.
-        E.g.\ a parallel plot can reorder the attributes along the x-axis.
-    \item
-        $ Sort: \mathbb{E} \times \mathbb{E} \rightarrow \mathbb{R} $
-
-        The $Sort$ function is used to order two arbitrary entities $e1, e2 \in \mathbb{E}$.
+        The $Order$ function is used to order two arbitrary entities $e1, e2 \in \mathbb{E}$.
         If $e1 < e2$ then the return value $r$ will be $ r < 0 $.
         For $e1 = e2$ the statement $r = 0$ holds and for $e1 > e2$ then $r > 0$.
-    \item
-        $ Encode: \mathbb{A} \rightarrow \mathbb{V} $
 
-        The $Encode$ function can be used to change any mapping of attribute to any visual variable.
-        E.g.\ bar charts can change the attribute mapped to the \emph{height} of bars.
-        Histograms and scatter plots can change the name attribute that is mapped along the \emph{x-axis}.
-        Bubble charts can encode a different data attribute in the \emph{area} of the bubbles.
-        A specialized version of this function may return the attribute that is used for the layout algorithm in tree maps. 
+        Similar to $Filter$, the $Order$ function can either be implemented explicity or implicitly.
+        An explicit implementation returns a value $r$ based on the relative position of $e1$ to $e1$ in a given sequence.
+        An implicit implementation would return a value $r$ based on some computation of dimensions of $e1$ and $e2$.
+        E.g.\ ordering entities based on the alphabetical order of their name would be an example of the latter.
+    \item
+        $ Encode: \mathbb{D} \rightarrow \mathbb{V} $
+
+        The $Encode$ function can be used to change any mapping of dimension to any visual variable.
+        E.g.\ bar charts, line diagrams, histograms and bubble charts can change the attribute mapped to the \attr{y} and \attr{x} axes.
+        Bubble charts can encode a different data attribute in the \attr{area} of the bubbles.
+        Choropleth maps, treemaps and bubble charts can map a different attribute to the \attr{colour}.
+        A specialized version of this function may return the attribute that is used for the \attr{layout} of the tiling algorithm in tree maps. 
+        Note that parallel plots have arbitrary many \attr{y} axes.
+        To define the order of dimensions displayed in a parallel plot, each dimension will be mapped to a named \attr{y} axis, e.g. $y1, y2 ... y3$ and so on.
 \end{enumerate}
 
 Let's have some examples how these functions can be applied on coordinated interactions:
