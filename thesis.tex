@@ -1293,16 +1293,16 @@ The following is a list of functions describing the types based on the aforement
 Let's have some examples how these functions can be applied on coordinated interactions:
 
 A user clicks on a bar in a bar chart and this feature then changes its background colour.
-To coordinate the highlighting, the bar chart visualization replaces the \emph{Highlight} function.
-The function now returns the id of the entity of the feature with the new background colour.
+To coordinate the highlighting, the bar chart view will formulate a new sentence composed of a \emph{Select} function and the verb \emph{highlight}.
+The function returns the set with the highlighted entity.
 
-When a region in a geographical map is clicked, the new \emph{Focus} function will return the id of the clicked entity.
-A coordinated tree map next to the geographical map now shows a subtree with the focused entity as root node.
+Let's say, a geographical map should move the position of the viewpoint on a entity.
+The triggering view will use a function \emph{Select} this time with a verb \emph{focus}.
+A treemap as a third view could pick up that interaction and show a subtree with the focused entity as root node. 
 
-If many attributes are chosen from a dropdown menu and some thresholds are specified with a slider, both the \emph{FilterAttributes} and the \emph{FilterByValues} functions are changed.
-The \emph{FilterAttributes} will return the ordered list of chosen attributes of the dropdown menu.
-The updated \emph{FilterByValues} function will now expect a new argument list, based on $ FilterAttributes $.
-It then yields either true or false based on the values of these attributes.
+A view may show some controls to filter the data set, e.g.\ two sliders on an attribute called \attr{prize}.
+When the user releases the mouse, an interaction with the function \emph{Filter} and the verb \emph{Hide} will be triggered.  
+The function will then check the \attr{prize} of every entity and returns \attr{true} if the prize is within the given lower and upper limit, \attr{false} otherwise.
 
 \subsubsection{Communication pattern}
 
