@@ -1226,7 +1226,8 @@ Note about notation:
 The power set of all entities in $E$ is written as $ \mathcal{P}(\mathbb{E})$ and is the set of all subsets of $E$.
 The list of all sequences of all entities in $E$ is written as $ \mathbb{E^*} $ and includes all subsets of $E$ with a given order.
 The empty set is written as $\varnothing$.
-A function with the empty set as its domain corresponds to a function without arguments, also called constant.
+If a function has the empty set as its domain, it expects no arguments.
+Such a function is also called a constant.
 
 The following is a list of functions describing the types based on the aforementioned sets:
 \begin{enumerate}
@@ -1234,20 +1235,20 @@ The following is a list of functions describing the types based on the aforement
         $ Select: \varnothing \rightarrow \mathcal{P}(\mathbb{E})$
 
         The constant $Select$ takes no arguments and returns a subset of selected entities.
+        A $Select$ can be used to highlight entities or to show details of entities.
+        It can be used to mark entities for deletion as well as to open an edit dialog.
+
+        This function is also used to focus the visualization on an entity.
+        During a focusing $Select$ a geographical map will move the viewpoint position and the zoom level such that all focused entities are visible.
+        Hierarchical visualizations, e.g.\ tree maps or sunburst maps, may choose a single focused entity to be the root node of the currently displayed subtree.
     \item
         $ Filter: \mathbb{E} \rightarrow \{ \bot, \top \} $
 
         The $Filter$ function describes which entities are part of the visualization.
-        It can either be implemented as a function which returns \attr{true} or \attr{false} if an entity is part of an already known set.
-        It can also be implemented based on the values of the dimensions in $\mathbb{D}$ of the entity.
-        A threshold function would be an example of the latter.
-    \item
-        $ Focus: \varnothing \rightarrow \mathbb{E} $
-
-        The constant function $Focus$ returns a single entity that should be in the center of the viewpoint.
-        Different visualizations can have different interpretations of this: 
-        A geographical map will move the viewpoint position on the geometric center of the focused entity.
-        Hierarchical visualizations, e.g.\  tree maps or sunburst maps, may choose the focused entity to be the root node of the currently displayed subtree.
+        It can be implemented explicitly or implicitly.
+        An explicit implementation would returns \attr{true} or \attr{false} based on the fact if an entity is part of an already known set.
+        Implicit implementations would be based on the values of the dimensions in $\mathbb{D}$ of the entity.
+        A threshold function is a good example of an implicit implementation.
     \item
         $ Window: \mathbb{D} \rightarrow \mathbb{R^*} $
 
