@@ -61,6 +61,7 @@
 \newcommand{\dss}{\hmm{d}ecision support systems}
 \newcommand{\riso}{\texttt{RISO}}
 \newcommand{\attr}[1]{\texttt{\detokenize{#1}}}
+\newenvironment{bullshit}{\color{gray}}{\ignorespacesafterend}
 
 \newcommand{\conceptTable}[3]{%
     \begin{center}
@@ -109,10 +110,11 @@ In many cases a great interactivity results in a great user experience.
 
 There is a wide range of options, techniques and implementations for this purpose.
 \cmvs{} are interesting, as they try to make the most out of the various advantages of different visualizations.
-\todo[inline]{Bullshit ahead}
+\begin{bullshit}
 This combination may yield a greater value to the user, but it is unclear what kind visualization techniques work best together and for which kind of data.
 How a user interact with \cmvs{} and how it differs from the use of single visualizations is another question worth to investigate.
 In this thesis, we consider the question how a combination of a geographical visualization with a hierarchical visualization performs, for what kind of data this combination is suitable and what interaction patterns apply.
+\end{bullshit}
 
 % Three moves
 %\todo{What is the topic about?}
@@ -742,33 +744,15 @@ Let's have some examples how an interaction between a \tmap{} and a \map{} might
 
 \clearpage
 \section{Analysis}\label{sec:analysis}
-In this section, we list several interaction examples in singular views as well as in multiple views.
-We list the expected data structure of each visualization and the respective dependent and independent visual variables according to~\cite{Bertin2010}.
-In addition we classify each interaction according to \textcite{Yi2007}.
-Finally, we describe the relevant subject of the interaction.
-I.e.\ what would be exchanged, if the interaction should be mirrored in an entirely different visualization on the underlying data set.
+One purpose of this section is to abstract and deduce the essential characteristics of any interaction.
+These characteristics are relevant for a formalized language of \cmvs{}.
+To accomplish this goal, we take the approach of deducing the characteristics by example.
+We analyze each data visualization example in terms of the expected data structure and dependent and independent visual variables~\cite{Bertin2010}.
+We suggest interactions for each visualization as well as interactions that run on multiple views. 
+Those interactions will be classified according to \textcite{Yi2007} and the relevant subject of the interaction is specified.
 
-The goal of this procedure is to abstract and deduce the essential characteristics of any interaction, to pave the way for a formalized language of \cmvs{}.
+The second outcome of this section is a set of requirements which can be used to evaluate a framework of \cmvs{}.
 
-\todo[inline]{Bullshit ahead}
-\subsection{Free visual variables allow for interaction effects}
-
-In order to communicate the interaction to the user, the effect of the visualization must be communicated back to the user by a visual change.
-Data visualizations have \emph{dependent} and \emph{independent} visual variables, see~\ref{sec:theory:visual-variables}.
-Dependent variables are those that are tied to a data attribute.
-These constrained visual attributes are unavailable while independent visual variables are therefore available to be used for a visual feedback of an interaction.
-
-\subsection{List events as candidates for interaction triggers}
-
-Interaction can be triggered by any input of a human-computer-interaction device, like the keyboard or the mouse.
-Because users are in the habit of expecting certain interactions to be triggered from certain events, we also have constraints here.
-E.g.\ the viewpoint in geographical maps is moved by mouse drag events and the zoom level is controlled by the mouse wheel.
-So we should not use those already occupied events as triggers for our coordinated interactions.
-Nevertheless, consistency in user interfaces is crucial for great user experience, because users can reuse the learned knowledge.
-Therefore, we need to list all availabe events as candidates and connect them to our interactions in a preferrably consistent manner.
-
-On the other hand, we might have special controls in visualizations, in order to change the encoding.
-E.g.\ a \tmap{} shows a menu where the user can define how attributes are mapped to visual variables.
 
 \subsection{Singular Visualization Interactions}\label{sec:analysis:examples}
 
@@ -1069,6 +1053,42 @@ Calendars and gantt charts could not only read the data from the data source, bu
   \includegraphics[width=0.4\textwidth]{images/chartTypes/multi/detail-view}
   \caption{The screenshot-tool ``shutter'' shows a magnified detail view of the area around the mouse cursor in the lower right corner of the screen}\label{fig:concept:chart-types:detail}
 \end{figure}
+
+\subsection{Requirements}
+In this subsection, we list a set or requirements imposed on a \cmv{} framework.
+These requirements can be used for further evaluation.
+\paragraph{Serialization} is the process of translating objects that can be stored or transmitted and reconstructed later.
+In order to coordinate interactions among views, information needs to be passed from one view to another. 
+A framework for \cmvs{} should therefore find a serialization of interactions that is:
+\paragraph{Undo capability} in the context of a \cmv{} framework means if it is possible to revert the effect of an interaction to the previous state.
+\paragraph{Development costs} qualify how much time and effort is needed in order to develop new interactive visualizations for the framework.
+\paragraph{Maintainability} means in our case, how much changing an interaction in one view impacts other visualizations and how error-prone the framework is.
+\paragraph{Volatility of data} is considered as the rapid reloading and replacement of data.
+
+
+
+
+\begin{bullshit}
+\subsection{Free visual variables allow for interaction effects}
+
+In order to communicate the interaction to the user, the effect of the visualization must be communicated back to the user by a visual change.
+Data visualizations have \emph{dependent} and \emph{independent} visual variables, see~\ref{sec:theory:visual-variables}.
+Dependent variables are those that are tied to a data attribute.
+These constrained visual attributes are unavailable while independent visual variables are therefore available to be used for a visual feedback of an interaction.
+
+\subsection{List events as candidates for interaction triggers}
+
+Interaction can be triggered by any input of a human-computer-interaction device, like the keyboard or the mouse.
+Because users are in the habit of expecting certain interactions to be triggered from certain events, we also have constraints here.
+E.g.\ the viewpoint in geographical maps is moved by mouse drag events and the zoom level is controlled by the mouse wheel.
+So we should not use those already occupied events as triggers for our coordinated interactions.
+Nevertheless, consistency in user interfaces is crucial for great user experience, because users can reuse the learned knowledge.
+Therefore, we need to list all availabe events as candidates and connect them to our interactions in a preferrably consistent manner.
+
+On the other hand, we might have special controls in visualizations, in order to change the encoding.
+E.g.\ a \tmap{} shows a menu where the user can define how attributes are mapped to visual variables.
+\end{bullshit}
+
 
 \clearpage
 \section{Concept}\label{sec:concept}
