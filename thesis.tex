@@ -1160,23 +1160,25 @@ E.g.\ when a parallel plot rearranges the list of attributes, the exact order wi
 
 \subsubsection{Shared data model}\label{sec:concept:data-model}
 To account for the various data structures, we use an abstract data model that is powerful enough to include tabular, hierarchical and relational data.
-You can see a class diagram in figure~\ref{fig:concept:meta-data-structure}.
+You can see a class diagram in figure~\ref{fig:concept:shared-data-model}.
 
 The \emph{entity} class is used to model the smallest distinguishable unit.
 All entities can be identified and retrieved via the \emph{id}.
-An entity is defined to be any object that can have data attached as \emph{attribute}.
+An entity is defined to be any object that can have data attributes attached as \emph{dimensions}.
 
-While entities describe what an object \emph{is}, an \emph{attribute} describes what it \emph{has}.
+While entities describe what an object \emph{is}, a \emph{dimension} describes what it \emph{has}.
 
 An entity can have arbitrary many attributes and each value can be accessed by the name of the attribute.
-So if you want to get the \emph{latitude} value of an entity, you can retrieve the value with a call to the named attribute \emph{latitude}.
+So if you want to get the \emph{latitude} value of an entity, you can retrieve the value with a call to the dimension \emph{latitude}.
 
 Entities can also be \emph{series} of other entities.
 A series contains an ordered list of contained entities.
 As series can also contain other series, so we can model a hierarchy relation.
 
-There is always one particular series without a parent.
-This is the root node of the hierarchy.
+Every entity has a \emph{parent} which is the series it is contained in.
+The root entity of the hierarchy has a parent which is \attr{nil}.
+Every series has a special attribute \attr{height} that describes the number of nested series or the height of the subtree.
+
 If we just want to display tabular data, we just have one or two levels of hierarchy.
 E.g.\ one level of hierarchy for a histogram and two levels of hierarchy for a stacked bar chart.
 
@@ -1188,10 +1190,10 @@ These attributes may describe e.g.\ the weight of an edge in a flow map.
 
 \begin{figure}[h!]
   \centering
-  \includegraphics[width=0.5\textwidth]{images/meta-data-structure.png}
+  \includegraphics[width=0.5\textwidth]{images/concept/shared-data-model.png}
   \caption{%
     A data structure for tabular, hierarchical and relational data
-  }\label{fig:concept:meta-data-structure}
+  }\label{fig:concept:shared-data-model}
 \end{figure}
 
 \subsubsection{Predefined Interaction Types}\label{sec:concept:types}
@@ -1210,6 +1212,7 @@ To declare the functions explicitly, we define a couple of sets:
         $ \mathbb{E} : \mathbb{E} \subseteq \mathbb{N} $
 
         The set of all entities in our subject space.
+        Each entity can be represented by its \attr{id}, so for simplicity $\mathbb{E}$ is a subset all natural numbers in $\mathbb{N}$.
     \item
         $ \mathbb{D} : \mathbb{D} \subseteq \mathbb{\sum^*} $
 
