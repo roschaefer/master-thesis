@@ -1131,14 +1131,14 @@ A subject can be a data point, a list of data points, a position of the viewpoin
 
 Interaction type and interaction subject are interrelated in the same way like the name and the list of arguments of a function signature.
 
-\subsubsection{Application context}
+\subsubsection{Verb}
 A developer may want to have many \emph{select} interactions.
 E.g.\ the user desires to select a detail view of an item under the mouse cursor from a previously selected set of already highlighted items.
-Therefore we allow for a user-defined \emph{application context}.
-The application context describes the interaction in the context of a task or an intention that is intrinsic to the application the interaction happens in.
+Therefore we allow for a user-defined \emph{verb}.
+The verb describes the interaction in the context of a task or an intention that is intrinsic to the application the interaction happens in.
 
-\subsubsection{Message}
-A message is the information that is send from one view to another in order to coordinate an interaction.
+\subsubsection{Sentence}
+A sentence is the information that is send from one view to another in order to coordinate an interaction.
 It contains everything necessary to ensure the interaction is reflected in the other view.
 
 
@@ -1148,11 +1148,12 @@ It contains everything necessary to ensure the interaction is reflected in the o
 
 We formalize an interaction $I$ as follows:
 \begin{equation}
-  I(T, M(AC, IT, F(IS)), E)
+  I(T, S(V, F(IS)), E)
 \end{equation}
-For a trigger $T$, an application context $AC$, an interaction type $IT$, a function definition $F$, an interaction subject $IS$ and the effect $E$.
-The part of the interaction which is shared among multiple views is the application context $AC$.
-The function definition $F$ is defined by the view at runtime.
+For a trigger $T$, a sentence $S$ and the effect $E$.
+The sentence $S$ is composed of a verb $V$, an interaction function definition $F$ and an interaction subject $IS$.
+The part of the interaction which is shared among multiple views is the sentence $S$.
+The function definition $F$ is defined by the triggering view at runtime.
 E.g.\ when a parallel plot rearranges the list of attributes, the exact order will be determined by the view itself, during the handling of the drag-and-drop action.
 
 \subsection{Framework}
@@ -1321,13 +1322,13 @@ In Section~\ref{sec:concept:types} we discussed how we can describe the types of
 The interaction type determines the signature of the function and describes the interaction itself.
 However a type does not define how interactions are \emph{coordinated} among views.
 E.g.\ what action in one view should lead to what kind of changes in what other views?
-What is the communication pattern or what is the protocol how messages are exchanged in the framework?
+What is the communication pattern or what is the protocol how sentences are exchanged in the framework?
 
-We define a message $M$ as:
+We define a sentence $S$ as:
 \begin{equation}
-  M(AC, T, F)
+  S(V, T, F)
 \end{equation}
-With $AC$ as an application context, an interaction type $T$ and a function $F$.
+With $V$ as a verb, an interaction type $T$ and a function $F$.
 The interaction type is one out of the names in Section~\ref{sec:concept:types} and defines the function signature.
 $F$ is the actual definition of the function, i.e.\ a call of this function with the provided parameters defined by $T$ returns an expected value.
 
@@ -1338,7 +1339,7 @@ Figure~\ref{fig:concept:communication-pattern} gives an overview on the message 
   \caption{%
     The message flow of the communication pattern:
     Every view can decide for itself whether to trigger an interaction or respond to an interaction with a visual effect.
-    This is done by a user-defined application context.
+    This is done by a user-defined verb.
   }\label{fig:concept:communication-pattern}
 \end{figure}
 
