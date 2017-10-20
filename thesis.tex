@@ -108,13 +108,11 @@ On a computer, the user can interact with the data and explore different levels 
 The visualization changes and the user can iteratively perform another interaction.
 In many cases a great interactivity results in a great user experience.
 
-There is a wide range of options, techniques and implementations for this purpose.
-\cmvs{} are interesting, as they try to make the most out of the various advantages of different visualizations.
-\begin{bullshit}
-This combination may yield a greater value to the user, but it is unclear what kind visualization techniques work best together and for which kind of data.
-How a user interact with \cmvs{} and how it differs from the use of single visualizations is another question worth to investigate.
-In this thesis, we consider the question how a combination of a geographical visualization with a hierarchical visualization performs, for what kind of data this combination is suitable and what interaction patterns apply.
-\end{bullshit}
+There is a wide range of existing frameworks and implementations for data visualizations.
+In some advanced cases, the data is visualized in multiple views which are linked with each other.
+These \cmvs{} are interesting, as they try to make the most out of the various advantages of different visualizations.
+However, implementing interactions on data visualizations, and especially on multiple visiualization, is tedious and costly.
+There is currently no extensible framework that helps to implement interactions of the same data in various visualizations.
 
 % Three moves
 %\todo{What is the topic about?}
@@ -126,17 +124,20 @@ In this thesis, we consider the question how a combination of a geographical vis
 We create data visualizations of multi-dimensional, hierarchical and geographical data.
 Namely, we develop \rufu{} which is an application for German citizen to publish which public broadcasts should benefit from their broadcasting fees.
 The output of this application is a public user ranking and it can be used by broadcasting corporations to evaluate their program.
-Data visualizations guide media researchers, journalists and the general audience to draw conclusions.
-In this particular use case, the selection and interaction with the data may happen geographically, but the desired visualization could show e.g.\ changes over time or relationships within the data.
+Visualizations of multidimensional, hierarhical data guide media researchers, journalists and the general audience to draw conclusions.
 
 To explain this a little deeper:
 Public broadcasting in Germany is organized federally, a German home belongs to the jurisdiction of a public broadcasting corporation.
-But the produced content can be used all German citizen and it is even required to be free and available to everyone.
-So this means that e.g.\ a media researcher might want to select all users from within a certain region, but is actually interested into relationships of broadcasts that are preferred by people from that area.
+But the produced content can be used by all German citizen and it is even required to be free and available for everyone.
+In the application, common users vote on the entire collection of broadcasts but media researchers are only interested in users of a service area.
+User accounts have a local context and broadcasts have a global context.
 
-So the interaction and selection of data should happen in another view than the actual data visualization.
-Since we deal with geographical data, we use geometry on a map for selection and interaction.
-For the visualization, we use a different technique, e.g.\ a tree map if we deal with hierarchical data.
+Let's say a media researcher is interacting with two views of the data.
+The interaction may happen in one view but is reflected in another view.
+E.g.\ the researcher selects user accounts from a geographical map but has the intention to update a separate view.
+That view could show e.g.\ a listing of the most popular broadcasts, based on the data of user accounts from that area.
+
+So there is a strong demand for \cmvs{} composed of arbitrary charts and plots and the separate implementation of each visualization turns into an unsustainable amount of work.
 
 \todo[inline]{More scenarios here}
 
