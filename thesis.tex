@@ -144,42 +144,42 @@ A \cmv{} composed of arbitrary charts and plots and the implementation of their 
 \todo[inline]{More scenarios here}
 
 \subsection{Problem Statement}
+%
+% \tmaps{} visualize hierarchical data on a two dimensional canvas and are particularly suitable if the proportions of the data should be emphasized.
+% When dealing with both multidimensional and geographical data, problems arise when features other than geographical features are used as input of the tiling algorithm.
+% Items that should belong together according to their geographic circumstances may be scattered across the \tmap{}.
+% This impairs the comprehensibility and complicates the selection of geographical units of items.
+% A second problem is the coordination of interactions among arbitrary data visualizations.
 
-% \todo[inline]{Start off with the problem of tree map vs geo map}
-
-\tmaps{} visualize hierarchical data on a two dimensional canvas and are particularly suitable if the proportions of the data should be emphasized.
-When dealing with both multidimensional and geographical data, problems arise when features other than geographical features are used as input of the tiling algorithm.
-Items that should belong together according to their geographic circumstances may be scattered across the \tmap{}.
-This impairs the comprehensibility and complicates the selection of geographical units of items.
-
-A second problem is the coordination of interactions among arbitrary data visualizations.
-Until today, there is no framework that allows communication between data visualizations of any kind and that simplifies the implementation of coordinated interactions.
-Neither is there a specification of the interfaces and their requirements, a shared language or a messaging pattern for coordination.
+Until today, there is no framework that simplifies the implementation of multiple views and their interactions.
+Neither is there a specification of the interfaces and their requirements, a formalization of an interaction or a messaging pattern for the coordination of interactions.
 
 \subsection{Research Questions}
 
 Based on the preceding problem statement, we take up the following research questions:
 \begin{enumerate}
+  % \item
+  %   Are \cmvs{} an effective way to select data geographically and display it hiearchically and vice versa?
+  % \item
+  %   Does it significantly improve the comprehensibility and facilitate the understanding of the data in our use case?
   \item
-    Are \cmvs{} an effective way to select data geographically and display it hiearchically and vice versa?
+    What are the main characteristics of an interaction?
   \item
-    Does it significantly improve the comprehensibility and facilitate the understanding of the data in our use case?
+    What entities are affected by interactions?
   \item
-    Is it possible to theoretically describe the substantial characteristics of every interaction?
+    What is a good communication protocol for multiple views?
   \item
-    What is the smallest interface possible to connect data visualizations of any kind?
-  \item
-    How should multiple views be organized and how do they exchange information efficiently?
-  \item
-    What gives the best user experience:
-    Master- and slave coordinations with one visualization to interact with and another view to show changes or should all views be on an equal footing?
+    What is a minimal yet complete interface for one data visualization in group of \cmvs{}?
+  % \item
+  %   What gives the best user experience:
+  %   Master- and slave coordinations with one visualization to interact with and another view to show changes or should all views be on an equal footing?
 \end{enumerate}
 
 
-\paragraph{We hypothesize} that most of our research questions can be answered positively.
-The theory of interactions is not very well researched, for this reason we see a great potential.
-Even if not all visualizations ever to be invented can be coordinated with one common language.
-Data visualizations share certain characteristics and so should interactions on data visualizations.
+% \paragraph{We hypothesize} that most of our research questions can be answered positively.
+% The theory of interactions is not very well researched, for this reason we see a great potential.
+% Even if not all visualizations ever to be invented can be coordinated with one common language.
+% Data visualizations share certain characteristics and so should interactions on data visualizations.
 
 
 %Hypothese ist, dass durchs Visualisierungs-, Navigations- und Interaktionstechniken eine Kopplung von georäumlichen 2D-Kartendarstellungen und thematisch-orientierten 3D-Treemaps ermöglicht wird und dadurch die Exploration und Analyse von multidimensionalen georäumlichen Daten unterstützt werden kann.
