@@ -141,8 +141,6 @@ Having the interaction spread across several views creates a great value for the
 We see a strong demand for \cmvs{} and the development effort as the main obstacle.
 A \cmv{} composed of arbitrary charts and plots and the implementation of their interactions turns into an unsustainable amount of work.
 
-\todo[inline]{More scenarios here}
-
 \subsection{Problem Statement}
 %
 % \tmaps{} visualize hierarchical data on a two dimensional canvas and are particularly suitable if the proportions of the data should be emphasized.
@@ -184,11 +182,10 @@ Based on the preceding problem statement, we take up the following research ques
 
 %Hypothese ist, dass durchs Visualisierungs-, Navigations- und Interaktionstechniken eine Kopplung von georäumlichen 2D-Kartendarstellungen und thematisch-orientierten 3D-Treemaps ermöglicht wird und dadurch die Exploration und Analyse von multidimensionalen georäumlichen Daten unterstützt werden kann.
 
-\subsection{Objectives}
+\subsection{Implementation Objectives}
 
-To address our research questions we develop a reference implementation of the theoretical framework.
-This reference implementation gives proof to the feasibility of the specification.
-We subdivide the development effort into the following work-packages:
+In order to validate the conceptual framework for \cmvs{}, we develop a reference implementation to investigate its feasibility.
+The development of the reference implementation is subdivided into the following packages:
 
 \begin{enumerate}
   \item
@@ -212,55 +209,45 @@ We subdivide the development effort into the following work-packages:
     Based on the test data sets, the \cmv{} implementation is examined and evaluated for design criteria~\cite{Baldonado2000}, general usability aspects~\cite{Roberts2007} and usage for typical visual analytics tasks.
 \end{enumerate}
 
+% \subsection{Methodological Approach}
+%
+% A literature research is used to gather knowledge about the current state of the art with respect to \cmvs{}.
+% Existing concepts and implementations available on the internet are examined and reused if possible.
+% Interviews of people from the target group are conducted and the define the requirements for the application.
+% A minimal viable product is developed to further validate the user requirements.
+% Also, common user behaviour is observed during user tests.
+% The prototype is continuously developed to allow for further experimentation.
+%
+% \paragraph{Scenarios}
+% While implementing more features, we have two scenarios with different kind of data and different user requirements:
+% \begin{itemize}
+%   \item
+%     In our work on the project \rufu{} we design and prototype visualizations for media researchers.
+%     We fully control the database and the database schema as well as on the user facing application on top of it.
+%     User requirements are tied to journalists, media researchers, broadcasting corporations.
+%     The data has geographical, hierarchical, temporal and correlated characteristics.
+%   \item
+%     The \visan{} for administrative data is used as a more general purpose application.
+%     There is no single database schema but combatibility with many sources or services.
+%     User requirements are potentially unknown and part of the resarch.
+%     The usage focuses especially on geographical and hierarchical data.
+% \end{itemize}
+%
+% For the scope of this master thesis we therefore compare implemented visualization and views.
+% How do both approaches differ in development speed, value for the customer?
+% What considerations need to be done regarding the database schema?
+%
+% \todo[inline]{What are the areas of research, in which this thesis can be placed into?}
 
-% Our goal is to create meaningful data.
-% This includes to encourage as many people as possible to publish their interests.
-% It also involves to provide access to information about the preferred broadcasts.
-% We suggest that users actively publish data and passively examine the summary of data of all users.
-% Broadcasters on the other side receive the data and evaluate the program and actively change the program according to the interest of the audience.
-% \todo[inline]{explain feedback loop}
-% The mentioned data visualization need to be interactive to show the user the desired level of detail.
-
-%\subsubsection{Use case specific goals}
-%We propose the hypothesis that people behave differently when they decide consciously and when they decide with their remote control.
-%The hypothesis goes even further, explicit interests may fit to the programme mandate of public broadcasting in contrast to TV and radio ratings which are based on usage data.
-
-%As the data is usage independent we want to gain knowledge about the entire population including those who don't use broadcasting at all.
-%In this manner we want to tackle the mentioned overfitting problem.
-
-\subsection{Methodological Approach}
-
-A literature research is used to gather knowledge about the current state of the art with respect to \cmvs{}.
-Existing concepts and implementations available on the internet are examined and reused if possible.
-Interviews of people from the target group are conducted and the define the requirements for the application.
-A minimal viable product is developed to further validate the user requirements.
-Also, common user behaviour is observed during user tests.
-The prototype is continuously developed to allow for further experimentation.
-
-\paragraph{Scenarios}
-While implementing more features, we have two scenarios with different kind of data and different user requirements:
-\begin{itemize}
-  \item
-    In our work on the project \rufu{} we design and prototype visualizations for media researchers.
-    We fully control the database and the database schema as well as on the user facing application on top of it.
-    User requirements are tied to journalists, media researchers, broadcasting corporations.
-    The data has geographical, hierarchical, temporal and correlated characteristics.
-  \item
-    The \visan{} for administrative data is used as a more general purpose application.
-    There is no single database schema but combatibility with many sources or services.
-    User requirements are potentially unknown and part of the resarch.
-    The usage focuses especially on geographical and hierarchical data.
-\end{itemize}
-
-For the scope of this master thesis we therefore compare implemented visualization and views.
-How do both approaches differ in development speed, value for the customer?
-What considerations need to be done regarding the database schema?
-
-\todo[inline]{What are the areas of research, in which this thesis can be placed into?}
 \subsection{Structure of the Work}
 
-In Section~\ref{sec:related-work} we will give an overview on \cmvs{} and focus on visual analytics as well as massive, geographical data.
-Existing concepts and implementations of \cmvs{} are examined and summarized in an overview.
+In Section~\ref{sec:theory} we introduce basic terminology of \cmvs{} and the theoretical background in this area of research.
+Section~\ref{sec:related-work} covers the state of the art and research on multiple views and coordinated interactions.
+In Section~\ref{sec:analysis} we analyze a set of data visualizations and their interactions by example.
+The gained knowledge from that section is used in the following Section~\ref{sec:concept} for a formalization of the \cmv{} framework.
+In Section~\ref{sec:implementation} we describe the reference implementation.
+Then in Section~\ref{sec:evaluation} we take the requirements from Section~\ref{sec:analysis} to evaluate the framework and its implementation.
+Finally sum up the main contribution in Section~\ref{sec:conclusion} and outline the future work in Section~\ref{sec:future-work}.
 
 \clearpage
 \section{Theoretical background}\label{sec:theory}
@@ -1400,7 +1387,7 @@ The term \emph{interaction} in our case is equivalent to the term \emph{channel}
 
 
 \clearpage
-\section{Implementation}
+\section{Implementation}\label{sec:implementation}
 
 This section describes the implementation details for the described concepts.
 We start with a list of to be implemented features.
@@ -1572,16 +1559,16 @@ We can use this data as input for our common \visan{}, e.g.\ figure~\ref{fig:imp
 
 \clearpage
 
-\section{Evaluation}
+\section{Evaluation}\label{sec:evaluation}
 \todo[inline]{How and what can we evaluate?}
 \todo[inline]{The performance?}
 \todo[inline]{The flexibility?}
 
-\section{Conclusion}
+\section{Conclusion}\label{sec:conclusion}
 \todo[inline]{Did we achieve our goals?}
 \todo[inline]{Is the concept sane in regarding the implementation?}
 
-\section{Future Work}
+\section{Future Work}\label{sec:future-work}
 \todo[inline]{List stuff which was not accomplished in this master thesis}
 
 
