@@ -1410,77 +1410,8 @@ In the course of this thesis we want to implement the following interactions:
     \emph{Filter}: The user double-clicks on a region in a geographical map and the \tmap{} will be based on data of only that region.
 \end{itemize}
 
-\subsection{Geographical Map}
-
-
-\paragraph{Leaflet}
-Leaflet is the leading open-source JavaScript library for mobile-friendly interactive maps~\cite{Leaflet2017}.
-
-
-\subsubsection{Frontend Frameworks}
-
-We evaluated three javascript frontend frameworks for our application: \emph{GlimmerJS}, \emph{Google Polymer} and \emph{ReactJS}.
-Figure~\ref{fig:implementation:frontend-frameworks} shows the pros and cons of each framework for our use case.
-
-\paragraph{GlimmerJS} is the rendering enginge of EmberJS\cite{Ember2017}.
-In 2017 it was released as a standalone framework.
-Applications written in GlimmerJS can be exported as web components.
-These web components can be included in any website, which makes GlimmerJS a reasonable choice to build high-quality widgets for user interfaces.
-GlimmerJS also uses handlebars\cite{Handlebars2017}, a user-friendly templating language.
-The downside of GlimmerJS is the current lack of documentation and immaturity due to the recent first release this year.
-
-\paragraph{Google Polymer} is another popular library to build web components \cite{Polymer2017}.
-With 18,469 stars on Github it is the most popular framework for web components at the time of writing.
-Polymer has a large community and comprehensive documentation and therefore more suitable than GlimmerJS for our task.
-
-Unfortunately, the web component standard does not specify how arbitrary Javascript objects can be passed to web components.
-This raises some problems in legacy apps:
-Usually, legacy apps are written in plain javascript without the use of a component-based frontend framework.
-Any part of the code may call any other part of the code, leading to the dreaded ``spaghetti code''.
-Refactoring the existing app requires the framework to have a reliable way of communication with the legacy parts.
-E.g.\ parts of the legacy code call the backend in order to load data.
-This data needs to be passed to the compponents of the user interface.
-Web components do not have a designated interface
-Because of that, libraries like Polymer come back on proprietary solutions.
-But those proprietary solutions defeat the main advantageof developing against a standard, as it is unclear how components may interact with each other.
-
-\paragraph{ReactJS} is a JavaScript library for building user interfaces\cite{React2017}.
-After lifting the constraint to implement against web components, it is the frontend framework we finally decided to go for.
-ReactJS does not have the ability to export web components.
-It has, in return, an ascertained way of integrating the framework into a legacy app built with jQuery.
-Along with its major advantage of easy integration, it has a striving community, heaps of documentation and tutorials and is well tested.
-
-All of these reasons make us choose ReactJS for the task of coordinating multiple views in our existing \visan{}.
-
-
-\todo[inline]{Pros/cons of GlimmerJS, Polymer, React}
-
-
-\begin{figure}[h!]
-  \centering
-  \includegraphics[width=\textwidth]{images/frontend-frameworks.png}
-  \caption{Comparison of frontend frameworks}\label{fig:implementation:frontend-frameworks}
-\end{figure}
-
-\subsection{Observer pattern and component pattern in \cmvs{}}
-Figure~\ref{fig:implementation:both-patterns} shows the final result.
-We try to put as much code as possible under the root node of ReactJS\@.
-By that we eliminate the amount of custom updating implementation.
-The root node of the DOM-tree of our react application is connected with the existing app through the common interface.
-Both urban analytics controller and the multiview map component will observe changes to the common interface.
-Also sub-components may communicate with the common interface.
-
-
-\begin{figure}[h!]
-  \centering
-  \includegraphics[width=\textwidth]{images/both-patterns-implemented.png}
-  \caption{%
-    Both observer pattern and component pattern applied in the field of \cmvs{}
-  }\label{fig:implementation:both-patterns}
-\end{figure}
-
-
 \subsection{Standards}
+\todo[inline]{no section without text}
 
 \paragraph{GeoJSON} is the name of the data format used to exchange geometries.
 
@@ -1561,6 +1492,88 @@ Examples for the kind of data that might trigger a rerendering of a view:
   \item
     A list of thresholds for certain features as a filter
 \end{itemize}
+\subsection{Geographical Map}
+
+\todo[inline]{Introduce the implementation of the geographical map}
+
+
+\subsubsection{Client-side rendering frameworks}
+
+We evaluated three javascript frontend frameworks for our application: \emph{GlimmerJS}, \emph{Google Polymer} and \emph{ReactJS}.
+Figure~\ref{fig:implementation:frontend-frameworks} shows the pros and cons of each framework for our use case.
+
+\paragraph{GlimmerJS} is the rendering enginge of EmberJS\cite{Ember2017}.
+In 2017 it was released as a standalone framework.
+Applications written in GlimmerJS can be exported as web components.
+These web components can be included in any website, which makes GlimmerJS a reasonable choice to build high-quality widgets for user interfaces.
+GlimmerJS also uses handlebars\cite{Handlebars2017}, a user-friendly templating language.
+The downside of GlimmerJS is the current lack of documentation and immaturity due to the recent first release this year.
+
+\paragraph{Google Polymer} is another popular library to build web components \cite{Polymer2017}.
+With 18,469 stars on Github it is the most popular framework for web components at the time of writing.
+Polymer has a large community and comprehensive documentation and therefore more suitable than GlimmerJS for our task.
+
+Unfortunately, the web component standard does not specify how arbitrary Javascript objects can be passed to web components.
+This raises some problems in legacy apps:
+Usually, legacy apps are written in plain javascript without the use of a component-based frontend framework.
+Any part of the code may call any other part of the code, leading to the dreaded ``spaghetti code''.
+Refactoring the existing app requires the framework to have a reliable way of communication with the legacy parts.
+E.g.\ parts of the legacy code call the backend in order to load data.
+This data needs to be passed to the components of the user interface.
+Web components do not have a designated interface
+Because of that, libraries like Polymer come back on proprietary solutions.
+But those proprietary solutions defeat the main advantage of developing against a standard, as it is unclear how components may interact with each other.
+
+\paragraph{ReactJS} is a JavaScript library for building user interfaces\cite{React2017}.
+After lifting the constraint to implement against web components, it is the frontend framework we finally decided to go for.
+ReactJS does not have the ability to export web components.
+It has, in return, an ascertained way of integrating the framework into a legacy app built with jQuery.
+Along with its major advantage of easy integration, it has a striving community, heaps of documentation and tutorials and is well tested.
+
+All of these reasons make us choose ReactJS for the task of coordinating multiple views in our existing \visan{}.
+
+
+\todo[inline]{Pros/cons of GlimmerJS, Polymer, React}
+
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=\textwidth]{images/frontend-frameworks.png}
+  \caption{Comparison of frontend frameworks}\label{fig:implementation:frontend-frameworks}
+\end{figure}
+
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=\textwidth]{images/both-patterns-implemented.png}
+  \caption{%
+    Both observer pattern and component pattern applied in the field of \cmvs{}
+  }\label{fig:implementation:both-patterns}
+\end{figure}
+
+
+\paragraph{Leaflet}
+Leaflet is the leading open-source JavaScript library for mobile-friendly interactive maps~\cite{Leaflet2017}.
+\todo[inline]{Show a code example how to use Leaflet}
+
+\paragraph{PubSubJS}
+PubSubJS is a topic-based publish/subscribe library written in JavaScript~\cite{PubSubJS2017}.
+Topics are published asynchronuously.
+\todo[inline]{Show a code listing here, how interaction verbs are mapped to topics}
+
+\subsection{Coordination of Geographical Map and Treemap}
+
+\todo[inline]{Introduce how we integrated the geographical map into the existing
+treemap implementation}
+
+\paragraph{Observer pattern and component pattern in \cmvs{}}
+Figure~\ref{fig:implementation:both-patterns} shows the final result.
+We try to put as much code as possible under the root node of ReactJS\@.
+By that we eliminate the amount of custom updating implementation.
+The root node of the DOM-tree of our react application is connected with the existing app through the common interface.
+Both urban analytics controller and the multiview map component will observe changes to the common interface.
+Also sub-components may communicate with the common interface.
+
 
 
 
