@@ -80,7 +80,7 @@
 \begin{document}
 
 \title{Multiple coordinated views on massive geo data}
-\author{Robert Schäfer\\ Department of Computer Graphics, Hasso-Plattner-Institut}
+\author{Robert Schäfer, Hasso-Plattner-Institut}
 \maketitle
 \clearpage
 
@@ -145,12 +145,12 @@ A \cmv{} composed of arbitrary charts and plots and the implementation of their 
 %
 % \tmaps{} visualize hierarchical data on a two dimensional canvas and are particularly suitable if the proportions of the data should be emphasized.
 % When dealing with both multidimensional and geographical data, problems arise when features other than geographical features are used as input of the tiling algorithm.
-% Items that should belong together according to their geographic circumstances may be scattered across the \tmap{}.
 % This impairs the comprehensibility and complicates the selection of geographical units of items.
 % A second problem is the coordination of interactions among arbitrary data visualizations.
 
-Until today, there is no framework that simplifies the implementation of multiple views and their interactions.
-Neither is there a specification of the interfaces and their requirements, a formalization of an interaction or a messaging pattern for the coordination of interactions.
+A \tmap{} of hierarchical, geographical data can loose the geographic context if the tiling algorithm is based on non-geographical features.
+Items that should belong together according to their geographic circumstances may be scattered across the \tmap{}.
+This impairs the comprehensibility and complicates the selection of geographical units of items.
 
 \subsection{Research Questions}
 
@@ -1586,11 +1586,10 @@ Also sub-components may communicate with the common interface.
 \todo[inline]{The performance?}
 \todo[inline]{The flexibility?}
 
-\section{Conclusion}\label{sec:conclusion}
+\section{Conclusion and Future Work}\label{sec:conclusion}
 \todo[inline]{Did we achieve our goals?}
 \todo[inline]{Is the concept sane in regarding the implementation?}
 
-\section{Future Work}\label{sec:future-work}
 \todo[inline]{List stuff which was not accomplished in this master thesis}
 
 
