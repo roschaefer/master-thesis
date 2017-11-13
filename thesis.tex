@@ -1439,7 +1439,7 @@ In this scenario, senders of messages simply categorize their messages which wil
 The scenario has very low coupling, publishers do not even need to know the existence of subscribers.
 
 \paragraph{Component pattern}
-State-of-the-art javascript frameworks like ReactJS and EmberJS follow the component pattern for the architecture of a single page web application.
+State-of-the-art javascript component frameworks like ReactJS and EmberJS follow the component pattern for the architecture of a single page web application.
 The component pattern imposes a hierarchical structure on a website.
 Each component is responsible for a task and may contain other components.
 The components are joined at the root node of the page.
@@ -1478,13 +1478,13 @@ Examples for the kind of data that might trigger a rerendering of a view:
 \todo[inline]{Introduce the implementation of the geographical map}
 
 
-\subsubsection{Client-side rendering frameworks}
+\subsubsection{Client-side component frameworks}
 
-We evaluated three javascript frontend frameworks for our application: \emph{GlimmerJS}, \emph{Google Polymer} and \emph{ReactJS}.
+We evaluated three javascript component frameworks for our application: \emph{GlimmerJS}, \emph{Google Polymer} and \emph{ReactJS}.
 Figure~\ref{fig:implementation:frontend-frameworks} shows the pros and cons of each framework for our use case.
 
 \paragraph{GlimmerJS} is the rendering enginge of EmberJS\cite{Ember2017}.
-In 2017 it was released as a standalone framework.
+In 2017 it was released as a standalone component framework.
 Applications written in GlimmerJS can be exported as web components.
 These web components can be included in any website, which makes GlimmerJS a reasonable choice to build high-quality widgets for user interfaces.
 GlimmerJS also uses handlebars\cite{Handlebars2017}, a user-friendly templating language.
@@ -1506,9 +1506,9 @@ Because of that, libraries like Polymer come back on proprietary solutions.
 But those proprietary solutions defeat the main advantage of developing against a standard, as it is unclear how components may interact with each other.
 
 \paragraph{ReactJS} is a JavaScript library for building user interfaces\cite{React2017}.
-After lifting the constraint to implement against web components, it is the frontend framework we finally decided to go for.
+After lifting the constraint to implement against web components, it is the javascript framework we finally decided to go for.
 ReactJS does not have the ability to export web components.
-It has, in return, an ascertained way of integrating the framework into a legacy app built with jQuery.
+It has, in return, an ascertained way of integrating the component framework into a legacy app built with jQuery.
 Along with its major advantage of easy integration, it has a striving community, heaps of documentation and tutorials and is well tested.
 
 All of these reasons make us choose ReactJS for the task of coordinating multiple views in our existing \visan{}.
