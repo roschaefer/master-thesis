@@ -169,7 +169,7 @@ The development of the reference implementation is subdivided into the following
   \item
     Concept
 
-    Based on a number of examples, a basic framework is designed.
+    Based on a number of examples, a basic, conceptual framework is designed.
     This includes a common data structure, a formalization of an interaction in general and the communication prototocol for multiple views.
 
   \item
@@ -227,7 +227,7 @@ Section~\ref{sec:related-work} covers the state of the art and research on multi
 In Section~\ref{sec:analysis} we analyze a set of data visualizations and their interactions by example.
 The gained knowledge from that section is used in the following Section~\ref{sec:concept} for a formalization of the \cmv{} framework.
 In Section~\ref{sec:implementation} we describe the reference implementation.
-Then in Section~\ref{sec:evaluation} we take the requirements from Section~\ref{sec:analysis} to evaluate the framework and its implementation.
+Then in Section~\ref{sec:evaluation} we take the requirements from Section~\ref{sec:analysis} to evaluate the conceptual framework and its implementation.
 Finally sum up the main contribution in Section~\ref{sec:conclusion} and outline the future work in Section~\ref{sec:future-work}.
 
 \clearpage
@@ -720,13 +720,13 @@ One purpose of this section is to abstract and deduce the essential characterist
 These characteristics are relevant for a formalized language of \cmvs{}.
 To accomplish this goal, we take the approach of deducing the characteristics by example.
 We analyze each data visualization example in terms of the expected data structure and dependent and independent visual variables~\cite{Bertin2010}.
-We suggest interactions for each visualization as well as interactions that run on multiple views. 
+We suggest interactions for each visualization as well as interactions that run on multiple views.
 Those interactions will be classified according to \textcite{Yi2007} and the relevant subject of the interaction is specified.
 
 The second outcome of this section is a set of requirements which can be used to evaluate a framework of \cmvs{}.
 
 
-\subsection{Singular Visualization Interactions}\label{sec:analysis:examples}
+\subsection{Single Visualization Interactions}\label{sec:analysis:examples}
 
 The data visualization catalogue by Severino Ribecca list many of the most used data visualizations\cite{VisualizationCatalogue2017}.
 Let's pick some of those and derive a number of possible interactions.
@@ -1100,14 +1100,14 @@ E.g.\ a \tmap{} shows a menu where the user can define how attributes are mapped
 
 \clearpage
 \section{Concept}\label{sec:concept}
-Based on the findings in Section~\ref{sec:analysis} we specify a formal language and a framework for \cmvs{} in this section.
-Our approach involves the definition of the terminology and the basic components of the framework.
+Based on the findings in Section~\ref{sec:analysis} we specify a formal language and a conceptual framework for \cmvs{} in this section.
+Our approach involves the definition of the terminology and the basic components of the conceptual framework.
 The first component is the shared data model on which all visualizations must agree on.
 We formalize each interaction from Section~\ref{sec:analysis} as a mathematical function and group these functions together if they have the same input and output.
 As a last step, we specify the communication pattern of the formalized language.
 
 \subsection{Terminology}
-We introduce a couple of new terms in order to give a formal definition of the framework
+We introduce a couple of new terms in order to give a formal definition of the conceptual framework
 
 \paragraph{Trigger} describes the event that starts an interaction.
 As we have seen in Section~\ref{sec:analysis} every interaction is started by a user action.
@@ -1186,7 +1186,7 @@ The part of the interaction which is shared among multiple views is the sentence
 The function definition $F$ is defined by the triggering view at runtime.
 E.g.\ when a parallel plot rearranges the list of attributes, the exact order will be determined by the view itself, during the handling of the drag-and-drop action.
 
-\subsection{Framework}
+\subsection{Conceptual Framework}
 \todo[inline]{no section without text}
 
 \subsubsection{Shared data model}\label{sec:concept:data-model}
@@ -1341,7 +1341,7 @@ In Section~\ref{sec:concept:types} we discussed how we can describe the types of
 The interaction type determines the signature of the function and describes the interaction itself.
 However a type does not define how interactions are \emph{coordinated} among views.
 E.g.\ what action in one view should lead to what kind of changes in what other views?
-What is the communication pattern or what is the protocol how sentences are exchanged in the framework?
+What is the communication pattern or what is the protocol how sentences are exchanged in the conceptual framework?
 
 Figure~\ref{fig:concept:communication-pattern} gives an overview on the message flow in the communication pattern.
 \begin{figure}[h!]
