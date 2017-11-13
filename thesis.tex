@@ -155,30 +155,33 @@ This impairs the comprehensibility and complicates the selection of geographical
 \subsection{Hypothesis}
 
 A second, geographical visualization next to the \tmap{} can maintain the geographical context.
-If an interaction in one visualization is reflected in the other, this might further support the analysis of the data.
+If an interaction in one visualization is reflected in the other, this further supports the analysis of the data.
 Moreover, the limitations of a single data visualization can be avoided by interacting with the data trough another view.
 
 %Hypothese ist, dass durchs Visualisierungs-, Navigations- und Interaktionstechniken eine Kopplung von georäumlichen 2D-Kartendarstellungen und thematisch-orientierten 3D-Treemaps ermöglicht wird und dadurch die Exploration und Analyse von multidimensionalen georäumlichen Daten unterstützt werden kann.
 
-\subsection{Implementation Objectives}
+\subsection{Contributions}
 
 In order to validate the conceptual framework for \cmvs{}, we develop a reference implementation to investigate its feasibility.
 The development of the reference implementation is subdivided into the following packages:
 
 \begin{enumerate}
   \item
-    Basic multiple view layout
+    Concept
 
-    The existing \visan{} is complemented with a basic \cmv{} system.
-    Modules, interfaces and functionalities of the \cmv{} system are designed, coordinated and prototypically implemented.
-    In particular, a method for arranging multiple \cmv{} widgets in a \cmv{} layout and storing \cmv{} layouts is developed.
+    Based on a number of examples, a basic framework is designed.
+    This includes a common data structure, a formalization of an interaction in general and the communication prototocol for multiple views.
 
   \item
-    Interactions within \cmvs{}
+    Implementation
 
-    We develop linking and interaction mechanisms between \maps{} (for map-based representation) and \tmaps{} (for abstract information representation).
-    The functionality includes zoom per object or selection with a bounding box.
+    We develop a geographical represenatation of the data.
+    Items in the map can be focused, highlighted, selected with multiple clicks or with a bounding box.
     This creates a powerful selection mechanism, which can be used to select data in map-based representations and highlight the data in the \tmap{}.
+
+  \item
+    Integration of \tmap{} and \map{}
+    We develop linking and interaction mechanisms between \maps{} (for map-based representation) and \tmaps{} (for abstract information representation).
 
   \item
     Demonstration and evaluation
