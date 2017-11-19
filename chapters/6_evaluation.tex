@@ -2,6 +2,71 @@
 \todo[inline]{How and what can we evaluate?}
 \todo[inline]{The performance?}
 \todo[inline]{The flexibility?}
+\section{Comparison of client-side component frameworks}
+
+Which JavaScript, client-side rendering and component based framework is most suitable for \cmvs{}?
+Three frameworks have been evaluated:
+\begin{enumerate*}[label=(\arabic*)]
+  \item GlimmerJS
+  \item Google Polymer and
+  \item ReactJS.
+\end{enumerate*}
+
+
+\textbf{GlimmerJS} is the rendering enginge of EmberJS\cite{Ember2017}.
+In 2017 it was released as a standalone component framework.
+Applications written in GlimmerJS can be exported as web components.
+These web components can be included in any website, which makes GlimmerJS a reasonable choice to build high-quality widgets for user interfaces.
+GlimmerJS also uses handlebars\cite{Handlebars2017}, a user-friendly templating language.
+The downside of GlimmerJS is the current lack of documentation and immaturity due to the recent first release this year.
+
+\textbf{Google Polymer} is another popular library to build web components \cite{Polymer2017}.
+With 18,469 stars on Github it is the most popular framework for web components at the time of writing.
+Polymer has a large community and comprehensive documentation and therefore more suitable than GlimmerJS to build \cmvs{}.
+
+But critically, \cmvs{} require a means to exchange data between views, which is specific to interactions.
+The web component specification, unfortunately, does not specify how arbitrary JavaScript objects can be passed to web components.
+String based attributes are supported, as seen in Listing~\ref{lst:evaluation:web-components-data}.
+To pass rich data to components however, web component frameworks have to roll their own data flow and syntax.
+Google Polymer's syntax to pass rich data to a components is shown in Listing~\ref{lst:evaluation:polymer-data}.
+
+\lstinputlisting[
+  language=HTML,
+  label={lst:evaluation:web-components-data},
+  caption={An example of string based attributes of web components~\cite{GoogleMapWebComponent2017}}
+]{listings/evaluation/web-components-data.html}
+
+\lstinputlisting[
+  language=HTML,
+  label={lst:evaluation:polymer-data},
+  caption={An small syntax example how Google Polymer passes rich data to a component}
+]{listings/evaluation/polymer-data.html}
+
+This raises some problems in existing applications:
+A particular component-based frontend framework can not be assumed, a lot of existing applications are also written without any JavaScript framework.
+Proprietary solutions like the one of Polymer lessen the main motivation of implementing against web components:
+Platform agnostic flexibility.
+
+\textbf{ReactJS} is a JavaScript library for building user interfaces\cite{React2017}.
+React is explicitly not implementing web components and is not going to implement web components in the future.
+It has, in return, a well-known way of integrating the component framework into a legacy application built with e.g.\ jQuery.
+Along with its major advantage of easy integration, it has a striving community, lots of documentation and tutorials and it is well tested.
+
+As a summary, if there is
+\begin{enumerate*}[label=(\arabic*)]
+  \item no obligation to implement web components
+  \item and an easy integration into an existing application is necessary
+\end{enumerate*}
+React is the perfect choice for \cmvs{}.
+Figure~\ref{fig:implementation:frontend-frameworks} shows the pros and cons of each framework for the use case.
+
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=\textwidth]{images/frontend-frameworks.png}
+  \caption{Comparison of frontend frameworks}\label{fig:implementation:frontend-frameworks}
+\end{figure}
+
 \section{Use case}\label{sec:use-case}
 \todo[inline]{No section without text}
 
@@ -83,7 +148,7 @@ The sum of all amounts for one user will never exceed the virtual budget of 17.5
 \begin{figure}[h!]
   \centering
   \includegraphics[width=\textwidth]{images/er}
-  \caption{Database schema of the \rufu{} app}\label{fig:data:rundfunk}
+  \caption{Database schema of the \rufu{} application}\label{fig:data:rundfunk}
 \end{figure}
 
 \textbf{Features}
