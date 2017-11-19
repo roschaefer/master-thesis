@@ -47,7 +47,7 @@ Listing \ref{lst:implementation:onEachFeature} shows the event handlers added to
 \lstinputlisting[
   language=JavaScript,
   label={lst:implementation:onEachFeature},
-  caption={\attr{onEachFeature} callback passed into the \attr{GeoJSON} component, adding handlers for mouse events}
+  caption={\attr{onEachFeature} callback, adding handlers for mouse events}
 ]{listings/implementation/onEachFeature.tsx}
 
 First we cache all layers in the internal state of the \attr{Map} component.
@@ -58,15 +58,22 @@ In the latter case, the id of the feature is either added or removed from the li
 \lstinputlisting[
   language=JavaScript,
   label={lst:implementation:featureStyle},
-  caption={\attr{featureStyle} callback passed into the \attr{GeoJSON} component, configuring the visual appearance depending on the currently highlighted or focused feature ids}
+  caption={\attr{featureStyle} callback, configuring the visual appearance depending on the currently highlighted or focused feature ids}
 ]{listings/implementation/featureStyle.tsx}
 
-The \attr{featureStyle} method is very straightforward.
+The \attr{featureStyle} in Listing \ref{lst:implementation:featureStyle} method is very straightforward.
 If the feature is currently focused, the \attr{fillColor} of the polygon is red, otherwise blue.
 Likewise, if the feature is currently highlighted, the polygon has a white, solid stroke.
 
+\lstinputlisting[
+  language=JavaScript,
+  label={lst:implementation:pointToLayer},
+  caption={\attr{pointToLayer} callback, if a feature of \attr{GeoJSON} has a point geometry, it will be shown as a circle}
+]{listings/implementation/pointToLayer.tsx}
 
-
+Finally, we configure how to display point geometries in callback \attr{poinToLayer}.
+Since normal markers do not have a configurable color and style, we instruct the \attr{GeoJSON} component to render a \attr{CircleMarker} for each point geometry instead.
+This way, the same options of \attr{featureStyle} can be applied to both point and area geometries.
 
 
 
