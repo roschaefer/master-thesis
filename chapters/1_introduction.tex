@@ -16,7 +16,7 @@ There is currently no extensible framework that helps to implement interactions 
 \todo[inline]{Establish the niche, why is there further research on your topic?}
 \todo[inline]{Introduce the current research, what's the hypothesis, the research question?}
 
-\subsection{Motivation}\label{sec:outline}
+\section{Motivation}\label{sec:outline}
 
 We create data visualizations of multi-dimensional, hierarchical and geographical data.
 Namely, we develop \rufu{} which is an application for German citizen to publish which public broadcasts should benefit from their broadcasting fees.
@@ -38,7 +38,7 @@ Having the interaction spread across several views creates a great value for the
 We see a strong demand for \cmvs{} and the development effort as the main obstacle.
 A \cmv{} composed of arbitrary charts and plots and the implementation of their interactions turns into an unsustainable amount of work.
 
-\subsection{Problem Statement}
+\section{Problem Statement}
 %
 % \tmaps{} visualize hierarchical data on a two dimensional canvas and are particularly suitable if the proportions of the data should be emphasized.
 % When dealing with both multidimensional and geographical data, problems arise when features other than geographical features are used as input of the tiling algorithm.
@@ -49,7 +49,7 @@ A \tmap{} of hierarchical, geographical data can loose the geographic context if
 Items that should belong together according to their geographic circumstances may be scattered across the \tmap{}.
 This impairs the comprehensibility and complicates the selection of geographical units of items.
 
-\subsection{Hypothesis}
+\section{Hypothesis}
 
 A second, geographical visualization next to the \tmap{} can maintain the geographical context.
 If an interaction in one visualization is reflected in the other, this further supports the analysis of the data.
@@ -57,7 +57,7 @@ Moreover, the limitations of a single data visualization can be avoided by inter
 
 %Hypothese ist, dass durchs Visualisierungs-, Navigations- und Interaktionstechniken eine Kopplung von georäumlichen 2D-Kartendarstellungen und thematisch-orientierten 3D-Treemaps ermöglicht wird und dadurch die Exploration und Analyse von multidimensionalen georäumlichen Daten unterstützt werden kann.
 
-\subsection{Contributions}
+\section{Contributions}
 
 In order to validate the conceptual framework for \cmvs{}, we develop a reference implementation to investigate its feasibility.
 The development of the reference implementation is subdivided into the following packages:
@@ -87,7 +87,7 @@ The development of the reference implementation is subdivided into the following
     Based on the test data sets, the \cmv{} implementation is examined and evaluated for design criteria~\cite{Baldonado2000}, general usability aspects~\cite{Roberts2007} and usage for typical visual analytics tasks.
 \end{enumerate}
 
-% \subsection{Methodological Approach}
+% \section{Methodological Approach}
 %
 % A literature research is used to gather knowledge about the current state of the art with respect to \cmvs{}.
 % Existing concepts and implementations available on the internet are examined and reused if possible.
@@ -117,10 +117,10 @@ The development of the reference implementation is subdivided into the following
 %
 % \todo[inline]{What are the areas of research, in which this thesis can be placed into?}
 
-\subsection{Structure of the Work}
+\section{Structure of the Work}
 
 In Section~\ref{sec:theory} we introduce basic terminology of \cmvs{} and the theoretical background in this area of research.
-Section~\ref{sec:related-work} covers the state of the art and research on multiple views and coordinated interactions.
+Section~\ref{sec:interaction-theory} covers the state of the art and research on multiple views and coordinated interactions.
 In Section~\ref{sec:analysis} we analyze a set of data visualizations and their interactions by example.
 The gained knowledge from that section is used in the following Section~\ref{sec:concept} for a formalization of the \cmv{} framework.
 In Section~\ref{sec:implementation} we describe the reference implementation.

@@ -29,7 +29,7 @@ It is a relational database and a part of the data base schema is shown as an ER
 \end{figure}
 
 The largest table is called \attr{data} with approximately 10,466,600 records, which holds all values along with the survey date.
-\paragraph{Features}
+\textbf{Features}
 This data is connected to a feature table through a foreign key called \attr{id_mm}.
 In the feature table we can find the description for every referenced feature, e.g.\ population density, working population in agriculture, education spending.
 The \riso{} system groups all features in a 4-level hierarchy:
@@ -47,7 +47,7 @@ The actual features table is the last one in the list.
 At the lowest level within the hierarchy, this is the largest table with 1234 records.
 
 
-\paragraph{Regions}
+\textbf{Regions}
 On the other side, the geographical data is stored in the \attr{regions} table.
 The geometry data for each region is stored in the \attr{geojson} column and as the name suggests, the data type is a \attr{geojson}.
 The foreign keys that connect the tables \attr{data} and \attr{regions} are called \attr{id_re} and \attr{regs}.
@@ -57,7 +57,7 @@ E.g.\ a region with a \attr{id_re} of $1$ is a federal state of Germany, a regio
 A textual description for the hierarchy level can be found in the \attr{katalog_raumebenen} table in column \attr{raumebene}.
 Both column \attr{id_re} and \attr{regs} belong to the primary key of the regions table, so there will never be two regions on the same hierarchy level with the same \attr{regs} id.
 
-\paragraph{Characteristics}
+\textbf{Characteristics}
 As we can see, the schema of the \riso{} database follows a rather denormalized approach.
 The schema does not make a lot of assumptions regarding the input data.
 It allows to add data of arbitrary size, features and completeness as long as there is some kind of numerical data associated with some kind of geographical unit.
@@ -86,20 +86,20 @@ The sum of all amounts for one user will never exceed the virtual budget of 17.5
   \caption{Database schema of the \rufu{} app}\label{fig:data:rundfunk}
 \end{figure}
 
-\paragraph{Features}
+\textbf{Features}
 We have both numerical as well as nominal features.
 A numerical feature could be the number of supporters from an area in Germany.
 A nominal feature could be a list of the most supported broadcasts from an area in Germany.
 Numerical and nominal features can be combined, so we could request for every region, a distribution of the desired expenditure for radio, TV, online and other broadcasts.
 
-\paragraph{Regions}
+\textbf{Regions}
 \rufu{} stores the geometry for each region in \attr{geojson} files.
 These files hold a \attr{FeatureCollection}.
 Every \attr{Feature} is a region, the identifier is stored as a property.
 We merge the geometry data with features for every request.
 To be precise: We get all the user data, group it by the identifier \attr{state_code} and merge it with the geometry in the \attr{geojson}.
 
-\paragraph{Characteristics}
+\textbf{Characteristics}
 The data base schema is a result of the specific requirements of the persistence layer.
 Changes in the source code may require a migration of the data base schema.
 
@@ -118,10 +118,10 @@ However, we can ask a lot of questions already with common data base queries or 
 \end{enumerate}
 
 
-\subsection{Existing Interactions}
-We will now classify the implemented interactions of our two applications according to the classification by \textcite{Yi2007} in Section~\ref{sec:related-work:categories}.
+\section{Existing Interactions}
+We will now classify the implemented interactions of our two applications according to the classification by \textcite{Yi2007} in Section~\ref{sec:interaction-theory:categories}.
 
-\paragraph{In our \visan{}} possible interactions can be categorized into the classes \emph{select}, \emph{explore}, \emph{reconfigure}, \emph{encode} and \emph{filter}.
+\textbf{In our \visan{}} possible interactions can be categorized into the classes \emph{select}, \emph{explore}, \emph{reconfigure}, \emph{encode} and \emph{filter}.
 As seen in Figure~\ref{fig:analysis:interaction:existing} the user can \emph{select} one item in the view by clicking on it.
 The user can reveal a tooltip showing the item properties by hovering with the mouse on the item, which is another \emph{selection}.
 The user can \emph{explore} the map in the usual manner:
@@ -152,7 +152,7 @@ When the user drags the slider, the items in the map on the right side are updat
   }\label{fig:analysis:interaction:existing:filter}
 \end{figure}
 
-\subsection{Planned Interactions}
+\section{Planned Interactions}
 We have a focus on coordinated multiple views consisting of a tree map and a geographical map.
 Let's have some examples how an interaction between a \tmap{} and a \map{} might work:
 

@@ -1,4 +1,5 @@
-\chapter{Foundations}\label{sec:theory}
+\chapter{Related Work}\label{sec:theory}
+\section{Foundations}
 \todo[inline]{no section without text}
 
 \subsection{Data Visualizations}
@@ -9,7 +10,7 @@ The purpose of data visualizations is twofold, according to the Interaction Desi
 Statistical information is abstract and in data visualization ``we must find a way to give form to that which has none.''~\cite{Few2013}
 Successful data visualizations helps the human user to derive knowledge and meta data from the visualization itself, \textcite{Nocke2002} call it ``visual data mining''.
 
-\paragraph{Data-driven \dss{}} are applications to support businesses and organizational decision-making activities in which data visualizations play a key part~\cite{Nada2007}~\cite{Poleto2015}.
+\textbf{Data-driven \dss{}} are applications to support businesses and organizational decision-making activities in which data visualizations play a key part~\cite{Nada2007}~\cite{Poleto2015}.
 Visualizations are an obvious choice for managers who demand a quick overview on performance data.
 Stephen Few's book ``Show me the numbers'' was named after the phrase often used by sales managers who can't afford to wade through lengthy reports.
 \todo[inline]{Prof. Döllner mentioned the emerging ``cockpit'' views}
@@ -74,7 +75,7 @@ Treemaps are space-filling visualizations, i.e.\ they make 100\% use of the avai
 
 Note that as the order and placement of the nodes depends on the value of their specified dimension, geographical units of data may may be placed separately on the treemap.
 
-\paragraph{\threedTmaps{}} is a concept introduced by \textcite{Bladh2004} in 2004.
+\textbf{\threedTmaps{}} is a concept introduced by \textcite{Bladh2004} in 2004.
 The authors transfer the concept of tree maps from two dimensional into three dimensional space.
 They introduce StepTree~\cite{Bladh2004}, which is a three dimensional tree map to display a directory layout.
 It ``differs from Treemap in that it employs three dimensions by stacking each subdirectory on top of its parent directory.''
@@ -82,7 +83,7 @@ It ``differs from Treemap in that it employs three dimensions by stacking each s
 User perform significantly better in interpreting the hierarchical structure.
 However, 3D visualizations also introduce some disadvantages as superimposition of objects and a complex view point navigation.
 
-\paragraph{\tmap{}} is a term coined by \textcite{Limberger2016}.
+\textbf{\tmap{}} is a term coined by \textcite{Limberger2016}.
 A \tmap{} emphasizes physical constraints of a \threedTmap{}, i.e.\ a \tmap{} has all items attached to the ground.
 We can see an example of a \tmap{} in figure~\ref{fig:research:ua_treemap}
 
@@ -98,7 +99,7 @@ We can see an example of a \tmap{} in figure~\ref{fig:research:ua_treemap}
 
 \subsection{Geographical Data Visualization}
 \todo[inline]{introduction}
-\paragraph{Flow maps} place stroked lines on top of a geographic map.
+\textbf{Flow maps} place stroked lines on top of a geographic map.
 They often display the flow of goods or the migration of people.
 As we can see in Figure~\ref{fig:theory:flow-map}, an early example of a flow map is Charles Minard’s depiction of Napoleon’s ill-fated march on Moscow in 1861~\cite{Corbett2001}.
 \begin{figure}[h]
@@ -111,7 +112,7 @@ As we can see in Figure~\ref{fig:theory:flow-map}, an early example of a flow ma
   }\label{fig:theory:flow-map}
 \end{figure}
 
-\paragraph{Choropleth maps} is a thematic map in which areas are shaded or patterned in proportion to the statistical variable being displayed on the map.
+\textbf{Choropleth maps} is a thematic map in which areas are shaded or patterned in proportion to the statistical variable being displayed on the map.
 A popular use case is the display of population density or per-capita income.
 We can see an example of a choropleth map in Figure~\ref{fig:theory:choropleth}, showing the percentage of obese population in the US\@.
 Choropleth maps are widely popular and likely to understand them.
@@ -129,12 +130,12 @@ They are very helpful when data is attached to enumeration unites like counties,
   }\label{fig:theory:choropleth}
 \end{figure}
 
-\paragraph{Graduated Symbol Maps} is a good alternative to a choropleth maps, as it alleviates one of its downsides:
+\textbf{Graduated Symbol Maps} is a good alternative to a choropleth maps, as it alleviates one of its downsides:
 Larger areas may appear more emphasized than smaller ones, thus confounding geographic area with data values.
 Instead, symbols are placed over the regions of a map.
 As \textcite{Heer2010} point out, these symbols allow for more visal variables to be visualized, i.e.\  symbol size, shape and colour.
 
-\paragraph{Cartograms} are used to encode a data attribute in the size of an area.
+\textbf{Cartograms} are used to encode a data attribute in the size of an area.
 For this reason geographic regions in cartograms appear distorted.
 A common example is to redraw the size of a country based on the the population or gross domestic product of a country.
 Area cartograms may be contiguous or noncontiguous, depending on the applied layout algorithm.
@@ -155,19 +156,19 @@ As we can see in the example in Figure~\ref{fig:research:cmv} there seems to be 
   \caption{Airline on-time performance: Correlation of time of day with arrival delay. Most recent flight with a delay of more than 100 minutes selected.}\label{fig:research:cmv}
 \end{figure}
 
-\paragraph{Brushing and Linking}
+\textbf{Brushing and Linking}
 Most multiple coordinated views also provide some kind of brushing technique.
 ``The technique of brushing is the principle approach, where elements are selected (and highlighted) in one display, concurrently the same information in any other linked display is also highlighted.''\cite{Roberts2007}
 
 \clearpage
-\section{Related Work}\label{sec:related-work}
+\section{Interaction Theory}\label{sec:interaction-theory}
 According to \textcite{Ho2013} interactions are a crucial part of data visualizations, yet most research in the area of data visualization still focuses on visual representations.
 Roughly speaking, research on interaction falls into these groups:
 How to categorize interaction techniques?
 How to find new interaction techniques and apply those to visualizations?
 
 \todo[inline]{Give a rough overview of this section}
-\subsection{Interaction Categories}\label{sec:related-work:categories}
+\subsection{Interaction Categories}\label{sec:interaction-theory:categories}
 \textcite{Shneiderman1996} classifies interactions into these groups:
 \begin{enumerate*}[label=(\arabic*)]
   \item
@@ -251,10 +252,10 @@ The most recent classification was done in 2007 by \textcite{Yi2007} listing sev
 \todo[inline]{The classifications are all redundant! Explain why and choose one classification for later use}
 \todo[inline]{Give one example for each category of the chosen classification}
 
-\subsection{Interaction Theory}
+\subsection{Interaction Models}
 \todo[inline]{no section without text}
 
-\paragraph{Space-Time Cube Operations}
+\textbf{Space-Time Cube Operations}
 is a concept introduced in 2014 by \textcite{Bach2014} to map temporal data into two dimensional visualizations.
 Space-time-cubes are used to model two attributes of continuous data with temporal data along a third axis, therefore the name \emph{cube}.
 While the transformations are rather static it is also possible to introduce activity into the transformations.
@@ -267,7 +268,7 @@ The work focuses on temporal data and otherwise continuous data.
 Interactions are not seen as an abstract entity, that need to be agnostic of the underlying data structure and visualization.
 The authors admit ``our framework does not provide much guidance for interaction design: the design space for interactive operations has only been partially explored.''\cite[Other limitations, p.~15]{Bach2014}
 
-\paragraph{ITlib\cite{Figueroa2001}} is an architecture and a framework of interaction techniques for virtual reality applications, designed to be extensible and flexible.
+\textbf{ITlib\cite{Figueroa2001}} is an architecture and a framework of interaction techniques for virtual reality applications, designed to be extensible and flexible.
 New interaction techniques can easily be added and application specific code is seamlessly integrated.
 On a low level an interaction technique ``is modeled as a set of filters connected in a small data flow''\cite[Basic concept, p.~2]{Figueroa2001}.
 These filters are the smallest process unit in the data flow.
@@ -280,7 +281,7 @@ Certain assumptions are made, including the data model, which is the 3D scene, a
 The goal is not to better understand the data, as the data model in this case is the 3D scene, and not statistical data.
 Most important, the framework describes interaction techniques for a single viewpoint but not for coordinated multiple views.
 
-\paragraph{Focus+Context Visualization} by \textcite{Bjork1999} is one of the few formalizations of information visualizations.
+\textbf{Focus+Context Visualization} by \textcite{Bjork1999} is one of the few formalizations of information visualizations.
 The authors describe this formalization based on first-level and second-level visualization:
 \subparagraph{Visualizations} referred to as $IV$, are triples of a set $[D]$ of underlying data, a visual representation $V$ and $I$ which is the possible interaction or manipulation.
 \begin{equation}
