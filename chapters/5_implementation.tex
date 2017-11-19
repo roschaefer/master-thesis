@@ -1,9 +1,26 @@
 \chapter{Implementation}\label{sec:implementation}
 
 This section describes the reference implementation for the conceptual framework in Chapter \ref{cha:concept}.
-Various components and interaction techiques of the geographical visualization are detailed.
-The integration of the geographical visualization in the existing \visan{} is layed out.
+Various components and interaction techniques of the geographical visualization are detailed.
+The integration of the geographical visualization in the existing \visan{} is shown.
 The connection of the conceptual framework and the implemented framework is examined.
+
+\section{Geographical visualization with React and Leaflet}
+
+The geographical visualization is implemented as a \attr{Map} component of the React Leaflet library.
+Listing \ref{lst:implementation:render} shows the \attr{render} method of the component.
+
+\lstinputlisting[
+  language=JavaScript,
+  label={lst:implementation:render},
+  caption={\attr{render} method of the Map component of the geographical visualization}
+]{listings/implementation/render.tsx}
+
+The \attr{render} is the only required method of a React component.
+When the component is rendered in the \attr{DOM} tree of the document, the \attr{render} method will be called and returns the inserted HTML.
+React uses a templating language called \attr{JSX}, which can be written right into the javascript method.
+This templating language allows to nest other child components in to the React parent component.
+In this case we add a \attr{Geojson} component.
 
 
 \section{Implemented interactions}
