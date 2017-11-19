@@ -16,11 +16,33 @@ Listing \ref{lst:implementation:render} shows the \attr{render} method of the co
   caption={\attr{render} method of the Map component of the geographical visualization}
 ]{listings/implementation/render.tsx}
 
-The \attr{render} is the only required method of a React component.
-When the component is rendered in the \attr{DOM} tree of the document, the \attr{render} method will be called and returns the inserted HTML.
-React uses a templating language called \attr{JSX}, which can be written right into the javascript method.
-This templating language allows to nest other child components in to the React parent component.
-In this case we add a \attr{Geojson} component.
+The \attr{render} method is the only required method of a React component.
+It will be invoked on the initial rendering of the component of the \attr{DOM} and on every update of the component's properties.
+React's templating language ``\attr{JSX}'' allows to nest other child components in to the React parent component.
+In this case the \attr{Map} component includes a \attr{TileLayer} \attr{GeoJSON} component from the \attr{react-leaflet} library.
+This library conveniently provides ``React components for Leaflet maps.''~\cite{ReactLeaflet2017}.
+
+\subsection{GeoJSON component}
+
+The \attr{GeoJSON} component is provided by the \attr{Map} component with a couple of properties:
+It gets a
+\begin{enumerate*}[label=(\arabic*)]
+  \item
+    geojsonURL as well as a
+  \item
+    geojson as data attribute. Furthermore a couple of callbacks is passed into the child component, including
+  \item
+    featureStyle,
+  \item
+    pointToLayer and
+  \item
+    onEachFeature.
+\end{enumerate*}
+
+The \attr{Map} component controls the data flow and without a \attr{geojson} object, no polygons are placed on the map.
+
+
+
 
 
 \section{Implemented interactions}
