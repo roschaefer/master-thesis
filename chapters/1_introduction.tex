@@ -1,0 +1,130 @@
+\section{Introduction}
+The human brain processes visual information better than it processes text.
+As a result, the most tangible data analyses usually come with some sort of data visualization.
+On a computer, the user can interact with the data and explore different levels of granularity.
+The visualization changes and the user can iteratively perform another interaction.
+In many cases a great interactivity results in a great user experience.
+
+There is a wide range of existing frameworks and implementations for data visualizations.
+In some advanced cases, the data is visualized in multiple views which are linked with each other.
+These \cmvs{} are interesting, as they try to make the most out of the various advantages of different visualizations.
+However, implementing interactions on data visualizations, and especially on multiple visiualization, is tedious and costly.
+There is currently no extensible framework that helps to implement interactions of the same data in various visualizations.
+
+% Three moves
+%\todo{What is the topic about?}
+\todo[inline]{Establish the niche, why is there further research on your topic?}
+\todo[inline]{Introduce the current research, what's the hypothesis, the research question?}
+
+\subsection{Motivation}\label{sec:outline}
+
+We create data visualizations of multi-dimensional, hierarchical and geographical data.
+Namely, we develop \rufu{} which is an application for German citizen to publish which public broadcasts should benefit from their broadcasting fees.
+The output of this application is a public user ranking and it can be used by broadcasting corporations to evaluate their program.
+Visualizations of multidimensional, hierarhical data guide media researchers, journalists and the general audience to draw conclusions.
+
+To explain this a little deeper:
+Public broadcasting in Germany is organized federally, a German home belongs to the jurisdiction of a public broadcasting corporation.
+But the produced content can be used by all German citizen and it is even required to be free and available for everyone.
+In the application, common users vote on the entire collection of broadcasts but media researchers are only interested in users of a service area.
+User accounts have a local context and broadcasts have a global context.
+
+Let's say a media researcher is interacting with two views of the data.
+The interaction may happen in one view but is reflected in another view.
+E.g.\ the researcher selects user accounts from a geographical map but has the intention to update a separate view.
+That view could show e.g.\ a listing of the most popular broadcasts, based on the data of user accounts from that area.
+
+Having the interaction spread across several views creates a great value for the user but the implementation this functionality is very tedious.
+We see a strong demand for \cmvs{} and the development effort as the main obstacle.
+A \cmv{} composed of arbitrary charts and plots and the implementation of their interactions turns into an unsustainable amount of work.
+
+\subsection{Problem Statement}
+%
+% \tmaps{} visualize hierarchical data on a two dimensional canvas and are particularly suitable if the proportions of the data should be emphasized.
+% When dealing with both multidimensional and geographical data, problems arise when features other than geographical features are used as input of the tiling algorithm.
+% This impairs the comprehensibility and complicates the selection of geographical units of items.
+% A second problem is the coordination of interactions among arbitrary data visualizations.
+
+A \tmap{} of hierarchical, geographical data can loose the geographic context if the tiling algorithm is based on non-geographical features.
+Items that should belong together according to their geographic circumstances may be scattered across the \tmap{}.
+This impairs the comprehensibility and complicates the selection of geographical units of items.
+
+\subsection{Hypothesis}
+
+A second, geographical visualization next to the \tmap{} can maintain the geographical context.
+If an interaction in one visualization is reflected in the other, this further supports the analysis of the data.
+Moreover, the limitations of a single data visualization can be avoided by interacting with the data trough another view.
+
+%Hypothese ist, dass durchs Visualisierungs-, Navigations- und Interaktionstechniken eine Kopplung von georäumlichen 2D-Kartendarstellungen und thematisch-orientierten 3D-Treemaps ermöglicht wird und dadurch die Exploration und Analyse von multidimensionalen georäumlichen Daten unterstützt werden kann.
+
+\subsection{Contributions}
+
+In order to validate the conceptual framework for \cmvs{}, we develop a reference implementation to investigate its feasibility.
+The development of the reference implementation is subdivided into the following packages:
+
+\begin{enumerate}
+  \item
+    Concept
+
+    Based on a number of examples, a basic, conceptual framework is designed.
+    This includes a common data structure, a formalization of an interaction in general and the communication prototocol for multiple views.
+
+  \item
+    Implementation
+
+    We develop a geographical represenatation of the data.
+    Items in the map can be focused, highlighted, selected with multiple clicks or with a bounding box.
+    This creates a powerful selection mechanism, which can be used to select data in map-based representations and highlight the data in the \tmap{}.
+
+  \item
+    Integration of \tmap{} and \map{}
+    We develop linking and interaction mechanisms between \maps{} (for map-based representation) and \tmaps{} (for abstract information representation).
+
+  \item
+    Demonstration and evaluation
+
+    \cmv{} layouts and suitable views are implemented and tested for the selected test data.
+    Based on the test data sets, the \cmv{} implementation is examined and evaluated for design criteria~\cite{Baldonado2000}, general usability aspects~\cite{Roberts2007} and usage for typical visual analytics tasks.
+\end{enumerate}
+
+% \subsection{Methodological Approach}
+%
+% A literature research is used to gather knowledge about the current state of the art with respect to \cmvs{}.
+% Existing concepts and implementations available on the internet are examined and reused if possible.
+% Interviews of people from the target group are conducted and the define the requirements for the application.
+% A minimal viable product is developed to further validate the user requirements.
+% Also, common user behaviour is observed during user tests.
+% The prototype is continuously developed to allow for further experimentation.
+%
+% \paragraph{Scenarios}
+% While implementing more features, we have two scenarios with different kind of data and different user requirements:
+% \begin{itemize}
+%   \item
+%     In our work on the project \rufu{} we design and prototype visualizations for media researchers.
+%     We fully control the database and the database schema as well as on the user facing application on top of it.
+%     User requirements are tied to journalists, media researchers, broadcasting corporations.
+%     The data has geographical, hierarchical, temporal and correlated characteristics.
+%   \item
+%     The \visan{} for administrative data is used as a more general purpose application.
+%     There is no single database schema but combatibility with many sources or services.
+%     User requirements are potentially unknown and part of the resarch.
+%     The usage focuses especially on geographical and hierarchical data.
+% \end{itemize}
+%
+% For the scope of this master thesis we therefore compare implemented visualization and views.
+% How do both approaches differ in development speed, value for the customer?
+% What considerations need to be done regarding the database schema?
+%
+% \todo[inline]{What are the areas of research, in which this thesis can be placed into?}
+
+\subsection{Structure of the Work}
+
+In Section~\ref{sec:theory} we introduce basic terminology of \cmvs{} and the theoretical background in this area of research.
+Section~\ref{sec:related-work} covers the state of the art and research on multiple views and coordinated interactions.
+In Section~\ref{sec:analysis} we analyze a set of data visualizations and their interactions by example.
+The gained knowledge from that section is used in the following Section~\ref{sec:concept} for a formalization of the \cmv{} framework.
+In Section~\ref{sec:implementation} we describe the reference implementation.
+Then in Section~\ref{sec:evaluation} we take the requirements from Section~\ref{sec:analysis} to evaluate the conceptual framework and its implementation.
+Finally sum up the main contribution in Section~\ref{sec:conclusion} and outline the future work in Section~\ref{sec:future-work}.
+
+\clearpage
