@@ -78,6 +78,10 @@ This way, the same options of \attr{featureStyle} can be applied to both point a
 \section{MultiviewController}
 
 The \attr{MultiviewController} is a simple wrapper around the library \attr{PubSubJS} and works as a broker for interactions across \cmvs{}.
+The library \attr{PubSubJS} is a simple, asynchronous implementation of the ``publish-subscribe'' software pattern, described in detail in section~\ref{sec:implementation:patterns}.
+Topics can be registered hierarchically, with subtopics delimited with dots.
+A subscription to topic \attr{mcv.select.focus} will be notified only for \attr{focus} interactions whereas a subscription of \attr{mcv.select} will be notified for both \attr{focus} and \attr{highlight} interactions.
+
 As the central part of the software, the controller is also used for certain performance optimiziations.
 These optimizations affect how often the geometries are reloaded, i.e.\ it reduces the number of requests to the \attr{GeoJSON} endpoint.
 
@@ -129,7 +133,7 @@ They look perfectly suited to be used in \cmvs{}.
 However the attributes of web components are string based.
 If arbitrary javascript objects need to be passed into the web component it is suggested to use one of the common javascript frameworks that allow for data binding.
 
-\section{Software patterns}
+\section{Software patterns}\label{sec:implementation:patterns}
 Figure~\ref{fig:implementation:sequence-diagram} shows how \cmvs{} can be automatically updated even if the environment lacks a native update-mechanism.
 
 \begin{figure}[h!]
@@ -254,7 +258,7 @@ Leaflet is the leading open-source JavaScript library for mobile-friendly intera
 
 \textbf{PubSubJS}
 PubSubJS is a topic-based publish/subscribe library written in JavaScript~\cite{PubSubJS2017}.
-Topics are published asynchronuously.
+Topics are published asynchronously.
 \todo[inline]{Show a code listing here, how interaction verbs are mapped to topics}
 
 \section{Coordination of Geographical Visualization and Treemap}
