@@ -1,4 +1,6 @@
-\chapter{Related Work}\label{sec:theory}
+\chapter{Related Work}\label{sec:related-work}
+
+\todo[inline]{no section without text}
 \section{Foundations}
 \todo[inline]{no section without text}
 
@@ -29,9 +31,9 @@ Let's say we have multidimensional data, is there an order in how people access 
 How do these visualizations perform and what are best practices to be considered for their implementation?
 
 
-\subsection{Visual Variables}\label{sec:theory:visual-variables}
+\subsection{Visual Variables}\label{sec:related-work:visual-variables}
 French cartographer Jaques Bertin introduced seven visual varables in 1967~\cite{Bertin2010}.
-We can see an example for each in Figure~\ref{fig:theory:visual-variables}.
+We can see an example for each in Figure~\ref{fig:related-work:visual-variables}.
 These visual variables are used in cartography but can also be applied to data visualization in general.
 \textcite{Carpendale2003} explains in detail their use in terms of computational information instead of printed cartography.
 \textcite{Garlandini2009} put these visual variables under systematical validation procedures.
@@ -39,7 +41,7 @@ The authors conclude that the variable size provides the most accurate and effic
 \begin{figure}[h!]
   \centering
   \includegraphics[width=\textwidth]{images/visual-variables.png}
-  \caption{Bertin's~\cite{Bertin2010} original visual variables.}\label{fig:theory:visual-variables}
+  \caption{Bertin's~\cite{Bertin2010} original visual variables.}\label{fig:related-work:visual-variables}
 \end{figure}
 
 \subsection{Treemaps}
@@ -55,7 +57,7 @@ Rectangles contain sub-branches of the node as tiles, thereby expressing hierarc
         \includegraphics[width=\textwidth]{images/theory/german-exports-1}}{%
         \hfill \ccAttribution{} \ccShareAlike{} Observatory of Economic Complexity~\cite{Macro2017}
     }
-    \caption{First hierarchy level of German exports}\label{fig:theory:treemap-german-exports-1}
+    \caption{First hierarchy level of German exports}\label{fig:related-work:treemap-german-exports-1}
 \end{figure}
 
 \begin{figure}[h]
@@ -64,11 +66,11 @@ Rectangles contain sub-branches of the node as tiles, thereby expressing hierarc
         \includegraphics[width=\textwidth]{images/theory/german-exports-2}}{%
         \hfill \ccAttribution{} \ccShareAlike{} Observatory of Economic Complexity~\cite{Macro2017}
     }
-    \caption{Second hierarchy level of German exports}\label{fig:theory:treemap-german-exports-2}
+    \caption{Second hierarchy level of German exports}\label{fig:related-work:treemap-german-exports-2}
 \end{figure}
 \todo[inline]{Why is the layout different in the second image?}
 
-We can see an example of an interactive treemap in Figures~\ref{fig:theory:treemap-german-exports-1} and~\ref{fig:theory:treemap-german-exports-2}.
+We can see an example of an interactive treemap in Figures~\ref{fig:related-work:treemap-german-exports-1} and~\ref{fig:related-work:treemap-german-exports-2}.
 German exports are divided in generic groups like ``Machines'' and ``Chemical Products'' and include more specific groups like ``Cars'' and ``Packaged Medicaments''.
 The level of hiearchy can be selected with a dropdown menu, so only leaf nodes are displayed at a time.
 Treemaps are space-filling visualizations, i.e.\ they make 100\% use of the available screen size.
@@ -101,7 +103,7 @@ We can see an example of a \tmap{} in figure~\ref{fig:research:ua_treemap}
 \todo[inline]{introduction}
 \textbf{Flow maps} place stroked lines on top of a geographic map.
 They often display the flow of goods or the migration of people.
-As we can see in Figure~\ref{fig:theory:flow-map}, an early example of a flow map is Charles Minard’s depiction of Napoleon’s ill-fated march on Moscow in 1861~\cite{Corbett2001}.
+As we can see in Figure~\ref{fig:related-work:flow-map}, an early example of a flow map is Charles Minard’s depiction of Napoleon’s ill-fated march on Moscow in 1861~\cite{Corbett2001}.
 \begin{figure}[h]
   \centering
   \includegraphics[width=\textwidth]{images/theory/minard}
@@ -109,12 +111,12 @@ As we can see in Figure~\ref{fig:theory:flow-map}, an early example of a flow ma
     Charles Minard's map of Napoleon's disastrous Russian campaign of 1812.
     Minard managed to represent six values in two graphical dimensions:
     The number of Napoleon's troops, the travelled direction and distance, latitude and longitude relative to specific dates and the temperature.
-  }\label{fig:theory:flow-map}
+  }\label{fig:related-work:flow-map}
 \end{figure}
 
 \textbf{Choropleth maps} is a thematic map in which areas are shaded or patterned in proportion to the statistical variable being displayed on the map.
 A popular use case is the display of population density or per-capita income.
-We can see an example of a choropleth map in Figure~\ref{fig:theory:choropleth}, showing the percentage of obese population in the US\@.
+We can see an example of a choropleth map in Figure~\ref{fig:related-work:choropleth}, showing the percentage of obese population in the US\@.
 Choropleth maps are widely popular and likely to understand them.
 They are very helpful when data is attached to enumeration unites like counties, provinces and countries.
 
@@ -127,7 +129,7 @@ They are very helpful when data is attached to enumeration unites like counties,
   \caption{%
     Choropleth Map of Obesity in the United States in 2008.
     Present of population classified as ``obese'' (Body Mass Index in excess of 30), by state.
-  }\label{fig:theory:choropleth}
+  }\label{fig:related-work:choropleth}
 \end{figure}
 
 \textbf{Graduated Symbol Maps} is a good alternative to a choropleth maps, as it alleviates one of its downsides:
@@ -289,7 +291,7 @@ The authors describe this formalization based on first-level and second-level vi
 \end{equation}
 If $I$ affects $[D]$ we can manipulate the underlying data set.
 Examples would be changes in a spreadsheet editor, or a change of the start and end date of an appointment in a calendar.
-When $V$ is affected by $I$ the user can manipulate $IV$ in order to change the way $[D]$ is represented, e.g.\ choosing a different level of detail as shown in Figures~\ref{fig:theory:treemap-german-exports-1} and~\ref{fig:theory:treemap-german-exports-2}.
+When $V$ is affected by $I$ the user can manipulate $IV$ in order to change the way $[D]$ is represented, e.g.\ choosing a different level of detail as shown in Figures~\ref{fig:related-work:treemap-german-exports-1} and~\ref{fig:related-work:treemap-german-exports-2}.
 
 \subparagraph{Second-level Visualizations} are information visualizations consecutively applied.
 The underlying data set $[D]$ of the previous formula is replaced with some information visualization $IV$, which is compatible with $IV'$.
