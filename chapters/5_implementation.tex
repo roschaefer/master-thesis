@@ -75,7 +75,21 @@ Finally, we configure how to display point geometries in callback \attr{poinToLa
 Since normal markers do not have a configurable color and style, we instruct the \attr{GeoJSON} component to render a \attr{CircleMarker} for each point geometry instead.
 This way, the same options of \attr{featureStyle} can be applied to both point and area geometries.
 
+\section{MultiviewController}
 
+The \attr{MultiviewController} is a simple wrapper around the library \attr{PubSubJS} and works as a broker for interactions across \cmvs{}.
+As the central part of the software, the controller is also used for certain performance optimiziations.
+These optimizations affect how often the geometries are reloaded, i.e.\ it reduces the number of requests to the \attr{GeoJSON} endpoint.
+
+
+\lstinputlisting[
+  language=JavaScript,
+  label={lst:implementation:multiviewController},
+  caption={The \attr{multiviewController} avoids unnecessary requests to reload geometries}
+]{listings/implementation/multiviewController.tsx}
+
+As shown in Listing~{list:implementation:multiviewController}, the geometries depend on a change of the \attr{url} of the geometries.
+A change of the \attr{url} will automatically trigger an interaction of type \attr{reconfigure} to reload geometries.
 
 
 \section{Implemented interactions}
