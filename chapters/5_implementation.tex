@@ -39,7 +39,24 @@ It gets a
     onEachFeature.
 \end{enumerate*}
 
-The \attr{Map} component controls the data flow and without a \attr{geojson} object, no polygons are placed on the map.
+This way, the parent \attr{Map} component controls the data flow and without a \attr{geojson} object, no polygons are placed on the map.
+A changed \attr{geojsonURL} will always update the child component as it is used a \attr{key} on the \attr{GeoJSON} component.
+The callbacks passed into the \attr{GeoJSON} component control the visual representation of each polygon and they add event handlers for a mouse click or a mouse move on each polygon.
+Listing \ref{lst:implementation:onEachFeature} shows the event handlers added to the map.
+
+\lstinputlisting[
+  language=JavaScript,
+  label={lst:implementation:onEachFeature},
+  caption={\attr{onEachFeature} callback passed into the \attr{GeoJSON} component, adding handlers for mouse events}
+]{listings/implementation/onEachFeature.tsx}
+
+First we cache all layers in the internal state of the \attr{Map} component.
+On each \attr{mouseover} event, the \attr{id} of the \attr{GeoJSON} feature is published as \attr{mcv.select.highlight} interaction.
+A \attr{click} event is distinguised if the control key is pressed or not.
+In the latter case, the id of the feature is either added or removed from the list of focused ids and then the list of focused ids is published as \attr{mcv.select.focus} interaction.
+
+
+
 
 
 
