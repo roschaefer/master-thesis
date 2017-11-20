@@ -95,28 +95,16 @@ These optimizations affect how often the geometries are reloaded, i.e.\ it reduc
 As shown in Listing~{list:implementation:multiviewController}, the geometries depend on a change of the \attr{url} of the geometries.
 A change of the \attr{url} will automatically trigger an interaction of type \attr{reconfigure} to reload geometries.
 
+An example of these geometries can be seen in listing~\ref{lst:geojson:example}.
+For convenience, the file includes the aggregated data in the \attr{properties} of each feature.
+In this case the colors the shapes of the \tmap{} are based on the value of \attr{user_count_normalized}.
+Each feature comes with a unique \attr{id} which is published when a user interacts with the feature.
 
-\section{Implemented interactions}
-
-In the course of this thesis we want to implement the following interactions:
-\begin{itemize}
-  \item
-    \emph{Select}: The user clicks on a building or region in a geographical map and all affected properties in the \tmap{} will be highlighted.
-  \item
-    \emph{Explore}: The user clicks on a block in the \tmap{} and the viewpoint in the geographical map will be centered on relevant area.
-  \item
-    \emph{Reconfigure}: The user selects a different feature set and the changes are reflected in both the geographical map (e.g. point instead of polygon geometries) and in the \tmap{}.
-  \item
-    \emph{Filter}: The user double-clicks on a region in a geographical map and the \tmap{} will be based on data of only that region.
-\end{itemize}
-
-\section{Standards}
-\todo[inline]{no section without text}
-
-\textbf{GeoJSON} is the name of the data format used to exchange geometries.
-
-An example of aggregated user data merged with geometry data can be seen in listing~\ref{lst:geojson:example}.
-\lstinputlisting[language=JavaScript, label={lst:geojson:example}, caption={Geojson example}]{listings/example.geojson}
+\lstinputlisting[
+  language=JavaScript,
+  label={lst:geojson:example},
+  caption={A truncated example of a user distribution across German federal states}
+]{listings/example.geojson}
 
 We can use this data as input for our common \visan{}, e.g.\ figure~\ref{fig:implementation:user_distribution} shows the user distribution of \rufu{}.
 
@@ -128,10 +116,6 @@ We can use this data as input for our common \visan{}, e.g.\ figure~\ref{fig:imp
   }\label{fig:implementation:user_distribution}
 \end{figure}
 
-\textbf{Web components} is a recent standard of the W3C\cite{W3C2017} to bring component-based software engineering to the world wide web.
-They look perfectly suited to be used in \cmvs{}.
-However the attributes of web components are string based.
-If arbitrary javascript objects need to be passed into the web component it is suggested to use one of the common javascript frameworks that allow for data binding.
 
 \section{Software patterns}\label{sec:implementation:patterns}
 Figure~\ref{fig:implementation:sequence-diagram} shows how \cmvs{} can be automatically updated even if the environment lacks a native update-mechanism.
@@ -229,3 +213,17 @@ By that we eliminate the amount of custom updating implementation.
 The root node of the DOM-tree of our react application is connected with the existing app through the common interface.
 Both urban analytics controller and the multiview map component will observe changes to the common interface.
 Also sub-components may communicate with the common interface.
+
+\section{Implemented interactions}
+
+In the course of this thesis we want to implement the following interactions:
+\begin{itemize}
+  \item
+    \emph{Select}: The user clicks on a building or region in a geographical map and all affected properties in the \tmap{} will be highlighted.
+  \item
+    \emph{Explore}: The user clicks on a block in the \tmap{} and the viewpoint in the geographical map will be centered on relevant area.
+  \item
+    \emph{Reconfigure}: The user selects a different feature set and the changes are reflected in both the geographical map (e.g. point instead of polygon geometries) and in the \tmap{}.
+  \item
+    \emph{Filter}: The user double-clicks on a region in a geographical map and the \tmap{} will be based on data of only that region.
+\end{itemize}

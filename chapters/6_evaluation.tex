@@ -4,13 +4,19 @@
 \todo[inline]{The flexibility?}
 \section{Comparison of client-side component frameworks}
 
-Which JavaScript, client-side rendering and component based framework is most suitable for \cmvs{}?
-Three frameworks have been evaluated:
+This section evaluates the most suitable client-side rendering and component based JavaScript framework for \cmvs{} and whether or not to use web components.
+
+Three JavaScript frameworks have been evaluated:
 \begin{enumerate*}[label=(\arabic*)]
   \item GlimmerJS
   \item Google Polymer and
   \item ReactJS.
 \end{enumerate*}
+Google Polymer is built on top of web components and GlimmerJS applications can be exported as a web component, but React does not support web components.
+
+\textbf{Web components} is a recent standard of the W3C\cite{W3C2017} to bring component-based software engineering to the world wide web.
+Web components are a set of web platform APIs to create new custom, reusable, encapsulated HTML tags that can be used in web pages and web applications~\cite{WebComponents2017}.
+If \cmvs{} are implemented in JavaScript based web applications, web components are a promising choice, to allow arbitrary views to be put together.
 
 
 \textbf{GlimmerJS} is the rendering enginge of EmberJS\cite{Ember2017}.
@@ -29,6 +35,7 @@ The web component specification, unfortunately, does not specify how arbitrary J
 String based attributes are supported, as seen in Listing~\ref{lst:evaluation:web-components-data}.
 To pass rich data to components however, web component frameworks have to roll their own data flow and syntax.
 Google Polymer's syntax to pass rich data to a components is shown in Listing~\ref{lst:evaluation:polymer-data}.
+But this is a proprietary solution that abandons standard HTML.
 
 \lstinputlisting[
   language=HTML,
@@ -55,9 +62,9 @@ Along with its major advantage of easy integration, it has a striving community,
 As a summary, if there is
 \begin{enumerate*}[label=(\arabic*)]
   \item no obligation to implement web components
-  \item and an easy integration into an existing application is necessary
+  \item and an easy integration into an existing application is necessary,
 \end{enumerate*}
-React is the perfect choice for \cmvs{}.
+then React is the perfect choice for \cmvs{}.
 Figure~\ref{fig:implementation:frontend-frameworks} shows the pros and cons of each framework for the use case.
 
 
