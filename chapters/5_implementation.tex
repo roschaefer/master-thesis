@@ -1,5 +1,6 @@
 \chapter{Implementation}\label{sec:implementation}
 
+
 This section describes the reference implementation for the conceptual framework in Chapter \ref{cha:concept}.
 First, the general architecture is explained.
 Various components and interaction techniques of the geographical visualization are detailed.
@@ -8,15 +9,30 @@ The connection of the conceptual framework and the implemented framework is exam
 
 \section{Architecture}
 
+% \begin{figure}[h!]
+%   \centering
+%   \includegraphics[width=\textwidth]{figures/implementation/thesis-class-diagram.pdf}
+%   \caption{%
+%     Class diagram of the most important components and their relations
+%   }\label{fig:implementation:class-diagram}
+% \end{figure}
+
 \begin{figure}[h!]
   \centering
-  \includegraphics[width=\textwidth]{figures/implementation/thesis-class-diagram.pdf}
+  \includegraphics[width=\textwidth]{figures/implementation/thesis-architecture.pdf}
   \caption{%
-    Class diagram of the most important components and their relations
-  }\label{fig:implementation:class-diagram}
+    Architecture of the reference implementation.
+  }\label{fig:implementation:architecture}
 \end{figure}
 
-The general architecture of the reference implementation is show in Figure~\ref{fig:implementation:class-diagram}.
+The reference implementation of the conceptual framework is written in \attr{TypeScript} and uses \attr{PubSubJS} for communication.
+The visualizations are implemented with \attr{React} and the geographical visualization uses \attr{Leaflet} under the hood.
+Geometry data is exchanged with \attr{GeoJSON} as data format.
+
+\textbf{Leaflet}
+Leaflet is the leading open-source JavaScript library for mobile-friendly interactive maps~\cite{Leaflet2017}.
+
+The general architecture of the reference implementation is shown in Figure~\ref{fig:implementation:architecture}.
 Within the existing \visan{} the \attr{UAController} controls the rendering of the \tmap{}.
 The rendering of the geographical visualization is controlled by the \attr{MapComponent}.
 Additionally, there are two other views, \attr{DebugView} and \attr{MessageLog}.
@@ -106,11 +122,13 @@ This way, the same options of \attr{featureStyle} can be applied to both point a
 \section{MultiviewController}
 
 The \attr{MultiviewController} is a simple wrapper around the library \attr{PubSubJS} and works as a broker for interactions across \cmvs{}.
-The library \attr{PubSubJS} is a simple, asynchronous implementation of the ``publish-subscribe'' software pattern, described in detail in section~\ref{sec:implementation:patterns}.
-Topics can be registered hierarchically, with subtopics delimited with dots.
-A subscription to topic \attr{mcv.select.focus} will be notified only for \attr{focus} interactions whereas a subscription of \attr{mcv.select} will be notified for both \attr{focus} and \attr{highlight} interactions.
 
-As the central part of the software, the controller is also used for certain performance optimiziations.
+\textbf{PubSubJS} is a topic-based publish/subscribe library written in JavaScript~\cite{PubSubJS2017}.
+Topics can be registered hierarchically, with subtopics delimited by dots.
+A subscription to topic \attr{mcv.select.focus} will be notified only for \attr{focus} interactions whereas a subscription of \attr{mcv.select} will be notified for both \attr{focus} and \attr{highlight} interactions.
+Furthermore, topics are published asynchronously, so if the user interacts with a visualization, that does not block code execution.
+
+As the central part of the software, the \attr{MultiviewController} is also used for certain performance optimiziations.
 These optimizations affect how often the geometries are reloaded, i.e.\ it reduces the number of requests to the \attr{GeoJSON} endpoint.
 
 
@@ -211,36 +229,11 @@ Examples for the kind of data that might trigger a rerendering of a view:
 
 
 
-\begin{figure}[h!]
-  \centering
-  \includegraphics[width=\textwidth]{images/both-patterns-implemented.png}
-  \caption{%
-    Both observer pattern and component pattern applied in the field of \cmvs{}
-  }\label{fig:implementation:both-patterns}
-\end{figure}
 
 
-\textbf{Leaflet}
-Leaflet is the leading open-source JavaScript library for mobile-friendly interactive maps~\cite{Leaflet2017}.
-\todo[inline]{Show a code example how to use Leaflet}
-
-\textbf{PubSubJS}
-PubSubJS is a topic-based publish/subscribe library written in JavaScript~\cite{PubSubJS2017}.
-Topics are published asynchronously.
-\todo[inline]{Show a code listing here, how interaction verbs are mapped to topics}
 
 \section{Coordination of Geographical Visualization and Treemap}
 
-\todo[inline]{Introduce how we integrated the geographical map into the existing
-treemap implementation}
-
-\textbf{Observer pattern and component pattern in \cmvs{}}
-Figure~\ref{fig:implementation:both-patterns} shows the final result.
-We try to put as much code as possible under the root node of ReactJS\@.
-By that we eliminate the amount of custom updating implementation.
-The root node of the DOM-tree of our react application is connected with the existing app through the common interface.
-Both urban analytics controller and the multiview map component will observe changes to the common interface.
-Also sub-components may communicate with the common interface.
 
 \section{Implemented interactions}
 
