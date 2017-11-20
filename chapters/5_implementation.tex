@@ -1,9 +1,37 @@
 \chapter{Implementation}\label{sec:implementation}
 
 This section describes the reference implementation for the conceptual framework in Chapter \ref{cha:concept}.
+First, the general architecture is explained.
 Various components and interaction techniques of the geographical visualization are detailed.
 The integration of the geographical visualization in the existing \visan{} is shown.
 The connection of the conceptual framework and the implemented framework is examined.
+
+\section{Architecture}
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=\textwidth]{figures/implementation/thesis-class-diagram.pdf}
+  \caption{%
+    Class diagram of the most important components and their relations
+  }\label{fig:implementation:class-diagram}
+\end{figure}
+
+The general architecture of the reference implementation is show in Figure~\ref{fig:implementation:class-diagram}.
+Within the existing \visan{} the \attr{UAController} controls the rendering of the \tmap{}.
+The rendering of the geographical visualization is controlled by the \attr{MapComponent}.
+Additionally, there are two other views, \attr{DebugView} and \attr{MessageLog}.
+These views record interactions at runtime and can trigger and simulate an interaction.
+
+Every view has a reference to \attr{MultiviewController} in order to subscribe to interactions.
+The \attr{MultiviewController} itself does not have a visual representation.
+
+The classes \attr{MapComponent}, \attr{DebugView} and \attr{MessageLog} are implemented with React and have a \attr{render} method.
+This way, these class can be initialized and rendered anywhere in the DOM tree.
+They are dependency free, except of the reference to a \attr{MultiviewController}, which makes those classes easy to test.
+
+The views that are implemented with React automatically re-render if their internal state changes.
+Event handlers just have to publish an interaction, if the view is subscribed to the same interaction, it will automatically re-render.
+
 
 \section{Geographical visualization with React and Leaflet}
 
