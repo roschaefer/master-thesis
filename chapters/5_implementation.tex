@@ -69,6 +69,66 @@ They are dependency free, except of the reference to a \attr{MultiviewController
 The views that are implemented with React automatically re-render if their internal state changes.
 Event handlers just have to publish an interaction, if the view is subscribed to the same interaction, it will automatically re-render.
 
+\section{Software patterns}\label{sec:implementation:patterns}
+Figure~\ref{fig:implementation:sequence-diagram} shows how \cmvs{} can be automatically updated even if the environment lacks a native update-mechanism.
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=\textwidth]{images/sequence-diagram.png}
+  \caption{%
+    The sequence diagram shows the notification of different components.
+  The user first chooses a feature set and hovers over a polygon in the geographical map.
+  }\label{fig:implementation:sequence-diagram}
+\end{figure}
+
+
+\textbf{The Observer pattern} allows multiple \emph{observers} to react to changes of an observed state.
+In our case, the observed state is the \attr{MultiviewController}.
+Any change to the \attr{MultiviewController} will subsequently be broadcasted to all connected views.
+
+
+\textbf{Publisher subscriber}
+In our particular case we apply a special form of the observer pattern, the so called ``Publish-subscribe'' pattern\cite{Eugster2003}.
+Publish-subsribe is a messaging pattern which is widely used in message queues.
+In this scenario, senders of messages simply categorize their messages which will be consumed by subscribers of the category.
+The scenario has very low coupling, publishers do not even need to know the existence of subscribers.
+
+\textbf{Component pattern}
+State-of-the-art javascript component frameworks like ReactJS and EmberJS follow the component pattern for the architecture of a single page web application.
+The component pattern imposes a hierarchical structure on a website.
+Each component is responsible for a task and may contain other components.
+The components are joined at the root node of the page.
+
+This pattern is very applicable to \cmvs{}.
+The different views of \cmvs{} share state, i.e.\ the feature, that is currently highlighted or the applied filter on the data.
+So the views are components and their closest common ancestor is the \cmv{} itself, controlling state and passing user interaction down to it's children.
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=\textwidth]{images/data-down-actions-up.png}
+  \caption{%
+    Implementation of the component pattern in EmberJS\@.
+    The example shows a page of a webshop.
+    The customer is about to order the items in the shopping cart.
+  }\label{fig:implementation:data-down-actions-up}
+\end{figure}
+
+\textbf{Actions up --- Data down}
+
+Version 2.0 of Ember introduced a common phrase how to use this pattern effectively: ``Data down, actions up''\cite{Emberigniter2017}
+In the domain of \cmvs{} actions would mean user interactions, e.g.\ a click on a feature.
+The action will notify the controlling \cmv{} component.
+Actions may change data, and the changes will be passed to to all dependen views.
+These views are then rerendered.
+
+Examples for the kind of data that might trigger a rerendering of a view:
+\begin{itemize}
+  \item
+    The selected feature or a list of selected features
+  \item
+    A list of thresholds for certain features as a filter
+\end{itemize}
+
 
 \section{Geographical visualization with React and Leaflet}
 
@@ -180,65 +240,6 @@ We can use this data as input for our common \visan{}, e.g.\ figure~\ref{fig:imp
 \end{figure}
 
 
-\section{Software patterns}\label{sec:implementation:patterns}
-Figure~\ref{fig:implementation:sequence-diagram} shows how \cmvs{} can be automatically updated even if the environment lacks a native update-mechanism.
-
-\begin{figure}[h!]
-  \centering
-  \includegraphics[width=\textwidth]{images/sequence-diagram.png}
-  \caption{%
-    The sequence diagram shows the notification of different components.
-  The user first chooses a feature set and hovers over a polygon in the geographical map.
-  }\label{fig:implementation:sequence-diagram}
-\end{figure}
-
-
-\textbf{The Observer pattern} allows multiple \emph{observers} to react to changes of an observed state.
-In our case, the observed state is the \attr{MultiviewController}.
-Any change to the \attr{MultiviewController} will subsequently be broadcasted to all connected views.
-
-
-\textbf{Publisher subscriber}
-In our particular case we apply a special form of the observer pattern, the so called ``Publish-subscribe'' pattern\cite{Eugster2003}.
-Publish-subsribe is a messaging pattern which is widely used in message queues.
-In this scenario, senders of messages simply categorize their messages which will be consumed by subscribers of the category.
-The scenario has very low coupling, publishers do not even need to know the existence of subscribers.
-
-\textbf{Component pattern}
-State-of-the-art javascript component frameworks like ReactJS and EmberJS follow the component pattern for the architecture of a single page web application.
-The component pattern imposes a hierarchical structure on a website.
-Each component is responsible for a task and may contain other components.
-The components are joined at the root node of the page.
-
-This pattern is very applicable to \cmvs{}.
-The different views of \cmvs{} share state, i.e.\ the feature, that is currently highlighted or the applied filter on the data.
-So the views are components and their closest common ancestor is the \cmv{} itself, controlling state and passing user interaction down to it's children.
-
-\begin{figure}[h!]
-  \centering
-  \includegraphics[width=\textwidth]{images/data-down-actions-up.png}
-  \caption{%
-    Implementation of the component pattern in EmberJS\@.
-    The example shows a page of a webshop.
-    The customer is about to order the items in the shopping cart.
-  }\label{fig:implementation:data-down-actions-up}
-\end{figure}
-
-\textbf{Actions up --- Data down}
-
-Version 2.0 of Ember introduced a common phrase how to use this pattern effectively: ``Data down, actions up''\cite{Emberigniter2017}
-In the domain of \cmvs{} actions would mean user interactions, e.g.\ a click on a feature.
-The action will notify the controlling \cmv{} component.
-Actions may change data, and the changes will be passed to to all dependen views.
-These views are then rerendered.
-
-Examples for the kind of data that might trigger a rerendering of a view:
-\begin{itemize}
-  \item
-    The selected feature or a list of selected features
-  \item
-    A list of thresholds for certain features as a filter
-\end{itemize}
 
 
 \section{Implemented interactions}
