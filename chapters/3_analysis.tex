@@ -14,13 +14,6 @@ The second outcome of this section is a set of requirements which can be used to
 The data visualization catalogue by Severino Ribecca list many of the most used data visualizations\cite{VisualizationCatalogue2017}.
 Let's pick some of those and derive a number of possible interactions.
 
-%\begin{tabular}{l l l l}
-    %Comparisons & Proportions & Relationships & Hierarchy \\
-    %Concepts & Location & Part-to-a-whole & Distribution \\
-    %How things work & Processes \& methods & Movement or flow & Patterns \\
-    %Range & Data over time & Analysing text & Reference tool \\
-%\end{tabular}
-
 
 \textbf{Line diagrams}
 \begin{figure}
@@ -32,10 +25,15 @@ Let's pick some of those and derive a number of possible interactions.
 \end{figure}
 
 Line diagrams are multiple sets of data, displayed along the x-axis.
-They are used to display quantitative value over a continuous interval or time span.
+They can display a quantitative value over a continuous interval or time span and often they are used to show trends.
 It is possible to highlight an entire series of data or just a feature within that series.
-
-\conceptTable{Tabular data, many data sets as series.}{Position, orientation, texture.}{Color, shape, size.}
+Line diagrams expect data in a tabular format, a few columns with many data points each.
+The dependant visual variables here are
+\begin{enumerate*}[label=(\arabic*)]
+    \item Position
+    \item Orientation and
+    \item Texture.
+\end{enumerate*}
 
 \begin{table}[H]
   \centering
@@ -65,12 +63,12 @@ It is possible to highlight an entire series of data or just a feature within th
 
 Bar charts and multiset bar charts show one or many attributes per feature along an axis.
 They have in common that they encode the data attribute into the height of the eponymous bars.
-Colors might be used to better distinuish between the different data attributes.
+Colors might be used to better distinguish between the different data attributes.
 Features can be arbitrarily ordered along the axis, although multiset bar charts group features along a series of categories.
 
 Therefore, bar charts need to be initialized with the set of features and their values as well as the groups of features for the multiset bar chart.
 The supplied colours would colour each feature in a group in turn.
-The set of possible ineractions include the highlighting of features, the reordering of features and a change in encoding of colour values.
+The set of possible interactions include the highlighting of features, the reordering of features and a change in encoding of colour values.
 
 \conceptTable{Tabular data, many data sets as series}{Size, orientation.}{Position, colour, shape, texture.}
 
@@ -187,9 +185,9 @@ Possible interactions include the highlighting of a feature, a change of color m
     \label{fig:concept:chart-types:hierarchies}
 \end{figure}
 
-Treemaps are great to show hierarchical data without ever exceeding the availabe screen.
+Treemaps are great to show hierarchical data without ever exceeding the available screen.
 Each feature is a assigned a rectangle according to a layouting algorithm.
-Unlike a tree map a hiearchical ring diagram or sunburst diagram shows each level of the tree as a series of rings.
+Unlike a tree map a hierarchical ring diagram or sunburst diagram shows each level of the tree as a series of rings.
 
 Therefore, both tree map and ring diagram need the feature set as a tree, with each node having a data attribute for layouting. Every node may be assigned a color.
 As we are describing hierarchies, the maximal depth of tree may be increased or decreased.
@@ -292,7 +290,7 @@ Calendars and gantt charts could not only read the data from the data source, bu
 In this subsection, we list a set or requirements imposed on a \cmv{} framework.
 These requirements can be used for further evaluation.
 \textbf{Serialization} is the process of translating objects that can be stored or transmitted and reconstructed later.
-In order to coordinate interactions among views, information needs to be passed from one view to another. 
+In order to coordinate interactions among views, information needs to be passed from one view to another.
 A framework for \cmvs{} should therefore find a serialization format for interactions which has
 \begin{enumerate*}[label=(\arabic*)]
   \item
@@ -329,7 +327,7 @@ For the \cmv{} framework we want to measure the
     cycliomatic complexity. We will try to find a means to measure
   \item
     cohesion and
-  \item 
+  \item
     coupling in the framework.
 \end{enumerate*}
 We assume that the amount of shared data between views is an indicator for high coupling.
