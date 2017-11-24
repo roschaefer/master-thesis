@@ -12,33 +12,45 @@ The second outcome of this section is a set of requirements which can be used to
 \section{Single Visualization Interactions}\label{sec:analysis:examples:single}
 
 The data visualization catalogue by Severino Ribecca list many of the most used data visualizations\cite{VisualizationCatalogue2017}.
-Let's pick some of those and derive a number of possible interactions.
+This section covers a list of common data visualizations from that catalogue as examples.
+The expected data structure and a list of possible interactions is systematically analysed.
 
-
-\textbf{Line diagrams}
+\textbf{Line graphs}
 \begin{figure}
   \begin{center}
-    \subfloat[Line diagram]{{\includegraphics[width=0.4\textwidth]{images/chartTypes/line-diagram.png} }}%
+    \subfloat[Line graphs]{{\includegraphics[width=0.4\textwidth]{figures/analysis/line-graphs} }}%
     \qquad
   \end{center}
-  \caption{Line charts are used to display trends}\label{fig:concept:chart-types:line-diagrams}
+  \caption{Line graphs are used to display trends}
+  \label{fig:analysis:line-graphs}
 \end{figure}
 
-Line diagrams are multiple sets of data, displayed along the x-axis.
-They can display a quantitative value over a continuous interval or time span and often they are used to show trends.
-It is possible to highlight an entire series of data or just a feature within that series.
-Line diagrams expect data in a tabular format, a few columns with many data points each.
-The dependant visual variables here are
+Line graphs display how quantitative values have changed over time.
+They are perfectly suited to show trends or compare multiple series of data with each other.
+The expected data format is \emph{tabular}, since one ore many series of data in parallel are visualized.
+
+Line graphs are drawn in a Cartesian coordinate system, connecting subsequent points to each other.
+Thus,
 \begin{enumerate*}[label=(\arabic*)]
-    \item Position
-    \item Orientation and
-    \item Texture.
+    \item position
+    \item orientation and
+    \item texture
 \end{enumerate*}
+are constrained by the nature of the visualization.
+However, an interaction with the line graph can alter the
+\begin{enumerate*}[label=(\arabic*)]
+    \item shape
+    \item color or
+    \item size
+\end{enumerate*}
+of lines to create a visual effect.
+It is further possible to highlight either the entire series of data or a single data point within that series, e.g. changing the shape and size of the point.
+Table~\ref{tab:analysis:line-graph:interactions} shows a list of conceivable interactions in a line graph.
 
 \begin{table}[H]
   \centering
   \caption{Interactions for line charts}%
-  \label{fig:concept:chart-types:line-diagrams:interactions}
+  \label{tab:analysis:line-graph:interactions}
   \begin{tabular}{ll}
     \bf Select & Highlight a data point (id of data point) \\
     \bf Select & Highlight a data series (id of data series) \\
@@ -50,31 +62,48 @@ The dependant visual variables here are
 
 
 
-\textbf{Bar charts and multiset bar charts}
+
+\textbf{Bar charts and multi set bar charts}
 
 \begin{figure}
   \begin{center}
-    \subfloat[Bar chart]{{\includegraphics[width=0.4\textwidth]{images/chartTypes/bar-chart.png} }}%
+    \subfloat[Bar chart or column graph]{{\includegraphics[width=0.4\textwidth]{figures/analysis/bar-chart} }}%
     \qquad
-    \subfloat[Multiset bar chart]{{\includegraphics[width=0.4\textwidth]{images/chartTypes/multiset-bar-chart.png} }}%
+    \subfloat[Multi set bar chart]{{\includegraphics[width=0.4\textwidth]{figures/analysis/multiset-bar-chart} }}%
   \end{center}
-  \caption{A multiset bar charts is a variation of a bar chart}\label{fig:concept:chart-types:bar-charts}
+  \caption{A multi set bar charts is a variation of a bar chart}
+  \label{fig:analysis:bar-charts}
 \end{figure}
 
-Bar charts and multiset bar charts show one or many attributes per feature along an axis.
-They have in common that they encode the data attribute into the height of the eponymous bars.
-Colors might be used to better distinguish between the different data attributes.
-Features can be arbitrarily ordered along the axis, although multiset bar charts group features along a series of categories.
+Bar charts use either horizontal or vertical bars to show discrete, numerical comparisons across categories.
+The length of a bar displays a quantitative value of a category.
 
-Therefore, bar charts need to be initialized with the set of features and their values as well as the groups of features for the multiset bar chart.
-The supplied colours would colour each feature in a group in turn.
-The set of possible interactions include the highlighting of features, the reordering of features and a change in encoding of colour values.
+Multiple bar charts display many data series next to each other.
+Every series is grouped by category and a colour can be used to identify a data series.
 
-\conceptTable{Tabular data, many data sets as series}{Size, orientation.}{Position, colour, shape, texture.}
+Like line graphs, bar charts expect a \emph{tabular} data format.
+In contrast to line graphs, bar charts are used to show a comparison rather than a trend.
+
+The type of the visualization constrains the
+\begin{enumerate*}[label=(\arabic*)]
+    \item shape,
+    \item size and, in case of a multi set bar charts,
+    \item the colour
+\end{enumerate*}
+of the visualization.
+An interaction can be shown by altering
+\begin{enumerate*}[label=(\arabic*)]
+    \item position,
+    \item colour,
+    \item shape and
+    \item the texture
+\end{enumerate*}
+of bars and columns.
+Table~\ref{tab:analysis:bar-charts:interactions} list some possible interactions.
 
 \begin{table}
   \centering
-  \caption{Interactions for bar charts}\label{fig:concept:chart-types:bar-charts:interactions}
+  \caption{Interactions for bar charts}\label{tab:analysis:bar-charts:interactions}
   \begin{tabular}{ll}
     \bf Select & Highlight a bar (id of data point) \\
     \bf Encode & Change colours of data series (colours \rightarrow{} data series) \\
@@ -84,47 +113,48 @@ The set of possible interactions include the highlighting of features, the reord
   \end{tabular}
 \end{table}
 
+\textbf{Histograms}
 
 \begin{figure}
   \centering
-    \includegraphics[width=0.4\textwidth]{images/chartTypes/histogram.png}%
-    \label{fig:concept:chart-types:histograms}
+    \includegraphics[width=0.4\textwidth]{figures/analysis/histogram.png}%
+    \label{fig:analysis:histograms}
     \caption{A histogram is a bar chart over a continuous interval}%
 \end{figure}
 
 Histograms visualise the distribution of data over a continuous interval or certain time period.
 A special type is the population pyramid, which is a pair of back-to-back histograms, one for each sex.
-The difference of histograms to bar charts lies in the type of data itself, not the representation.
-Therefore these charts need to be initialized with the same data and the same interactions can be applied.
-
-\conceptTable{Tabular data, many data sets as series}{Size, orientation, position.}{Color, shape, texture.}
+Histograms and bar charts expect the same kind of data, i.e.\ a \emph{tabular} format.
+Almost the same interactions as in Table~\ref{tab:analysis:bar-charts:interactions} can be applied to histograms.
+Except a re-ordering of bars along the x-axis, because the histogram constrains the position of bars along the interval.
 
 \textbf{Bubble charts and scatter plots}
 
 \begin{figure}
   \centering
-    \subfloat[Bubble chart]{{\includegraphics[width=0.4\textwidth]{images/chartTypes/bubble-chart.png} }}%
+    \subfloat[Bubble chart]{{\includegraphics[width=0.4\textwidth]{figures/analysis/bubble-chart.png} }}%
     \qquad
-    \subfloat[Scatter plot]{{\includegraphics[width=0.4\textwidth]{images/chartTypes/scatter-plot.png} }}%
+    \subfloat[Scatter plot]{{\includegraphics[width=0.4\textwidth]{figures/analysis/scatter-plot.png} }}%
     \caption{Bubble charts and scatter plots are similar regarding interactions}%
-    \label{fig:concept:chart-types:bubble-chart}
+    \label{fig:analysis:bubble-chart}
 \end{figure}
 
-Bubble charts are popular choices to display a distribution of features.
-The chart is initialized with coordinates for each feature, a colour and a size in case of a bubble charts.
-Possible interactions include the highlighting of features, a different colour encoding, a reconfiguration to map another attribute to size.
-Bubble charts may show only a window of the available data and allow to zoom in, zoom out or move the window along the axes.
+Both bubble charts and scatter plots are popular choices to visualize variables from two values.
+Points are placed with the two values in Cartesian coordinates in order to detect relationships and correlations.
+In case of bubble charts, each point is displayed as a bubble with a third value encoded in the size the bubble.
+It is even possible to encode a fourth value in the colour of the bubble.
 
-\conceptTable{Tabular data, single data set with x- and y-coordinates}{Size, position.}{Color, shape, texture, orientation.}
-
+Like line graphs, bar charts and histograms, a scatter plot expects \emph{tabular} data.
+Each data point can take up to four values (in case of a coloured bubble chart).
+As we can see in Table~\ref{tab:analysis:bubble-charts:interactions}, interactions also include a zooming and movement of the viewpoint.
 \begin{table}
   \centering
   \caption{Interactions for bubble charts}%
-  \label{fig:concept:chart-types:bubble-chart:interactions}
+  \label{tab:analysis:bubble-charts:interactions}
   \begin{tabular}{ll}
     \bf Select & Highlight a bubble (id of data point) \\
     \bf Explore & Zoom in, zoom out (width and height of window) \\
-    \bf Explore & Move viewport position (x- and y-coordinates of viewport) \\
+    \bf Explore & Move viewpoint position (x- and y-coordinates of viewport) \\
     \bf Encode & Change mapping of colour to category (data series \rightarrow\ colour) \\
     \bf Encode & Change colour function (function value \rightarrow\ colour) \\
     \bf Encode & Change data attribute to colour (data attribute) \\
@@ -139,27 +169,30 @@ Bubble charts may show only a window of the available data and allow to zoom in,
 
 \begin{figure}
   \centering
-    \subfloat[Stacked bar chart]{{\includegraphics[width=0.3\textwidth]{images/chartTypes/stacked-bar-without-baseline.png} }}%
+    \subfloat[Stacked bar chart]{{\includegraphics[width=0.3\textwidth]{figures/analysis/stacked-bar-without-baseline.png} }}%
     \qquad
-    \subfloat[Stacked bar chart with baseline]{{\includegraphics[width=0.3\textwidth]{images/chartTypes/stacked-bar-with-baseline.png} }}%
+    \subfloat[Stacked bar chart with baseline]{{\includegraphics[width=0.3\textwidth]{figures/analysis/stacked-bar-with-baseline.png} }}%
     \caption{Stacked bar charts can be ordered along a baseline or stretch to 100\% width to show the percentage-of-the-whole of each group}%
-    \label{fig:concept:chart-types:stacked-bar-chart}
+    \label{fig:analysis:stacked-bar-chart}
 \end{figure}
 \begin{figure}
   \centering
-    \includegraphics[width=0.4\textwidth]{images/chartTypes/population-pyramid.png}%
-    \label{fig:concept:chart-types:population-pyramid}
+    \includegraphics[width=0.4\textwidth]{figures/analysis/population-pyramid.png}%
+    \label{fig:analysis:population-pyramid}
     \caption{A population pyramid can be modeled as a stacked bar chart}%
 \end{figure}
 
 Unlike a multi-set bar graph which displays their bars side-by-side, stacked bar graphs segment their bars of multiple datasets on top of each other.
-A baseline, as shown in figure~\ref{fig:concept:chart-types:stacked-bar-chart} might be modeled as two back-to-back multi-set bar graphs. A reordering would e.g.\ move one data set from the left side to the right side.
-Possible interactions include the highlighting of a feature, a change of color mapping, reordering of the baseline.
+A baseline, as shown in figure~\ref{fig:analysis:stacked-bar-chart} might be modeled as two back-to-back multi-set bar graphs. A reordering would e.g.\ move one data set from the left side to the right side.
+A stacked bar chart also expects \emph{tabular} data
+If the stacked bar chart has a baseline, often the sign of the numeric value defines the placement of the segment on the left or on the right side.
+Table~\ref{tab:analysis:stacked-bar-chart:interactions} shows possible interactions, including the highlighting of a feature, a change of color mapping or a reordering of the baseline.
+% \conceptTable{Tabular data, multiple date sets as series}{Size, shape, orientation.}{Color, position, texture.}
 
 \begin{table}
   \centering
   \caption{Interactions for stacked bar charts}%
-  \label{fig:concept:chart-types:stacked-bar-chart:interactions}
+  \label{tab:analysis:stacked-bar-chart:stacked-bar-chart:interactions}
   \begin{tabular}{ll}
     \bf Select & Highlight a bar (id of data point) \\
     \bf Encode & Change mapping of category to colour (data series \rightarrow\ colour) \\
@@ -172,36 +205,38 @@ Possible interactions include the highlighting of a feature, a change of color m
   \end{tabular}
 \end{table}
 
-\conceptTable{Tabular data, multiple date sets as series}{Size, shape, orientation.}{Color, position, texture.}
 
 \textbf{Hierarchical visualizations}
 
 \begin{figure}
   \centering
-    \subfloat[Tree map]{{\includegraphics[width=0.4\textwidth]{images/chartTypes/treemap.png} }}%
+    \subfloat[Tree map]{{\includegraphics[width=0.4\textwidth]{figures/analysis/treemap.png} }}%
     \qquad
-    \subfloat[Sunburst diagram]{{\includegraphics[width=0.4\textwidth]{images/chartTypes/sunburst.png} }}%
+    \subfloat[Sunburst diagram]{{\includegraphics[width=0.4\textwidth]{figures/analysis/sunburst.png} }}%
     \caption{Tree maps and sunburst diagrams are ideal to show hierarchies}%
-    \label{fig:concept:chart-types:hierarchies}
+    \label{fig:analysis:hierarchies}
 \end{figure}
 
 Treemaps are great to show hierarchical data without ever exceeding the available screen.
 Each feature is a assigned a rectangle according to a layouting algorithm.
 Unlike a tree map a hierarchical ring diagram or sunburst diagram shows each level of the tree as a series of rings.
 
-Therefore, both tree map and ring diagram need the feature set as a tree, with each node having a data attribute for layouting. Every node may be assigned a color.
+Therefore, both tree map and ring diagram expects \emph{hierarchical} data in form of a tree.
+Each node needs to have at least one quantitative value for layouting, additionally, each node may be assigned a color.
+
 As we are describing hierarchies, the maximal depth of tree may be increased or decreased.
 Again, interactions could include a highlighting of features and a change of color encoding.
 Both visualizations may show only a subtree.
 E.g.\ a click on a box in the treemap opens another treemap focused on the subtree.
 Similarly a click on a slice of the ring would surround the most external ring with the children of the feature.
+Table~\ref{tab:analysis:hierarchies:interactions} gives a more comprehensive list of interactions.
 
-\conceptTable{Tree, each feature has a value for layouting.}{Position, Size, shape, orientation.}{Color, texture.}
+% \conceptTable{Tree, each feature has a value for layouting.}{Position, Size, shape, orientation.}{Color, texture.}
 
 \begin{table}
   \centering
   \caption{Interactions for hierarchical visualizations}%
-  \label{fig:concept:chart-types:hierarchies:interactions}
+  \label{tab:analysis:hierarchies:interactions}
   \begin{tabular}{ll}
     \bf Select & Highlight a feature (id of data point) \\
     \bf Explore & Use another node as root of the visible tree (id of data point) \\
@@ -217,11 +252,11 @@ Similarly a click on a slice of the ring would surround the most external ring w
 
 \begin{figure}
   \centering
-    \subfloat[Choropleth map]{{\includegraphics[width=0.4\textwidth]{images/chartTypes/choropleth-map.png} }}%
+    \subfloat[Choropleth map]{{\includegraphics[width=0.4\textwidth]{figures/analysis/choropleth-map.png} }}%
     \qquad
-    \subfloat[Flow map]{{\includegraphics[width=0.4\textwidth]{images/chartTypes/flow-map.png} }}%
+    \subfloat[Flow map]{{\includegraphics[width=0.4\textwidth]{figures/analysis/flow-map.png} }}%
     \caption{Choropleth maps focus on a density while flow maps show a migration of data}%
-    \label{fig:analysis:chart-types:geographical}
+    \label{fig:analysis:geographical}
 \end{figure}
 
 Choropleth maps and flow maps are specialized diagrams focused on geographical data.
@@ -229,12 +264,16 @@ Size, position and shape of a feature is defined by the geometry data of a featu
 In choropleth maps the color of each feature is based on a data attribute.
 Flow maps may display connections between features, a data value defining the size of each arrow.
 
-\conceptTable{Graph data with edges, each feature has geometry data.}{Position, Size, shape, orientation.}{Color, texture.}
+Non-geographical data may be given in a \emph{tabular} form, assigned to each geographical feature.
+In contrast to tabular data, a flow map expects relationships between geographical features.
+Thus, it also expects \emph{relational} data in form of a graph
+
+% \conceptTable{Graph data with edges, each feature has geometry data.}{Position, Size, shape, orientation.}{Color, texture.}
 
 \begin{table}
   \centering
   \caption{Interactions for geographical visualizations}%
-  \label{fig:concept:chart-types:geographical:interactions}
+  \label{tab:analysis:geographical:interactions}
   \begin{tabular}{ll}
     \bf Select & Highlight a feature (id of data point) \\
     \bf Explore & Move viewport (latitude and longitude of viewport)\\
@@ -251,22 +290,24 @@ Flow maps may display connections between features, a data value defining the si
 \textbf{Activity diagrams}
 \begin{figure}
   \centering
-    \subfloat[Calendar]{{\includegraphics[width=0.4\textwidth]{images/chartTypes/calendar.png} }}%
+    \subfloat[Calendar]{{\includegraphics[width=0.4\textwidth]{figures/analysis/calendar.png} }}%
     \qquad
-    \subfloat[Gantt chart]{{\includegraphics[width=0.4\textwidth]{images/chartTypes/gantt-chart.png} }}%
+    \subfloat[Gantt chart]{{\includegraphics[width=0.4\textwidth]{figures/analysis/gantt-chart.png} }}%
     \caption{Similar to a calendar, a gantt chart shows activities and the progress along a time line}%
-    \label{fig:concept:chart-types:temporal}
+    \label{fig:analysis:temporal}
 \end{figure}
 
 In activity diagrams, each feature is represented as a rectangle, with the duration of the activity mapped to size and position.
 Calendars and gantt charts could not only read the data from the data source, but also add new features to the data set or update metadata of a feature, e.g.\ the progress of the activity.
+Calendars and gantt charts expect \emph{tabular} data, although data points might reoccur on a regular schedule.
+So some data points, i.e.\ events, might repeat infinitely.
 
-\conceptTable{Temporal data, each feature has a time interval.}{Position, Size, orientation.}{Color, shape, texture.}
+% \conceptTable{Temporal data, each feature has a time interval.}{Position, Size, orientation.}{Color, shape, texture.}
 
 \begin{table}
   \centering
   \caption{Interactions for temporal visualizations}%
-  \label{fig:concept:chart-types:temporal:interactions}
+  \label{fig:analysis:temporal:interactions}
   \begin{tabular}{ll}
     \bf Select & Highlight a feature (id of data point) \\
     \bf Explore & Show a different period of dates (start and end datetime)\\
@@ -282,8 +323,8 @@ Calendars and gantt charts could not only read the data from the data source, bu
 \textbf{Detail view}
 \begin{figure}
   \centering
-  \includegraphics[width=0.4\textwidth]{images/chartTypes/multi/detail-view}
-  \caption{The screenshot-tool ``shutter'' shows a magnified detail view of the area around the mouse cursor in the lower right corner of the screen}\label{fig:concept:chart-types:detail}
+  \includegraphics[width=0.4\textwidth]{figures/analysis/detail-view}
+  \caption{The screenshot-tool ``shutter'' shows a magnified detail view of the area around the mouse cursor in the lower right corner of the screen}\label{fig:analysis:detail}
 \end{figure}
 
 \section{Requirements}
