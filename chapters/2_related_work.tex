@@ -162,7 +162,33 @@ As we can see in the example in Figure~\ref{fig:research:cmv} there seems to be 
 Most multiple coordinated views also provide some kind of brushing technique.
 ``The technique of brushing is the principle approach, where elements are selected (and highlighted) in one display, concurrently the same information in any other linked display is also highlighted.''\cite{Roberts2007}
 
-\clearpage
+\section{Libraries, Frameworks and Standards}
+
+\textbf{TypeScript}
+TypeScript is a typed superset of JavaScript that compiles to plain JavaScript.
+It provides optional static typing, classes and interfaces.
+
+
+\textbf{PubSubJS} is a topic-based publish/subscribe library written in JavaScript~\cite{PubSubJS2017}.
+Topics can be registered hierarchically, with subtopics delimited by dots.
+A subscription to topic \attr{mcv.select.focus} will be notified only for \attr{focus} interactions whereas a subscription of \attr{mcv.select} will be notified for both \attr{focus} and \attr{highlight} interactions.
+Furthermore, topics are published asynchronously, so if the user interacts with a visualization, that does not block code execution.
+
+\textbf{GeoJSON}
+GeoJSON is a format for encoding a variety of geographic data structures~\cite{GeoJSON2017}.
+Based on JSON, it can simple geographic features like points, lines and areas and reserves a properties object for non-spatial attributes.
+
+\textbf{Leaflet}
+Leaflet is the leading open-source JavaScript library for mobile-friendly interactive maps~\cite{Leaflet2017}.
+It has support for GeoJSON which makes it very easy to display tiled web maps with interactive overlays.
+
+\textbf{ReactJS}
+ReactJS is an open-source JavaScript library to build user interfaces and allows to create reusable UI components.
+React renders HTML on the client, it changes the page without reloading the page.
+The framework corresponds with the View in the Model-View-Controller pattern.
+React components are structured hierarchically, with each component having dedicated responsibility.
+
+
 \section{Interaction Theory}\label{sec:interaction-theory}
 According to \textcite{Ho2013} interactions are a crucial part of data visualizations, yet most research in the area of data visualization still focuses on visual representations.
 Roughly speaking, research on interaction falls into these groups:
