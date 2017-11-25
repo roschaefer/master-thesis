@@ -146,3 +146,77 @@ Let's have some examples how an interaction between a \tmap{} and a \map{} might
     \end{enumerate}
 \todo[inline]{What are the key interactions in our use case?}
 
+\section{Evaluation of Requirements}\label{sec:evaluation:requirements}
+In this section, the reference implementation is evaluated based on the requirements from Section~\ref{sec:analysis:requirements}.
+
+\textbf{Serialization} of interactions depends on the published interaction data.
+The interaction type is just a string and therefore trivial to serialize.
+But the payload of the interaction can be an arbitrary JavaScript object, so the serialization depends on the serialization of that data.
+
+In our case, the largest JavaScript object that is published as interaction data are the geometries during initialization.
+This step is necessary as there is no shared state of data between visualizations and every view needs to hold its own data.
+Only identifiers are valid across multiple views, but each view is allowed to have its own internal structure of data.
+
+The largest data set of geometries at hand is called ``Immoscout Wohnungsangebote'' and consists of 8617 geographical features with a total size of 2.1 MB on disk.
+These geometries are stored as GeoJSON, i.e.\ JSON.
+
+After the initialization, data transmission between views can be reduced by exchanging implicit functions instead of explicit data sets.
+E.g.\ if some data points shall be hidden, the threshold function can be published instead of a set of entity ids that are hidden.
+In JavaScript, functions can be serialized with \attr{toString()} and deserialized with \attr{eval}.
+
+
+\textbf{Reversibility} of interactions also does not depend on the interaction framework but rather on the implementation of the participating visualizations.
+The undoing of an interaction needs to be implemented in each view separately.
+If the interaction framework is used to publish an \attr{undo} interaction, there are two possible implementations:
+\begin{enumerate*}[label=(\arabic*)]
+  \item
+    Each visualizations keeps a record of every past interaction and can replay the record up to the desired step
+    \item
+    or the mathematical inverse of the function is published.
+\end{enumerate*}
+Both options have an undesired impact on the required memory, because data needs to be kept in memory for every visualization.
+If the record of interactions is long, the first implementation will take a long time to replay every interaction up to the desired state.
+
+If past interactions are mathematically reversible, e.g.\ a threshold function for a filter interaction, the \attr{undo} interaction only needs to publish the inverse function.
+The number of interactions does not have an impact on the performance, but if more than just one interaction shall be reversed, a record of past interactions need to be stored.
+
+\textbf{Data extensibility} of interactions is enabled with arbitrary JavaScript objects.
+In Section~\ref{sec:analysis:requirements} good extensibility is present when
+\begin{enumerate*}[label=(\arabic*)]
+  \item
+    additional data attributes can be added without lookup of corresponding items and
+  \item
+    no de-duplication steps are necessary when new items are added.
+\end{enumerate*}
+Since every entity in the data set is considered to be identifiable, a lookup of additional data can be accomplished a request with the entity id.
+Entity ids are unique, so no de-duplication is necessary.
+Since attributes have a unique name, the value of an attribute for the entity can be replaced without de-duplication.
+
+\textbf{Development costs} do not diminish significantly.
+The framework design assumes loose coupling, independent views and no shared state.
+It is lightweight, has a low complexity and scales well.
+The downside of this approach is that it does not come with a huge simplification of implementing visual changes and event handlers in single views.
+Implementing the correct trigger and effect of interactions stays to be the main burden of work.
+
+\textbf{Maintainability} as described in Section~\ref{sec:analysis:requirements} means how much other parts of the code are impacted by an interaction and how error-prone the framework is.
+The framework benefits of the main advantages of the publish-subscribe pattern, i.e.\ loose coupling and scalability.
+On the other hand, it suffers from the main disadvantages of this software pattern, the decoupling of publisher and subscriber.
+Debugging the connections can be quite cumbersome and the asynchronous publishing can lead to further errors.
+
+The geographical visualization is 873 lines long which is quite small.
+The glue code of a very simple example takes 132 lines of code.
+
+% \begin{enumerate*}[label=(\arabic*)]
+%   \item
+%     lines of code and the
+%   \item
+%     cycliomatic complexity. We will try to find a means to measure
+%   \item
+%     cohesion and
+%   \item
+%     coupling in the framework.
+% \end{enumerate*}
+% We assume that the amount of shared data between views is an indicator for high coupling.
+
+\section{Performance}
+The largest data set at hand is called ``Immoscout Wohnungsangebote'' and consists of 8617 geographical features with a total size of 2.1 MB on disk.
