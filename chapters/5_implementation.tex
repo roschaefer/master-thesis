@@ -9,7 +9,7 @@ The connection of the conceptual framework and the implemented framework is exam
 
 \section{Architecture}
 
-% \begin{figure}[h!]
+% \begin{figure}[ht]
 %   \centering
 %   \includegraphics[width=\textwidth]{figures/implementation/thesis-class-diagram.pdf}
 %   \caption{%
@@ -17,7 +17,7 @@ The connection of the conceptual framework and the implemented framework is exam
 %   }\label{fig:implementation:class-diagram}
 % \end{figure}
 
-\begin{figure}[h!]
+\begin{figure}[ht]
   \centering
   \includegraphics[width=\textwidth]{figures/implementation/thesis-architecture.pdf}
   \caption{%
@@ -48,7 +48,7 @@ Event handlers just have to publish an interaction, if the view is subscribed to
 \section{Software patterns}\label{sec:implementation:patterns}
 Figure~\ref{fig:implementation:sequence-diagram} shows how \cmvs{} can be automatically updated even if the environment lacks a native update-mechanism.
 
-\begin{figure}[h!]
+\begin{figure}[ht]
   \centering
   \includegraphics[width=\textwidth]{images/sequence-diagram.png}
   \caption{%
@@ -79,7 +79,7 @@ This pattern is very applicable to \cmvs{}.
 The different views of \cmvs{} share state, i.e.\ the feature, that is currently highlighted or the applied filter on the data.
 So the views are components and their closest common ancestor is the \cmv{} itself, controlling state and passing user interaction down to it's children.
 
-\begin{figure}[h!]
+\begin{figure}[ht]
   \centering
   \includegraphics[width=\textwidth]{images/data-down-actions-up.png}
   \caption{%
@@ -207,7 +207,7 @@ Each feature comes with a unique \attr{id} which is published when a user intera
 
 We can use this data as input for our common \visan{}, e.g.\ figure~\ref{fig:implementation:user_distribution} shows the user distribution of \rufu{}.
 
-\begin{figure}[h!]
+\begin{figure}[ht]
   \centering
   \includegraphics[width=\textwidth]{images/ua_example.png}
   \caption{%
