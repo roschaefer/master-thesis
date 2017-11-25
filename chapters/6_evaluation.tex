@@ -119,39 +119,6 @@ However, we can ask a lot of questions already with common data base queries or 
 \end{enumerate}
 
 
-\section{Existing Interactions}
-We will now classify the implemented interactions of our two applications according to the classification by \textcite{Yi2007} in Section~\ref{sec:interaction-theory:categories}.
-
-\textbf{In our \visan{}} possible interactions can be categorized into the classes \emph{select}, \emph{explore}, \emph{reconfigure}, \emph{encode} and \emph{filter}.
-As seen in Figure~\ref{fig:analysis:interaction:existing} the user can \emph{select} one item in the view by clicking on it.
-The user can reveal a tooltip showing the item properties by hovering with the mouse on the item, which is another \emph{selection}.
-The user can \emph{explore} the map in the usual manner:
-If the user drags with the mouse on the map, a panning operation is performed with the viewpoint focused on Germany, i.e.\ the camera moves around like a turntable.
-The zoom factor can be changed by scrolling on the canvas of the map.
-\emph{Encode} and \emph{reconfigure} techniques are performed through the menu on the left side:
-Under the ``features'' tab, the user can \emph{reconfigure} different data sets and the displayed diagram, e.g.\ a tree map visualization based on the geometry shape, cubes or voronoi regions.
-The tab ``Dimensions'' allows the user to \emph{encode} properties of a data set to visual attributes, e.g.\ the height, color and texture of an item.
-The tab ``Filter'' can be used to reduce the displayed data set along a range of continuous values.
-Figure~\ref{fig:analysis:interaction:existing:filter} shows the range of visible values in the left menu.
-When the user drags the slider, the items in the map on the right side are updated interactively.
-
-\begin{figure}[h]
-  \centering
-  \includegraphics[width=\textwidth]{images/existing-interactions.png}
-  \caption{%
-    Items can be highlighted with a click, Bavaria is currently highlighted.
-    A mouse over reveals a tooltip showing item properties.
-    The menu on the left side allows to change the data set and the specific base visualization.
-  }\label{fig:analysis:interaction:existing}
-\end{figure}
-
-\begin{figure}[h]
-  \centering
-  \includegraphics[width=\textwidth]{images/existing-interactions-filter.png}
-  \caption{%
-    Only gas stations with a price for E10 within 1.349 Euro and 1.589 Euro are displayed in the map
-  }\label{fig:analysis:interaction:existing:filter}
-\end{figure}
 
 \section{Planned Interactions}
 We have a focus on coordinated multiple views consisting of a tree map and a geographical map.
