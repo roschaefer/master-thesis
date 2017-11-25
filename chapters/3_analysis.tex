@@ -1,5 +1,5 @@
 \chapter{Analysis}\label{sec:analysis}
-One purpose of this section is to abstract and deduce the essential characteristics of any interaction.
+Sections~\ref{sec:analysis:examples:single} and~\ref{sec:analysis:examples:multiple} abstract and deduce the essential characteristics of any interaction.
 These characteristics are relevant for a formalized language of \cmvs{}.
 To accomplish this goal, the approach is to deduce the characteristics by a list of examples.
 What are the expected data structures for each visualization?
@@ -7,8 +7,10 @@ What visual variables can be used to show an interaction?
 A list of possible interactions is given for each visualization.
 Those interactions will be classified according to \textcite{Yi2007} and the relevant subject of the interaction is specified.
 
-The second outcome of this section is a set of requirements which can be used to evaluate a framework of \cmvs{}.
+Section~\ref{sec:analysis:requirements} gives a set of requirements which can be used to evaluate a framework of \cmvs{}.
 
+Finally in Section~\ref{sec:analysis:frontend-framework-comparison} existing tools are evaluated with respect to their suitability for \cmvs{}.
+In order to accomplish that, advantages and disadvantages of libraries and frameworks are compared and a final decision is made.
 
 \section{Single Visualization Interactions}\label{sec:analysis:examples:single}
 
@@ -328,7 +330,7 @@ So some data points, i.e.\ events, might repeat infinitely.
   \caption{The screenshot-tool ``shutter'' shows a magnified detail view of the area around the mouse cursor in the lower right corner of the screen}\label{fig:analysis:detail}
 \end{figure}
 
-\section{Requirements}
+\section{Requirements}\label{sec:analysis:requirements}
 In this subsection, we list a set or requirements imposed on a \cmv{} framework.
 These requirements can be used for further evaluation.
 \textbf{Serialization} is the process of translating objects that can be stored or transmitted and reconstructed later.
@@ -376,7 +378,7 @@ We assume that the amount of shared data between views is an indicator for high 
 
 
 
-\section{Comparison of client-side component frameworks}
+\section{Comparison of client-side component frameworks}\label{sec:analysis:frontend-framework-comparison}
 
 This section evaluates the most suitable client-side rendering and component based JavaScript framework for \cmvs{} and whether or not to use web components.
 
@@ -440,7 +442,6 @@ As a summary, if there is
 \end{enumerate*}
 then React is the perfect choice for \cmvs{}.
 Figure~\ref{fig:implementation:frontend-frameworks} shows the pros and cons of each framework for the use case.
-
 
 \begin{figure}[h!]
   \centering
