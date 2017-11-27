@@ -294,19 +294,27 @@ It is worth noting, that not the coordination of the interaction is responsible 
 \begin{figure}[h]
   \centering
   \includegraphics[width=\textwidth]{figures/evaluation/performance/profiles/immoscout_both/fps}
-  \caption{}\label{fig:evaluation:performance:profiling:immoscout_both:fps}
+  \caption{
+    Every highlighting interaction comes with a spike of CPU time for rendering and painting.
+    Focusing on a feature redraws the background and leads to an increase of painting time.
+  }\label{fig:evaluation:performance:profiling:immoscout_both:fps}
 \end{figure}
 
 \begin{figure}[h]
   \centering
   \includegraphics[width=0.5\textwidth]{figures/evaluation/performance/profiles/immoscout_both/summary}
-  \caption{}\label{fig:evaluation:performance:profiling:immoscout_both:summary}
+  \caption{
+    The geographical visualization spends much more time during re-rendering and painting.
+  }\label{fig:evaluation:performance:profiling:immoscout_both:summary}
 \end{figure}
 
 \begin{figure}[h]
   \centering
   \includegraphics[width=\textwidth]{figures/evaluation/performance/profiles/immoscout_both/callstack}
-  \caption{}\label{fig:evaluation:performance:profiling:immoscout_both:callstack}
+  \caption{
+    Event handler \attr{handleHighlight} takes about 90ms to finish.
+    During this time, the list of features is iterated and \attr{setStyle} executed.
+  }\label{fig:evaluation:performance:profiling:immoscout_both:callstack}
 \end{figure}
 
 The profile summary looks totally different for the scenario of a \tmap{} along with a \gvis{}.
