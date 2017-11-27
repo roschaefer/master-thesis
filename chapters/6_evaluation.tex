@@ -268,3 +268,56 @@ The data set with the highest number of features is called ``Immoscout Wohnungsa
   \caption{Data sets used for performance profiling}%
   \label{tab:evaluation:performance:data-sets}
 \end{table}
+
+
+The slowest profiling is the visualization of data set ``Immoscout''.
+Chrome's runtime analysis shows a red bar at the top of the screen if the frames per second drop in such a way that it impairs the perceived interactivity.
+You can see a screenshot of the profiling of just the \tmap{} in Figure~\ref{fig:evaluation:performance:profiling:immoscout_tmap_only:fps}.
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=\textwidth]{figures/evaluation/performance/profiles/immoscout_tmap_only/fps}
+  \caption{During profiling of the ``Immoscout'' data set, only 16 frames per second get rendered}\label{fig:evaluation:performance:profiling:immoscout_tmap_only:fps}
+\end{figure}
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.5\textwidth]{figures/evaluation/performance/profiles/immoscout_tmap_only/summary}
+  \caption{Visualizing just the \tmap{}, almost the entire CPU time is spent during Scripting }\label{fig:evaluation:performance:profiling:immoscout_tmap_only:summary}
+\end{figure}
+
+The Timeline identifies the event handler of the ``mousemove'' event to be the cause of this slow scripting.
+In this event handler, the currently highlighted point or polygon is picked in order to get the feature id.
+Obviously, this is a performance problem.
+It is worth noting, that not the coordination of the interaction is responsible of the performance problem, but an internal implementation of one visualization.
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=\textwidth]{figures/evaluation/performance/profiles/immoscout_both/fps}
+  \caption{}\label{fig:evaluation:performance:profiling:immoscout_both:fps}
+\end{figure}
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.5\textwidth]{figures/evaluation/performance/profiles/immoscout_both/summary}
+  \caption{}\label{fig:evaluation:performance:profiling:immoscout_both:summary}
+\end{figure}
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=\textwidth]{figures/evaluation/performance/profiles/immoscout_both/callstack}
+  \caption{}\label{fig:evaluation:performance:profiling:immoscout_both:callstack}
+\end{figure}
+
+The profile summary looks totally different for the scenario of a \tmap{} along with a \gvis{}.
+Compared to just a \tmap{} only, much more time is spent during painting and rendering.
+This is caused by the fact, that LeafletJS moves the viewpoint and zooms if a feature is focused.
+This can cause a network request and will re-render background tiles.
+
+Figure~\ref{fig:evaluation:performance:profiling:immoscout_both:callstack} shows that most of the time is spent in the event handler for a highlighted feature.
+LeafletJS iterates through all circle markers in order to update the style, i.e.\ change the stroke width.
+Therefore, this is a costly operation for a large number of features.
+
+
+
+
