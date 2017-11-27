@@ -221,18 +221,50 @@ The glue code of a very simple example takes 132 lines of code.
 
 \section{Performance}
 
-The following performance evaluation was carried out on a machine with hardware specifications listed in Table~\ref{tab:evaluation:performance:hardware}
+The following performance evaluation was carried out with the built-in runtime performance analysis feature of the Chrome browser.
+In particular, a Chromium Browser was used in Version 62.0 - 64 Bit.
+The hardware specifications of the machine are listed in Table~\ref{tab:evaluation:performance:hardware}.
 
 \begin{table}[ht]
   \centering
-  \caption{Hardware specifications}%
-  \label{tab:evaluation:performance:hardware}
   \begin{tabular}{ll}
     Device name & LENOVO ThinkPad L540 \\
     CPU type & Intel i3-4100M CPU @ 2.50GHz \\
     CPUs & 4 \\
     Main memory & 8GiB \\
+    Graphics card & Intel Corporation 4th Gen Core Processor Integrated Graphics Controller \\
   \end{tabular}
+  \caption{Hardware specifications}%
+  \label{tab:evaluation:performance:hardware}
 \end{table}
 
-The largest data set at hand is called ``Immoscout Wohnungsangebote'' and consists of 8617 geographical features with a total size of 2.1 MB on disk.
+A couple of data sets were used in three different scenarios:
+\begin{enumerate*}[label=(\arabic*)]
+  \item The \tmap{} without a geographical visualization, just publishing interactions,
+  \item an example application of the geographical visualization without a \tmap{} and
+  \item both visualizations together.
+\end{enumerate*}
+
+In the first and second scenario, the data set is loaded, some data points are highlighted and then some data points are focused with a single-select and a multi-select holding the control-key.
+In the second scenario and third scenarios, which have a geographical visualization, we also select many items with a select box, holding the shift-key.
+\todo[inline]{How long does it take for each scenario?}
+
+Table~\ref{tab:evaluation:performance:data-sets} shows the list of data sets used for profiling the performance of the reference implementation.
+The largest data set consists of German administrative districts called ``Landkreise Deutschland'' with a total size of 2.13 MiB.
+Whereas the data with the most features is called ``Immoscout Wohnungsangebote'' with 8601 coordinates German real estates, totalling 2.11 MiB.
+
+\begin{table}[ht]
+  \centering
+  \begin{tabular}{llll}
+    Name & Number of features & Type of features & Size of GeoJSON \\
+    \hline
+    Bundesländer Deutschland      & 16   & Areas  & 0.64 MiB \\
+    Tankstellen Berlin            & 366  & Points & 0.75 MiB \\
+    Wahlkreise BT 2009            & 299  & Areas  & 0.91 MiB \\
+    Regierungsbezirke Deutschland & 31   & Areas  & 0.94 MiB \\
+    Immoscout Wohnungsangebote    & 8601 & Points & 2.11 MiB \\
+    Landkreise Deutschland        & 402  & Areas  & 2.13 MiB \\
+  \end{tabular}
+  \caption{Data sets used for performance profiling}%
+  \label{tab:evaluation:performance:data-sets}
+\end{table}
