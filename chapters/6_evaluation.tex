@@ -326,6 +326,43 @@ Figure~\ref{fig:evaluation:performance:profiling:immoscout_both:callstack} shows
 LeafletJS iterates through all circle markers in order to update the style, i.e.\ change the stroke width.
 Therefore, this is a costly operation for a large number of features.
 
+The data set ``Landreise'' is the second slowest data set.
+It is larger than ``Immoscout'' but has fewer features.
+As you can see in Figure~\ref{fig:evaluation:performance:profiling:landkreise_both:fps} the geographical visualization can recover much faster if the data set has less features.
+About 10\% of the CPU time is spent idling, see Figure~\ref{fig:evaluation:performance:profiling:landkreise_both:summary}.
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=\textwidth]{figures/evaluation/performance/profiles/landkreise_both/fps}
+  \caption{
+    The number of features is crucial for the time spent during a highlighting interaction.
+  }\label{fig:evaluation:performance:profiling:landkreise_both:fps}
+\end{figure}
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.5\textwidth]{figures/evaluation/performance/profiles/landkreise_both/summary}
+  \caption{
+    Data set ``Landkreise'' shows less time spent on painting and rendering.
+  }\label{fig:evaluation:performance:profiling:landkreise_both:summary}
+\end{figure}
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=\textwidth]{figures/evaluation/performance/profiles/landkreise_geo_only/fps}
+  \caption{
+    A timeline without any significant drop of frames per second is achieved with the geographical visualization without \tmap{} of the ``Landkreise'' data set.
+  }\label{fig:evaluation:performance:profiling:landkreise_geo_only:fps}
+\end{figure}
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.5\textwidth]{figures/evaluation/performance/profiles/landkreise_geo_only/summary}
+  \caption{
+    Without a \tmap{} the CPU is idling for almost 50\% of the time.
+  }\label{fig:evaluation:performance:profiling:landkreise_both:summary}
+\end{figure}
+
 
 
 
