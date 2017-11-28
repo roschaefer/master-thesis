@@ -33,7 +33,6 @@ Many of those outliers are gas stations located in the proximity of highways.
 These gas stations are generally a little more expensive and that applies especially to those stations of ``ARAL''.
 
 
-
 \begin{figure}[h]
   \centering
   \includegraphics[width=\textwidth]{figures/evaluation/cases/gasstations}
@@ -42,6 +41,23 @@ These gas stations are generally a little more expensive and that applies especi
     Relatively expensive gas stations, with respect to the other gas stations of that brand, are often located next to highways.
   }\label{fig:evaluation:cases:gasstations}
 \end{figure}
+
+\subsection{Find an unusually cheap gas station in the center of Berlin}
+
+This use case demonstrates the benefit of a multiple select.
+Let's say, we're interested into unusually cheap gas stations which are not too far outside of Berlin.
+We would map attributes \attr{price} and \attr{distance} to colour and height, and would look for unusually coloured, protruding blocks in a region of the \tmap{}.
+If we press the control key and selectively click on each of those blocks, we collect a group of interesting gas stations.
+These gas stations are focused on in the geographical visualization as you can see in Figure~\ref{fig:evaluation:cases:gasstations_multiselect}.
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=\textwidth]{figures/evaluation/cases/gasstations_multiselect}
+  \caption{
+    A multi select allows to collect a group of interesting features.
+  }\label{fig:evaluation:cases:gasstations_multiselect}
+\end{figure}
+
 
 
 \section{Performance Evaluation}
