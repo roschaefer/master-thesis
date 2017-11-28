@@ -59,6 +59,35 @@ These gas stations are focused on in the geographical visualization as you can s
 \end{figure}
 
 
+\subsection{Explain influx of sparsely populated administrative districts}
+
+This is another use case demonstrating the benefit of a multiple select plus the ability to connect interesting features with their geographical context.
+Figure~\ref{fig:evaluation:cases:wahlkreise_multiselect} shows a \tmap{} with a common mapping:
+The layout is based on the population density, the large cluster at the top are sparsely populated districts.
+The colour is based on the increase or decrease of inhabitants, a red colour indicating a decrease of inhabitants.
+The height of the blocks is mapped to unemployment rate.
+
+The highlighted block and its two neighboring blocks catch our attention:
+As we can see on the right side, those three districts happen to be geographically related.
+They are all neighboring districts of Munich, the city with the highest rents in Germany.
+
+We draw the following conclusion:
+Apparently people can not pay the rising rents in Munich anymore and start to move out in the rural areas that are somehow close to their work place in Munich.
+This conclusion coincided with the discovery of a geographical context that was not present in the mere data itself.
+A \tmap{} alone would not have been able to give us this insight.
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=\textwidth]{figures/evaluation/cases/wahlkreise_multiselect}
+  \caption{
+    Three unsuspicious districts happen to be located next to Munich.
+    Apparently people move out of Munich to avoid high rents.
+  }\label{fig:evaluation:cases:wahlkreise_multiselect}
+\end{figure}
+
+
+
+
 
 \section{Performance Evaluation}
 
