@@ -16,7 +16,7 @@ In order to accomplish that, advantages and disadvantages of libraries and frame
 
 The data visualization catalogue by Severino Ribecca list many of the most used data visualizations\cite{VisualizationCatalogue2017}.
 This section covers a list of common data visualizations from that catalogue as examples.
-The expected data structure and a list of possible interactions is systematically analysed.
+The expected data structure and a list of possible interactions are systematically analysed.
 
 \textbf{Line graphs}
 \begin{figure}
@@ -323,12 +323,44 @@ So some data points, i.e.\ events, might repeat infinitely.
 
 \section{Multiple View Interactions}\label{sec:analysis:examples:multiple}
 
-\textbf{Detail view}
+This section covers examples of multiple data visualizations.
+Combination of views are often very specific to certain use cases.
+That's why the examples in this section are tied to a use case in contrast to the more generic examples in Section~\ref{sec:analysis:examples:single}.
+
+
+\textbf{Detail view or Mini View}
 \begin{figure}
   \centering
-  \includegraphics[width=0.4\textwidth]{figures/analysis/detail-view}
-  \caption{The screenshot-tool ``shutter'' shows a magnified detail view of the area around the mouse cursor in the lower right corner of the screen}\label{fig:analysis:detail}
+    \subfloat[Detail view]{ \includegraphics[width=0.4\textwidth]{figures/analysis/detail-view} }%
+    \qquad
+    \subfloat[Mini view]{\includegraphics[width=0.4\textwidth]{figures/analysis/mini-view}}%
+  \caption{
+    The screenshot-tool ``shutter'' shows a magnified detail view of the area around the mouse cursor in the lower right corner of the screen.
+  Leaflet-Minimap shows the map at a larger scale in the lower right.
+  }
+  \label{fig:analysis:detail}
 \end{figure}
+
+Detail views show a magnification of the surrounding area of a cursor in a secondary view.
+The resolution of the primary view is too high for the user to distinguish individual pixels.
+The detail view helps to select items.
+Popular use cases are screenshot tools, as seen on the left in Figure~\ref{fig:analysis:detail}, or image processing application.
+
+The opposite of a detail view is the mini view.
+You can see an example on the right side of Figure~\ref{fig:analysis:detail}.
+This secondary view shows a larger surrounding of the primary view, if the primary view shows only a section of the entire space.
+Use cases are geographical visualizations and therefore the expected data structure is a map with coordinates of the viewpoint and a zoom factor for each view.
+
+\begin{table}
+  \centering
+  \caption{Interactions for detail and mini views}%
+  \label{fig:analysis:temporal:interactions}
+  \begin{tabular}{ll}
+    \bf Explore & Move the viewpoint of the secondary view \\
+    \bf Explore & Move the viewpoint of the primary visualization by dragging in the secondary view \\
+    \bf Explore & Accelerate scrolling by scrolling in the secondary view \\
+  \end{tabular}
+\end{table}
 
 \section{Requirements}\label{sec:analysis:requirements}
 In this subsection, we list a set or requirements imposed on a \cmv{} framework.
