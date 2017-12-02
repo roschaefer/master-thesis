@@ -354,13 +354,41 @@ Use cases are geographical visualizations and therefore the expected data struct
 \begin{table}
   \centering
   \caption{Interactions for detail and mini views}%
-  \label{fig:analysis:temporal:interactions}
+  \label{fig:analysis:detail:interactions}
   \begin{tabular}{ll}
     \bf Explore & Move the viewpoint of the secondary view \\
     \bf Explore & Move the viewpoint of the primary visualization by dragging in the secondary view \\
     \bf Explore & Accelerate scrolling by scrolling in the secondary view \\
   \end{tabular}
 \end{table}
+
+\textbf{Timeline}
+\begin{figure}
+  \centering
+    \includegraphics[width=\textwidth]{figures/analysis/profiler}
+  \caption{ Multiple views of Chromium's runtime analysis tool can be reduced on a selected time span. }
+  \label{fig:analysis:timeline}
+\end{figure}
+Figure~\ref{fig:analysis:timeline} shows the runtime analysis of the Chromium browser.
+Multiple views show different granularities of the same data.
+At the top, the entire profiling time frame is visualized, with a screenshot of one step in the middle.
+The development of memory is displayed on the third row while a summary is at the very bottom.
+The user can select a window on the top line and the data for the other views is reduced on that interval.
+A multiple visualization like that expects \emph{temporal} data.
+
+\begin{table}
+  \centering
+  \caption{Interactions for timelines}%
+  \label{fig:analysis:timeline:interactions}
+  \begin{tabular}{ll}
+    \bf Filter & Reduce the displayed data on a time span \\
+    \bf Select & Display details at a certain point (e.g.\ show a screenshot at that time) \\
+  \end{tabular}
+\end{table}
+
+
+
+
 
 \section{Requirements}\label{sec:analysis:requirements}
 In this subsection, we list a set or requirements imposed on a \cmv{} framework.
