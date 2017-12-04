@@ -43,8 +43,7 @@ Drei Punkte:
 
 ## Related Work
 Eine Datensvisualisierung zeigen
-Wofür brauchen wir erklären Bertin's visuelle Variablen
-Traditionelle Baumdarstellung zeigen
+
 Den Absatz über Treemaps leichter verständlich erklären, mit Bild!
 Besseres Beispiel einer Treemap
 Umstand als Baum als auch als Treemap darstellen
