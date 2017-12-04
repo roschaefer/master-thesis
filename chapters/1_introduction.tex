@@ -14,11 +14,11 @@ A few specific use cases extend these frameworks to show multiple views next to 
 The user experience is even better compared with single data visualizations but the development effort for multiple views is high.
 Currently, there is no dedicated or prevalent framework that helps to implement interactions in multiple visualizations of the same data.
 
-\todo[inline]{1. Research domain}
-\todo[inline]{2. Problem statement}
-\todo[inline]{3. Lack of existing research}
-\todo[inline]{4. Own solution, contribution}
-\todo[inline]{5. What kind of validation was carried out?}
+% \todo[inline]{1. Research domain}
+% \todo[inline]{2. Problem statement}
+% \todo[inline]{3. Lack of existing research}
+% \todo[inline]{4. Own solution, contribution}
+% \todo[inline]{5. What kind of validation was carried out?}
 
 \section{Motivation}\label{sec:outline}
 Many research papers in the field of \cmvs{} have focused more on visual representations than interaction aspects.
@@ -35,18 +35,26 @@ Obviously, these update mechanisms are a promising choice for \cmvs{}.
 They have not gained research interest yet, probably because of the very recent development.
 
 \section{Problem Statement}
-%
+\begin{tcolorbox}
+\textbf{Problem Statement} \\
 A \tmap{} of geographic data may loose the geographic context if the tiling algorithm is based on non-geographic attributes.
-An administrative district that is located in the east of a second district may be placed in the \tmap{} left of it instead of being placed on the right side.
+\end{tcolorbox}
+
+Let's take the visualization of administrative districts in Germany as an example.
+An  district that is located in the east of a second district may be placed in the \tmap{} left of it instead of being placed on the right side.
 If the tiling algorithm uses a non-geographic hierarchy, the geographic context will be lost entirely.
 Items that should belong together according to their geographic circumstances may be scattered across the \tmap{}.
 Users have a hard time to recognize geographic areas and locations which deteriorates the comprehensibility of the \tmap{}.
 Selecting and grouping items based on their geographic proximity becomes increasingly difficult if the items are scattered across the \tmap{}.
 
 
-\section{Hypothesis}
+\section{Hypothesis}\label{sec:introduction:hypothesis}
 
+\begin{tcolorbox}
+\textbf{Hypothesis} \\
 A second, \gv{} next to the \tmap{} can preserve the geographic context if these two views are combined in a \cmv{}.
+\end{tcolorbox}
+
 The user can relate an item in the \tmap{} if the item is linked with the corresponding item in the \gv{} and vice versa.
 Many items can be selected in the geographic map based on their proximity by dragging a bounding box around them.
 In the \tmap{} the user can select many items based on their proximity in a non-geographic dimension and see the selection in the \gv{}.
@@ -54,38 +62,23 @@ Essentially,  the limitations of a single \tmap{} or a single \gv{} can be overc
 The user can trigger the interaction in one view and see the effect, i.e.\ the change of visual representation, in another view.
 
 
-%Hypothese ist, dass durchs Visualisierungs-, Navigations- und Interaktionstechniken eine Kopplung von georäumlichen 2D-Kartendarstellungen und thematisch-orientierten 3D-Treemaps ermöglicht wird und dadurch die Exploration und Analyse von multidimensionalen georäumlichen Daten unterstützt werden kann.
-
 \section{Contributions}
 
-In order to validate the conceptual framework for \cmvs{}, we develop a reference implementation to investigate its feasibility.
-The development of the reference implementation is subdivided into the following packages:
 
-\begin{enumerate}
-  \item
-    Concept
+\begin{minipage}{\textwidth}
+	The contributions of this work are the following: \\
+	\begin{tcolorbox}
+		\textbf{Contributions:}
+		\begin{enumerate}
+  \item A formalization of interaction aspects in the field of data visualizations
+  \item A conceptual framework for \cmvs{} of arbitrary data visualizations
+  \item An implementation of the conceptual framework for the present use case of geographic and hierarchic data
+  \item A proof of concept how \tmap{} and \gv{} can be combined to overcome limitations of each visualization respectively
+		\end{enumerate}
+	\end{tcolorbox}
+\end{minipage} \\
 
-    Based on a number of examples, a basic, conceptual framework is designed.
-    This includes a common data structure, a formalization of an interaction in general and the communication protocol for multiple views.
 
-  \item
-    Implementation
-
-    We develop a geographical representation of the data.
-    Items in the map can be focused, highlighted, selected with multiple clicks or with a bounding box.
-    This creates a powerful selection mechanism, which can be used to select data in map-based representations and highlight the data in the \tmap{}.
-
-  \item
-    Integration of \tmap{} and \map{}
-
-    We develop linking and interaction mechanisms between \maps{} (for map-based representation) and \tmaps{} (for abstract information representation).
-
-  \item
-    Demonstration and evaluation
-
-    \cmv{} layouts and suitable views are implemented and tested for the selected test data.
-    Based on the test data sets, the \cmv{} implementation is examined and evaluated for design criteria~\cite{Baldonado2000}, general usability aspects~\cite{Roberts2007} and usage for typical visual analytics tasks.
-\end{enumerate}
 
 % \section{Methodological Approach}
 %
@@ -122,8 +115,24 @@ The development of the reference implementation is subdivided into the following
 In Section~\ref{sec:related-work} we introduce basic terminology of \cmvs{} and the theoretical background in this area of research.
 This Section also covers the state of the art and research on multiple views and coordinated interactions.
 In Section~\ref{sec:analysis} we analyze a set of data visualizations and their interactions by example.
-The gained knowledge from that section is used in the following Section~\ref{sec:concept} for a formalization of the \cmv{} framework.
-In Section~\ref{sec:implementation} we describe the reference implementation.
-Then in Section~\ref{sec:evaluation} we take the requirements from Section~\ref{sec:analysis} to evaluate the conceptual framework and its implementation.
-Finally sum up the main contributions in Section~\ref{sec:conclusion} and outline the future work.
+Each interaction is further examined to identify the relevant information that need to be communicated in a \cmv{}.
+The gained knowledge from that section is used in the following Section~\ref{sec:concept} to develop a conceptual framework that can be used for future implementations of \cmvs{}.
+This conceptual framework includes a data model shared between all views, a suggested communication protocol as well as a formalization of an interaction.
+In Section~\ref{sec:implementation} we describe the implementation of the conceptual framework for the present use case.
+This implementation serves as reference implementation, to prove feasibility of the conceptual framework.
+The implementation includes the necessary interactions to demonstrate the advantage of \cmvs{} for hierarchic and geographic data.
+It also serves to validate or invalidate the hypothesis in Section~\ref{sec:introduction:hypothesis}.
+In Section~\ref{sec:evaluation} the implementation is tested for typical visual analytics tasks and it is demonstrated that additional value can be generated from the combination of \tmap{} and \gv{}.
+A performance analysis of the implementation is carried out to demonstrate the feasibility of the conceptual framework.
+\todo[inline]{Check design criteria or rephrase/delete this sentence}
+Based on the test data sets, the \cmv{} implementation is examined and evaluated for design criteria~\cite{Baldonado2000} and general usability aspects~\cite{Roberts2007}.
+The types of evaluation are therefore:
+
+\begin{enumerate*}[label=(\arabic*)]
+  \item Use case,
+  \item Performance profiling and
+  \item manual check of formal requirements.
+\end{enumerate*}
+
+Finally, the main contributions in Section~\ref{sec:conclusion} are summarized and the future work is outlined.
 
