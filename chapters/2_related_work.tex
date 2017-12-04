@@ -48,7 +48,7 @@ These visual variables are used in cartography but can also be applied to data v
 The authors conclude that the variable \attr{size} provides the most accurate and efficient performance while the variable \attr{orientation} provides the least performance.
 \begin{figure}[ht]
   \centering
-  \includegraphics[width=\textwidth]{images/visual-variables.png}
+  \includegraphics[width=\textwidth]{figures/related-work/visual-variables.png}
   \caption{Bertin's~\cite{Bertin2010} original visual variables.}\label{fig:related-work:visual-variables}
 \end{figure}
 Bertin's visual variable play a role in interaction aspects of \cmvs{} as they are used to communicate the effect of an interaction.
@@ -56,15 +56,22 @@ A highlighted data point can be highlighted by changing the colour of an area or
 
 \subsection{Treemaps}
 The visualization of hierarchical data has a long tradition.
-The traditional visual representation of a tree is a directed graph with the root node at the top.
-An everyday use case is a directory tree example of a file system, e.g.\ in file browsers or command line utilities like \texttt{tree} in UNIX based operating systems.
+The traditional visual representation of a tree is a directed graph with the root node at the top, as seen in Figure~\ref{fig:related-work:tree-graph}.
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=\textwidth]{figures/related-work/tree.pdf}
+	\caption{Traditional visualization of a tree in form of a directed graph with edges and nodes}\label{fig:related-work:tree-graph}
+\end{figure}
+An everyday use case is a directory tree example of a file system.
+E.g.\ a file browser or the command line utility \texttt{tree} on UNIX based operating systems.
 As \textcite{Shneiderman1992} mentions, this visualization becomes increasingly large when displaying more than one level and soon exceeds the entire screen size.
+
 \textcite{Johnson1991} proposes the tree map visualization technique, in which each node is a rectangle whose area is proportional to a specified dimension.
 Rectangles contain sub-branches of the node as tiles, thereby expressing hierarchy information.
 \begin{figure}[ht]
     \centering
     \copyrightbox[b]{%
-        \includegraphics[width=\textwidth]{images/theory/german-exports-1}}{%
+        \includegraphics[width=\textwidth]{figures/related-work/german-exports-1}}{%
         \hfill \ccAttribution{} \ccShareAlike{} Observatory of Economic Complexity~\cite{Macro2017}
     }
     \caption{First hierarchy level of German exports}\label{fig:related-work:treemap-german-exports-1}
@@ -73,7 +80,7 @@ Rectangles contain sub-branches of the node as tiles, thereby expressing hierarc
 \begin{figure}[ht]
     \centering
     \copyrightbox[b]{%
-        \includegraphics[width=\textwidth]{images/theory/german-exports-2}}{%
+        \includegraphics[width=\textwidth]{figures/related-work/german-exports-2}}{%
         \hfill \ccAttribution{} \ccShareAlike{} Observatory of Economic Complexity~\cite{Macro2017}
     }
     \caption{Second hierarchy level of German exports}\label{fig:related-work:treemap-german-exports-2}
@@ -103,7 +110,7 @@ We can see an example of a \tmap{} in figure~\ref{fig:research:ua_treemap}
 \begin{figure}[ht]
   \centering
   \copyrightbox[b]{%
-    \includegraphics[width=\textwidth]{images/2_5D_treemap_example}}{%
+    \includegraphics[width=\textwidth]{figures/related-work/2_5D_treemap_example}}{%
     \hfill \textcopyright{} Hasso-Plattner-Institut\cite{Doellner2017}
   }
   \caption{Example of a \tmap{}}\label{fig:research:ua_treemap}
@@ -113,16 +120,6 @@ We can see an example of a \tmap{} in figure~\ref{fig:research:ua_treemap}
 \todo[inline]{introduction}
 \textbf{Flow maps} place stroked lines on top of a geographic map.
 They often display the flow of goods or the migration of people.
-As we can see in Figure~\ref{fig:related-work:flow-map}, an early example of a flow map is Charles Minard’s depiction of Napoleon’s ill-fated march on Moscow in 1861~\cite{Corbett2001}.
-\begin{figure}[ht]
-  \centering
-  \includegraphics[width=\textwidth]{images/theory/minard}
-  \caption{%
-    Charles Minard's map of Napoleon's disastrous Russian campaign of 1812.
-    Minard managed to represent six values in two graphical dimensions:
-    The number of Napoleon's troops, the travelled direction and distance, latitude and longitude relative to specific dates and the temperature.
-  }\label{fig:related-work:flow-map}
-\end{figure}
 
 \textbf{Choropleth maps} are thematic maps in which areas are shaded or patterned in proportion to the statistical variable being displayed on the map.
 A popular use case is the display of population density or per-capita income.
@@ -133,7 +130,7 @@ They are very helpful when data is attached to enumeration unites like counties,
 \begin{figure}[ht]
   \centering
   \copyrightbox[b]{%
-    \includegraphics[width=\textwidth]{images/theory/choropleth}}{%
+    \includegraphics[width=\textwidth]{figures/related-work/choropleth}}{%
     \hfill National Center for Chronic Disease Prevention and Health Promotion~\cite{NCCDPHP2017}
   }
   \caption{%
@@ -164,7 +161,7 @@ As we can see in the example in Figure~\ref{fig:research:cmv} there seems to be 
 
 \begin{figure}[h]
   \centering
-  \copyrightbox[b]{\includegraphics[width=\textwidth]{images/cmv_example}}{\hfill Crossfilter\cite{Bostock2017}}
+  \copyrightbox[b]{\includegraphics[width=\textwidth]{figures/related-work/cmv_example}}{\hfill Crossfilter\cite{Bostock2017}}
   \caption{Airline on-time performance: Correlation of time of day with arrival delay. Most recent flight with a delay of more than 100 minutes selected.}\label{fig:research:cmv}
 \end{figure}
 
