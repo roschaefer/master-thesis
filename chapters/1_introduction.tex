@@ -21,6 +21,19 @@ Currently, there is no dedicated or prevalent framework that helps to implement 
 \todo[inline]{5. What kind of validation was carried out?}
 
 \section{Motivation}\label{sec:outline}
+Many research papers in the field of \cmvs{} have focused more on visual representations than interaction aspects.
+Even though interaction aspects give a great user experience and enable the user to find complex connections involving multiple views.
+\textcite{Ho2013} assumes this may ``originate from the fact that the implementation of interaction techniques and interactive features normally takes much more time than the implementation of visual representations''.
+Obviously, there is a lot of existing research in the area but a lack of research regarding interactions in particular.
+This could also explain why hardly any general-purpose implementation exists to coordinate multiple views, that focuses on interactions.
+It is for this reason that this thesis develops an interaction model for \cmvs{}, so future implementations can use this model as a specification.
+
+Another motivation to do research in that particular area is the recent adoption of the component pattern to build user interfaces.
+Many popular frameworks like Angular, Ember, React and Vue structure a web page into several parts, so-called ``components''.
+Each of these frameworks have developed update-mechanisms like ``Two way data binding'' or ``Actions up, Data down'' to create interactivity among these components.
+The web component pattern has become the prevalent pattern to build user interfaces and even triggered a recent web specification with the same name.
+It is a promising pattern for \cmvs{} but has not gained research interest yet, probably because of the very recent development.
+
 
 % We create data visualizations of multi-dimensional, hierarchical and geographical data.
 % Namely, we develop \rufu{} which is an application for German citizen to publish which public broadcasts should benefit from their broadcasting fees.
