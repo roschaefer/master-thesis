@@ -8,9 +8,11 @@
 Data visualizations is a means of visual communication and have steadily developed since the 16th century~\cite{Friendly2001}.
 Otherwise abstract information is visually represented, making complex data more accessible, understandable and usable.
 \textcite{Kusinitz2014} explains that the human brain processes visual information 60,000 times faster than text and visual content makes up even 93\% of all human communication.
-The purpose of data visualizations is twofold, according to the Interaction Design Foundation: sense-making and communication.
+According to the Interaction Design Foundation the purpose of data visualizations is twofold:
+Sense-making and communication.
 Statistical information is abstract and in data visualization ``we must find a way to give form to that which has none.''~\cite{Few2013}
-Successful data visualizations helps the human user to derive knowledge and meta data from the visualization itself, \textcite{Nocke2002} call it ``visual data mining''.
+Successful data visualizations helps the human user to derive knowledge and meta data from the visualization itself.
+\textcite{Nocke2002} call this ``visual data mining''.
 
 \textbf{Data-driven \dss{}} are applications to support businesses and organizational decision-making activities in which data visualizations play a key part~\cite{Nada2007}~\cite{Poleto2015}.
 Visualizations are an obvious choice for managers who demand a quick overview on performance data.
@@ -21,23 +23,20 @@ We can expect to see these technologies more in more in business applications.
 \textcite{McAfee2012} from the MIT Center of Digital Business showed that organizations driven most by data-based decision making had 4\% higher productivity rates and 6\% higher profits.
 However, little research has been done regarding the performance of \cmvs{} in the field of decision making.
 There might be a great potential.
-Back in 1997 \textcite{Mayer1997} conducted eight studies to compare the effect of using multimedia on university students.
+In 1997 \textcite{Mayer1997} conducted eight studies to compare the effect of using multimedia on university students.
 The studies showed that when using combined visual and verbal explanations the generation of creative problem solutions increased by an average of more than 50\%.
 
 So the application of combined data visualization techniques in decision making seems to be a promising strategy.
-Nevertheless is is unclear, which visualization techniques are the most suitable to be used in combination.
-If we know what kind of data we are dealing with, what are the best suited visualization techniques?
-Let's say we have multidimensional data, is there an order in how people access these multiple dimensions?
-How do these visualizations perform and what are best practices to be considered for their implementation?
+Nevertheless it is unclear, which visualization techniques are the most suitable to be used in combination.
 
 
 \subsection{Visual Variables}\label{sec:related-work:visual-variables}
-French cartographer Jaques Bertin introduced seven visual varables in 1967~\cite{Bertin2010}.
+French cartographer Jaques Bertin introduced seven visual variables in 1967~\cite{Bertin2010}.
 We can see an example for each in Figure~\ref{fig:related-work:visual-variables}.
 These visual variables are used in cartography but can also be applied to data visualization in general.
-\textcite{Carpendale2003} explains in detail their use in terms of computational information instead of printed cartography.
-\textcite{Garlandini2009} put these visual variables under systematical validation procedures.
-The authors conclude that the variable size provides the most accurate and efficent performance while the variable orientation provides the least performance.
+\textcite{Carpendale2003} explains in detail their use in computational information instead of printed cartography.
+\textcite{Garlandini2009} put these visual variables under systematic validation procedures.
+The authors conclude that the variable \attr{size} provides the most accurate and efficient performance while the variable \attr{orientation} provides the least performance.
 \begin{figure}[ht]
   \centering
   \includegraphics[width=\textwidth]{images/visual-variables.png}
@@ -48,7 +47,7 @@ The authors conclude that the variable size provides the most accurate and effic
 The visualization of hierarchical data has a long tradition.
 The traditional visual representation of a tree is a directed graph with the root node at the top.
 An everyday use case is a directory tree example of a file system, e.g.\ in file browsers or command line utilities like \texttt{tree} in UNIX based operating systems.
-As \textcite{Shneiderman1992} mentions, this visualization becomes increasingly large when displaying more than one node and soon exceeds the entire screen size.
+As \textcite{Shneiderman1992} mentions, this visualization becomes increasingly large when displaying more than one level and soon exceeds the entire screen size.
 \textcite{Johnson1991} proposes the tree map visualization technique, in which each node is a rectangle whose area is proportional to a specified dimension.
 Rectangles contain sub-branches of the node as tiles, thereby expressing hierarchy information.
 \begin{figure}[ht]
@@ -72,10 +71,11 @@ Rectangles contain sub-branches of the node as tiles, thereby expressing hierarc
 
 We can see an example of an interactive treemap in Figures~\ref{fig:related-work:treemap-german-exports-1} and~\ref{fig:related-work:treemap-german-exports-2}.
 German exports are divided in generic groups like ``Machines'' and ``Chemical Products'' and include more specific groups like ``Cars'' and ``Packaged Medicaments''.
-The level of hiearchy can be selected with a dropdown menu, so only leaf nodes are displayed at a time.
+The level of hierarchy can be selected with a dropdown menu, so only leaf nodes are displayed at a time.
 Treemaps are space-filling visualizations, i.e.\ they make 100\% use of the available screen size.
 
 Note that as the order and placement of the nodes depends on the value of their specified dimension, geographical units of data may may be placed separately on the treemap.
+\todo[inline]{Nothing to do with treemaps}
 
 \textbf{\threedTmaps{}} is a concept introduced by \textcite{Bladh2004} in 2004.
 The authors transfer the concept of tree maps from two dimensional into three dimensional space.
@@ -113,10 +113,10 @@ As we can see in Figure~\ref{fig:related-work:flow-map}, an early example of a f
   }\label{fig:related-work:flow-map}
 \end{figure}
 
-\textbf{Choropleth maps} is a thematic map in which areas are shaded or patterned in proportion to the statistical variable being displayed on the map.
+\textbf{Choropleth maps} are thematic maps in which areas are shaded or patterned in proportion to the statistical variable being displayed on the map.
 A popular use case is the display of population density or per-capita income.
 We can see an example of a choropleth map in Figure~\ref{fig:related-work:choropleth}, showing the percentage of obese population in the US\@.
-Choropleth maps are widely popular and likely to understand them.
+Choropleth maps are widely popular and many people can immediately understand them.
 They are very helpful when data is attached to enumeration unites like counties, provinces and countries.
 
 \begin{figure}[ht]
@@ -131,7 +131,7 @@ They are very helpful when data is attached to enumeration unites like counties,
   }\label{fig:related-work:choropleth}
 \end{figure}
 
-\textbf{Graduated Symbol Maps} is a good alternative to a choropleth maps, as it alleviates one of its downsides:
+\textbf{Graduated Symbol Maps} are a good alternative to choropleth maps, as they help to avoid one of the downsides of choropleth maps:
 Larger areas may appear more emphasized than smaller ones, thus confounding geographic area with data values.
 Instead, symbols are placed over the regions of a map.
 As \textcite{Heer2010} point out, these symbols allow for more visal variables to be visualized, i.e.\  symbol size, shape and colour.
