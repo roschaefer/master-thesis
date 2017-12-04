@@ -31,19 +31,18 @@ It is for this reason that this thesis develops an interaction model for \cmvs{}
 Another motivation to do research in that particular area is a recent development in web application frameworks:
 Many popular frameworks like Angular, Ember, React and Vue have developed mechanisms to update UI elements during user interactions.
 These patterns and mechanisms have become so widespread and prevalent that they triggered even a web specification called ``web components''.
-Naturally, these update mechanisms are a promising choice for \cmvs{}.
-Yet, they did not gain research interest, probably because of the very recent development.
+Obviously, these update mechanisms are a promising choice for \cmvs{}.
+They have not gained research interest yet, probably because of the very recent development.
 
 \section{Problem Statement}
 %
-% \tmaps{} visualize hierarchical data on a two dimensional canvas and are particularly suitable if the proportions of the data should be emphasized.
-% When dealing with both multidimensional and geographical data, problems arise when features other than geographical features are used as input of the tiling algorithm.
-% This impairs the comprehensibility and complicates the selection of geographical units of items.
-% A second problem is the coordination of interactions among arbitrary data visualizations.
-
-A \tmap{} of hierarchical, geographical data can loose the geographic context if the tiling algorithm is based on non-geographical features.
+A \tmap{} of geographic data may loose the geographic context if the tiling algorithm is based on non-geographic attributes.
+An administrative district that is located in the east of a second district may be placed in the \tmap{} left of it instead of being placed on the right side.
+If the tiling algorithm uses a non-geographic hierarchy, the geographic context will be lost entirely.
 Items that should belong together according to their geographic circumstances may be scattered across the \tmap{}.
-This impairs the comprehensibility and complicates the selection of geographical units of items.
+Users have a hard time to recognize geographic areas and locations which deteriorates the comprehensibility of the \tmap{}.
+Selecting and grouping items based on their geographic proximity becomes increasingly difficult if the items are scattered across the \tmap{}.
+
 
 \section{Hypothesis}
 
