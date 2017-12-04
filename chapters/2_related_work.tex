@@ -60,14 +60,27 @@ The traditional visual representation of a tree is a directed graph with the roo
 \begin{figure}[ht]
 	\centering
 	\includegraphics[width=\textwidth]{figures/related-work/tree.pdf}
-	\caption{Traditional visualization of a tree in form of a directed graph with edges and nodes with the root node at the top}\label{fig:related-work:tree-graph}
+	\caption{Traditional visualization of a tree in form of a directed graph with edges and nodes and the root node at the top}\label{fig:related-work:tree-graph}
 \end{figure}
 An everyday use case is a directory tree example of a file system.
 E.g.\ a file browser or the command line utility \texttt{tree} on UNIX based operating systems.
 As \textcite{Shneiderman1992} mentions, this visualization becomes increasingly large when displaying more than one level and soon exceeds the entire screen size.
 
 \textcite{Johnson1991} proposes the tree map visualization technique, in which each node is a rectangle whose area is proportional to a specified dimension.
-Rectangles contain sub-branches of the node as tiles, thereby expressing hierarchy information.
+The hierarchy in tree maps is expressed with tiles instead of nodes and every child node to parent node relation is expressed with a parent tile containing other tiles.
+
+We can see two examples of tree maps in Figures~\ref{fig:related-work:treemap-german-exports-1} and~\ref{fig:related-work:treemap-german-exports-2}.
+German exports are divided in generic groups like ``Machines'' and ``Chemical Products'' and include more specific groups like ``Cars'' and ``Packaged Medicaments''.
+The user can click on a drop-down menu to change the current level of hierarchy, only leaf nodes are displayed at a time.
+
+The big advantage of tree maps is that they are space-filling visualizations, i.e.\ they make 100\% use of the available screen size.
+A tree map will, unlike a graph representation of a tree, never exceed the size of the screen.
+
+The area of the tiles can be mapped to a data attribute, e.g.\ the file size on disk or, in cases of Figures~\ref{fig:related-work:treemap-german-exports-1} and~\ref{fig:related-work:treemap-german-exports-2}, the percentage of export quota.
+Thus, a tree map can display even more information than a traditional graph representation.
+A disadvantage of tree maps is the variable size of each node.
+If more and more nodes are displayed, the size of each tile will get smaller and smaller and there might not be enough space to display a label.
+You can see this problem occur in Figure~\ref{fig:related-work:treemap-german-exports-2}.
 \begin{figure}[ht]
     \centering
     \copyrightbox[b]{%
@@ -86,26 +99,26 @@ Rectangles contain sub-branches of the node as tiles, thereby expressing hierarc
     }
     \caption{A tree map of Germany's foreign trade quota of exports, showing a hierarchy of depth ``HS4''}\label{fig:related-work:treemap-german-exports-2}
 \end{figure}
+If tree maps are used to visualize geographic data like municipalities, real estates or streets, the placement of nodes depends on the tiling algorithm and not the geographic location on a map.
+Let's say a tree map visualizes a hierarchy of federal states and municipalities, the area of each tile mapped to the total population of administrative district.
+Even if the membership hierarchy is matched by the tree map, the placement of districts in the same hierarchy level is based on their total population and not their geographic location.
 
-We can see an example of an interactive treemap in Figures~\ref{fig:related-work:treemap-german-exports-1} and~\ref{fig:related-work:treemap-german-exports-2}.
-German exports are divided in generic groups like ``Machines'' and ``Chemical Products'' and include more specific groups like ``Cars'' and ``Packaged Medicaments''.
-The level of hierarchy can be selected with a dropdown menu, so only leaf nodes are displayed at a time.
-Treemaps are space-filling visualizations, i.e.\ they make 100\% use of the available screen size.
-
-Note that as the order and placement of the nodes depends on the value of their specified dimension, geographical units of data may may be placed separately on the treemap.
-\todo[inline]{Nothing to do with treemaps}
-
-\textbf{\threedTmaps{}} is a concept introduced by \textcite{Bladh2004} in 2004.
-The authors transfer the concept of tree maps from two dimensional into three dimensional space.
-They introduce StepTree~\cite{Bladh2004}, which is a three dimensional tree map to display a directory layout.
+\subsubsection{3D tree maps and \tmaps{}}
+3D tree maps is a concept introduced by \textcite{Bladh2004} in 2004.
+The authors transfer the concept of tree maps from two dimensional into three dimensional space, transforming tiles to blocks.
+They introduce StepTree~\cite{Bladh2004}, which is a three dimensional tree map to display a directory layout of a file system.
 It ``differs from Treemap in that it employs three dimensions by stacking each subdirectory on top of its parent directory.''
+
 3D tree maps are superior to 2D tree maps for tasks with a pronounced topological challenge.
 User perform significantly better in interpreting the hierarchical structure.
-However, 3D visualizations also introduce some disadvantages as superimposition of objects and a complex view point navigation.
+However, 3D visualizations also introduce some disadvantages.
+Blocks can superimpose each other, forcing the user to navigate the view point.
+The navigation of the view point itself is an increase of complexity not present in two dimensional tree maps.
 
-\textbf{\tmap{}} is a term coined by \textcite{Limberger2016}.
-A \tmap{} emphasizes physical constraints of a \threedTmap{}, i.e.\ a \tmap{} has all items attached to the ground.
-We can see an example of a \tmap{} in figure~\ref{fig:research:ua_treemap}
+The term \tmap{} was coined by \textcite{Limberger2016} in 2016.
+A \tmap{} is just an ordinary 3D tree map, but it has all blocks attached to the ground, or more specifically, attached to the parent block.
+We can see an example of a \tmap{} in figure~\ref{fig:research:ua_treemap}.
+The term \tmap{} is used throughout this thesis to emphasize this usually existing constraint.
 
 \begin{figure}[ht]
   \centering

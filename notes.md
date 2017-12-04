@@ -45,11 +45,6 @@ Drei Punkte:
 Eine Datensvisualisierung zeigen
 
 Den Absatz über Treemaps leichter verständlich erklären, mit Bild!
-Besseres Beispiel einer Treemap
-Umstand als Baum als auch als Treemap darstellen
-Die Grenzen des Bildschirms werden übertreten bei Bäumen, dafür haben die Knoten
-einen minimale Größe
-Note... schlechter Satz
 Bis auf choropleth maps alle geographischen Visualierungen weglassen, höchstens
 erklaären und warum man sich gegen sie entschieden hat.
 Besseres Beispiel für cmvs zeigen, nicht crossfilter
