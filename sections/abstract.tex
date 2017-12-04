@@ -3,32 +3,34 @@
 
 \tmaps{} are good visualizations for multi-dimensional and hierarchical data.
 If the data is also geographic, the geographic context is often lost when displayed in a \tmap{}.
-This is definitely the case if the tiling algorithm does not receive a geographic attribute as input.
+This is because the blocks of a \tmap{} are placed on the grid depending on the tiling algorithm.
+The geographic context is lost for sure if no geographic attribute is used as input for the algorithm.
 This loss of geographical context makes it difficult to understand and interact with the visualization.
-The data may be scattered so that the user can no longer recognize individual geographic areas or locations.
-In addition, data can no longer be easily grouped and selected based on their geographic proximity.
+The blocks may be scattered across the \tmap{} so that the user can no longer recognize individual geographic areas or locations.
+In addition, blocks can no longer be easily grouped and selected based on their geographic proximity.
 
 This thesis demonstrates if and how a geographic visualization combined with a \tmap{} can solve these problems.
 The focus is on interactions, how the individual visualizations communicate with each other, which information must be contained in messages and which data they relate to.
 These interactions are formalized and, based on this, a conceptual framework is developed that enables interactions for any data visualization.
 For this conceptual framework, a reference implementation is developed that couples a geographic visualization with a \tmap{}.
-Last but not least, the implementation will be evaluated on the basis of requirements developed during the thesis.
+The evaluation will be based on typical application scenarios, formal criteria and requirements as well as a performance analysis.
 
 \begin{otherlanguage}{german}
 \chapter*{Zusammenfassung}
 
 \tmaps{} sind gut geeignete Visualisierungen für multi-dimensionale und hierarchische Daten.
 Handelt es sich bei den Daten auch um geographische Daten, geht der geographische Zusammenhang bei der Darstellung in einer \tmap{} oft verloren.
-Das ist in jedem Fall so, wenn der Tiling-Algorithmus kein geographisches Attribut als Eingabe erhält.
+Das liegt daran, dass die Blöcke einer \tmap{} in Abhängigkeit vom Tiling-Algorithmus auf dem Raster platziert werden.
+In jedem Fall geht der geographische Kontext verloren, wenn kein geographisches Attribut als Eingabe für den Algorithmus verwendet wird.
 Dieser Verlust des geographischen Kontextes erschwert die Verständlichkeit und die Interaktivität der Visualisierung.
-Die Daten werden unter Umständen verstreut dargestellt, sodass der Nutzer nicht mehr nachvollziehen kann, um welche geographischen Gebiete oder Orte es sich handelt.
-Außerdem können Daten nicht mehr leicht anhand ihrer geographischen Nähe gruppiert und selektiert werden.
+Die einzelnen Blöcke werden unter Umständen verstreut dargestellt, sodass der Nutzer nicht mehr nachvollziehen kann, um welche geographischen Gebiete oder Orte es sich handelt.
+Außerdem können Blöcke nicht mehr leicht anhand ihrer geographischen Nähe gruppiert und selektiert werden.
 
 Diese Arbeit zeigt, ob und wie eine geographische Visualisierung kombiniert mit einer \tmap{} diese Probleme lösen kann.
-Der Fokus liegt dabei auf Interaktionen, wie die einzelnen Visualisierungen miteinander kommunizieren, welche Informationen in Nachrichten beinhaltet sein müssen und auf welche Daten sich diese beziehen.
+Der Fokus liegt dabei auf Interaktionen, wie die einzelnen Visualisierungen miteinander kommunizieren, welche Informatiknen in Nachrichten beinhaltet sein müssen und auf welche Daten sich diese beziehen.
 Diese Interaktionen werden formalisiert und darauf aufbauend ein konzeptuelles Framework entwickelt, welches Interaktionen über beliebige Datenvisualisierungen ermöglicht.
 Für dieses konzeptuelles Framework wird eine Referenzimplementierung entwickelt, welches eine geographische Visualisierung mit einer \tmap{} koppelt.
-Zu guter Letzt wird die Implementierung anhand von erarbeiteten Anforderungen evaluiert.
+Die Evaluierung wird anhand typischer Anwendungsszenarios, formaler Kriterien und Anforderungen sowie einer Leistungsanalyse durchgeführt.
 
 \end{otherlanguage}
 
