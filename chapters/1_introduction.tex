@@ -21,25 +21,25 @@ There is currently no extensible framework that helps to implement interactions 
 
 \section{Motivation}\label{sec:outline}
 
-We create data visualizations of multi-dimensional, hierarchical and geographical data.
-Namely, we develop \rufu{} which is an application for German citizen to publish which public broadcasts should benefit from their broadcasting fees.
-The output of this application is a public user ranking and it can be used by broadcasting corporations to evaluate their program.
-Visualizations of multidimensional, hierarchical data guide media researchers, journalists and the general audience to draw conclusions.
+% We create data visualizations of multi-dimensional, hierarchical and geographical data.
+% Namely, we develop \rufu{} which is an application for German citizen to publish which public broadcasts should benefit from their broadcasting fees.
+% The output of this application is a public user ranking and it can be used by broadcasting corporations to evaluate their program.
+% Visualizations of multidimensional, hierarchical data guide media researchers, journalists and the general audience to draw conclusions.
 
-To explain this a little deeper:
-Public broadcasting in Germany is organized federally, a German home belongs to the jurisdiction of a public broadcasting corporation.
-But the produced content can be used by all German citizen and it is even required to be free and available for everyone.
-In the application, common users vote on the entire collection of broadcasts but media researchers are only interested in users of a service area.
-User accounts have a local context and broadcasts have a global context.
+% To explain this a little deeper:
+% Public broadcasting in Germany is organized federally, a German home belongs to the jurisdiction of a public broadcasting corporation.
+% But the produced content can be used by all German citizens and it is even free and available for everyone.
+% In the application, common users vote on the entire collection of broadcasts but media researchers are only interested in users of a service area.
+% User accounts have a local context and broadcasts have a global context.
 
-Let's say a media researcher is interacting with two views of the data.
-The interaction may happen in one view but is reflected in another view.
-E.g.\ the researcher selects user accounts from a geographical map but has the intention to update a separate view.
-That view could show e.g.\ a listing of the most popular broadcasts, based on the data of user accounts from that area.
+% Let's say a media researcher is interacting with two views of the data.
+% The interaction may happen in one view but is reflected in another view.
+% E.g.\ the researcher selects user accounts from a geographical map but has the intention to update a separate view.
+% That view could show e.g.\ a listing of the most popular broadcasts, based on the data of user accounts from that area.
 
-Having the interaction spread across several views creates a great value for the user but the implementation this functionality is very tedious.
-We see a strong demand for \cmvs{} and the development effort as the main obstacle.
-A \cmv{} composed of arbitrary charts and plots and the implementation of their interactions turns into an unsustainable amount of work.
+% Having the interaction spread across several views creates a great value for the user but the implementation this functionality is very tedious.
+% We see a strong demand for \cmvs{} and the development effort as the main obstacle.
+% A \cmv{} composed of arbitrary charts and plots and the implementation of their interactions turns into an unsustainable amount of work.
 
 \section{Problem Statement}
 %
@@ -56,7 +56,7 @@ This impairs the comprehensibility and complicates the selection of geographical
 
 A second, geographical visualization next to the \tmap{} can maintain the geographical context.
 If an interaction in one visualization is reflected in the other, this further supports the analysis of the data.
-Moreover, the limitations of a single data visualization can be avoided by interacting with the data trough another view.
+Moreover, the limitations of a single data visualization can be avoided by interacting with the data through another view.
 
 %Hypothese ist, dass durchs Visualisierungs-, Navigations- und Interaktionstechniken eine Kopplung von georäumlichen 2D-Kartendarstellungen und thematisch-orientierten 3D-Treemaps ermöglicht wird und dadurch die Exploration und Analyse von multidimensionalen georäumlichen Daten unterstützt werden kann.
 
@@ -70,17 +70,18 @@ The development of the reference implementation is subdivided into the following
     Concept
 
     Based on a number of examples, a basic, conceptual framework is designed.
-    This includes a common data structure, a formalization of an interaction in general and the communication prototocol for multiple views.
+    This includes a common data structure, a formalization of an interaction in general and the communication protocol for multiple views.
 
   \item
     Implementation
 
-    We develop a geographical represenatation of the data.
+    We develop a geographical representation of the data.
     Items in the map can be focused, highlighted, selected with multiple clicks or with a bounding box.
     This creates a powerful selection mechanism, which can be used to select data in map-based representations and highlight the data in the \tmap{}.
 
   \item
     Integration of \tmap{} and \map{}
+
     We develop linking and interaction mechanisms between \maps{} (for map-based representation) and \tmaps{} (for abstract information representation).
 
   \item
@@ -128,5 +129,5 @@ In Section~\ref{sec:analysis} we analyze a set of data visualizations and their 
 The gained knowledge from that section is used in the following Section~\ref{sec:concept} for a formalization of the \cmv{} framework.
 In Section~\ref{sec:implementation} we describe the reference implementation.
 Then in Section~\ref{sec:evaluation} we take the requirements from Section~\ref{sec:analysis} to evaluate the conceptual framework and its implementation.
-Finally sum up the main contribution in Section~\ref{sec:conclusion} and outline the future work.
+Finally sum up the main contributions in Section~\ref{sec:conclusion} and outline the future work.
 

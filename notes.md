@@ -38,3 +38,17 @@ Drei Punkte:
 * Ein Ergebnis kann auch sein, dass vorläufige Anforderungen nicht mehr so
   wichtig sind
 * Qualitative Evaluation passt
+
+# 2017-12-04 (Gerd)
+
+### Abstract:
+Warum geht der geographische Kontext verloren?
+
+#### Introduction
+Wirrer dritter paragraph.
+Betonung, es gibt noch kein Framework für koordinierte Interaktionen
+#### Motivation
+Rundfunk MITBESTIMMEN rausnehmen
+#### Contributions
+von structure of work abgrenzen
+
