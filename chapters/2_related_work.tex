@@ -238,20 +238,39 @@ It provides optional static typing, classes and interfaces.
 GeoJSON is a format for encoding a variety of geographic data structures~\cite{GeoJSON2017}.
 Based on JSON, it can simple geographic features like points, lines and areas and reserves a properties object for non-spatial attributes.
 
+\textbf{Leaflet}
+Leaflet is the leading open-source JavaScript library for mobile-friendly interactive maps~\cite{Leaflet2017}.
+It has support for GeoJSON which makes it very easy to display tiled web maps with interactive overlays.
+
+\textbf{Web components} is a recent standard of the W3C\cite{W3C2017} to bring component-based software engineering to the world wide web.
+Web components are a set of web platform APIs to create new custom, reusable, encapsulated HTML tags that can be used in web pages and web applications~\cite{WebComponents2017}.
+If \cmvs{} are implemented in JavaScript based web applications, web components are a promising choice, to allow arbitrary views to be put together.
+
+\textbf{GlimmerJS} is the rendering enginge of EmberJS\cite{Ember2017}.
+In 2017 it was released as a standalone component framework.
+Applications written in GlimmerJS can be exported as web components.
+These web components can be included in any website, which makes GlimmerJS a reasonable choice to build high-quality widgets for user interfaces.
+GlimmerJS also uses handlebars\cite{Handlebars2017}, a user-friendly templating language.
+The downside of GlimmerJS is the current lack of documentation and immaturity due to the recent first release this year.
+
+\textbf{Google Polymer} is another popular library to build web components \cite{Polymer2017}.
+With 18,469 stars on Github it is the most popular framework for web components at the time of writing.
+Polymer has a large community and comprehensive documentation and therefore more suitable than GlimmerJS to build \cmvs{}.
+
+\textbf{ReactJS} is an open-source JavaScript library to build user interfaces and allows to create reusable UI components.
+React renders HTML on the client, it changes the page without reloading the page.
+The framework corresponds with the View in the Model-View-Controller pattern.
+React components are structured hierarchically, with each component having dedicated responsibility.
+React is explicitly not implementing web components and is not going to implement web components in the future.
+It has, in return, a well-known way of integrating the component framework into a legacy application built with e.g.\ jQuery.
+Along with its major advantage of easy integration, it has a striving community, lots of documentation and tutorials and it is well tested.
+
 \textbf{PubSubJS} is a topic-based publish/subscribe library written in JavaScript~\cite{PubSubJS2017}.
 Topics can be registered hierarchically, with subtopics delimited by dots.
 A subscription to topic \attr{mcv.select.focus} will be notified only for \attr{focus} interactions whereas a subscription of \attr{mcv.select} will be notified for both \attr{focus} and \attr{highlight} interactions.
 Furthermore, topics are published asynchronously, so if the user interacts with a visualization, that does not block code execution.
 
-\textbf{Leaflet}
-Leaflet is the leading open-source JavaScript library for mobile-friendly interactive maps~\cite{Leaflet2017}.
-It has support for GeoJSON which makes it very easy to display tiled web maps with interactive overlays.
 
-\textbf{Angular, Ember, ReactJS, Vue}
-ReactJS is an open-source JavaScript library to build user interfaces and allows to create reusable UI components.
-React renders HTML on the client, it changes the page without reloading the page.
-The framework corresponds with the View in the Model-View-Controller pattern.
-React components are structured hierarchically, with each component having dedicated responsibility.
 
 
 \section{Interaction Theory}\label{sec:related-work:interaction-theory}
