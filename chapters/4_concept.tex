@@ -1,27 +1,45 @@
 \chapter{Concept}\label{sec:concept}
-Based on the findings in Section~\ref{sec:analysis} we specify a formal language and a conceptual framework for \cmvs{} in this section.
-Our approach involves the definition of the terminology and the basic components of the conceptual framework.
+Based on the findings in Chapter~\ref{sec:analysis} this chapter specifies a formal language and a conceptual framework for \cmvs{}.
+The approach involves the definition of the terminology and the basic components of the conceptual framework.
+
 The first component is the shared data model on which all visualizations must agree on.
-We formalize each interaction from Section~\ref{sec:analysis} as a mathematical function and group these functions together if they have the same input and output.
-As a last step, we specify the communication pattern of the formalized language.
+Each interaction from Chapter~\ref{sec:analysis} is formalized as a mathematical function and these functions are grouped if they have the same input and output.
+As a last step, the communication pattern of the formalized language is layed out.
 
-\section{Terminology}
-We introduce a couple of new terms in order to give a formal definition of the conceptual framework
+\section{Formalization of an interaction}
 
-\textbf{Trigger} describes the event that starts an interaction.
+The formalization of an interaction $I$ is defined as follows:
+\begin{equation}
+  I(T, M(V(P,IS)), E)
+\end{equation}
+For a trigger $T$, a message $M$ and the effect $E$.
+The message $M$ is composed of a verb $V$, an application specific purpose $P$ and an interaction subject $IS$.
+The part of the interaction which is shared among multiple views is the message $M$.
+
+The verb $F$ is defined by the triggering view at runtime.
+E.g.\ when a parallel plot rearranges the list of attributes, the exact order will be determined by the view itself, during the handling of the drag-and-drop action.
+
+
+\subsection{Trigger}
+A trigger describes the event that starts an interaction.
 As we have seen in Section~\ref{sec:analysis} every interaction is started by a user action.
+
 The user e.g.\ clicks on a shape in the view, hovers over an area, selects an item from a dropdown menu, turns around a mobile device, speaks into the microphone or makes a particular gesture.
 If the event of action is handled by a view and causes an interaction, we call this handling a \emph{trigger}.
+
 Every view is responsible of its \emph{triggers}.
 These are implementation details and are not shared by other views.
 
-\textbf{Effect} is the change of the visual representation subsequent to the interaction.
+\subsection{Effect}
+The effect is the change of the visual representation subsequent to the interaction.
 In order to be perceivable by the user, the interaction must have some visual effect, i.e.\ a change in the visual representation of the data.
+
 Examples are:
 A change of colour of a selected bubble, a movement of the viewpoint, a rearrangement of attributes in a parallel plot or a higher level of detail in a \tmap{}.
+
 Every view is responsible of its visual \emph{effects}.
-Those are implementation details as well and they are not shared by other views.
-Obviously visual effects are not shared, as it depends on the visualization if visual variables are constrained or available to express a visual effect.
+Obviously visual effects are not shared, as it depends on the visualization technique if visual variables are available to express a visual effect.
+A re-order interaction will not have an effect in bubble charst, as position is constrained by the type of visualization.
 
 In singular visualizations, interactions consist of at least of a trigger and an effect:
 \begin{equation}
@@ -29,67 +47,44 @@ In singular visualizations, interactions consist of at least of a trigger and an
 \end{equation}
 The meaning of the interaction in a singular view can be implicit.
 E.g.\ hovering over a geographic area changes the background colour of the polygon and the user can identify the interaction as a \emph{highlighting}.
-Note that this implicit meaning must be explicit in \cmvs{} so that other views are able to process it.
+
+This implicit meaning gets explicit in \cmvs{} so that other views are able to react appropriately.
 
 
-\textbf{Subject} refers to the target of the interaction.
+\subsection{Subject}
+A subject refers to the target of the interaction.
 We must define what data or meta-data is affected by the interaction.
 E.g.\ when a user moves the mouse cursor on a line in the line diagram, that could highlight the \emph{data point} under the cursor as well as the entire \emph{data series}.
 Therefore we call the object affected of an interaction the interaction \emph{subject}.
 A subject can be a data point, a list of data points, a position of the viewpoint, a certain order of attributes or a mapping of attributes to visual variables.
 
-\textbf{Verb} refers to the application specific context and purpose of the interaction.
+\subsection{Purpose}
+The purpose refers to the application specific purpose of the interaction.
+
 A developer may want to have many \emph{select} interactions.
 E.g.\ the user desires to select a detail view of an item under the mouse cursor from a previously selected set of already highlighted items.
-Therefore we allow for a user-defined \emph{verb}.
-The verb describes the interaction in the context of a task or an intention that is intrinsic to the application the interaction happens in.
 
-\textbf{Interaction function} is the declaration and definition how the subject of the interaction should be changed.
+Therefore we allow for a user-defined \emph{purpose}.
+The purpose describes the interaction in the context of a task or an intention that is intrinsic to the application the interaction happens in.
+
+\subsection{Verb}
+An verb is the declaration and definition how the subject of the interaction should be changed.
 The aforementioned explicit meaning of the interaction is the smallest unit of information of the interaction.
-This meaning is shared among multiple views, it is agnostic of how the interaction is implemented.
-Therefore the meaning is shared between multiple views.
-We call this meaning the \emph{interaction type}.
-Some examples of interaction types include: Selection, Deletion, Point-of-Interest, Filtering, Reordering, Re-encoding.
-Interaction types can be classified with the interaction categories of \textcite{Yi2007}.
 
-Note that different information visualizations implement an interaction types in a different way or maybe not at all:
+Some examples of verbs include: Selection, Deletion, Point-of-Interest, Filtering, Reordering, Re-encoding.
+Verbs can be classified with the interaction categories of \textcite{Yi2007}.
 
-E.g.\ a bubble chart might encode a certain data attribute to the colour of a bubble.
-Therefore the colour would not be changed for an interaction of type \emph{Selection} but the texture of the bubble.
 
-A user may perform an interaction of type \emph{Reordering} on the series of a stacked bar chart.
-This can have no effect on a coordinated scatter plot, as the position of each data point depends on its dimension.
+\subsection{Message}
+A message is the required set of information to coordinate an interaction across multiple views.
 
-\textbf{Sentence} is the minimal set of information to coordinate an interaction across multiple views.
-We define a sentence $S$ as:
-\begin{equation}
-    S(V, F(IS))
-\end{equation}
-With $V$ as a verb, an interaction function $F$ and the interaction subject $IS$.
-See Section~\ref{sec:concept:types} for a list of interaction functions.
-A sentence contains everything necessary to ensure the interaction can be reflected in another view.
-
-\textbf{Application context} is name for the state which is exclusive to the specific application.
+\subsection{Application context}
+The application context refers to the exclusive state of the specific application.
 Part of the application context is the access to data sources and the procedure to initialize data visualization with it.
 Also, the binary files of textures, icons and vectors that describe the visual representation of a shape and colour themes are part of the application context.
 
-\section{Formalization of an interaction}
-
-We formalize an interaction $I$ as follows:
-\begin{equation}
-  I(T, S(V, F(IS)), E)
-\end{equation}
-For a trigger $T$, a sentence $S$ and the effect $E$.
-The sentence $S$ is composed of a verb $V$, an interaction function definition $F$ and an interaction subject $IS$.
-The part of the interaction which is shared among multiple views is the sentence $S$.
-The function definition $F$ is defined by the triggering view at runtime.
-E.g.\ when a parallel plot rearranges the list of attributes, the exact order will be determined by the view itself, during the handling of the drag-and-drop action.
-
-\section{Conceptual Framework}
-\todo[inline]{no section without text}
-
 \section{Shared data model}\label{sec:concept:data-model}
-To account for the various data structures, we use an abstract data model that is powerful enough to include tabular, hierarchical and relational data.
+To account for the various data structures, we use an abstract data model that is inclusive enough to include tabular, hierarchical and relational data.
 You can see a class diagram in figure~\ref{fig:concept:shared-data-model}.
 
 The \emph{entity} class is used to model the smallest distinguishable unit.
@@ -126,7 +121,7 @@ These attributes may describe e.g.\ the weight of an edge in a flow map.
   }\label{fig:concept:shared-data-model}
 \end{figure}
 
-\section{Predefined Interaction Functions}\label{sec:concept:types}
+\section{Predefined verbs}\label{sec:concept:types}
 
 It turns out that we can describe the types of an interaction as a mathematical function.
 These functions operates on the ids of \emph{entities}, \emph{series}, and \emph{relations} or their respective \emph{attributes}.
@@ -223,7 +218,7 @@ The following is a list of functions describing the types based on the aforement
 Let's have some examples how these functions can be applied on coordinated interactions:
 
 A user clicks on a bar in a bar chart and this feature then changes its background colour.
-To coordinate the highlighting, the bar chart view will formulate a new sentence composed of a \emph{Select} function and the verb \emph{highlight}.
+To coordinate the highlighting, the bar chart view will formulate a new message composed of a \emph{Select} function and the verb \emph{highlight}.
 The function returns the set with the highlighted entity.
 
 Let's say, a geographical map should move the position of the viewpoint on a entity.
@@ -237,10 +232,10 @@ The function will then check the \attr{prize} of every entity and returns \attr{
 \section{Communication pattern}
 
 In Section~\ref{sec:concept:types} we discussed how we can describe the types of the interaction.
-The interaction type determines the signature of the function and describes the interaction itself.
+The verb determines the signature of the function and describes the interaction itself.
 However a type does not define how interactions are \emph{coordinated} among views.
 E.g.\ what action in one view should lead to what kind of changes in what other views?
-What is the communication pattern or what is the protocol how sentences are exchanged in the conceptual framework?
+What is the communication pattern or what is the protocol how messages are exchanged in the conceptual framework?
 
 Figure~\ref{fig:concept:communication-pattern} gives an overview on the message flow in the communication pattern.
 \begin{figure}[ht]
@@ -259,7 +254,7 @@ Therefore, not only the \emph{trigger} and \emph{effect} is implementation speci
 
 Every visualization decides on its own, how to react to a certain interaction.
 That leads us to distinguishable, named interactions.
-Every view can subscribe to certain interactions and receive messages in form of changed interaction types.
+Every view can subscribe to certain interactions and receive messages in form of changed verbs.
 In order trigger an interaction, the visualization simply publishes to the named interaction.
 
 This pattern is known as the \emph{Publish-subscribe pattern} and widely used in message queues.
