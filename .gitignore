@@ -30,4 +30,4 @@
 *-blx.bib
 
 !/pdf/*.pdf
-!/figures/*.pdf
+!/figures/**/*.pdf
