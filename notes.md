@@ -45,11 +45,33 @@ Drei Punkte:
 Eine Datensvisualisierung zeigen
 
 Den Absatz über Treemaps leichter verständlich erklären, mit Bild!
-Bis auf choropleth maps alle geographischen Visualierungen weglassen, höchstens
-erklaären und warum man sich gegen sie entschieden hat.
-Besseres Beispiel für cmvs zeigen, nicht crossfilter
-Brushing und Linking ausführlicher erklären
 
 
+# 2017-12-05 (Benjamin)
 
+Zusammenhang kommt nicht raus in dem Text bei den Detailstufen der tree maps
+Latex tabelle statt bild für die Comparison
+UML aus dem Communication protocol machen
+Überhaupt wenn's geht UML bearbeiten
+Rundfunk MITBESTIMMEN aus der Beschreibung eines Bildes rausschmeißen
+Eigenständigkeitserklärung fehlt
+Frau Pamperin wegen Abgabemodalitäten fragen
+Was ist eigentlich eine View? => Konzept
+Wer kommuniziert eigentlich mit wem im Communication pattern?
+Communication part nach vorne holen
+Implementierungsteil noch mau
+Das Abstrakte aus dem Implementierungsteil rausnehmen
+Evtl die Architektur rausnehmen und in den Konzeptteil packen
+schreib hin, was die Komponenten im Implementierungsteil machen, Zuständigkeiten
+Notification ist ein wesentlicher Punkt, eigenen Absatz daraus machen
+Software pattern umbenennen in Notification
+Patterns sind gar nicht so wichtig
+Implemented interactions noch ausführlicher machen
+"We want ... " => The following interactions have been implemented
+Für jede Interaktion einen Screenshot machen
+Wieviel Code ist notwendig um eine neue Interaktion einzubauen? => Zeigen
+Wie hängt Concept mit Implementierung zusammen?
+Wie ist das Mapping?
+Requirements: Mit "Extensibility" war nicht Data Extensibility sondern "Software
+extensibility" gemeint
 
