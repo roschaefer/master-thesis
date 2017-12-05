@@ -5,15 +5,15 @@ After introducing visualization techniques, related work on interaction aspects 
 
 \section{Foundations}\label{sec:related-work:foundations}
 This section introduces terminology, describes the development and shows examples of each data visualization technique.
-Strengths of certain data visualization techniques are emphasized.
+Advantages and disadvantages of certain data visualization are emphasized.
 
 \subsection{Data visualization}
 Data visualization is a means of visual communication and have steadily developed since the 16th century~\cite{Friendly2001}.
 It is a generic term, expressing all kinds of effort to put data into visual context to help people understand the significance of data~\cite{Rose2017}.
-Data visualization today goes beyond standard charts and graphs used in spreadsheet applications and covers also infographics, heat maps, geographical visualizations and tree maps.
+Data visualization today goes beyond standard charts and graphs used in spreadsheet applications and covers also infographics, heat maps, geographic visualizations and tree maps.
 Otherwise abstract information is visually represented, making complex data more accessible, understandable and usable.
 
-\textcite{Kusinitz2014} explains that the human brain processes visual information 60,000 times faster than text and visual content makes up even 93\% of all human communication.
+\textcite{Kusinitz2014} mentions that the human brain processes visual information 60,000 times faster than text and visual content makes up even 93\% of all human communication.
 According to the Interaction Design Foundation the purpose of data visualizations is twofold:
 Sense-making and communication.
 
@@ -87,7 +87,7 @@ You can see this problem occur in Figure~\ref{fig:related-work:treemap-german-ex
         \includegraphics[width=\textwidth]{figures/related-work/en_profile_country_deu.pdf}}{%
         \hfill \ccAttribution{} \ccShareAlike{} Observatory of Economic Complexity~\cite{Macro2017}
     }
-    \caption{A tree map of Germany's foreign trade quota of exports, showing only the first hierarchy level}
+    \caption{A two dimensional tree map of Germany's foreign trade quota of exports, showing only the first hierarchy level.}
     \label{fig:related-work:treemap-german-exports-1}
 \end{figure}
 
@@ -97,7 +97,7 @@ You can see this problem occur in Figure~\ref{fig:related-work:treemap-german-ex
         \includegraphics[width=\textwidth]{figures/related-work/en_profile_country_deu_2.pdf}}{%
         \hfill \ccAttribution{} \ccShareAlike{} Observatory of Economic Complexity~\cite{Macro2017}
     }
-    \caption{A tree map of Germany's foreign trade quota of exports, showing a hierarchy of depth ``HS4''}\label{fig:related-work:treemap-german-exports-2}
+    \caption{A two dimensional tree map of Germany's foreign trade quota of exports, showing a hierarchy of depth ``HS4''}\label{fig:related-work:treemap-german-exports-2}
 \end{figure}
 If tree maps are used to visualize geographic data like municipalities, real estates or streets, the placement of nodes depends on the tiling algorithm and not the geographic location on a map.
 Let's say a tree map visualizes a hierarchy of federal states and municipalities, the area of each tile mapped to the total population of administrative district.
@@ -129,16 +129,20 @@ The term \tmap{} is used throughout this thesis to emphasize this usually existi
   \caption{Example of a \tmap{}}\label{fig:research:ua_treemap}
 \end{figure}
 
-\subsection{Geographical Data Visualization}
-\todo[inline]{introduction}
-\textbf{Flow maps} place stroked lines on top of a geographic map.
-They often display the flow of goods or the migration of people.
+\subsection{Geovisualization}
+The umbrella term ``Geovisualization'' covers visualization techniques for the visual exploration, analysis, synthesis and presentation of geospatial data (any data having geospatial  referencing)~\cite{Maceachren2001}.
+The entities of gespatial data may include buildings, streets, landmasses, terrain, administrative districts and also moving entities like cars.
+In this section we introduce four types of geographic visualization, which are commonly used to display both geographic and hierarchic data.
 
-\textbf{Choropleth maps} are thematic maps in which areas are shaded or patterned in proportion to the statistical variable being displayed on the map.
+
+\subsubsection{Choropleth maps}
+Choropleth maps are thematic maps in which areas are shaded or patterned in proportion to the statistical variable being displayed on the map.
 A popular use case is the display of population density or per-capita income.
 We can see an example of a choropleth map in Figure~\ref{fig:related-work:choropleth}, showing the percentage of obese population in the US\@.
-Choropleth maps are widely popular and many people can immediately understand them.
-They are very helpful when data is attached to enumeration unites like counties, provinces and countries.
+Choropleth maps are very popular and therefore many people are familiar with them already.
+A downside of choropleth maps is that larger regions may appear more emphasized than smaller ones, since the entire area of regions is coloured.
+Another disadvantage of choropleth maps is the common error of incorrect encoding:
+If they display absolute numbers, e.g.\ total population or proceeds of crime, rather than relative numbers, e.g.\ population density of unemployment rate.
 
 \begin{figure}[ht]
   \centering
@@ -152,35 +156,72 @@ They are very helpful when data is attached to enumeration unites like counties,
   }\label{fig:related-work:choropleth}
 \end{figure}
 
-\textbf{Graduated Symbol Maps} are a good alternative to choropleth maps, as they help to avoid one of the downsides of choropleth maps:
-Larger areas may appear more emphasized than smaller ones, thus confounding geographic area with data values.
-Instead, symbols are placed over the regions of a map.
-As \textcite{Heer2010} point out, these symbols allow for more visal variables to be visualized, i.e.\  symbol size, shape and colour.
+\subsubsection{Other thematic maps}
 
-\textbf{Cartograms} are used to encode a data attribute in the size of an area.
+There is a variety of geographic visualizations similar to choropleth maps.
+Some of those have advantages compared to choropleth maps or enable to visualize other kinds of data.
+
+\textbf{Flow maps} is a graph visualization of regions and their relationships.
+You can see a flow map in Section~\ref{sec:analysis:examples:single} in Figure~\ref{fig:analysis:geographical}.
+Flow maps place stroked lines on top of a geographic map to connect two geographic entities.
+These connections can encode more data attributes in the size or the colour of the stroke, its direction or shape.
+They often display the flow of goods or the migration of people.
+
+
+\textbf{Graduated Symbol or Proportional Symbol Maps} place a symbol on each region of the map, the symbol representing one or more data attributes.
+These maps are a good alternative to choropleth maps as they overcome the disadvantage of emphasizing larger areas.
+As \textcite{Heer2010} point out, these symbols can visualize many more data attributes, e.g.\  by symbol size, shape and colour.
+
+\textbf{Cartograms} encode a data attribute in the size of an area.
 For this reason geographic regions in cartograms appear distorted.
-A common example is to redraw the size of a country based on the the population or gross domestic product of a country.
+A common example is to redraw the size of a country based on the population or gross domestic product of a country.
 Area cartograms may be contiguous or noncontiguous, depending on the applied layout algorithm.
 
+This work uses a choropleth map for the geographic visualization because of its widespread recognition.
+
 \subsection{Coordinated Multiple Views}
+\cmvs{} are a combination of data visualizations of the same data set in multiple views, often side-by-side.
 According to \textcite{Roberts2007} \cmvs{} is just ``a specific exploratory visualization technique that enables users to explore their data''.
-\cmvs{} are characterized by the fact, that they show multiple views side-by-side.
-We can see an example in Figure~\ref{fig:research:cmv}.
-It displays an on-time performance of airlines, visualized with the ``Crossfilter'' javascript library.
-The user can set the borders of an interval with the mouse in each of the views.
-The visualization takes the most recent 80 flights from the database that match all given filters.
-All visualizations are then updated in real time.
-As we can see in the example in Figure~\ref{fig:research:cmv} there seems to be a correlation of a long delay with a later time of the day.
+Because ``the overall premise for the technique is that users understand their data better if they interact with the presented information and view it through different representations.''~\cite{Roberts2007}
+
+We can see an example of a \cmv{} in Figure~\ref{fig:related-work:cmv}
+It displays spatial and temporal attributes of pictures in a picture database, as well as continuous attributes like popularity and number of comments.
+\begin{figure}[h]
+  \centering
+  \copyrightbox[b]{\includegraphics[width=\textwidth]{figures/related-work/cmv}}{\hfill Dukevis\cite{Dukevis2017}}
+  \caption{\cmv{} displaying the popularity, number of comments, location and time of pictures in a picture data base}\label{fig:research:cmv}
+\end{figure}
+The user can move the mouse cursor over each item in the scatter plot and the graduated symbol map and the corresponding item is highlighted with a larger stroke in all other views.
+On the time line below, the user can also filter for pictures in a certain time frame by dragging the mouse from lower to upper limit.
 
 \begin{figure}[h]
   \centering
-  \copyrightbox[b]{\includegraphics[width=\textwidth]{figures/related-work/cmv_example}}{\hfill Crossfilter\cite{Bostock2017}}
-  \caption{Airline on-time performance: Correlation of time of day with arrival delay. Most recent flight with a delay of more than 100 minutes selected.}\label{fig:research:cmv}
+  \copyrightbox[b]{\includegraphics[width=\textwidth]{figures/related-work/brushing_linking}}{\hfill Crossfilter\cite{Bostock2017}}
+  \caption{Airline on-time performance: Correlation of time of day with arrival delay. Most recent flight with a delay of more than 100 minutes selected.}\label{fig:research:brushing-linking}
 \end{figure}
 
-\textbf{Brushing and Linking}
-Most multiple coordinated views also provide some kind of brushing technique.
+\subsubsection{Brushing and Linking}
+Brushing and linking is a common interaction pattern found in \cmvs{} and often a crucial part of these visualization.
 ``The technique of brushing is the principle approach, where elements are selected (and highlighted) in one display, concurrently the same information in any other linked display is also highlighted.''\cite{Roberts2007}
+
+We can see an example in Figure~\ref{fig:research:brushing-linking}.
+It displays an on-time performance of airlines, visualized with the ``Crossfilter'' javascript library.
+
+This library is also one of the very few examples of an interaction framework for \cmvs{}.
+However, this library is unmaintained as of December 2017, the most recent commit dating back to March 2016.
+
+Each of the flight in the data set has an hour and a date for departure, a arrival delay, which can also be negative, and a traveled distance in miles.
+The user can ``brush'' the data by selecting an interval by dragging the mouse.
+The respective view will become a primary view and display the deselected items with a grey colour.
+
+All other views become secondary views and display only selected items.
+The visualization takes the most recent 80 flights from the database that match all given filters.
+The user can further filter for items by dragging another interval in one of the secondary views.
+
+This technique of propagating interactions to other views is called ``linking''.
+
+Figure~\ref{fig:research:brushing-linking} shows a filter for travels with a long delay, i.e.\ from 120 minutes to the maximum value, see the selection in the upper center.
+In the view in the upper left corner in Figure~\ref{fig:research:brushing-linking}, we can see a correlation of long delays with the time of the day.
 
 \section{Libraries, Frameworks and Standards}
 
