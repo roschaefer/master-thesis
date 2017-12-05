@@ -125,7 +125,7 @@ These attributes may describe e.g.\ the weight of an edge in a flow map.
 
 It turns out that we can describe the types of an interaction as a mathematical function.
 These functions operates on the ids of \emph{entities}, \emph{series}, and \emph{relations} or their respective \emph{attributes}.
-The name of the function is the \emph{type} of the interaction and the function domain being the \emph{subject} of the interaction.
+The name of the function is the \emph{verb} and the function domain being the \emph{subject} of the interaction.
 Thus, we can describe interaction through a change of its semantic but we ignore implementation details of specific visualizations.
 
 
@@ -243,7 +243,8 @@ Figure~\ref{fig:concept:communication-pattern} gives an overview on the message 
   \includegraphics[width=\textwidth]{figures/concept/communication-pattern}
   \caption{%
     The message flow of the communication pattern:
-    Every view can decide for itself whether to trigger an interaction or respond to an interaction with a visual effect.
+    Multiple triggers and can lead to multiple effects in every view.
+    Trigger and effect are handled by views individually.
   }\label{fig:concept:communication-pattern}
 \end{figure}
 
