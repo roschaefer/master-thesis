@@ -179,7 +179,7 @@ Area cartograms may be contiguous or noncontiguous, depending on the applied lay
 
 This work uses a choropleth map for the geographic visualization because of its widespread recognition.
 
-\subsection{Coordinated Multiple Views}
+\subsection{Coordinated Multiple Views}\label{sec:related-work:cmvs}
 \cmvs{} are a combination of data visualizations of the same data set in multiple views, often side-by-side.
 According to \textcite{Roberts2007} \cmvs{} is just ``a specific exploratory visualization technique that enables users to explore their data''.
 Because ``the overall premise for the technique is that users understand their data better if they interact with the presented information and view it through different representations.''~\cite{Roberts2007}
@@ -189,7 +189,7 @@ It displays spatial and temporal attributes of pictures in a picture database, a
 \begin{figure}[h]
   \centering
   \copyrightbox[b]{\includegraphics[width=\textwidth]{figures/related-work/cmv}}{\hfill Dukevis\cite{Dukevis2017}}
-  \caption{\cmv{} displaying the popularity, number of comments, location and time of pictures in a picture data base}\label{fig:research:cmv}
+  \caption{\cmv{} displaying the popularity, number of comments, location and time of pictures in a picture data base}\label{fig:related-work:cmv}
 \end{figure}
 The user can move the mouse cursor over each item in the scatter plot and the graduated symbol map and the corresponding item is highlighted with a larger stroke in all other views.
 On the time line below, the user can also filter for pictures in a certain time frame by dragging the mouse from lower to upper limit.
@@ -359,38 +359,51 @@ Not only interactions in \cmvs{} are considered but any kind of a formalization 
 \textbf{Space-Time Cube Operations}
 is a concept introduced in 2014 by \textcite{Bach2014} to map temporal data into two dimensional visualizations.
 Space-time-cubes are used to model two attributes of continuous data with temporal data along a third axis, therefore the name \emph{cube}.
+
 While the transformations are rather static it is also possible to introduce activity into the transformations.
-The authors describe user-independent \emph{animations} and user-controlled \emph{interactions}.
+The authors distinguish user-independent \emph{animations} and user-controlled \emph{interactions}.
 E.g.\ a transformation may display a given slice of the cube.
 An animation would display one slice at a time and display the next slice every second.
 Whereas the interaction would show the slice determined by a user-controlled slider.
+
 Various transformations and their best use in practice are evaluated in this work.
 The work focuses on temporal data and otherwise continuous data.
-Interactions are not seen as an abstract entity, that need to be agnostic of the underlying data structure and visualization.
-The authors admit ``our framework does not provide much guidance for interaction design: the design space for interactive operations has only been partially explored.''\cite[Other limitations, p.~15]{Bach2014}
+In this work, interactions are not agnostic of the underlying data structure and visualization.
+The authors admit ``our framework does not provide much guidance for interaction design: the design space for interactive operations has only been partially explored.''\cite[p.~15]{Bach2014}
 
 \textbf{ITlib\cite{Figueroa2001}} is an architecture and a framework of interaction techniques for virtual reality applications, designed to be extensible and flexible.
 New interaction techniques can easily be added and application specific code is seamlessly integrated.
-On a low level an interaction technique ``is modeled as a set of filters connected in a small data flow''\cite[Basic concept, p.~2]{Figueroa2001}.
+
+On a low level an interaction technique ``is modeled as a set of filters connected in a small data flow''\cite[p.~2]{Figueroa2001}.
 These filters are the smallest process unit in the data flow.
 Composed of input and output ports, they communicate with other filters, to receive data input from predecessors and send data output to successors.
+
 The framework specifies and stores the interaction techniques along with its filters, the execution model and the scene in XML documents.
 The authors chose XML because it can be parsed easily and they generate code in order to target various virtual reality toolkits and environments.
 
 Even though the system describes interactions in an abstract way, the domain of the framework is clearly the interaction of a human body within a 3D virtual reality.
 Certain assumptions are made, including the data model, which is the 3D scene, and human computer interaction devices, like the user's hand or the user's head.
-The goal is not to better understand the data, as the data model in this case is the 3D scene, and not statistical data.
+
+The goal is not to better understand the data, which is the common goal in data visualizations.
+In this case, the data model is the 3D scene and the goal is to manipulate the 3D scene.
+
 Most important, the framework describes interaction techniques for a single viewpoint but not for coordinated multiple views.
 
-\textbf{Focus+Context Visualization} by \textcite{Bjork1999} is one of the few formalizations of information visualizations.
-The authors describe this formalization based on first-level and second-level visualization:
+\textbf{A framework for Focus+Context Visualization} by \textcite{Bjork1999} is one of the few formalizations of interactions in data visualizations.
+
+The idea behind the concept of focus and context visualization is to present the object of primary interest in full detail while at the same time giving a overview of the surroundings.
+
+The authors of the paper distinguish first-level and second-level information visualizations:
 \subparagraph{Visualizations} referred to as $IV$, are triples of a set $[D]$ of underlying data, a visual representation $V$ and $I$ which is the possible interaction or manipulation.
 \begin{equation}
   IV([D], V, I)
 \end{equation}
 If $I$ affects $[D]$ we can manipulate the underlying data set.
 Examples would be changes in a spreadsheet editor, or a change of the start and end date of an appointment in a calendar.
-When $V$ is affected by $I$ the user can manipulate $IV$ in order to change the way $[D]$ is represented, e.g.\ choosing a different level of detail as shown in Figures~\ref{fig:related-work:treemap-german-exports-1} and~\ref{fig:related-work:treemap-german-exports-2}.
+
+If $V$ is affected by $I$ the user can manipulate $IV$ in order to change the way $[D]$ is represented.
+This statement holds e.g.\ for an interaction in which the user increases the visible level of hierarchy in a tree map, which is an \attr{abstract/elaborate} interaction according to \textcite{Yi2007}.
+The effect of such an interaction is depicted by the change from Figure~\ref{fig:related-work:treemap-german-exports-1} to Figure~\ref{fig:related-work:treemap-german-exports-2} in Section~\ref{sec:related-work:cmvs}.
 
 \subparagraph{Second-level Visualizations} are information visualizations consecutively applied.
 The underlying data set $[D]$ of the previous formula is replaced with some information visualization $IV$, which is compatible with $IV'$.
@@ -398,7 +411,8 @@ The underlying data set $[D]$ of the previous formula is replaced with some info
   IV'(IV, V', I')
 \end{equation}
 
-
 Focus+context visualizations are second-level visualizations.
 An example given by the authors is the  ``rubbersheet'' visualization, that visually distorts a first-level visualization similar to a magnifier.
+Regions of primary interest are distorted to appear magnified, while the remaining regions are minified.
+
 
