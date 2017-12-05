@@ -62,18 +62,18 @@ The traditional visual representation of a tree is a directed graph with the roo
 	\includegraphics[width=\textwidth]{figures/related-work/tree.pdf}
 	\caption{Traditional visualization of a tree in form of a directed graph with edges and nodes and the root node at the top}\label{fig:related-work:tree-graph}
 \end{figure}
-An everyday use case is a directory tree example of a file system.
-E.g.\ a file browser or the command line utility \texttt{tree} on UNIX based operating systems.
+An common use case is a directory tree of a file system, e.g.\ a file browser or the command line utility \texttt{tree} on UNIX based operating systems.
 As \textcite{Shneiderman1992} mentions, this visualization becomes increasingly large when displaying more than one level and soon exceeds the entire screen size.
 
-\textcite{Johnson1991} proposes the tree map visualization technique, in which each node is a rectangle whose area is proportional to a specified dimension.
-The hierarchy in tree maps is expressed with tiles instead of nodes and every child node to parent node relation is expressed with a parent tile containing other tiles.
+\textcite{Johnson1991} propose the tree map visualization technique, in which each node is a rectangle whose area is proportional to a specified dimension.
+In tree maps every node is visualized as a tile.
+The membership relationship is expressed with tiles containing other tiles, thus representing the hierarchy.
 
 We can see two examples of tree maps in Figures~\ref{fig:related-work:treemap-german-exports-1} and~\ref{fig:related-work:treemap-german-exports-2}.
 German exports are divided in generic groups like ``Machines'' and ``Chemical Products'' and include more specific groups like ``Cars'' and ``Packaged Medicaments''.
 The user can click on a drop-down menu to change the current level of hierarchy, only leaf nodes are displayed at a time.
 
-The big advantage of tree maps is that they are space-filling visualizations, i.e.\ they make 100\% use of the available screen size.
+The advantage of tree maps is that they are space-filling visualizations, i.e.\ they make 100\% use of the available screen size.
 A tree map will, unlike a graph representation of a tree, never exceed the size of the screen.
 
 The area of the tiles can be mapped to a data attribute, e.g.\ the file size on disk or, in cases of Figures~\ref{fig:related-work:treemap-german-exports-1} and~\ref{fig:related-work:treemap-german-exports-2}, the percentage of export quota.
@@ -100,14 +100,14 @@ You can see this problem occur in Figure~\ref{fig:related-work:treemap-german-ex
     \caption{A two dimensional tree map of Germany's foreign trade quota of exports, showing a hierarchy of depth ``HS4''}\label{fig:related-work:treemap-german-exports-2}
 \end{figure}
 If tree maps are used to visualize geographic data like municipalities, real estates or streets, the placement of nodes depends on the tiling algorithm and not the geographic location on a map.
-Let's say a tree map visualizes a hierarchy of federal states and municipalities, the area of each tile mapped to the total population of administrative district.
+Let's say a tree map visualizes a hierarchy of federal states and municipalities with the area of each tile mapped to the total population of administrative district.
 Even if the membership hierarchy is matched by the tree map, the placement of districts in the same hierarchy level is based on their total population and not their geographic location.
 
 \subsubsection{3D tree maps and \tmaps{}}
-3D tree maps is a concept introduced by \textcite{Bladh2004} in 2004.
+3D tree maps are a concept introduced by \textcite{Bladh2004} in 2004.
 The authors transfer the concept of tree maps from two dimensional into three dimensional space, transforming tiles to blocks.
-They introduce StepTree~\cite{Bladh2004}, which is a three dimensional tree map to display a directory layout of a file system.
-It ``differs from Treemap in that it employs three dimensions by stacking each subdirectory on top of its parent directory.''
+They introduce ``StepTree''~\cite{Bladh2004}, which is a three dimensional tree map to display a directory layout of a file system.
+It ``differs from tree maps in that it employs three dimensions by stacking each subdirectory on top of its parent directory.''
 
 3D tree maps are superior to 2D tree maps for tasks with a pronounced topological challenge.
 User perform significantly better in interpreting the hierarchical structure.
@@ -118,7 +118,7 @@ The navigation of the view point itself is an increase of complexity not present
 The term \tmap{} was coined by \textcite{Limberger2016} in 2016.
 A \tmap{} is just an ordinary 3D tree map, but it has all blocks attached to the ground, or more specifically, attached to the parent block.
 We can see an example of a \tmap{} in figure~\ref{fig:research:ua_treemap}.
-The term \tmap{} is used throughout this thesis to emphasize this usually existing constraint.
+All three dimensional tree maps in this thesis are in fact \tmaps{} and therefore this term is used for the rest of this work.
 
 \begin{figure}[ht]
   \centering
@@ -130,19 +130,19 @@ The term \tmap{} is used throughout this thesis to emphasize this usually existi
 \end{figure}
 
 \subsection{Geovisualization}
-The umbrella term ``Geovisualization'' covers visualization techniques for the visual exploration, analysis, synthesis and presentation of geospatial data (any data having geospatial  referencing)~\cite{Maceachren2001}.
-The entities of gespatial data may include buildings, streets, landmasses, terrain, administrative districts and also moving entities like cars.
-In this section we introduce four types of geographic visualization, which are commonly used to display both geographic and hierarchic data.
+The umbrella term ``Geovisualization'' covers visualization techniques for the ``visual exploration, analysis, synthesis and presentation of geospatial data (any data having geospatial  referencing)''~\cite{Maceachren2001}.
+The entities of geospatial data may include buildings, streets, landmasses, terrain, administrative districts and also moving entities like cars.
+In this section four types of geographic visualization are introduced, which are commonly used to display both geographic and hierarchic data.
 
 
 \subsubsection{Choropleth maps}
-Choropleth maps are thematic maps in which areas are shaded or patterned in proportion to the statistical variable being displayed on the map.
+Choropleth maps are thematic maps in which areas are shaded or patterned in proportion to the statistical variables being displayed on the map.
 A popular use case is the display of population density or per-capita income.
 We can see an example of a choropleth map in Figure~\ref{fig:related-work:choropleth}, showing the percentage of obese population in the US\@.
 Choropleth maps are very popular and therefore many people are familiar with them already.
 A downside of choropleth maps is that larger regions may appear more emphasized than smaller ones, since the entire area of regions is coloured.
 Another disadvantage of choropleth maps is the common error of incorrect encoding:
-If they display absolute numbers, e.g.\ total population or proceeds of crime, rather than relative numbers, e.g.\ population density of unemployment rate.
+Such an incorrect encoding would be the display of absolute numbers, e.g.\ total population or proceeds of crime, rather than relative numbers, e.g.\ population density or unemployment rate.
 
 \begin{figure}[ht]
   \centering
@@ -152,7 +152,7 @@ If they display absolute numbers, e.g.\ total population or proceeds of crime, r
   }
   \caption{%
     Choropleth Map of Obesity in the United States in 2008.
-    Present of population classified as ``obese'' (Body Mass Index in excess of 30), by state.
+    Present of population classified as ``obese'' (Body Mass Index greater than 30), by state.
   }\label{fig:related-work:choropleth}
 \end{figure}
 
@@ -164,8 +164,8 @@ Some of those have advantages compared to choropleth maps or enable to visualize
 \textbf{Flow maps} is a graph visualization of regions and their relationships.
 You can see a flow map in Section~\ref{sec:analysis:examples:single} in Figure~\ref{fig:analysis:geographical}.
 Flow maps place stroked lines on top of a geographic map to connect two geographic entities.
-These connections can encode more data attributes in the size or the colour of the stroke, its direction or shape.
-They often display the flow of goods or the migration of people.
+These relationships can encode additional data attributes in the size or the colour of the stroke, its direction or shape.
+Flow maps often display the flow of goods or the migration of people.
 
 
 \textbf{Graduated Symbol or Proportional Symbol Maps} place a symbol on each region of the map, the symbol representing one or more data attributes.
@@ -185,7 +185,7 @@ According to \textcite{Roberts2007} \cmvs{} is just ``a specific exploratory vis
 Because ``the overall premise for the technique is that users understand their data better if they interact with the presented information and view it through different representations.''~\cite{Roberts2007}
 
 We can see an example of a \cmv{} in Figure~\ref{fig:related-work:cmv}
-It displays spatial and temporal attributes of pictures in a picture database, as well as continuous attributes like popularity and number of comments.
+It displays spatial and temporal attributes of pictures from a picture database, as well as continuous attributes like popularity and number of comments.
 \begin{figure}[h]
   \centering
   \copyrightbox[b]{\includegraphics[width=\textwidth]{figures/related-work/cmv}}{\hfill Dukevis\cite{Dukevis2017}}
@@ -201,7 +201,7 @@ On the time line below, the user can also filter for pictures in a certain time 
 \end{figure}
 
 \subsubsection{Brushing and Linking}
-Brushing and linking is a common interaction pattern found in \cmvs{} and often a crucial part of these visualization.
+Brushing and linking is a common interaction pattern found in \cmvs{} and often a crucial part of these visualizations.
 ``The technique of brushing is the principle approach, where elements are selected (and highlighted) in one display, concurrently the same information in any other linked display is also highlighted.''\cite{Roberts2007}
 
 We can see an example in Figure~\ref{fig:research:brushing-linking}.
@@ -210,7 +210,7 @@ It displays an on-time performance of airlines, visualized with the ``Crossfilte
 This library is also one of the very few examples of an interaction framework for \cmvs{}.
 However, this library is unmaintained as of December 2017, the most recent commit dating back to March 2016.
 
-Each of the flight in the data set has an hour and a date for departure, a arrival delay, which can also be negative, and a traveled distance in miles.
+Each of the flight in the data set has an hour and a date for departure, an arrival delay, which can also be negative, and a traveled distance in miles.
 The user can ``brush'' the data by selecting an interval by dragging the mouse.
 The respective view will become a primary view and display the deselected items with a grey colour.
 
@@ -274,7 +274,7 @@ Furthermore, topics are published asynchronously, so if the user interacts with 
 
 
 \section{Interaction Theory}\label{sec:related-work:interaction-theory}
-According to \textcite{Ho2013} interactions are a crucial part of data visualizations, yet most research in the area of data visualization still focuses on visual representations.
+According to \textcite{Ho2013} interactions are a crucial part of data visualizations, yet most research in the area still focuses on visual representations.
 Roughly speaking, research on interaction falls into these groups:
 How to categorize interaction techniques?
 How to find new interaction techniques and apply those to visualizations?
@@ -284,22 +284,6 @@ The following sections will give an overview of the current research of interact
 \subsection{Interaction Categories}\label{sec:related-work:interaction-theory:categories}
 This section covers the larger part of research on interactions in \cmvs{}:
 High-level classification and categorization.
-
-\textcite{Shneiderman1996} classifies interactions into these groups:
-\begin{enumerate*}[label=(\arabic*)]
-  \item
-    Gain an \emph{overview} of the entire collection,
-  \item
-    \emph{zoom} in on items of interest,
-  \item
-    select an item or group and get \emph{details} when needed,
-  \item
-    view \emph{relationships} among items,
-  \item
-    keep a \emph{history} of actions to support undo,
-  \item
-    allow \emph{extraction} of sub-collections and of the query parameters.
-\end{enumerate*}
 
 In 1997 \textcite{Shneiderman1996} classified interactions into these groups:
 \begin{enumerate*}[label=(\arabic*)]
@@ -326,7 +310,7 @@ Two years later, \textcite{Dix1998} identified these categories:
   \item
     zoom in and out to give an \emph{overview and context},
   \item
-    \emph{change parameters} of the \emph{same representation}, e.g.\ another baseline of a stacked bar char,
+    \emph{change parameters} of the \emph{same representation}, e.g.\ another baseline of a stacked bar chart,
   \item
     \emph{change representation} of the \emph{same data} by switching the chart type,
   \item
@@ -342,7 +326,7 @@ In 2002, \textcite{Keim2002} comes up with the following classification:
   \item
     \emph{zoom} into a subset of the data and get a higher level of detail,
   \item
-    preserve an overview of the data during drill-down operations is called \emph{distortion}
+     drill-down operations to preserve an overview of the data are called \emph{distortion}
   \item
     and finally \emph{link and brush} visualizations, to highlight the same data points in multiple visualizations.
 \end{enumerate*}
@@ -358,11 +342,11 @@ The most recent classification was done in 2007 by \textcite{Yi2007} listing sev
   \item
     \emph{encode} to show a different representation,
   \item
-    \emph{abstract/elaborate} show more or less detail,
+    \emph{abstract/elaborate} to show more or less detail,
   \item
-    \emph{filter} show something conditionally,
+    \emph{filter} to show something conditionally,
   \item
-    \emph{connect} show related items.
+    \emph{connect} to show related items.
 \end{enumerate*}
 
 It is noticeable that all of these classifications of interactions are redundant.
@@ -371,8 +355,7 @@ In this work the classification of \textcite{Yi2007} is used for the remaining p
 \todo[inline]{Shall I give an example for each category of \textcite{Yi2007} classification?}
 
 \subsection{Formalization of Interactions}
-This section covers the smaller part of research in \cmvs{}:
-Everything that is \emph{not} related to a high-level classification of interactions.
+This section covers the smaller part of research in \cmvs{}, research that is \emph{not} related to a high-level classification of interactions.
 Not only interactions in \cmvs{} are considered but any kind of a formalization of interaction that may be used as the starting point for a framework for \cmvs{}.
 
 \textbf{Space-Time Cube Operations}
@@ -381,13 +364,11 @@ Space-time-cubes are used to model two attributes of continuous data with tempor
 
 While the transformations are rather static it is also possible to introduce activity into the transformations.
 The authors distinguish user-independent \emph{animations} and user-controlled \emph{interactions}.
-E.g.\ a transformation may display a given slice of the cube.
-An animation would display one slice at a time and display the next slice every second.
-Whereas the interaction would show the slice determined by a user-controlled slider.
+E.g.\ a transformation may display a particular slice of the cube.
+An animation would display one slice at a time and display the next slice every second, whereas the interaction would show the slice determined by a user-controlled slider.
 
 Various transformations and their best use in practice are evaluated in this work.
-The work focuses on temporal data and otherwise continuous data.
-In this work, interactions are not agnostic of the underlying data structure and visualization.
+The work focuses on temporal data or continuous data and interactions depend on the underlying data structure and visualization.
 The authors admit ``our framework does not provide much guidance for interaction design: the design space for interactive operations has only been partially explored.''\cite[p.~15]{Bach2014}
 
 \textbf{ITlib\cite{Figueroa2001}} is an architecture and a framework of interaction techniques for virtual reality applications, designed to be extensible and flexible.
@@ -406,7 +387,7 @@ Certain assumptions are made, including the data model, which is the 3D scene, a
 The goal is not to better understand the data, which is the common goal in data visualizations.
 In this case, the data model is the 3D scene and the goal is to manipulate the 3D scene.
 
-Most important, the framework describes interaction techniques for a single viewpoint but not for coordinated multiple views.
+Most importantly, the framework describes interaction techniques for a single viewpoint but not for coordinated multiple views.
 
 \textbf{A framework for Focus+Context Visualization} by \textcite{Bjork1999} is one of the few formalizations of interactions in data visualizations.
 
