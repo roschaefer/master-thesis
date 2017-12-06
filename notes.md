@@ -75,3 +75,9 @@ Wie ist das Mapping?
 Requirements: Mit "Extensibility" war nicht Data Extensibility sondern "Software
 extensibility" gemeint
 
+# 2017-12-06 (Gerd)
+
+vielleicht ein parallel plot anzeigen
+vielleicht beispiel ebay als detail view
+größere Minimap
+
