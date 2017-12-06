@@ -51,11 +51,8 @@ Den Absatz über Treemaps leichter verständlich erklären, mit Bild!
 
 Zusammenhang kommt nicht raus in dem Text bei den Detailstufen der tree maps
 Latex tabelle statt bild für die Comparison
-UML aus dem Communication protocol machen
 Überhaupt wenn's geht UML bearbeiten
-Rundfunk MITBESTIMMEN aus der Beschreibung eines Bildes rausschmeißen
 Eigenständigkeitserklärung fehlt
-Frau Pamperin wegen Abgabemodalitäten fragen
 Was ist eigentlich eine View? => Konzept
 Wer kommuniziert eigentlich mit wem im Communication pattern?
 Communication part nach vorne holen
@@ -67,7 +64,6 @@ Notification ist ein wesentlicher Punkt, eigenen Absatz daraus machen
 Software pattern umbenennen in Notification
 Patterns sind gar nicht so wichtig
 Implemented interactions noch ausführlicher machen
-"We want ... " => The following interactions have been implemented
 Für jede Interaktion einen Screenshot machen
 Wieviel Code ist notwendig um eine neue Interaktion einzubauen? => Zeigen
 Wie hängt Concept mit Implementierung zusammen?
