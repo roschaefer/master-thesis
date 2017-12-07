@@ -12,7 +12,7 @@ Section~\ref{sec:analysis:requirements} gives a set of requirements which can be
 Finally in Section~\ref{sec:analysis:frontend-framework-comparison} the advantages and disadvantages of several web frontend frameworks are contrasted.
 A final decision is made which framework will be used for the implementation of the conceptual framework.
 
-\section{Single Visualization Interactions}\label{sec:analysis:examples:single}
+\section{Single View Interactions}\label{sec:analysis:examples:single}
 
 The data visualization catalogue by Severino Ribecca lists many of the most used data visualizations\cite{VisualizationCatalogue2017}.
 This section covers a list of common data visualizations from that catalogue as examples.
@@ -457,7 +457,8 @@ In this section, the existing interactions are classified according to the class
 
 In the existing \visan{} possible interactions can be categorized into the classes \emph{select}, \emph{explore}, \emph{reconfigure}, \emph{encode} and \emph{filter}.
 
-As seen in Figure~\ref{fig:analysis:interaction:existing} the user can \emph{select} one item in the view by clicking on it.
+% As seen in Figure~\ref{fig:analysis:interaction:existing}
+The user can \emph{select} one item in the view by clicking on it.
 The user can reveal a tooltip showing the item properties by moving the mouse cursor on the item, which is another \emph{select} interaction.
 
 The user can \emph{explore} the map in the usual manner:
@@ -469,26 +470,26 @@ Under the ``features'' tab, the user can \emph{reconfigure} different data sets 
 The tab ``Dimensions'' allows the user to \emph{encode} properties of a data set to visual attributes, e.g.\ the height, color and texture of an item.
 
 The tab ``Filter'' can be used to reduce the displayed data set to a range of continuous values.
-Figure~\ref{fig:analysis:interaction:existing:filter} shows the range of visible values in the left menu.
+% Figure~\ref{fig:analysis:interaction:existing:filter} shows the range of visible values in the left menu.
 When the user drags the slider, the items in the map on the right side are \emph{filtered} accordingly.
 
-\begin{figure}[h]
-  \centering
-  \includegraphics[width=\textwidth]{images/existing-interactions.png}
-  \caption{%
-    Items can be highlighted with a click, Bavaria is currently highlighted.
-    A mouse over reveals a tooltip showing item properties.
-    The menu on the left side allows to change the data set and the specific base visualization.
-  }\label{fig:analysis:interaction:existing}
-\end{figure}
+% \begin{figure}[h]
+%   \centering
+%   \includegraphics[width=\textwidth]{images/existing-interactions.png}
+%   \caption{%
+%     Items can be highlighted with a click, Bavaria is currently highlighted.
+%     A mouse over reveals a tooltip showing item properties.
+%     The menu on the left side allows to change the data set and the specific base visualization.
+%   }\label{fig:analysis:interaction:existing}
+% \end{figure}
 
-\begin{figure}[h]
-  \centering
-  \includegraphics[width=\textwidth]{images/existing-interactions-filter.png}
-  \caption{%
-    Only gas stations with a price for E10 within 1.349 Euro and 1.589 Euro are displayed in the map
-  }\label{fig:analysis:interaction:existing:filter}
-\end{figure}
+% \begin{figure}[h]
+%   \centering
+%   \includegraphics[width=\textwidth]{images/existing-interactions-filter.png}
+%   \caption{%
+%     Only gas stations with a price for E10 within 1.349 Euro and 1.589 Euro are displayed in the map
+%   }\label{fig:analysis:interaction:existing:filter}
+% \end{figure}
 
 \section{Comparison of client-side component frameworks}\label{sec:analysis:frontend-framework-comparison}
 

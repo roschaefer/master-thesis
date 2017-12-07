@@ -1,11 +1,11 @@
-\chapter{Evaluation}\label{sec:evaluation}
+\chapter{Evaluation and Discussion}\label{sec:evaluation}
 
-In this chapter the reference implementation is evaluated in three steps.
+In this chapter the reference implementation of the conceptual framework is evaluated.
 First, a couple of use cases are described and how a geographical visualization can create more value.
 A performance evaluation is carried out, to discover technical limitations and to find performance bottlenecks.
 As a last step, the requirements of Chapter~\ref{sec:analysis} are used to validate the conceptual framework and the reference implementation.
 
-\section{Evaluation of Use Cases}\label{sec:use-case}
+\section{Use Cases and Discussion}\label{sec:use-case}
 
 \todo[inline]{no section without text}
 
@@ -104,7 +104,7 @@ Figure~\ref{fig:evaluation:cases:wahlkreise_multiselect:2} shows a correlation o
 \end{figure}
 
 
-\section{Performance Evaluation}
+\section{Performance Evaluation and Limitations}
 
 The following performance evaluation was carried out with the built-in runtime performance analysis feature of the Chrome browser.
 In particular, a Chromium Browser was used in Version 62.0 - 64 Bit.
@@ -113,11 +113,11 @@ The hardware specifications of the machine are listed in Table~\ref{tab:evaluati
 \begin{table}[ht]
   \centering
   \begin{tabular}{ll}
-    Device name & LENOVO ThinkPad L540 \\
-    CPU type & Intel i3-4100M CPU @ 2.50GHz \\
-    CPUs & 4 \\
-    Main memory & 8GiB \\
-    Graphics card & Intel 4th Gen Core Processor Integrated Graphics Controller \\
+    Device name: & LENOVO ThinkPad L540 \\
+    CPU type: & Intel i3-4100M CPU @ 2.50GHz \\
+    \#CPUs: & 4 \\
+    Main memory: & 8GiB \\
+    Graphics card: & Intel 4th Gen Core Processor Integrated Graphics Controller \\
   \end{tabular}
   \caption{Hardware specifications}%
   \label{tab:evaluation:performance:hardware}
@@ -141,7 +141,7 @@ The data set with the highest number of features is called ``Immoscout Wohnungsa
 \begin{table}[ht]
   \centering
   \begin{tabular}{lllr}
-    Name & Features & Type & Size (MiB) \\
+    Data Set & Features & Type & Size (MiB) \\
     \hline
     Bundesländer Deutschland      & 16   & Areas  & 0.64 \\
     Tankstellen Berlin            & 366  & Points & 0.75 \\

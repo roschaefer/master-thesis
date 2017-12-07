@@ -79,16 +79,6 @@ This pattern is very applicable to \cmvs{}.
 The different views of \cmvs{} share state, i.e.\ the feature, that is currently highlighted or the applied filter on the data.
 So the views are components and their closest common ancestor is the \cmv{} itself, controlling state and passing user interaction down to it's children.
 
-\begin{figure}[ht]
-  \centering
-  \includegraphics[width=\textwidth]{images/data-down-actions-up.png}
-  \caption{%
-    Implementation of the component pattern in EmberJS\@.
-    The example shows a page of a webshop.
-    The customer is about to order the items in the shopping cart.
-  }\label{fig:implementation:data-down-actions-up}
-\end{figure}
-
 \textbf{Actions up --- Data down}
 
 Version 2.0 of Ember introduced a common phrase how to use this pattern effectively: ``Data down, actions up''\cite{Emberigniter2017}
@@ -106,7 +96,7 @@ Examples for the kind of data that might trigger a rerendering of a view:
 \end{itemize}
 
 
-\section{Geographical visualization with React and Leaflet}
+\section{Implementation of the Map Component}
 
 The geographical visualization is implemented as a \attr{Map} component of the React Leaflet library.
 Listing \ref{lst:implementation:render} shows the \attr{render} method of the component.
@@ -123,7 +113,7 @@ React's templating language ``\attr{JSX}'' allows to nest other child components
 In this case the \attr{Map} component includes a \attr{TileLayer} \attr{GeoJSON} component from the \attr{react-leaflet} library.
 This library conveniently provides ``React components for Leaflet maps.''~\cite{ReactLeaflet2017}.
 
-\subsection{GeoJSON component}
+\subsection{GeoJSON Component}
 
 The \attr{GeoJSON} component is provided by the \attr{Map} component with a couple of properties:
 It gets a
@@ -191,7 +181,7 @@ These optimizations affect how often the geometries are reloaded, i.e.\ it reduc
   caption={The \attr{multiviewController} avoids unnecessary requests to reload geometries}
 ]{listings/implementation/multiviewController.tsx}
 
-As shown in Listing~{list:implementation:multiviewController}, the geometries depend on a change of the \attr{url} of the geometries.
+As shown in Listing~\ref{list:implementation:multiviewController}, the geometries depend on a change of the \attr{url} of the geometries.
 A change of the \attr{url} will automatically trigger an interaction of type \attr{reconfigure} to reload geometries.
 
 An example of these geometries can be seen in listing~\ref{lst:geojson:example}.
@@ -204,17 +194,6 @@ Each feature comes with a unique \attr{id} which is published when a user intera
   label={lst:geojson:example},
   caption={A truncated example of a user distribution across German federal states}
 ]{listings/example.geojson}
-
-We can use this data as input for our common \visan{}, e.g.\ figure~\ref{fig:implementation:user_distribution} shows the geographic distribution of users of a web application.
-
-\begin{figure}[ht]
-  \centering
-  \includegraphics[width=\textwidth]{images/ua_example.png}
-  \caption{%
-    User distribution across German federal states of users of a web application
-  }\label{fig:implementation:user_distribution}
-\end{figure}
-
 
 
 

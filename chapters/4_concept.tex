@@ -1,4 +1,4 @@
-\chapter{Concept}\label{sec:concept}
+\chapter{Conceptual Framework}\label{sec:concept}
 Based on the findings in Chapter~\ref{sec:analysis} this chapter specifies a formal language and a conceptual framework for \cmvs{}.
 The approach involves the definition of the terminology and the basic components of the conceptual framework.
 
@@ -10,13 +10,13 @@ As a last step, the communication pattern of the formalized language is layed ou
 
 The formalization of an interaction $I$ is defined as follows:
 \begin{equation}
-  I(T, M(V(P,IS)), E)
+  I(T, M(C,P,IS), E)
 \end{equation}
 For a trigger $T$, a message $M$ and the effect $E$.
-The message $M$ is composed of a verb $V$, an application specific purpose $P$ and an interaction subject $IS$.
+The message $M$ is composed of a category $C$, an application specific purpose $P$ and an interaction subject $IS$.
 The part of the interaction which is shared among multiple views is the message $M$.
 
-The verb $F$ is defined by the triggering view at runtime.
+The category $C$ is defined by the triggering view at runtime.
 E.g.\ when a parallel plot rearranges the list of attributes, the exact order will be determined by the view itself, during the handling of the drag-and-drop action.
 
 
@@ -41,11 +41,11 @@ Every view is responsible of its visual \emph{effects}.
 Obviously visual effects are not shared, as it depends on the visualization technique if visual variables are available to express a visual effect.
 A re-order interaction will not have an effect in bubble charst, as position is constrained by the type of visualization.
 
-In singular visualizations, interactions consist of at least of a trigger and an effect:
+In single visualizations, interactions consist of at least of a trigger and an effect:
 \begin{equation}
   I(T, E)
 \end{equation}
-The meaning of the interaction in a singular view can be implicit.
+The meaning of the interaction in a single view can be implicit.
 E.g.\ hovering over a geographic area changes the background colour of the polygon and the user can identify the interaction as a \emph{highlighting}.
 
 This implicit meaning gets explicit in \cmvs{} so that other views are able to react appropriately.
@@ -67,21 +67,16 @@ E.g.\ the user desires to select a detail view of an item under the mouse cursor
 Therefore we allow for a user-defined \emph{purpose}.
 The purpose describes the interaction in the context of a task or an intention that is intrinsic to the application the interaction happens in.
 
-\subsection{Verb}
-An verb is the declaration and definition how the subject of the interaction should be changed.
+\subsection{Category}
+An category is the declaration and definition how the subject of the interaction should be changed.
 The aforementioned explicit meaning of the interaction is the smallest unit of information of the interaction.
 
-Some examples of verbs include: Selection, Deletion, Point-of-Interest, Filtering, Reordering, Re-encoding.
-Verbs can be classified with the interaction categories of \textcite{Yi2007}.
+Some examples of categories include: Selection, Deletion, Point-of-Interest, Filtering, Reordering, Re-encoding.
+Categories can be classified with the interaction categories of \textcite{Yi2007}.
 
 
 \subsection{Message}
 A message is the required set of information to coordinate an interaction across multiple views.
-
-\subsection{Application context}
-The application context refers to the exclusive state of the specific application.
-Part of the application context is the access to data sources and the procedure to initialize data visualization with it.
-Also, the binary files of textures, icons and vectors that describe the visual representation of a shape and colour themes are part of the application context.
 
 \section{Shared data model}\label{sec:concept:data-model}
 To account for the various data structures, we use an abstract data model that is inclusive enough to include tabular, hierarchical and relational data.
@@ -122,11 +117,11 @@ These attributes may describe e.g.\ the weight of an edge in a flow map.
 
 
 
-\section{Predefined verbs}\label{sec:concept:types}
+\section{Predefined categories}\label{sec:concept:categories}
 
-It turns out that we can describe the types of an interaction as a mathematical function.
+It turns out that we can describe the categories of an interaction as a mathematical function.
 These functions operates on the ids of \emph{entities}, \emph{series}, and \emph{relations} or their respective \emph{attributes}.
-The name of the function is the \emph{verb} and the function domain being the \emph{subject} of the interaction.
+The name of the function is the \emph{category} and the function domain being the \emph{subject} of the interaction.
 Thus, we can describe interaction through a change of its semantic but we ignore implementation details of specific visualizations.
 
 
@@ -161,7 +156,7 @@ The empty set is written as $\varnothing$.
 If a function has the empty set as its domain, it expects no arguments.
 Such a function is also called a constant.
 
-The following is a list of functions describing the types based on the aforementioned sets:
+The following is a list of functions describing the categories based on the aforementioned sets:
 
 \begin{equation} Select: \varnothing \rightarrow \mathcal{P}(\mathbb{E}) \end{equation}
   The constant $Select$ takes no arguments and returns a subset of selected entities.
@@ -219,21 +214,21 @@ The following is a list of functions describing the types based on the aforement
 Let's have some examples how these functions can be applied on coordinated interactions:
 
 A user clicks on a bar in a bar chart and this feature then changes its background colour.
-To coordinate the highlighting, the bar chart view will formulate a new message composed of a \emph{Select} function and the verb \emph{highlight}.
+To coordinate the highlighting, the bar chart view will formulate a new message composed of a \emph{Select} function and the category \emph{highlight}.
 The function returns the set with the highlighted entity.
 
 Let's say, a geographical map should move the position of the viewpoint on a entity.
-The triggering view will use a function \emph{Select} this time with a verb \emph{focus}.
+The triggering view will use a function \emph{Select} this time with a category \emph{focus}.
 A treemap as a third view could pick up that interaction and show a subtree with the focused entity as root node. 
 
 A view may show some controls to filter the data set, e.g.\ two sliders on an attribute called \attr{prize}.
-When the user releases the mouse, an interaction with the function \emph{Filter} and the verb \emph{Hide} will be triggered.  
+When the user releases the mouse, an interaction with the function \emph{Filter} and the category \emph{Hide} will be triggered.  
 The function will then check the \attr{prize} of every entity and returns \attr{true} if the prize is within the given lower and upper limit, \attr{false} otherwise.
 
 \section{Communication pattern}
 
-In Section~\ref{sec:concept:types} we discussed how we can describe the types of the interaction.
-The verb determines the signature of the function and describes the interaction itself.
+In Section~\ref{sec:concept:categories} we discussed how we can describe the categories of the interaction.
+The category determines the signature of the function and describes the interaction itself.
 However a type does not define how interactions are \emph{coordinated} among views.
 E.g.\ what action in one view should lead to what kind of changes in what other views?
 What is the communication pattern or what is the protocol how messages are exchanged in the conceptual framework?
@@ -256,7 +251,7 @@ Therefore, not only the \emph{trigger} and \emph{effect} is implementation speci
 
 Every visualization decides on its own, how to react to a certain interaction.
 That leads us to distinguishable, named interactions.
-Every view can subscribe to certain interactions and receive messages in form of changed verbs.
+Every view can subscribe to certain interactions and receive messages in form of changed categories.
 In order trigger an interaction, the visualization simply publishes to the named interaction.
 
 This pattern is known as the \emph{Publish-subscribe pattern} and widely used in message queues.
