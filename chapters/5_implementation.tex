@@ -26,7 +26,7 @@ The connection of the conceptual framework and the implemented framework is exam
 \end{figure}
 
 The reference implementation of the conceptual framework is written in \attr{TypeScript} and uses \attr{PubSubJS} for communication.
-The visualizations are implemented with \attr{React} and the geographical visualization uses \attr{Leaflet} under the hood.
+The views are implemented with \attr{React} and the geographical visualization uses \attr{Leaflet} internally.
 Geometry data is exchanged with \attr{GeoJSON} as data format.
 
 The general architecture of the reference implementation is shown in Figure~\ref{fig:implementation:architecture}.
@@ -39,7 +39,7 @@ Every view has a reference to \attr{MultiviewController} in order to subscribe t
 The \attr{MultiviewController} itself does not have a visual representation.
 
 The classes \attr{MapComponent}, \attr{DebugView} and \attr{MessageLog} are implemented with React and have a \attr{render} method.
-This way, these class can be initialized and rendered anywhere in the DOM tree.
+This way, these classes can be initialized and rendered anywhere in the DOM tree.
 They are dependency free, except of the reference to a \attr{MultiviewController}, which makes those classes easy to test.
 
 The views that are implemented with React automatically re-render if their internal state changes.
@@ -65,12 +65,12 @@ Any change to the \attr{MultiviewController} will subsequently be broadcasted to
 
 \textbf{Publisher subscriber}
 In our particular case we apply a special form of the observer pattern, the so called ``Publish-subscribe'' pattern\cite{Eugster2003}.
-Publish-subsribe is a messaging pattern which is widely used in message queues.
+Publish-subscribe is a messaging pattern which is widely used in message queues.
 In this scenario, senders of messages simply categorize their messages which will be consumed by subscribers of the category.
 The scenario has very low coupling, publishers do not even need to know the existence of subscribers.
 
 \textbf{Component pattern}
-State-of-the-art javascript component frameworks like ReactJS and EmberJS follow the component pattern for the architecture of a single page web application.
+State-of-the-art JavaScript component frameworks like ReactJS and EmberJS follow the component pattern for the architecture of a single page web application.
 The component pattern imposes a hierarchical structure on a website.
 Each component is responsible for a task and may contain other components.
 The components are joined at the root node of the page.
@@ -84,10 +84,10 @@ So the views are components and their closest common ancestor is the \cmv{} itse
 Version 2.0 of Ember introduced a common phrase how to use this pattern effectively: ``Data down, actions up''\cite{Emberigniter2017}
 In the domain of \cmvs{} actions would mean user interactions, e.g.\ a click on a feature.
 The action will notify the controlling \cmv{} component.
-Actions may change data, and the changes will be passed to to all dependen views.
-These views are then rerendered.
+Actions may change data, and the changes will be passed to to all dependent views.
+These views are then re-rendered.
 
-Examples for the kind of data that might trigger a rerendering of a view:
+Examples for the kind of data that might trigger a re-rendering of a view:
 \begin{itemize}
   \item
     The selected feature or a list of selected features
@@ -109,7 +109,7 @@ Listing \ref{lst:implementation:render} shows the \attr{render} method of the co
 
 The \attr{render} method is the only required method of a React component.
 It will be invoked on the initial rendering of the component of the \attr{DOM} and on every update of the component's properties.
-React's templating language ``\attr{JSX}'' allows to nest other child components in to the React parent component.
+React's templating language ``\attr{JSX}'' allows to nest other child components into the React parent component.
 In this case the \attr{Map} component includes a \attr{TileLayer} \attr{GeoJSON} component from the \attr{react-leaflet} library.
 This library conveniently provides ``React components for Leaflet maps.''~\cite{ReactLeaflet2017}.
 
@@ -143,7 +143,7 @@ Listing \ref{lst:implementation:onEachFeature} shows the event handlers added to
 
 First we cache all layers in the internal state of the \attr{Map} component.
 On each \attr{mouseover} event, the \attr{id} of the feature is published as \attr{mcv.select.highlight} interaction.
-A \attr{click} event is distinguised if the control key is pressed or not.
+A \attr{click} event is distinguished if the control key is pressed or not.
 In the latter case, the id of the feature is either added or removed from the list of focused ids and then the list of focused ids is published as \attr{mcv.select.focus} interaction.
 
 \lstinputlisting[
@@ -171,7 +171,7 @@ This way, the same options of \attr{featureStyle} can be applied to both point a
 The \attr{MultiviewController} is a simple wrapper around the library \attr{PubSubJS} and works as a broker for interactions across \cmvs{}.
 
 
-As the central part of the software, the \attr{MultiviewController} is also used for certain performance optimiziations.
+As the central part of the software, the \attr{MultiviewController} is also used for certain performance optimizations.
 These optimizations affect how often the geometries are reloaded, i.e.\ it reduces the number of requests to the \attr{GeoJSON} endpoint.
 
 
@@ -181,7 +181,7 @@ These optimizations affect how often the geometries are reloaded, i.e.\ it reduc
   caption={The \attr{multiviewController} avoids unnecessary requests to reload geometries}
 ]{listings/implementation/multiviewController.tsx}
 
-As shown in Listing~\ref{list:implementation:multiviewController}, the geometries depend on a change of the \attr{url} of the geometries.
+As shown in Listing~\ref{lst:implementation:multiviewController}, the geometries depend on a change of the \attr{url} of the geometries.
 A change of the \attr{url} will automatically trigger an interaction of type \attr{reconfigure} to reload geometries.
 
 An example of these geometries can be seen in listing~\ref{lst:geojson:example}.
