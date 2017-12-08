@@ -60,9 +60,11 @@ In the course of this thesis the following interactions have been implemented:
 
 \begin{figure}[ht]
   \centering
-  \includegraphics[width=\textwidth]{figures/implementation/thesis-architecture.pdf}
+  \includegraphics[width=\textwidth]{figures/implementation/Architecture.pdf}
   \caption{%
-    Architecture of the reference implementation.
+    Architecture of components.
+    Every class with a \attr{render} method is a React component.
+    \attr{MultiviewCoordinator} is used to coordinate \tmap{} and \gv{} as well as to load geometry data.
   }\label{fig:implementation:architecture}
 \end{figure}
 
@@ -85,6 +87,33 @@ They are dependency free, except of the reference to a \attr{MultiviewController
 
 The views that are implemented with React automatically re-render if their internal state changes.
 Event handlers just have to publish an interaction, if the view is subscribed to the same interaction, it will automatically re-render.
+
+\section{MultiviewController}
+
+The \attr{MultiviewController} is a simple wrapper around the library \attr{PubSubJS} and works as a broker for interactions across \cmvs{}.
+
+
+As the central part of the software, the \attr{MultiviewController} is also used for certain performance optimizations.
+These optimizations affect how often the geometries are reloaded, i.e.\ it reduces the number of requests to the \attr{GeoJSON} endpoint.
+
+
+\lstinputlisting[
+  label={lst:implementation:multiviewController},
+  caption={The \attr{multiviewController} avoids unnecessary requests to reload geometries}
+]{listings/implementation/multiviewController.tsx}
+
+As shown in Listing~\ref{lst:implementation:multiviewController}, the geometries depend on a change of the \attr{url} of the geometries.
+A change of the \attr{url} will automatically trigger an interaction of type \attr{reconfigure} to reload geometries.
+
+An example of these geometries can be seen in listing~\ref{lst:geojson:example}.
+For convenience, the file includes the aggregated data in the \attr{properties} of each feature.
+In this case the colors the shapes of the \tmap{} are based on the value of \attr{user_count_normalized}.
+Each feature comes with a unique \attr{id} which is published when a user interacts with the feature.
+
+\lstinputlisting[
+  label={lst:geojson:example},
+  caption={A truncated example of a user distribution across German federal states}
+]{listings/implementation/example.geojson}
 
 \section{Software patterns}\label{sec:implementation:patterns}
 Figure~\ref{fig:implementation:sequence-diagram} shows how \cmvs{} can be automatically updated even if the environment lacks a native update-mechanism.
@@ -203,32 +232,6 @@ Finally, we configure how to display point geometries in callback \attr{poinToLa
 Since normal markers do not have a configurable color and style, we instruct the \attr{GeoJSON} component to render a \attr{CircleMarker} for each point geometry instead.
 This way, the same options of \attr{featureStyle} can be applied to both point and area geometries.
 
-\section{MultiviewController}
-
-The \attr{MultiviewController} is a simple wrapper around the library \attr{PubSubJS} and works as a broker for interactions across \cmvs{}.
-
-
-As the central part of the software, the \attr{MultiviewController} is also used for certain performance optimizations.
-These optimizations affect how often the geometries are reloaded, i.e.\ it reduces the number of requests to the \attr{GeoJSON} endpoint.
-
-
-\lstinputlisting[
-  label={lst:implementation:multiviewController},
-  caption={The \attr{multiviewController} avoids unnecessary requests to reload geometries}
-]{listings/implementation/multiviewController.tsx}
-
-As shown in Listing~\ref{lst:implementation:multiviewController}, the geometries depend on a change of the \attr{url} of the geometries.
-A change of the \attr{url} will automatically trigger an interaction of type \attr{reconfigure} to reload geometries.
-
-An example of these geometries can be seen in listing~\ref{lst:geojson:example}.
-For convenience, the file includes the aggregated data in the \attr{properties} of each feature.
-In this case the colors the shapes of the \tmap{} are based on the value of \attr{user_count_normalized}.
-Each feature comes with a unique \attr{id} which is published when a user interacts with the feature.
-
-\lstinputlisting[
-  label={lst:geojson:example},
-  caption={A truncated example of a user distribution across German federal states}
-]{listings/implementation/example.geojson}
 
 
 
