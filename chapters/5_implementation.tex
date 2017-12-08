@@ -137,13 +137,12 @@ Examples for the kind of data that might trigger a re-rendering of a view:
 \end{itemize}
 
 
-\section{Implementation of the Map Component}
+\section{Map Component}
 
 The geographical visualization is implemented as a \attr{Map} component of the React Leaflet library.
 Listing \ref{lst:implementation:render} shows the \attr{render} method of the component.
 
 \lstinputlisting[
-  language=JavaScript,
   label={lst:implementation:render},
   caption={\attr{render} method of the Map component of the geographical visualization}
 ]{listings/implementation/render.tsx}
@@ -177,7 +176,6 @@ The callbacks passed into the \attr{GeoJSON} component control the visual repres
 Listing \ref{lst:implementation:onEachFeature} shows the event handlers added to the map.
 
 \lstinputlisting[
-  language=JavaScript,
   label={lst:implementation:onEachFeature},
   caption={\attr{onEachFeature} callback, adding handlers for mouse events}
 ]{listings/implementation/onEachFeature.tsx}
@@ -188,7 +186,6 @@ A \attr{click} event is distinguished if the control key is pressed or not.
 In the latter case, the id of the feature is either added or removed from the list of focused ids and then the list of focused ids is published as \attr{mcv.select.focus} interaction.
 
 \lstinputlisting[
-  language=JavaScript,
   label={lst:implementation:featureStyle},
   caption={\attr{featureStyle} callback, configuring the visual appearance depending on the currently highlighted or focused feature ids}
 ]{listings/implementation/featureStyle.tsx}
@@ -198,7 +195,6 @@ If the feature is currently focused, the \attr{fillColor} of the polygon is red,
 Likewise, if the feature is currently highlighted, the polygon has a white, solid stroke.
 
 \lstinputlisting[
-  language=JavaScript,
   label={lst:implementation:pointToLayer},
   caption={\attr{pointToLayer} callback, if a feature of \attr{GeoJSON} has a point geometry, it will be shown as a circle}
 ]{listings/implementation/pointToLayer.tsx}
@@ -217,7 +213,6 @@ These optimizations affect how often the geometries are reloaded, i.e.\ it reduc
 
 
 \lstinputlisting[
-  language=JavaScript,
   label={lst:implementation:multiviewController},
   caption={The \attr{multiviewController} avoids unnecessary requests to reload geometries}
 ]{listings/implementation/multiviewController.tsx}
@@ -231,7 +226,6 @@ In this case the colors the shapes of the \tmap{} are based on the value of \att
 Each feature comes with a unique \attr{id} which is published when a user interacts with the feature.
 
 \lstinputlisting[
-  language=JavaScript,
   label={lst:geojson:example},
   caption={A truncated example of a user distribution across German federal states}
 ]{listings/implementation/example.geojson}
