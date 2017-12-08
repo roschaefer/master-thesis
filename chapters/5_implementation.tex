@@ -49,14 +49,21 @@ In the course of this thesis the following interactions have been implemented:
 \todo[inline]{If we still have time, add filter interaction here}
 
 \section{Architecture}
+Figure~\ref{fig:implementation:architecture} shows classes and their relations in the \cmv{} implementation of \tmap{} and \gv{}.
 
-% \begin{figure}[ht]
-%   \centering
-%   \includegraphics[width=\textwidth]{figures/implementation/thesis-class-diagram.pdf}
-%   \caption{%
-%     Class diagram of the most important components and their relations
-%   }\label{fig:implementation:class-diagram}
-% \end{figure}
+\attr{UAController} is a class of the existing \visan{} and controls the rendering of the \tmap{}.
+The rendering of the geographical visualization is controlled by the class \attr{MapComponent}.
+
+Classes with a \attr{render} method are views and can be rendered in place of a node inside the DOM tree.
+Those views are implemented as React components and therefore have a native update mechanism, i.e.\ they get automatically re-rendered if their internal state changes.
+Except of a dependency to a \attr{MultiviewCoordinator}, they are dependency free, which makes those classes easy to test.
+
+Additionally, there are two other views, \attr{DebugView} and \attr{MessageLog}.
+These views record interactions at runtime and can trigger and simulate an interaction.
+
+State and changes shared between views are controlled by the \attr{MultiviewCoordinator}.
+Every view has a reference to \attr{MultiviewCoordinator} in order to subscribe to interactions.
+The \attr{MultiviewCoordinator} itself does not have a visual representation.
 
 \begin{figure}[ht]
   \centering
@@ -68,33 +75,44 @@ In the course of this thesis the following interactions have been implemented:
   }\label{fig:implementation:architecture}
 \end{figure}
 
-The reference implementation of the conceptual framework is written in \attr{TypeScript} and uses \attr{PubSubJS} for communication.
-The views are implemented with \attr{React} and the geographical visualization uses \attr{Leaflet} internally.
-Geometry data is exchanged with \attr{GeoJSON} as data format.
 
-The general architecture of the reference implementation is shown in Figure~\ref{fig:implementation:architecture}.
-Within the existing \visan{} the \attr{UAController} controls the rendering of the \tmap{}.
-The rendering of the geographical visualization is controlled by the \attr{MapComponent}.
-Additionally, there are two other views, \attr{DebugView} and \attr{MessageLog}.
-These views record interactions at runtime and can trigger and simulate an interaction.
+\section{Adding the views to the DOM}
 
-Every view has a reference to \attr{MultiviewController} in order to subscribe to interactions.
-The \attr{MultiviewController} itself does not have a visual representation.
+Adding the \gv{} to the DOM is straightforward.
+Listing~\ref{lst:implementation:dom} shows an example how to use React's low-level API to render components inside the DOM.
 
-The classes \attr{MapComponent}, \attr{DebugView} and \attr{MessageLog} are implemented with React and have a \attr{render} method.
-This way, these classes can be initialized and rendered anywhere in the DOM tree.
-They are dependency free, except of the reference to a \attr{MultiviewController}, which makes those classes easy to test.
+\lstinputlisting[
+  label={lst:implementation:dom},
+  caption={Example application written in TypeScript, demonstrating how to add views to the DOM.}
+]{listings/implementation/dom.tsx}
 
-The views that are implemented with React automatically re-render if their internal state changes.
+The reference implementation of the conceptual framework is written in \attr{TypeScript}\footnotemark.
+The implementation exports typescript declaration and you can see an import of the classes \attr{MapComponent} and \attr{MultiviewCoordinator} on lines 1 to 3 in Listing~\ref{lst:implementation:dom}.
+\footnotetext{
+  TypeScript is a typed superset of JavaScript that compiles to plain JavaScript.
+  It provides optional static typing, classes and interfaces and helps to reduce errors by raising type errors at compile time.
+}
+
+
+
+
+
 Event handlers just have to publish an interaction, if the view is subscribed to the same interaction, it will automatically re-render.
 
-\section{MultiviewController}
-
-The \attr{MultiviewController} is a simple wrapper around the library \attr{PubSubJS} and works as a broker for interactions across \cmvs{}.
+\section{MultiviewCoordinator}
 
 
-As the central part of the software, the \attr{MultiviewController} is also used for certain performance optimizations.
-These optimizations affect how often the geometries are reloaded, i.e.\ it reduces the number of requests to the \attr{GeoJSON} endpoint.
+The \attr{MultiviewCoordinator} uses the \attr{publish-subscribe} pattern for coordination and works as a broker for interactions across \cmvs{}.
+In order to accomplish that it uses the JavaScript library \attr{PubSubJS} which is an topic-based, asynchronous implementation of the pattern.
+
+Geometry data is exchanged with \attr{GeoJSON}\footnotemark as data format.
+\footnotetext{
+  GeoJSON is a format for encoding a variety of geographic data structures~\cite{GeoJSON2017}.
+  Based on JSON, it can represent simple geographic features like points, lines and areas and reserves a properties object for non-spatial attributes.
+}
+
+As the central part of the software, the \attr{MultiviewCoordinator} is also used for certain performance optimizations.
+The optimizations affect how often the geometries are reloaded, i.e.\ it reduces the number of requests to the \attr{GeoJSON} endpoint.
 
 
 \lstinputlisting[
@@ -129,8 +147,8 @@ Figure~\ref{fig:implementation:sequence-diagram} shows how \cmvs{} can be automa
 
 
 \textbf{The Observer pattern} allows multiple \emph{observers} to react to changes of an observed state.
-In our case, the observed state is the \attr{MultiviewController}.
-Any change to the \attr{MultiviewController} will subsequently be broadcasted to all connected views.
+In our case, the observed state is the \attr{MultiviewCoordinator}.
+Any change to the \attr{MultiviewCoordinator} will subsequently be broadcasted to all connected views.
 
 
 \textbf{Publisher subscriber}
