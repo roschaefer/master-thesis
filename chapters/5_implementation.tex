@@ -7,6 +7,47 @@ Various components and interaction techniques of the geographical visualization 
 The integration of the geographical visualization in the existing \visan{} is shown.
 The connection of the conceptual framework and the implemented framework is examined.
 
+\section{Implemented interactions}
+
+In the course of this thesis the following interactions have been implemented:
+\begin{itemize}
+  \item
+    Select
+
+    \begin{itemize}
+      \item
+        Highlighting an entity is possible by moving the mouse cursor on a geographic feature in the \gv{} or a block in the \tmap{}.
+        The corresponding block or geographic feature will be highlighted respectively.
+      \item
+        A click on a block in the \tmap{} selects this entity in the \gv{} and vice versa.
+      \item
+        Holding the control key, multiple clicks on a block in the \tmap{} creates a group of selected entities.
+        Corresponding geographic feature or blocks in the \tmap{} or \gv{} are selected as well.
+    \end{itemize}
+
+  \item
+    Explore
+
+    \begin{itemize}
+      \item Selecting a block in the \tmap{} centers the viewpoint in the \gv{} on the corresponding geographic feature.
+      \item Selecting a group of blocks in the \tmap{} centers the viewpoint in the \gv{} on the boundaries of all corresponding geographic features.
+    \end{itemize}
+
+  \item
+    Reconfigure
+
+    \begin{itemize}
+      \item
+        Choosing a different data set updates the geometries in the \gv{}.
+      \item
+        Selecting another shape for the \tmap{} (e.g. point instead of polygon geometries) changes the visual representation in the \gv{}.
+    \end{itemize}
+
+  % \item
+  %   \emph{Filter}: The user double-clicks on a region in a geographical map and the \tmap{} will be based on data of only that region.
+\end{itemize}
+\todo[inline]{If we still have time, add filter interaction here}
+
 \section{Architecture}
 
 % \begin{figure}[ht]
@@ -197,16 +238,3 @@ Each feature comes with a unique \attr{id} which is published when a user intera
 
 
 
-\section{Implemented interactions}
-
-In the course of this thesis the following interactions have been implemented:
-\begin{itemize}
-  \item
-    \emph{Select}: The user clicks on a building or region in a geographical map and all affected properties in the \tmap{} will be highlighted.
-  \item
-    \emph{Explore}: The user clicks on a block in the \tmap{} and the viewpoint in the geographical map will be centered on relevant area.
-  \item
-    \emph{Reconfigure}: The user selects a different feature set and the changes are reflected in both the geographical map (e.g. point instead of polygon geometries) and in the \tmap{}.
-  \item
-    \emph{Filter}: The user double-clicks on a region in a geographical map and the \tmap{} will be based on data of only that region.
-\end{itemize}
