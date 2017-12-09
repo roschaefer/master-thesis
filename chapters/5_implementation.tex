@@ -48,6 +48,25 @@ In the course of this thesis the following interactions have been implemented:
 \end{itemize}
 \todo[inline]{If we still have time, add filter interaction here}
 
+\section{Overview of the Layout}
+
+Figure~\ref{fig:implementation:layout} shows the layout of the different views from the user perspective.
+The \tmap{} is on the left while the \gv{} is on the right.
+Some additional views like the message log and a form to manually change the highlighted item are visible as well.
+
+The figure shows a screenshot of the \visan{}, currently visualizing the data set ``Wahlkreise''.
+The \tmap{} is tiled based on unemployment rate and the colour is based on the percentage of high-school graduates.
+Currently the district ``Magdeburg'' is selected in the \gv{} with an unusually high percentage of graduates for its unemployment rate.
+
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=\textwidth]{figures/implementation/Layout}
+  \caption{%
+    This Figure shows the layout of the \cmv{}, red lines indicate the borders of different views.
+  }\label{fig:implementation:layout}
+\end{figure}
+
+
 \section{Architecture}
 Figure~\ref{fig:implementation:architecture} shows classes and their relations in the \cmv{} implementation of \tmap{} and \gv{}.
 
@@ -67,12 +86,12 @@ The \attr{MultiviewCoordinator} itself does not have a visual representation.
 
 \begin{figure}[ht]
   \centering
-  \includegraphics[width=\textwidth]{figures/implementation/Architecture.pdf}
   \caption{%
     Architecture of components.
     Every class with a \attr{render} method is a React component.
     \attr{MultiviewCoordinator} is used to coordinate \tmap{} and \gv{} as well as to load geometry data.
   }\label{fig:implementation:architecture}
+  \includegraphics[width=\textwidth]{figures/implementation/Architecture.pdf}
 \end{figure}
 
 
@@ -80,11 +99,27 @@ The \attr{MultiviewCoordinator} itself does not have a visual representation.
 
 Adding the \gv{} to the DOM is straightforward.
 Listing~\ref{lst:implementation:dom} shows an example how to use React's low-level API to render components inside the DOM.
+It uses an id \attr{multiview-map-component} to reference a particular node in the HTML document in Listing~\ref{lst:implementation:dom-html} on line 3.
+On lines 4 to 6 you can see the required JavaScript imports, i.e.\ two imports required by React and the compiled JavaScript application, which is called \attr{example.js}.
 
 \lstinputlisting[
   label={lst:implementation:dom},
-  caption={Example application written in TypeScript, demonstrating how to add views to the DOM.}
+  lastline=12,
+  caption={
+    Example application written in TypeScript.
+    Views can be added to the DOM individually.
+    The implementation exposes convenient TypeScript declarations, here \attr{MultiviewCoordinator} and \attr{MapComponent} are imported.
+  }
 ]{listings/implementation/dom.tsx}
+
+\lstinputlisting[
+  label={lst:implementation:dom-html},
+  caption={
+    This short HTML document shows how to render Views at a certain node inside the DOM.
+    The id multiview-map-component is used as anchor.
+  },
+  language=HTML
+]{listings/implementation/dom.html}
 
 The reference implementation of the conceptual framework is written in \attr{TypeScript}\footnotemark.
 The implementation exports typescript declaration and you can see an import of the classes \attr{MapComponent} and \attr{MultiviewCoordinator} on lines 1 to 3 in Listing~\ref{lst:implementation:dom}.
