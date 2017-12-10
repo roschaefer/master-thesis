@@ -1,4 +1,3 @@
-%\documentclass[10pt,a4paper,onecolumn,twoside,openright]{book}
 \RequirePackage{rotating}
 \let\accentvec\vec
 \documentclass[10pt,a4paper,onecolumn,twoside,openright,titlepage]{svmono}
@@ -110,9 +109,11 @@
 \renewcommand{\nomlabel}[1]{#1 \dotfill}
 %\makenomenclature
 
+\usepackage[style=authoryear]{biblatex}
 
-\bibliographystyle{unsrtnat} 
-%\bibliographystyle{plainnat} 
+
+
+
 \newcommand*{\Mail}[1]{\href{mailto:#1}{\protect\url{#1}}}
 \newcommand*{\MailTitle}[2]{\href{mailto:#1@#2}{\protect\url{#1}}}
 \newcommand{\keywords}[1]{\par\addvspace\baselineskip\noindent\keywordname\enspace\ignorespaces#1}
@@ -144,7 +145,6 @@
 
 % NON-BENNY
 \usepackage{todonotes}
-\usepackage{biblatex}
 \usepackage{listings}
 \usepackage{color}
 \usepackage{copyrightbox}

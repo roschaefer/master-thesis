@@ -155,7 +155,7 @@ Therefore, it is responsible to query geometry data.
 
 Geometries are exchanged with \attr{GeoJSON}\footnotemark as data format.
 \footnotetext{
-  GeoJSON is a format for encoding a variety of geographic data structures~\cite{GeoJSON2017}.
+  GeoJSON is a format for encoding a variety of geographic data structures~\parencite{GeoJSON2017}.
   Based on JSON, it can represent simple geographic features like points, lines and areas and reserves a properties object for non-spatial attributes.
 }
 
@@ -210,7 +210,7 @@ The implementation exports typescript declaration and you can see an import of t
 
 
 % \textbf{Publisher subscriber}
-% In our particular case we apply a special form of the observer pattern, the so called ``Publish-subscribe'' pattern\cite{Eugster2003}.
+% In our particular case we apply a special form of the observer pattern, the so called ``Publish-subscribe'' pattern\parencite{Eugster2003}.
 % Publish-subscribe is a messaging pattern which is widely used in message queues.
 % In this scenario, senders of messages simply categorize their messages which will be consumed by subscribers of the category.
 % The scenario has very low coupling, publishers do not even need to know the existence of subscribers.
@@ -227,7 +227,7 @@ The implementation exports typescript declaration and you can see an import of t
 
 % \textbf{Actions up --- Data down}
 
-% Version 2.0 of Ember introduced a common phrase how to use this pattern effectively: ``Data down, actions up''\cite{Emberigniter2017}
+% Version 2.0 of Ember introduced a common phrase how to use this pattern effectively: ``Data down, actions up''\parencite{Emberigniter2017}
 % In the domain of \cmvs{} actions would mean user interactions, e.g.\ a click on a feature.
 % The action will notify the controlling \cmv{} component.
 % Actions may change data, and the changes will be passed to to all dependent views.
@@ -257,7 +257,7 @@ The \attr{render} method is the only required method of a React component.
 It will be invoked on the initial rendering of the component of the \attr{DOM} and on every update of the component's properties.
 React's templating language ``\attr{JSX}'' allows to nest other child components into the React parent component.
 In this case the \attr{Map} component includes a \attr{TileLayer} \attr{GeoJSON} component from the \attr{react-leaflet} library.
-This library conveniently provides ``React components for Leaflet maps.''~\cite{ReactLeaflet2017}.
+This library conveniently provides ``React components for Leaflet maps.''~\parencite{ReactLeaflet2017}.
 
 \subsection{GeoJSON Component}
 
