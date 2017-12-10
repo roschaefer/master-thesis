@@ -6,4 +6,4 @@ coordinator.subscribe('mcv.select.highlight', (msg, data) => {
 });
 
 // publish a topic asyncronously
-PubSub.publish( 'mcv.select.highlight', 4711);
+coordinator.publish( 'mcv.select.highlight', 4711);

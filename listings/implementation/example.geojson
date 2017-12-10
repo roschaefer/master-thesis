@@ -14,20 +14,6 @@
         "user_count_normalized": "0.10149253731343283"
       },
       "id": 0
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [...]
-      },
-      "properties": {
-        "NAME_1": "Bayern",
-        "state_code": "BY",
-        "user_count_total": "36",
-        "user_count_normalized": "0.10746268656716418"
-      },
-      "id": 1
     }
   ]
 }

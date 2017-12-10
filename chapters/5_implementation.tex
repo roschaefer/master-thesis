@@ -70,13 +70,20 @@ District ``Magdeburg'' is selected in the \gv{} with an unusually high percentag
 The architecture of the implementation is depicted in the class diagram in Figure~\ref{fig:implementation:architecture}.
 For each of the views in Figure~\ref{fig:implementation:layout} you can see a corresponding class in Figure~\ref{fig:implementation:architecture}, i.e.\ \attr{Treemap}, \attr{MapComponent}, \attr{MessageLog} and \attr{DebugView}.
 
-Classes with a \attr{render} method are views and can be rendered in place of a node inside the DOM tree.
-Those views are implemented as React components and therefore have a native update mechanism, i.e.\ they get automatically re-rendered if their internal state changes.
-Except of a dependency to a \attr{MultiviewCoordinator}, they are dependency free, which makes those classes easy to test.
-
 All views have a reference to \attr{MultiviewCoordinator} in order to subscribe to interactions.
 The rendering \tmap{} is controlled by \attr{UAController}, thus it is connected to \attr{MultiviewCoordinator} through this class.
 The \attr{MultiviewCoordinator} itself does not have a visual representation.
+
+\subsection{Update mechanisms}
+In Figure~\ref{fig:implementation:architecture} views with a \attr{render} are implemented as React components and can be rendered in place of a node inside the DOM tree.
+React components and their dependant components get automatically re-rendered if their internal state changes.
+
+E.g. if the position of the view point of the \attr{MapComponent} changes, that will re-render the included \attr{Map} which depends on the position.
+If the Geometries of the visualized data set are updated, that will change the \attr{GeoJSON} component but not the \attr{Map}.
+
+% Views implemented with React are dependency free except for a reference to a \attr{MultiviewCoordinator}.
+% This makes those classes very easy to test.
+
 
 \begin{figure}[ht]
   \centering
@@ -90,14 +97,17 @@ The \attr{MultiviewCoordinator} itself does not have a visual representation.
 
 \section{Notifications}
 
+The automatic update mechanism works only within the virtual DOM of React components.
+Updates on view level need to be implemented manually.
+
 In accordance to Chapter~\ref{sec:concept}, the class \attr{MultiviewCoordinator} implements the \attr{publish-subscribe} pattern for coordination and works as a broker for interactions across \cmvs{}.
 To achieve this, it uses the JavaScript library \attr{PubSubJS} which is an topic-based, asynchronous implementation of the pattern.
 
 Each view gets a reference to the coordinator, e.g. during initialization, and can subscribe to interactions as seen in Listing~\ref{lst:implementation:subscribe}.
-\attr{PubSubJS} allows nested topics, therefore categories and purposes are encoded as nested strings.
-Nested topics make it possible to subscribe to all interactions of category \attr{select}, e.g.\ \attr{mcv.select.highlight} and \attr{mcv.select.focus}, by subscribing to \attr{mcv.select}.
+\attr{PubSubJS} allows nested topics, so categories and purposes are encoded as nested strings.
+A view can subscribe to a group of interactions, e.g.\ the group \attr{mcv.select} includes both \attr{mcv.select.highlight} and \attr{mcv.select.focus}.
 
-Not only basic data types like numbers and strings can be published, as seen here, but also functions.
+Not only basic data types like numbers and strings can be published, as seen in Listing~\ref{lst:implementation:subscribe}, but also functions.
 If an interaction of type \attr{filter} is published, it is not necessary to publish all filtered ids of entities explicitly.
 Instead, the \attr{data} of the interaction can be a threshold function which, applied on an entity, returns whether or not the entity is filtered.
 
