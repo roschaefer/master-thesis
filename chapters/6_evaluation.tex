@@ -9,11 +9,11 @@ As a last step, the requirements of Chapter~\ref{sec:analysis} are used to valid
 
 The following three use case scenarios demonstrate how more insights can be gained with \gv{} next to the \tmap{}.
 
-\subsection{Explain outliers}
+\subsection{Explain outliers}\label{sec:evaluation:use-cases:gas-stations}
 
 \tmaps{} can have outliers, i.e.\ unusual local maxima of a certain attribute.
 If the attribute is mapped to the height of the corresponding block, a local maximum is identifiable by a block that protrudes from a group of evenly leveled blocks.
-We can see such an example in Figure~\ref{fig:evaluation:cases:gasstations}.
+We can see such an example in Figure~\ref{fig:evaluation:use-cases:gas-prices}.
 
 The data set of the visualizations in the figure includes gas stations in Berlin.
 The \tmap{} is configured as follows:
@@ -21,9 +21,13 @@ The layout is based on the brand name of a gas station, i.e.\ gas stations of th
 Height and colour of the blocks are mapped to the price of ``Diesel'' and ``E10'' respectively.
 
 A \tmap{} with this configuration is suited to show a correlation of brand and price.
-Gas stations of brand ``Total'' are rather expensive in general but with smaller price variations.
-``Aral'' on the other hand is slightly cheaper than ``Total'' but some gas stations are very expensive.
-Gas stations of brand name ``HEM'', ``Star'' and ``Sprint'' are generally inexpensive.
+Gas stations of brand ``Total'' are located on the center-left side of the \tmap{} and they are rather expensive in general but with smaller price variations.
+
+This is in strong contrast to gas stations of brand ``ARAL'' in the lower left:
+10 gas stations can be identified as outliers, which are more expensive than other gas stations in the group.
+``Esso'' and ``Shell'', located in the center and on the lower right, show outliers, too.
+
+Gas stations of the brands ``HEM'', ``Star'' and ``Sprint'' are generally inexpensive and located in the groups with lighter colours at the top and on the right.
 
 However, the \tmap{} alone is not able to explain the reason for certain outliers.
 What is special about the protruding blocks, i.e.\ the outliers within a group?
@@ -32,40 +36,23 @@ The \gv{} can give a possible explanation:
 Many of those outliers are gas stations located next to a highway.
 These gas stations are slightly more expensive in general and significantly more expensive if they belong to the brand ``ARAL''.
 
-
-\begin{figure}[h]
+\begin{figure}
   \centering
   \caption{
-    The \tmap{} shows gas stations with a layout based on the brand name and height and colour mapped to price.
-    Expensive gas stations, compared to other gas stations of the brand, are often located next to highways.
-  }\label{fig:evaluation:cases:gasstations}
-  \includegraphics[width=\textwidth]{figures/evaluation/cases/gasstations}
+    Expensive gas stations, compared to other gas stations of the same brand, are often located next to highways.
+  }\label{fig:evaluation:use-cases:gas-prices}
+  \subfloat[Tree map]{{\includegraphics[width=0.4\textwidth]{figures/evaluation/use-cases/1-tmap} }}%
+  \qquad
+  \subfloat[\gv{}]{{\includegraphics[width=0.4\textwidth]{figures/evaluation/use-cases/1-map} }}%
 \end{figure}
 
-\subsection{Find an unusually cheap gas station in the center of Berlin}
+\subsection{Multi-Select in \tmap{}}
 
-This use case demonstrates the benefit of a multiple select.
-Let's say, we're interested into unusually cheap gas stations which are not too far outside of Berlin.
-We would map attributes \attr{price} and \attr{distance} to colour and height, and would look for unusually coloured, protruding blocks in a region of the \tmap{}.
-If we press the control key and selectively click on each of those blocks, we collect a group of interesting gas stations.
-These gas stations are focused on in the geographical visualization as you can see in Figure~\ref{fig:evaluation:cases:gasstations_multiselect}.
-
-\begin{figure}[h]
-  \centering
-  \caption{
-    A multi select allows to collect a group of interesting features.
-  }\label{fig:evaluation:cases:gasstations_multiselect}
-  \includegraphics[width=\textwidth]{figures/evaluation/cases/gasstations_multiselect}
-\end{figure}
-
-
-\subsection{Explain influx of sparsely populated administrative districts}
-
-This is another use case demonstrating the benefit of a multiple select plus the ability to connect interesting features with their geographical context.
-Figure~\ref{fig:evaluation:cases:wahlkreise_multiselect} shows a \tmap{} with a common mapping:
-The layout is based on the population density, the large cluster at the top are sparsely populated districts.
-The colour is based on the increase or decrease of inhabitants, a red colour indicating a decrease of inhabitants.
-The height of the blocks is mapped to unemployment rate.
+This use case demonstrates the benefit of a multiple select plus the ability to connect interesting features with their geographical context.
+Figure~\ref{fig:evaluation:cases:wahlkreise_multiselect} shows a \tmap{} with the following configuration:
+The layout is based on the population density, large cluster at the top are sparsely populated districts.
+Colour is based on the increase or decrease of inhabitants, a red colour indicating a decrease of inhabitants.
+Height is inversely mapped to unemployment rate, a high block indicating a low unemployment rate.
 
 The highlighted block and its two neighboring blocks catch our attention:
 As we can see on the right side, those three districts happen to be geographically related.
@@ -102,6 +89,17 @@ Figure~\ref{fig:evaluation:cases:wahlkreise_multiselect:2} shows a correlation o
   }\label{fig:evaluation:cases:wahlkreise_multiselect:2}
   \includegraphics[width=\textwidth]{figures/evaluation/cases/wahlkreise_multiselect_2}
 \end{figure}
+
+\section{Use case summary}
+
+The scenario in Section~\ref{sec:evaluation:use-cases:gas-stations} is a great example how a \gv{} can create more insights.
+The \tmap{} alone allows to identify the outliers and also shows a possible correlation of price and brand.
+However, without the \gv{} it is not possible to draw the hypothesis of the proximity to a highway being the reason for the high prices.
+The geographic context is just not present in the raw data.
+
+Deliberately selecting a particular area of interest in the \gv{} by clicking on an interesting item in the \tmap{} can be considered to be a new technique.
+
+
 
 
 \section{Performance Evaluation and Limitations}
