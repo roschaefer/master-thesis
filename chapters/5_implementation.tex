@@ -103,9 +103,38 @@ Updates on view level need to be implemented manually.
 In accordance to Chapter~\ref{sec:concept}, the class \attr{MultiviewCoordinator} implements the \attr{publish-subscribe} pattern for coordination and works as a broker for interactions across \cmvs{}.
 To achieve this, it uses the JavaScript library \attr{PubSubJS} which is an topic-based, asynchronous implementation of the pattern.
 
+Let's take an example from a common usage scenario:
+During initialization, all views subscribe to \attr{MultiviewCoordinator} in order to re-render after interactions.
+Then the user chooses another data set and the geometries are updated.
+After that, the user clicks with the mouse on a geographic feature and the corresponding item is focused.
+You can see this scenario in the sequence diagram in Figure~\ref{fig:implementation:sequence-diagram}.
+
+\begin{figure}[ht]
+  \centering
+  \caption{%
+    This sequence diagram shows the notification of different components during a common usage scenario.
+  }\label{fig:implementation:sequence-diagram}
+  \includegraphics[width=\textwidth]{figures/implementation/SequenceDiagram}
+\end{figure}
+
+
+\subsection{Encoding of interaction category and purpose}
 Each view gets a reference to the coordinator, e.g. during initialization, and can subscribe to interactions as seen in Listing~\ref{lst:implementation:subscribe}.
+
 \attr{PubSubJS} allows nested topics, so categories and purposes are encoded as nested strings.
 A view can subscribe to a group of interactions, e.g.\ the group \attr{mcv.select} includes both \attr{mcv.select.highlight} and \attr{mcv.select.focus}.
+This approach gives each view self-responsibility of the implementation of individual interactions.
+
+According to Chapter~\ref{sec:concept}, categories and purposes are encoded with nested strings.
+Figure~\ref{fig:implementation:encoding} gives an example of a select interaction with the purpose to focus on three entities.
+
+\begin{figure}[ht]
+  \centering
+  \caption{%
+    Example of the encoding of interaction category and purpose.
+  }\label{fig:implementation:encoding}
+  \includegraphics[width=\textwidth]{figures/implementation/Encoding}
+\end{figure}
 
 Not only basic data types like numbers and strings can be published, as seen in Listing~\ref{lst:implementation:subscribe}, but also functions.
 If an interaction of type \attr{filter} is published, it is not necessary to publish all filtered ids of entities explicitly.
@@ -182,16 +211,7 @@ The implementation exports typescript declaration and you can see an import of t
 
 
 \section{Software patterns}\label{sec:implementation:patterns}
-Figure~\ref{fig:implementation:sequence-diagram} shows how \cmvs{} can be automatically updated even if the environment lacks a native update-mechanism.
 
-\begin{figure}[ht]
-  \centering
-  \includegraphics[width=\textwidth]{figures/implementation/SequenceDiagram}
-  \caption{%
-    The sequence diagram shows the notification of different components.
-  The user first chooses a feature set and clicks on a polygon in the \gv{}.
-  }\label{fig:implementation:sequence-diagram}
-\end{figure}
 
 
 \textbf{The Observer pattern} allows multiple \emph{observers} to react to changes of an observed state.
