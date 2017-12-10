@@ -250,7 +250,7 @@ Listing \ref{lst:implementation:render} shows the \attr{render} method of the co
 
 \lstinputlisting[
   label={lst:implementation:render},
-  caption={\attr{render} method of the Map component of the geographical visualization}
+  caption={\attr{render} method of the Map component of the geographical visualization.}
 ]{listings/implementation/render.tsx}
 
 The \attr{render} method is the only required method of a React component.
@@ -283,7 +283,7 @@ Listing \ref{lst:implementation:onEachFeature} shows the event handlers added to
 
 \lstinputlisting[
   label={lst:implementation:onEachFeature},
-  caption={\attr{onEachFeature} callback, adding handlers for mouse events}
+  caption={\attr{onEachFeature} callback, adding handlers for mouse events.}
 ]{listings/implementation/onEachFeature.tsx}
 
 First we cache all layers in the internal state of the \attr{Map} component.
@@ -293,7 +293,7 @@ In the latter case, the id of the feature is either added or removed from the li
 
 \lstinputlisting[
   label={lst:implementation:featureStyle},
-  caption={\attr{featureStyle} callback, configuring the visual appearance depending on the currently highlighted or focused feature ids}
+  caption={\attr{featureStyle} callback, configuring the visual appearance depending on the currently highlighted or focused feature ids.}
 ]{listings/implementation/featureStyle.tsx}
 
 The \attr{featureStyle} in Listing \ref{lst:implementation:featureStyle} method is very straightforward.
@@ -302,7 +302,7 @@ Likewise, if the feature is currently highlighted, the polygon has a white, soli
 
 \lstinputlisting[
   label={lst:implementation:pointToLayer},
-  caption={\attr{pointToLayer} callback, if a feature of \attr{GeoJSON} has a point geometry, it will be shown as a circle}
+  caption={\attr{pointToLayer} callback, if a feature of \attr{GeoJSON} has a point geometry, it will be shown as a circle.}
 ]{listings/implementation/pointToLayer.tsx}
 
 Finally, we configure how to display point geometries in callback \attr{poinToLayer}.
