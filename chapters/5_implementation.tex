@@ -250,14 +250,21 @@ Listing \ref{lst:implementation:render} shows the \attr{render} method of the co
 
 \lstinputlisting[
   label={lst:implementation:render},
+  firstline=162,
+  lastline=183,
   caption={\attr{render} method of the Map component of the geographical visualization.}
-]{listings/implementation/render.tsx}
+]{listings/implementation/MapComponent.tsx}
 
 The \attr{render} method is the only required method of a React component.
 It will be invoked on the initial rendering of the component of the \attr{DOM} and on every update of the component's properties.
+
 React's templating language ``\attr{JSX}'' allows to nest other child components into the React parent component.
 In this case the \attr{Map} component includes a \attr{TileLayer} \attr{GeoJSON} component from the \attr{react-leaflet} library.
 This library conveniently provides ``React components for Leaflet maps.''~\parencite{ReactLeaflet2017}.
+
+The subscriptions to the coordinator happen during the method \attr{didComponentMount}, a lifecycle callback method provided by React.
+You can see the respective interaction handlers \attr{handleHighlight}, \attr{handleFocus} and \attr{handleGeometry} in the class diagram in Figure~\ref{fig:implementation:architecture}.
+
 
 \subsection{GeoJSON Component}
 
