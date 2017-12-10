@@ -25,7 +25,7 @@ A common expression by impatient managers who can not afford to wade through len
 Stephen Few's ``Show me the numbers''.
 
 In the business context, sales managers demand a quick access on the latest data with all relevant visualizations at once.
-Examples of this kind of \dss{} are called e.g.\ ``decision cockpit'' or ``business sphere''\parencite{Davenport2013}.
+Examples of this kind of \dss{} are called e.g.\ ``decision cockpit'' or ``business sphere''~\parencite{Davenport2013}.
 
 We can expect to see these technologies more in more in business applications.
 \textcite{McAfee2012} from the MIT Center of Digital Business showed that organizations driven most by data-based decision making had 4\% higher productivity rates and 6\% higher profits.
@@ -158,7 +158,7 @@ All three dimensional tree maps in this thesis are in fact \tmaps{} and therefor
   \label{fig:research:ua_treemap}
   \copyrightbox[b]{%
     \includegraphics[width=\textwidth]{figures/related-work/2_5D_treemap_example}}{%
-    \hfill \textcopyright{} Hasso-Plattner-Institut\parencite{Doellner2017}
+    \hfill \textcopyright{} Hasso-Plattner-Institut~\parencite{Doellner2017}
   }
 \end{figure}
 
@@ -174,7 +174,7 @@ It displays spatial and temporal attributes of pictures from a picture database,
   \centering
   \caption{\cmv{} displaying the popularity, number of comments, location and time of pictures in a picture data base.}
   \label{fig:related-work:cmv}
-  \copyrightbox[b]{\includegraphics[width=\textwidth]{figures/related-work/cmv}}{\hfill Dukevis\parencite{Dukevis2017}}
+  \copyrightbox[b]{\includegraphics[width=\textwidth]{figures/related-work/cmv}}{\hfill Dukevis~\parencite{Dukevis2017}}
 \end{figure}
 The user can move the mouse cursor over each item in the scatter plot and the graduated symbol map and the corresponding item is highlighted with a larger stroke in all other views.
 On the time line below, the user can also filter for pictures in a certain time frame by dragging the mouse from lower to upper limit.
@@ -183,12 +183,12 @@ On the time line below, the user can also filter for pictures in a certain time 
   \centering
   \caption{Airline on-time performance: Correlation of time of day with arrival delay. Most recent flight with a delay of more than 100 minutes selected.}
   \label{fig:research:brushing-linking}
-  \copyrightbox[b]{\includegraphics[width=\textwidth]{figures/related-work/brushing_linking}}{\hfill Crossfilter\parencite{Bostock2017}}
+  \copyrightbox[b]{\includegraphics[width=\textwidth]{figures/related-work/brushing_linking}}{\hfill Crossfilter~\parencite{Bostock2017}}
 \end{figure}
 
 \subsection{Brushing and Linking}
 Brushing and linking is a common interaction pattern found in \cmvs{} and often a crucial part of these visualizations.
-``The technique of brushing is the principle approach, where elements are selected (and highlighted) in one display, concurrently the same information in any other linked display is also highlighted.''\parencite{Roberts2007}
+``The technique of brushing is the principle approach, where elements are selected (and highlighted) in one display, concurrently the same information in any other linked display is also highlighted.''~\parencite{Roberts2007}
 
 We can see an example in Figure~\ref{fig:research:brushing-linking}.
 It displays an on-time performance of airlines, visualized with the ``Crossfilter'' javascript library.
@@ -220,18 +220,18 @@ In the view in the upper left corner in Figure~\ref{fig:research:brushing-linkin
 Leaflet is the leading open-source JavaScript library for mobile-friendly interactive maps~\parencite{Leaflet2017}.
 It has support for GeoJSON which makes it very easy to display tiled web maps with interactive overlays.
 
-\textbf{Web components} is a recent standard of the W3C\parencite{W3C2017} to bring component-based software engineering to the world wide web.
+\textbf{Web components} is a recent standard of the W3C~\parencite{W3C2017} to bring component-based software engineering to the world wide web.
 Web components are a set of web platform APIs to create new custom, reusable, encapsulated HTML tags that can be used in web pages and web applications~\parencite{WebComponents2017}.
 If \cmvs{} are implemented in JavaScript based web applications, web components are a promising choice, to allow arbitrary views to be put together.
 
-\textbf{GlimmerJS} is the rendering enginge of EmberJS\parencite{Ember2017}.
+\textbf{GlimmerJS} is the rendering enginge of EmberJS~\parencite{Ember2017}.
 In 2017 it was released as a standalone component framework.
 Applications written in GlimmerJS can be exported as web components.
 These web components can be included in any website, which makes GlimmerJS a reasonable choice to build high-quality widgets for user interfaces.
-GlimmerJS also uses handlebars\parencite{Handlebars2017}, a user-friendly templating language.
+GlimmerJS also uses handlebars~\parencite{Handlebars2017}, a user-friendly templating language.
 The downside of GlimmerJS is the current lack of documentation and immaturity due to the recent first release this year.
 
-\textbf{Google Polymer} is another popular library to build web components \parencite{Polymer2017}.
+\textbf{Google Polymer} is another popular library to build web components~\parencite{Polymer2017}.
 With 18,469 stars on Github it is the most popular framework for web components at the time of writing.
 Polymer has a large community and comprehensive documentation and therefore more suitable than GlimmerJS to build \cmvs{}.
 
@@ -336,10 +336,10 @@ In this work the classification of \textcite{Yi2007} is used for the remaining p
 This section covers the smaller part of research in \cmvs{}, research that is \emph{not} related to a high-level classification of interactions.
 Not only interactions in \cmvs{} are considered but any kind of a formalization of interaction that may be used as the starting point for a framework for \cmvs{}.
 
-\textbf{ITlib\parencite{Figueroa2001}} is an architecture and a framework of interaction techniques for virtual reality applications, designed to be extensible and flexible.
+\textbf{ITlib~\parencite{Figueroa2001}} is an architecture and a framework of interaction techniques for virtual reality applications, designed to be extensible and flexible.
 New interaction techniques can easily be added and application specific code is seamlessly integrated.
 
-On a low level an interaction technique ``is modeled as a set of filters connected in a small data flow''\parencite[p.~2]{Figueroa2001}.
+On a low level an interaction technique ``is modeled as a set of filters connected in a small data flow''~\parencite[p.~2]{Figueroa2001}.
 These filters are the smallest process unit in the data flow.
 Composed of input and output ports, they communicate with other filters, to receive data input from predecessors and send data output to successors.
 
