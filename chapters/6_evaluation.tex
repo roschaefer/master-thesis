@@ -46,7 +46,7 @@ These gas stations are slightly more expensive in general and significantly more
   \subfloat[Point of interest visualization]{{\includegraphics[width=0.4\textwidth]{figures/evaluation/use-cases/1-map} }}%
 \end{figure}
 
-\subsection{Multi-Select in \tmap{}}\label{sec:evaluation:use-cases:bounding-box}
+\subsection{Multi-Select in \tmap{}}\label{sec:evaluation:use-cases:multiselect}
 
 This use case demonstrates the benefit of a multiple select and the ability to relate interesting features with their geographic context.
 Figure~\ref{fig:evaluation:cases:multiselect:1} (a) shows a \tmap{} with the following configuration:
@@ -70,9 +70,6 @@ These districts are all located in the east of Germany, see Figure~\ref{fig:eval
 And finally, even the three purple districts in the cluster of sparsely populated districts are geographically related as well:
 These districts are in the vicinity of Munich, as we can see in Figure~\ref{fig:evaluation:cases:multiselect:2} (b).
 
-Similar to the scenario in Section~\ref{sec:evaluation:use-cases:gas-stations}, with the \tmap{} alone we can spot anomalies.
-However, we would not be able to relate these anomalies to a geographic context.
-This time, we can really benefit of the multiple selection as the white group is scattered across the \tmap{}.
 
 \begin{figure}
   \centering
@@ -95,15 +92,15 @@ This time, we can really benefit of the multiple selection as the white group is
   \subfloat[Purple group]{{\includegraphics[width=0.4\textwidth]{figures/evaluation/use-cases/2-map-munich} }}%
 \end{figure}
 
-\subsection{Bounding Box Selection in \gv{}}
-Similar to the multiple select in Section~\ref{sec:evaluation:use-cases:bounding-box}, multiple selects can be carried out by a bounding box in the \gv{}.
+\subsection{Bounding Box Selection in \gv{}}\label{sec:evaluation:use-cases:bounding-box}
+Similar to the multiple select in Section~\ref{sec:evaluation:use-cases:multiselect}, multiple selects can be carried out by a bounding box in the \gv{}.
 
 The layout of the \tmap{} in Figure~\ref{fig:evaluation:cases:bounding-box} (a) is based on construction activity, i.e.\ the number of completed accommodations per capita.
 The colour is mapped to the increase of population.
 As Berlin is known for quickly rising rents and real estate speculation we select all districts in Berlin with a bounding box.
 All selected districts are placed in the center right group of the \tmap{}.
 They are the dark red items next to the currently highlighted item in Figure~\ref{fig:evaluation:cases:bounding-box} (a).
-However, the districts are not in the group with the highest construction activity at the very top.
+But as we can see in Figure~\ref{fig:evaluation:cases:bounding-box} (a), the districts are not in the group with the highest construction activity at the very top.
 
 \begin{figure}
   \centering
@@ -115,16 +112,23 @@ However, the districts are not in the group with the highest construction activi
   \subfloat[Geographic map]{{\includegraphics[width=0.4\textwidth]{figures/evaluation/use-cases/3-map} }}%
 \end{figure}
 
-\section{Use case summary}
+\subsection{Use case summary}
 
 The scenario in Section~\ref{sec:evaluation:use-cases:gas-stations} is a great example how a \gv{} can create more insights.
 The \tmap{} alone allows to identify the outliers and also shows a possible correlation of price and brand.
-However, without the \gv{} it is not possible to draw the hypothesis of the proximity to a highway being the reason for the high prices.
+However, without the \gv{} it is not possible to draw a hypothesis of the proximity to a highway being the reason for the high prices.
 The geographic context is just not present in the raw data.
 
 Deliberately selecting a particular area of interest in the \gv{} by clicking on an interesting item in the \tmap{} can be considered to be a new technique.
 
+Similarly, in the scenario in Section~\ref{sec:evaluation:use-cases:multiselect}, the \tmap{} alone can show outliers or group of outliers.
+However, it is not possible to see the geographic relation between those items in that group immediately.
+The \gv{} makes the geographic context visible.
+In this scenario, the multiple selection really helps to select items of the white group, which is scattered across the \tmap{}.
 
+Finally, in the scenario of Section~\ref{sec:evaluation:use-cases:bounding-box}, we can also do the reverse:
+Identify a non-geographic relation in the \tmap{} by selecting geographically related items with a bounding box.
+In this case we can see a very similar construction activity.
 
 
 \section{Performance Evaluation and Limitations}
