@@ -43,51 +43,76 @@ These gas stations are slightly more expensive in general and significantly more
   }\label{fig:evaluation:use-cases:gas-prices}
   \subfloat[Tree map]{{\includegraphics[width=0.4\textwidth]{figures/evaluation/use-cases/1-tmap} }}%
   \qquad
-  \subfloat[\gv{}]{{\includegraphics[width=0.4\textwidth]{figures/evaluation/use-cases/1-map} }}%
+  \subfloat[Point of interest visualization]{{\includegraphics[width=0.4\textwidth]{figures/evaluation/use-cases/1-map} }}%
 \end{figure}
 
-\subsection{Multi-Select in \tmap{}}
+\subsection{Multi-Select in \tmap{}}\label{sec:evaluation:use-cases:bounding-box}
 
-This use case demonstrates the benefit of a multiple select plus the ability to connect interesting features with their geographical context.
-Figure~\ref{fig:evaluation:cases:wahlkreise_multiselect} shows a \tmap{} with the following configuration:
-The layout is based on the population density, large cluster at the top are sparsely populated districts.
-Colour is based on the increase or decrease of inhabitants, a red colour indicating a decrease of inhabitants.
-Height is inversely mapped to unemployment rate, a high block indicating a low unemployment rate.
+This use case demonstrates the benefit of a multiple select and the ability to relate interesting features with their geographic context.
+Figure~\ref{fig:evaluation:cases:multiselect:1} (a) shows a \tmap{} with the following configuration:
+The layout is based on the population density, large clusters on the right are sparsely populated districts.
+Colour is based on the increase or decrease of inhabitants, a red colour indicating a growth of inhabitants.
 
-The highlighted block and its two neighboring blocks catch our attention:
-As we can see on the right side, those three districts happen to be geographically related.
-They are all neighboring districts of Munich, the city with the highest rents in Germany.
+There are three groups of items in the \tmap{} that catch our interest:
+\begin{enumerate*}[label=(\arabic*)]
+  \item A group of orange items on the left side of tree map,
+  \item many scattered, white coloured items in the large cluster on the right and
+  \item three purple coloured items in the large cluster on the right.
+\end{enumerate*}
 
-We draw the following conclusion:
-Apparently people can not pay the rising rents in Munich anymore and start to move out in the rural areas that are somehow close to their work place in Munich.
-This conclusion coincided with the discovery of a geographical context that was not present in the mere data itself.
-A \tmap{} alone would not have been able to give us this insight.
+Districts in the orange group are rather densely populated and show a decline of population.
+But as we can see in Figure~\ref{fig:evaluation:cases:multiselect:1} (b) the districts of this group have a geographic context:
+They are all located in the Ruhr area.
 
-\begin{figure}[h]
+A similar observation can be made about the white group, i.e.\ sparsely populated districts with a serious decline of population:
+These districts are all located in the east of Germany, see Figure~\ref{fig:evaluation:cases:multiselect:2} (a).
+
+And finally, even the three purple districts in the cluster of sparsely populated districts are geographically related as well:
+These districts are in the vicinity of Munich, as we can see in Figure~\ref{fig:evaluation:cases:multiselect:2} (b).
+
+Similar to the scenario in Section~\ref{sec:evaluation:use-cases:gas-stations}, with the \tmap{} alone we can spot anomalies.
+However, we would not be able to relate these anomalies to a geographic context.
+This time, we can really benefit of the multiple selection as the white group is scattered across the \tmap{}.
+
+\begin{figure}
   \centering
   \caption{
-    Three unsuspicious districts happen to be located next to Munich.
-    Apparently people move out of Munich to avoid high rents.
-  }\label{fig:evaluation:cases:wahlkreise_multiselect}
-  \includegraphics[width=\textwidth]{figures/evaluation/cases/wahlkreise_multiselect}
+    The orange coloured group on the left, districts with a moderate decline of inhabitants and large population density, are all districts of the Ruhr area.
+  }\label{fig:evaluation:cases:multiselect:1}
+  \subfloat[Tree map]{{\includegraphics[width=0.4\textwidth]{figures/evaluation/use-cases/2-tmap} }}%
+  \qquad
+  \subfloat[Orange group]{{\includegraphics[width=0.4\textwidth]{figures/evaluation/use-cases/2-map-ruhr} }}%
 \end{figure}
 
-
-\subsection{Large districts by area with a high unemployment rate}
-
-Yet another use case to show the benefit of a multi select.
-In Figure~\ref{fig:evaluation:cases:wahlkreise_multiselect:2} all rural districts with a high unemployment rate have been selected.
-Since these features are located in different groups in the \tmap{} that would not have been possible without the multi select.
-Figure~\ref{fig:evaluation:cases:wahlkreise_multiselect:2} shows a correlation of unemployment in rural areas with the east of Germany.
-
-\begin{figure}[h]
+\begin{figure}
   \centering
   \caption{
-    The layout of the \tmap{} is based on area of the district, the colour based on the unemployment rate.
-    We did a multi select of all rural districts with a high unemployment rate.
-    We can see a strong correlation with a location in the east of Germany.
-  }\label{fig:evaluation:cases:wahlkreise_multiselect:2}
-  \includegraphics[width=\textwidth]{figures/evaluation/cases/wahlkreise_multiselect_2}
+    The sparsely populated districts with a serious decline of inhabitants are all located in the east of Germany.
+    The few districts with a low population density and high increase of population are all located in the vicinity of Munich.
+  }\label{fig:evaluation:cases:multiselect:2}
+  \subfloat[White group]{{\includegraphics[width=0.4\textwidth]{figures/evaluation/use-cases/2-map-east} }}%
+  \qquad
+  \subfloat[Purple group]{{\includegraphics[width=0.4\textwidth]{figures/evaluation/use-cases/2-map-munich} }}%
+\end{figure}
+
+\subsection{Bounding Box Selection in \gv{}}
+Similar to the multiple select in Section~\ref{sec:evaluation:use-cases:bounding-box}, multiple selects can be carried out by a bounding box in the \gv{}.
+
+The layout of the \tmap{} in Figure~\ref{fig:evaluation:cases:bounding-box} (a) is based on construction activity, i.e.\ the number of completed accommodations per capita.
+The colour is mapped to the increase of population.
+As Berlin is known for quickly rising rents and real estate speculation we select all districts in Berlin with a bounding box.
+All selected districts are placed in the center right group of the \tmap{}.
+They are the dark red items next to the currently highlighted item in Figure~\ref{fig:evaluation:cases:bounding-box} (a).
+However, the districts are not in the group with the highest construction activity at the very top.
+
+\begin{figure}
+  \centering
+  \caption{
+    A bounding box multiple select in the \gv{} can reveal a non-geographic context in the \tmap{}
+  }\label{fig:evaluation:cases:bounding-box}
+  \subfloat[Tree map]{{\includegraphics[width=0.4\textwidth]{figures/evaluation/use-cases/3-tmap} }}%
+  \qquad
+  \subfloat[Geographic map]{{\includegraphics[width=0.4\textwidth]{figures/evaluation/use-cases/3-map} }}%
 \end{figure}
 
 \section{Use case summary}
