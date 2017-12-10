@@ -35,11 +35,11 @@ These gas stations are generally a little more expensive and that applies especi
 
 \begin{figure}[h]
   \centering
-  \includegraphics[width=\textwidth]{figures/evaluation/cases/gasstations}
   \caption{
     The \tmap{} shows gas stations with a layout based on the brand name and height and colour mapped to price.
     Relatively expensive gas stations, with respect to the other gas stations of that brand, are often located next to highways.
   }\label{fig:evaluation:cases:gasstations}
+  \includegraphics[width=\textwidth]{figures/evaluation/cases/gasstations}
 \end{figure}
 
 \subsection{Find an unusually cheap gas station in the center of Berlin}
@@ -52,10 +52,10 @@ These gas stations are focused on in the geographical visualization as you can s
 
 \begin{figure}[h]
   \centering
-  \includegraphics[width=\textwidth]{figures/evaluation/cases/gasstations_multiselect}
   \caption{
     A multi select allows to collect a group of interesting features.
   }\label{fig:evaluation:cases:gasstations_multiselect}
+  \includegraphics[width=\textwidth]{figures/evaluation/cases/gasstations_multiselect}
 \end{figure}
 
 
@@ -78,11 +78,11 @@ A \tmap{} alone would not have been able to give us this insight.
 
 \begin{figure}[h]
   \centering
-  \includegraphics[width=\textwidth]{figures/evaluation/cases/wahlkreise_multiselect}
   \caption{
     Three unsuspicious districts happen to be located next to Munich.
     Apparently people move out of Munich to avoid high rents.
   }\label{fig:evaluation:cases:wahlkreise_multiselect}
+  \includegraphics[width=\textwidth]{figures/evaluation/cases/wahlkreise_multiselect}
 \end{figure}
 
 
@@ -95,12 +95,12 @@ Figure~\ref{fig:evaluation:cases:wahlkreise_multiselect:2} shows a correlation o
 
 \begin{figure}[h]
   \centering
-  \includegraphics[width=\textwidth]{figures/evaluation/cases/wahlkreise_multiselect_2}
   \caption{
     The layout of the \tmap{} is based on area of the district, the colour based on the unemployment rate.
     We did a multi select of all rural districts with a high unemployment rate.
     We can see a strong correlation with a location in the east of Germany.
   }\label{fig:evaluation:cases:wahlkreise_multiselect:2}
+  \includegraphics[width=\textwidth]{figures/evaluation/cases/wahlkreise_multiselect_2}
 \end{figure}
 
 
@@ -112,6 +112,8 @@ The hardware specifications of the machine are listed in Table~\ref{tab:evaluati
 
 \begin{table}[ht]
   \centering
+  \caption{Hardware specifications}%
+  \label{tab:evaluation:performance:hardware}
   \begin{tabular}{ll}
     Device name: & LENOVO ThinkPad L540 \\
     CPU type: & Intel i3-4100M CPU @ 2.50GHz \\
@@ -119,8 +121,6 @@ The hardware specifications of the machine are listed in Table~\ref{tab:evaluati
     Main memory: & 8GiB \\
     Graphics card: & Intel 4th Gen Core Processor Integrated Graphics Controller \\
   \end{tabular}
-  \caption{Hardware specifications}%
-  \label{tab:evaluation:performance:hardware}
 \end{table}
 
 A couple of data sets were used in three different scenarios:
@@ -140,6 +140,8 @@ The data set with the highest number of features is called ``Immoscout Wohnungsa
 
 \begin{table}[ht]
   \centering
+  \caption{Data sets used for performance profiling}%
+  \label{tab:evaluation:performance:data-sets}
   \begin{tabular}{lllr}
     Data Set & Features & Type & Size (MiB) \\
     \hline
@@ -150,8 +152,6 @@ The data set with the highest number of features is called ``Immoscout Wohnungsa
     Immoscout Wohnungsangebote    & 8601 & Points & 2.11 \\
     Landkreise Deutschland        & 402  & Areas  & 2.13 \\
   \end{tabular}
-  \caption{Data sets used for performance profiling}%
-  \label{tab:evaluation:performance:data-sets}
 \end{table}
 
 
@@ -161,14 +161,14 @@ You can see a screenshot of the profiling of just the \tmap{} in Figure~\ref{fig
 
 \begin{figure}[h]
   \centering
-  \includegraphics[width=\textwidth]{figures/evaluation/performance/profiles/immoscout_tmap_only/fps}
   \caption{During profiling of the ``Immoscout'' data set, only 16 frames per second get rendered}\label{fig:evaluation:performance:profiling:immoscout_tmap_only:fps}
+  \includegraphics[width=\textwidth]{figures/evaluation/performance/profiles/immoscout_tmap_only/fps}
 \end{figure}
 
 \begin{figure}[h]
   \centering
-  \includegraphics[width=0.5\textwidth]{figures/evaluation/performance/profiles/immoscout_tmap_only/summary}
   \caption{Visualizing just the \tmap{}, almost the entire CPU time is spent during Scripting }\label{fig:evaluation:performance:profiling:immoscout_tmap_only:summary}
+  \includegraphics[width=0.5\textwidth]{figures/evaluation/performance/profiles/immoscout_tmap_only/summary}
 \end{figure}
 
 The Timeline identifies the event handler of the ``mousemove'' event to be the cause of this slow scripting.
@@ -178,28 +178,28 @@ It is worth noting, that not the coordination of the interaction is responsible 
 
 \begin{figure}[h]
   \centering
-  \includegraphics[width=\textwidth]{figures/evaluation/performance/profiles/immoscout_both/fps}
   \caption{
     Every highlighting interaction comes with a spike of CPU time for rendering and painting.
     Focusing on a feature redraws the background and leads to an increase of painting time.
   }\label{fig:evaluation:performance:profiling:immoscout_both:fps}
+  \includegraphics[width=\textwidth]{figures/evaluation/performance/profiles/immoscout_both/fps}
 \end{figure}
 
 \begin{figure}[h]
   \centering
-  \includegraphics[width=0.5\textwidth]{figures/evaluation/performance/profiles/immoscout_both/summary}
   \caption{
     The geographical visualization spends much more time during re-rendering and painting.
   }\label{fig:evaluation:performance:profiling:immoscout_both:summary}
+  \includegraphics[width=0.5\textwidth]{figures/evaluation/performance/profiles/immoscout_both/summary}
 \end{figure}
 
 \begin{figure}[h]
   \centering
-  \includegraphics[width=\textwidth]{figures/evaluation/performance/profiles/immoscout_both/callstack}
   \caption{
     Event handler \attr{handleHighlight} takes about 90ms to finish.
     During this time, the list of features is iterated and \attr{setStyle} executed.
   }\label{fig:evaluation:performance:profiling:immoscout_both:callstack}
+  \includegraphics[width=\textwidth]{figures/evaluation/performance/profiles/immoscout_both/callstack}
 \end{figure}
 
 The profile summary looks totally different for the scenario of a \tmap{} along with a \gvis{}.
@@ -218,34 +218,34 @@ About 10\% of the CPU time is spent idling, see Figure~\ref{fig:evaluation:perfo
 
 \begin{figure}[h]
   \centering
-  \includegraphics[width=\textwidth]{figures/evaluation/performance/profiles/landkreise_both/fps}
   \caption{
     The number of features is crucial for the time spent during a highlighting interaction.
   }\label{fig:evaluation:performance:profiling:landkreise_both:fps}
+  \includegraphics[width=\textwidth]{figures/evaluation/performance/profiles/landkreise_both/fps}
 \end{figure}
 
 \begin{figure}[h]
   \centering
-  \includegraphics[width=0.5\textwidth]{figures/evaluation/performance/profiles/landkreise_both/summary}
   \caption{
     Data set ``Landkreise'' shows less time spent on painting and rendering.
   }\label{fig:evaluation:performance:profiling:landkreise_both:summary}
+  \includegraphics[width=0.5\textwidth]{figures/evaluation/performance/profiles/landkreise_both/summary}
 \end{figure}
 
 \begin{figure}[h]
   \centering
-  \includegraphics[width=\textwidth]{figures/evaluation/performance/profiles/landkreise_geo_only/fps}
   \caption{
     A timeline without any significant drop of frames per second is achieved with the geographical visualization without \tmap{} of the ``Landkreise'' data set.
   }\label{fig:evaluation:performance:profiling:landkreise_geo_only:fps}
+  \includegraphics[width=\textwidth]{figures/evaluation/performance/profiles/landkreise_geo_only/fps}
 \end{figure}
 
 \begin{figure}[h]
   \centering
-  \includegraphics[width=0.5\textwidth]{figures/evaluation/performance/profiles/landkreise_geo_only/summary}
   \caption{
     Without a \tmap{} the CPU is idling for almost 50\% of the time.
   }\label{fig:evaluation:performance:profiling:landkreise_both:summary}
+  \includegraphics[width=0.5\textwidth]{figures/evaluation/performance/profiles/landkreise_geo_only/summary}
 \end{figure}
 
 

@@ -51,8 +51,9 @@ These visual variables are used in cartography but can also be applied to data v
 The authors conclude that the variable \attr{size} provides the most accurate and efficient performance while the variable \attr{orientation} provides the least performance.
 \begin{figure}[ht]
   \centering
+  \caption{Bertin's~\cite{Bertin2010} original visual variables.}
+  \label{fig:related-work:visual-variables}
   \includegraphics[width=\textwidth]{figures/related-work/visual-variables.png}
-  \caption{Bertin's~\cite{Bertin2010} original visual variables.}\label{fig:related-work:visual-variables}
 \end{figure}
 Bertin's visual variable play a role in interaction aspects of \cmvs{} as they are used to communicate the effect of an interaction.
 A highlighted data point can be highlighted by changing the colour of an area or increasing the size of a point.
@@ -68,14 +69,14 @@ Such an incorrect encoding would be the display of absolute numbers, e.g.\ total
 
 \begin{figure}[ht]
   \centering
-  \copyrightbox[b]{%
-    \includegraphics[width=\textwidth]{figures/related-work/choropleth}}{%
-    \hfill National Center for Chronic Disease Prevention and Health Promotion~\cite{NCCDPHP2017}
-  }
   \caption{%
     Choropleth Map of Obesity in the United States in 2008.
     Present of population classified as ``obese'' (Body Mass Index greater than 30), by state.
   }\label{fig:related-work:choropleth}
+  \copyrightbox[b]{%
+    \includegraphics[width=\textwidth]{figures/related-work/choropleth}}{%
+    \hfill National Center for Chronic Disease Prevention and Health Promotion~\cite{NCCDPHP2017}
+  }
 \end{figure}
 
 This work uses a choropleth map for the geographic visualization because of its widespread recognition.
@@ -86,9 +87,10 @@ This work uses a choropleth map for the geographic visualization because of its 
 The visualization of hierarchical data has a long tradition.
 The traditional visual representation of a tree is a directed graph with the root node at the top, as seen in Figure~\ref{fig:related-work:tree-graph}.
 \begin{figure}[ht]
-	\centering
-	\includegraphics[width=\textwidth]{figures/related-work/tree.pdf}
-	\caption{Traditional visualization of a tree in form of a directed graph with edges and nodes and the root node at the top}\label{fig:related-work:tree-graph}
+  \centering
+  \caption{Traditional visualization of a tree in form of a directed graph with edges and nodes and the root node at the top}
+  \label{fig:related-work:tree-graph}
+  \includegraphics[width=\textwidth]{figures/related-work/tree.pdf}
 \end{figure}
 An common use case is a directory tree of a file system, e.g.\ a file browser or the command line utility \texttt{tree} on UNIX based operating systems.
 As \textcite{Shneiderman1992} mentions, this visualization becomes increasingly large when displaying more than one level and soon exceeds the entire screen size.
@@ -112,21 +114,22 @@ If more and more nodes are displayed, the size of each tile will get smaller and
 You can see this problem occur in Figure~\ref{fig:related-work:treemap-german-exports-2}.
 \begin{figure}[ht]
     \centering
+    \caption{A two dimensional tree map of Germany's foreign trade quota of exports, showing only the first hierarchy level.}
+    \label{fig:related-work:treemap-german-exports-1}
     \copyrightbox[b]{%
         \includegraphics[width=\textwidth]{figures/related-work/en_profile_country_deu.pdf}}{%
         \hfill \ccAttribution{} \ccShareAlike{} Observatory of Economic Complexity~\cite{Macro2017}
     }
-    \caption{A two dimensional tree map of Germany's foreign trade quota of exports, showing only the first hierarchy level.}
-    \label{fig:related-work:treemap-german-exports-1}
 \end{figure}
 
 \begin{figure}[ht]
     \centering
+    \caption{A two dimensional tree map of Germany's foreign trade quota of exports, showing a hierarchy of depth ``HS4''}
+    \label{fig:related-work:treemap-german-exports-2}
     \copyrightbox[b]{%
         \includegraphics[width=\textwidth]{figures/related-work/en_profile_country_deu_2.pdf}}{%
         \hfill \ccAttribution{} \ccShareAlike{} Observatory of Economic Complexity~\cite{Macro2017}
     }
-    \caption{A two dimensional tree map of Germany's foreign trade quota of exports, showing a hierarchy of depth ``HS4''}\label{fig:related-work:treemap-german-exports-2}
 \end{figure}
 If tree maps are used to visualize geographic data like municipalities, real estates or streets, the placement of nodes depends on the tiling algorithm and not the geographic location on a map.
 Let's say a tree map visualizes a hierarchy of federal states and municipalities with the area of each tile mapped to the total population of administrative district.
@@ -151,11 +154,12 @@ All three dimensional tree maps in this thesis are in fact \tmaps{} and therefor
 
 \begin{figure}[ht]
   \centering
+  \caption{Example of a \tmap{}}
+  \label{fig:research:ua_treemap}
   \copyrightbox[b]{%
     \includegraphics[width=\textwidth]{figures/related-work/2_5D_treemap_example}}{%
     \hfill \textcopyright{} Hasso-Plattner-Institut\cite{Doellner2017}
   }
-  \caption{Example of a \tmap{}}\label{fig:research:ua_treemap}
 \end{figure}
 
 
@@ -168,16 +172,16 @@ We can see an example of a \cmv{} in Figure~\ref{fig:related-work:cmv}
 It displays spatial and temporal attributes of pictures from a picture database, as well as continuous attributes like popularity and number of comments.
 \begin{figure}[h]
   \centering
-  \copyrightbox[b]{\includegraphics[width=\textwidth]{figures/related-work/cmv}}{\hfill Dukevis\cite{Dukevis2017}}
   \caption{\cmv{} displaying the popularity, number of comments, location and time of pictures in a picture data base}\label{fig:related-work:cmv}
+  \copyrightbox[b]{\includegraphics[width=\textwidth]{figures/related-work/cmv}}{\hfill Dukevis\cite{Dukevis2017}}
 \end{figure}
 The user can move the mouse cursor over each item in the scatter plot and the graduated symbol map and the corresponding item is highlighted with a larger stroke in all other views.
 On the time line below, the user can also filter for pictures in a certain time frame by dragging the mouse from lower to upper limit.
 
 \begin{figure}[h]
   \centering
-  \copyrightbox[b]{\includegraphics[width=\textwidth]{figures/related-work/brushing_linking}}{\hfill Crossfilter\cite{Bostock2017}}
   \caption{Airline on-time performance: Correlation of time of day with arrival delay. Most recent flight with a delay of more than 100 minutes selected.}\label{fig:research:brushing-linking}
+  \copyrightbox[b]{\includegraphics[width=\textwidth]{figures/related-work/brushing_linking}}{\hfill Crossfilter\cite{Bostock2017}}
 \end{figure}
 
 \subsection{Brushing and Linking}

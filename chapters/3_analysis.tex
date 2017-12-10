@@ -20,12 +20,12 @@ The expected data structure and a list of possible interactions are systematical
 
 \subsection{Line Graphs}
 \begin{figure}
+  \caption{Line graphs are used to display trends}
+  \label{fig:analysis:line-graphs}
   \begin{center}
     \subfloat[Line graphs]{{\includegraphics[width=0.4\textwidth]{figures/analysis/line-graphs} }}%
     \qquad
   \end{center}
-  \caption{Line graphs are used to display trends}
-  \label{fig:analysis:line-graphs}
 \end{figure}
 
 Line graphs display how quantitative values have changed over time.
@@ -52,6 +52,8 @@ Table~\ref{tab:analysis:line-graph:interactions} shows a list of plausible inter
 
 \begin{table}[H]
   \centering
+  \caption{Plausible interactions for line graphs}%
+  \label{tab:analysis:line-graph:interactions}
   \begin{tabular*}{\textwidth}{lll}
     \bf Category & \bf Description & \bf Required information \\
     \hline
@@ -61,8 +63,6 @@ Table~\ref{tab:analysis:line-graph:interactions} shows a list of plausible inter
     Filter & Restrict interval on x-axis & lower limit + upper limit \\
     Filter & Hide a data series & id of data series \\
   \end{tabular*}
-  \caption{Plausible interactions for line graphs}%
-  \label{tab:analysis:line-graph:interactions}
 \end{table}
 
 
@@ -71,13 +71,13 @@ Table~\ref{tab:analysis:line-graph:interactions} shows a list of plausible inter
 \subsection{Bar Charts and Multi-Set Bar Charts}
 
 \begin{figure}
+  \caption{A multi set bar charts is a variation of a bar chart}
+  \label{fig:analysis:bar-charts}
   \begin{center}
     \subfloat[Bar Chart or column graph]{{\includegraphics[width=0.4\textwidth]{figures/analysis/bar-chart} }}%
     \qquad
     \subfloat[Multi set bar Chart]{{\includegraphics[width=0.4\textwidth]{figures/analysis/multiset-bar-chart} }}%
   \end{center}
-  \caption{A multi set bar charts is a variation of a bar chart}
-  \label{fig:analysis:bar-charts}
 \end{figure}
 
 Bar charts use either horizontal or vertical bars to show discrete, numerical comparisons across categories.
@@ -109,6 +109,8 @@ Table~\ref{tab:analysis:bar-charts:interactions} lists some possible interaction
 
 \begin{table}[H]
   \centering
+  \caption{Plausible interactions for bar charts}
+  \label{tab:analysis:bar-charts:interactions}
   \begin{tabular*}{\textwidth}{lll}
     \bf Category & \bf Description & \bf Required information \\
     \hline
@@ -118,17 +120,15 @@ Table~\ref{tab:analysis:bar-charts:interactions} lists some possible interaction
     Reconfigure & Drag bars to reorder data series & ordered list of ids of data series \\
     Filter & Hide a data series & id of data series \\
   \end{tabular*}
-  \caption{Plausible interactions for bar charts}
-  \label{tab:analysis:bar-charts:interactions}
 \end{table}
 
 \subsection{Histograms}
 
 \begin{figure}
   \centering
-    \includegraphics[width=0.4\textwidth]{figures/analysis/histogram.png}%
-    \label{fig:analysis:histograms}
-    \caption{A histogram is a bar chart over a continuous interval}%
+  \label{fig:analysis:histograms}
+  \caption{A histogram is a bar chart over a continuous interval}%
+  \includegraphics[width=0.4\textwidth]{figures/analysis/histogram.png}%
 \end{figure}
 
 Histograms visualize the distribution of data over a continuous interval or a certain time period.
@@ -142,11 +142,11 @@ This is not possible, because the histogram constrains the position of bars alon
 
 \begin{figure}
   \centering
-    \subfloat[Bubble Chart]{{\includegraphics[width=0.4\textwidth]{figures/analysis/bubble-chart.png} }}%
-    \qquad
-    \subfloat[Scatter plot]{{\includegraphics[width=0.4\textwidth]{figures/analysis/scatter-plot.png} }}%
-    \caption{Bubble charts and scatter plots are similar regarding interactions}%
-    \label{fig:analysis:bubble-chart}
+  \caption{Bubble charts and scatter plots are similar regarding interactions}%
+  \label{fig:analysis:bubble-chart}
+  \subfloat[Bubble Chart]{{\includegraphics[width=0.4\textwidth]{figures/analysis/bubble-chart.png} }}%
+  \qquad
+  \subfloat[Scatter plot]{{\includegraphics[width=0.4\textwidth]{figures/analysis/scatter-plot.png} }}%
 \end{figure}
 
 Both bubble charts and scatter plots are techniques to visualize continuous values from two data attributes.
@@ -159,6 +159,8 @@ Like line graphs, bar charts and histograms, a scatter plot expects \emph{tabula
 Each data point can take up to four values (in case of a coloured bubble chart).
 As we can see in Table~\ref{tab:analysis:bubble-charts:interactions}, interactions also include a zooming and movement of the viewpoint.
 \begin{table}[H]
+  \caption{Plausible interactions for bubble charts}%
+  \label{tab:analysis:bubble-charts:interactions}
   \begin{tabular*}{\textwidth}{lll}
     \bf Category & \bf Description & \bf Required information \\
     \hline
@@ -172,25 +174,24 @@ As we can see in Table~\ref{tab:analysis:bubble-charts:interactions}, interactio
     Reconfigure & Drag bars to reorder data series & ordered list of ids of data series \\
     Filter & Hide a data series & id of data series \\
   \end{tabular*}
-  \caption{Plausible interactions for bubble charts}%
-  \label{tab:analysis:bubble-charts:interactions}
 \end{table}
 
 \subsection{Stacked Bar Charts}
 
 \begin{figure}
   \centering
-    \subfloat[Stacked bar chart]{{\includegraphics[width=0.3\textwidth]{figures/analysis/stacked-bar-without-baseline.png} }}%
-    \qquad
-    \subfloat[Stacked bar chart with baseline]{{\includegraphics[width=0.3\textwidth]{figures/analysis/stacked-bar-with-baseline.png} }}%
-    \caption{Stacked bar charts can be ordered along a baseline or stretch to 100\% width to show the percentage-of-the-whole of each group}%
-    \label{fig:analysis:stacked-bar-chart}
+  \caption{Stacked bar charts can be ordered along a baseline or stretch to 100\% width to show the percentage-of-the-whole of each group}%
+  \label{fig:analysis:stacked-bar-chart}
+  \subfloat[Stacked bar chart]{{\includegraphics[width=0.3\textwidth]{figures/analysis/stacked-bar-without-baseline.png} }}%
+  \qquad
+  \subfloat[.. with baseline]{{\includegraphics[width=0.3\textwidth]{figures/analysis/stacked-bar-with-baseline.png} }}%
 \end{figure}
+
 \begin{figure}
   \centering
-    \includegraphics[width=0.4\textwidth]{figures/analysis/population-pyramid.png}%
-    \caption{A population pyramid is a pair of histograms and can also be modeled as a stacked bar chart}%
-    \label{fig:analysis:population-pyramid}
+  \caption{A population pyramid is a pair of histograms and can also be modeled as a stacked bar chart}%
+  \label{fig:analysis:population-pyramid}
+  \includegraphics[width=0.4\textwidth]{figures/analysis/population-pyramid.png}%
 \end{figure}
 
 Unlike a multi-set bar graph which displays bars side-by-side, stacked bar graphs segment their bars of multiple datasets on top of each other.
@@ -203,6 +204,8 @@ Table~\ref{tab:analysis:stacked-bar-chart:interactions} shows possible interacti
 % \conceptTable{Tabular data, multiple date sets as series}{Size, shape, orientation.}{Color, position, texture.}
 
 \begin{table}[H]
+  \caption{Plausible interactions for stacked bar charts}%
+  \label{tab:analysis:stacked-bar-chart:interactions}
   \begin{tabular*}{\textwidth}{lll}
     \bf Category & \bf Description & \bf Required information \\
     \hline
@@ -215,8 +218,6 @@ Table~\ref{tab:analysis:stacked-bar-chart:interactions} shows possible interacti
     \bf Reconfigure & Specify a negative data series & list of ids of data series \\
     \bf Filter & Hide a data series & id of data series \\
   \end{tabular*}
-  \caption{Plausible interactions for stacked bar charts}%
-  \label{tab:analysis:stacked-bar-chart:interactions}
 \end{table}
 
 
@@ -224,11 +225,11 @@ Table~\ref{tab:analysis:stacked-bar-chart:interactions} shows possible interacti
 
 \begin{figure}
   \centering
-    \subfloat[Tree map]{{\includegraphics[width=0.4\textwidth]{figures/analysis/treemap.png} }}%
-    \qquad
-    \subfloat[Sunburst diagram]{{\includegraphics[width=0.4\textwidth]{figures/analysis/sunburst.png} }}%
-    \caption{Tree maps and sunburst diagrams are ideal to show hierarchies}%
-    \label{fig:analysis:hierarchies}
+  \caption{Tree maps and sunburst diagrams are ideal to show hierarchies}%
+  \label{fig:analysis:hierarchies}
+  \subfloat[Tree map]{{\includegraphics[width=0.4\textwidth]{figures/analysis/treemap.png} }}%
+  \qquad
+  \subfloat[Sunburst diagram]{{\includegraphics[width=0.4\textwidth]{figures/analysis/sunburst.png} }}%
 \end{figure}
 
 Tree maps are great to show hierarchical data without ever exceeding the available screen.
@@ -249,6 +250,8 @@ Table~\ref{tab:analysis:hierarchies:interactions} gives a more comprehensive lis
 % \conceptTable{Tree, each feature has a value for layouting.}{Position, Size, shape, orientation.}{Color, texture.}
 
 \begin{table}[H]
+  \caption{Plausible interactions for hierarchical visualizations}%
+  \label{tab:analysis:hierarchies:interactions}
   \begin{tabular*}{\textwidth}{lll}
     \bf Category & \bf Description & \bf Required information \\
     \hline
@@ -260,19 +263,17 @@ Table~\ref{tab:analysis:hierarchies:interactions} gives a more comprehensive lis
     Reconfigure & Specify order & ordered list of ids of data points \\
     Abstract/Elaborate & Specify maximum depth of visible tree & number of hierarchy levels \\
   \end{tabular*}
-  \caption{Plausible interactions for hierarchical visualizations}%
-  \label{tab:analysis:hierarchies:interactions}
 \end{table}
 
 \subsection{Geographic Data Visualizations}
 
 \begin{figure}
   \centering
-    \subfloat[Choropleth map]{{\includegraphics[width=0.4\textwidth]{figures/analysis/choropleth-map.png} }}%
-    \qquad
-    \subfloat[Flow map]{{\includegraphics[width=0.4\textwidth]{figures/analysis/flow-map.png} }}%
-    \caption{Choropleth maps focus on a density while flow maps show a migration of data}%
-    \label{fig:analysis:geographical}
+  \caption{Choropleth maps focus on a density while flow maps show a migration of data}%
+  \label{fig:analysis:geographical}
+  \subfloat[Choropleth map]{{\includegraphics[width=0.4\textwidth]{figures/analysis/choropleth-map.png} }}%
+  \qquad
+  \subfloat[Flow map]{{\includegraphics[width=0.4\textwidth]{figures/analysis/flow-map.png} }}%
 \end{figure}
 
 Choropleth maps and flow maps are thematic maps to visualize geographic data.
@@ -307,11 +308,11 @@ Thus, it also expects \emph{relational} data in form of a graph
 \textbf{Activity diagrams}
 \begin{figure}
   \centering
-    \subfloat[Calendar]{{\includegraphics[width=0.4\textwidth]{figures/analysis/calendar.png} }}%
-    \qquad
-    \subfloat[Gantt chart]{{\includegraphics[width=0.4\textwidth]{figures/analysis/gantt-chart.png} }}%
-    \caption{Similar to a calendar, a gantt chart shows activities and the progress along a time line}%
-    \label{fig:analysis:temporal}
+  \caption{Similar to a calendar, a gantt chart shows activities and the progress along a time line}%
+  \label{fig:analysis:temporal}
+  \subfloat[Calendar]{{\includegraphics[width=0.4\textwidth]{figures/analysis/calendar.png} }}%
+  \qquad
+  \subfloat[Gantt chart]{{\includegraphics[width=0.4\textwidth]{figures/analysis/gantt-chart.png} }}%
 \end{figure}
 
 In activity diagrams, each feature is represented as a rectangle, with the duration of the activity mapped to size and position.
@@ -322,6 +323,8 @@ So some data points, i.e.\ events, might repeat infinitely.
 % \conceptTable{Temporal data, each feature has a time interval.}{Position, Size, orientation.}{Color, shape, texture.}
 
 \begin{table}
+  \caption{Interactions for temporal visualizations}%
+  \label{fig:analysis:temporal:interactions}
   \begin{tabular*}{\textwidth}{lll}
     \bf Category & \bf Description & \bf Required information \\
     \hline
@@ -332,8 +335,6 @@ So some data points, i.e.\ events, might repeat infinitely.
     Encode & Change data attribute used for colour & data attribute \\
     Filter & Remove a calendar or a category & id of data series \\
   \end{tabular*}
-  \caption{Interactions for temporal visualizations}%
-  \label{fig:analysis:temporal:interactions}
 \end{table}
 
 \section{Multiple View Interactions}\label{sec:analysis:examples:multiple}
@@ -346,14 +347,14 @@ That's why the examples in this section are tied to a use case in contrast to th
 \subsection{Detail view and Mini View}
 \begin{figure}
   \centering
-    \subfloat[Detail view]{ \includegraphics[width=0.4\textwidth]{figures/analysis/detail-view} }%
-    \qquad
-    \subfloat[Mini view]{\includegraphics[width=0.4\textwidth]{figures/analysis/mini-view}}%
   \caption{
     The screenshot-tool ``Shutter'' shows a magnified detail view of the area around the mouse cursor in the lower left corner of the screen.
   The opposite approach is e.g.\ ``Leaflet-Minimap'' that shows the map at a larger scale in the lower right.
   }
   \label{fig:analysis:detail}
+  \subfloat[Detail view]{ \includegraphics[width=0.4\textwidth]{figures/analysis/detail-view} }%
+  \qquad
+  \subfloat[Mini view]{\includegraphics[width=0.4\textwidth]{figures/analysis/mini-view}}%
 \end{figure}
 
 Detail views show a magnification of the surrounding area of a cursor in a secondary view.
@@ -367,6 +368,8 @@ This secondary view shows a larger surrounding of the primary view, if the prima
 Use cases are geographic visualizations and therefore the expected data structure is a map with coordinates of the viewpoint and a zoom factor for each view.
 
 \begin{table}[H]
+  \caption{Plausible interactions for detail and mini views}%
+  \label{fig:analysis:detail:interactions}
   \begin{tabular*}{\textwidth}{lll}
     \bf Category & \bf Description & \bf Required information \\
     \hline
@@ -374,17 +377,15 @@ Use cases are geographic visualizations and therefore the expected data structur
     Explore & Move primary viewpoint through secondary view & Latitude + Longitude \\
     Explore & Accelerate scrolling via secondary view & Zoom factor \\
   \end{tabular*}
-  \caption{Plausible interactions for detail and mini views}%
-  \label{fig:analysis:detail:interactions}
 \end{table}
 
 \subsection{Timeline}
 
 \begin{figure}
   \centering
-    \includegraphics[width=\textwidth]{figures/analysis/profiler}
   \caption{Multiple views of Chromium's runtime analysis tool can be focused on a selected time span.}
   \label{fig:analysis:timeline}
+    \includegraphics[width=\textwidth]{figures/analysis/profiler}
 \end{figure}
 Figure~\ref{fig:analysis:timeline} shows the runtime analysis of the Chromium browser.
 Multiple views show different granularities of the same data.
@@ -394,14 +395,14 @@ The user can select a window on the top line and the data for the other views is
 A multiple visualization like that expects \emph{temporal} data.
 
 \begin{table}[H]
+  \caption{Plausible interactions for timelines}%
+  \label{fig:analysis:timeline:interactions}
   \begin{tabular*}{\textwidth}{lll}
     \bf Category & \bf Description & \bf Required information \\
     \hline
     Filter & Filter data by time span & Upper and lower limit \\
     Select & Display screenshot a certain time & Timestamp  \\
   \end{tabular*}
-  \caption{Plausible interactions for timelines}%
-  \label{fig:analysis:timeline:interactions}
 \end{table}
 
 
@@ -541,7 +542,7 @@ Figure~\ref{fig:implementation:frontend-frameworks} shows the pros and cons of e
 
 \begin{figure}[h]
   \centering
-  \includegraphics[width=\textwidth]{images/frontend-frameworks.png}
   \caption{Comparison of component based web frameworks, advantages highlighted in green, disadvantages highlighted in red.}\label{fig:implementation:frontend-frameworks}
+  \includegraphics[width=\textwidth]{images/frontend-frameworks.png}
 \end{figure}
 
