@@ -7,37 +7,37 @@ As a last step, the requirements of Chapter~\ref{sec:analysis} are used to valid
 
 \section{Use Cases and Discussion}\label{sec:use-case}
 
-\todo[inline]{no section without text}
+The following three use case scenarios demonstrate how more insights can be gained with \gv{} next to the \tmap{}.
 
-
-\subsection{Explain outliers with a geographical context}
+\subsection{Explain outliers}
 
 \tmaps{} can have outliers, i.e.\ unusual local maxima of a certain attribute.
-If the attribute is mapped to e.g.\ height, a local maximum would be a block that protrudes an group of evenly heightened blocks.
+If the attribute is mapped to the height of the corresponding block, a local maximum is identifiable by a block that protrudes from a group of evenly leveled blocks.
 We can see such an example in Figure~\ref{fig:evaluation:cases:gasstations}.
 
-This example visualizes Berlin's gas stations.
-The \tmap{} on the left side has a layout based on the brand name of a gas station.
-I.e.\ a group of gas stations in the \tmap{} belong to the same brand like ``Total'' or ``Aral''.
+The data set of the visualizations in the figure includes gas stations in Berlin.
+The \tmap{} is configured as follows:
+The layout is based on the brand name of a gas station, i.e.\ gas stations of the same brand like ``Total'' or ``Aral'' are grouped together.
+Height and colour of the blocks are mapped to the price of ``Diesel'' and ``E10'' respectively.
 
-The \tmap{} is perfectly suited to show a correlation based on the attributes itself.
-Apparently, there is a correlation of brand name and price.
+A \tmap{} with this configuration is suited to show a correlation of brand and price.
 Gas stations of brand ``Total'' are rather expensive in general but with smaller price variations.
 ``Aral'' on the other hand is slightly cheaper than ``Total'' but some gas stations are very expensive.
 Gas stations of brand name ``HEM'', ``Star'' and ``Sprint'' are generally inexpensive.
 
 However, the \tmap{} alone is not able to explain the reason for certain outliers.
 What is special about the protruding blocks, i.e.\ the outliers within a group?
-If you have a look on the right side, you can see a possible explanation.
-Many of those outliers are gas stations located in the proximity of highways.
-These gas stations are generally a little more expensive and that applies especially to those stations of ``ARAL''.
+
+The \gv{} can give a possible explanation:
+Many of those outliers are gas stations located next to a highway.
+These gas stations are slightly more expensive in general and significantly more expensive if they belong to the brand ``ARAL''.
 
 
 \begin{figure}[h]
   \centering
   \caption{
     The \tmap{} shows gas stations with a layout based on the brand name and height and colour mapped to price.
-    Relatively expensive gas stations, with respect to the other gas stations of that brand, are often located next to highways.
+    Expensive gas stations, compared to other gas stations of the brand, are often located next to highways.
   }\label{fig:evaluation:cases:gasstations}
   \includegraphics[width=\textwidth]{figures/evaluation/cases/gasstations}
 \end{figure}
