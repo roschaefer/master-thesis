@@ -172,16 +172,17 @@ Each feature comes with a unique \attr{id} which is published when a user intera
 \lstinputlisting[
   label={lst:geojson:example},
   caption={
-    A GeoJSON example of a user distribution across German federal states, coordinates are omitted.
+    A GeoJSON example of a user distribution across German federal states.
+    Coordinates are omitted.
   }
 ]{listings/implementation/example.geojson}
 
-\section{Adding the views to the DOM}
+\section{Render views in the DOM}
 
 Adding the \gv{} to the DOM is straightforward.
 Listing~\ref{lst:implementation:dom} shows an example how to use React's low-level API to render components inside the DOM.
-It uses an id \attr{multiview-map-component} to reference a particular node in the HTML document in Listing~\ref{lst:implementation:dom-html} on line 3.
-On lines 4 to 6 you can see the required JavaScript imports, i.e.\ two imports required by React and the compiled JavaScript application, which is called \attr{example.js}.
+It uses a HTML id \attr{multiview-map-component} to reference a particular node in the HTML document.
+The HTML document needs to import three JavaScript files, i.e.\ two imported libraries required by React and the compiled JavaScript application.
 
 \lstinputlisting[
   label={lst:implementation:dom},
@@ -193,15 +194,6 @@ On lines 4 to 6 you can see the required JavaScript imports, i.e.\ two imports r
   }
 ]{listings/implementation/dom.tsx}
 
-\lstinputlisting[
-  label={lst:implementation:dom-html},
-  caption={
-    This short HTML document shows how to render Views at a certain node inside the DOM.
-    The id multiview-map-component is used as anchor.
-  },
-  language=HTML
-]{listings/implementation/dom.html}
-
 The reference implementation of the conceptual framework is written in \attr{TypeScript}\footnotemark.
 The implementation exports typescript declaration and you can see an import of the classes \attr{MapComponent} and \attr{MultiviewCoordinator} on lines 1 to 3 in Listing~\ref{lst:implementation:dom}.
 \footnotetext{
@@ -210,51 +202,50 @@ The implementation exports typescript declaration and you can see an import of t
 }
 
 
-\section{Software patterns}\label{sec:implementation:patterns}
+% \section{Software patterns}\label{sec:implementation:patterns}
+
+% \textbf{The Observer pattern} allows multiple \emph{observers} to react to changes of an observed state.
+% In our case, the observed state is the \attr{MultiviewCoordinator}.
+% Any change to the \attr{MultiviewCoordinator} will subsequently be broadcasted to all connected views.
 
 
+% \textbf{Publisher subscriber}
+% In our particular case we apply a special form of the observer pattern, the so called ``Publish-subscribe'' pattern\cite{Eugster2003}.
+% Publish-subscribe is a messaging pattern which is widely used in message queues.
+% In this scenario, senders of messages simply categorize their messages which will be consumed by subscribers of the category.
+% The scenario has very low coupling, publishers do not even need to know the existence of subscribers.
 
-\textbf{The Observer pattern} allows multiple \emph{observers} to react to changes of an observed state.
-In our case, the observed state is the \attr{MultiviewCoordinator}.
-Any change to the \attr{MultiviewCoordinator} will subsequently be broadcasted to all connected views.
+% \textbf{Component pattern}
+% State-of-the-art JavaScript component frameworks like ReactJS and EmberJS follow the component pattern for the architecture of a single page web application.
+% The component pattern imposes a hierarchical structure on a website.
+% Each component is responsible for a task and may contain other components.
+% The components are joined at the root node of the page.
 
+% This pattern is very applicable to \cmvs{}.
+% The different views of \cmvs{} share state, i.e.\ the feature, that is currently highlighted or the applied filter on the data.
+% So the views are components and their closest common ancestor is the \cmv{} itself, controlling state and passing user interaction down to it's children.
 
-\textbf{Publisher subscriber}
-In our particular case we apply a special form of the observer pattern, the so called ``Publish-subscribe'' pattern\cite{Eugster2003}.
-Publish-subscribe is a messaging pattern which is widely used in message queues.
-In this scenario, senders of messages simply categorize their messages which will be consumed by subscribers of the category.
-The scenario has very low coupling, publishers do not even need to know the existence of subscribers.
+% \textbf{Actions up --- Data down}
 
-\textbf{Component pattern}
-State-of-the-art JavaScript component frameworks like ReactJS and EmberJS follow the component pattern for the architecture of a single page web application.
-The component pattern imposes a hierarchical structure on a website.
-Each component is responsible for a task and may contain other components.
-The components are joined at the root node of the page.
+% Version 2.0 of Ember introduced a common phrase how to use this pattern effectively: ``Data down, actions up''\cite{Emberigniter2017}
+% In the domain of \cmvs{} actions would mean user interactions, e.g.\ a click on a feature.
+% The action will notify the controlling \cmv{} component.
+% Actions may change data, and the changes will be passed to to all dependent views.
+% These views are then re-rendered.
 
-This pattern is very applicable to \cmvs{}.
-The different views of \cmvs{} share state, i.e.\ the feature, that is currently highlighted or the applied filter on the data.
-So the views are components and their closest common ancestor is the \cmv{} itself, controlling state and passing user interaction down to it's children.
-
-\textbf{Actions up --- Data down}
-
-Version 2.0 of Ember introduced a common phrase how to use this pattern effectively: ``Data down, actions up''\cite{Emberigniter2017}
-In the domain of \cmvs{} actions would mean user interactions, e.g.\ a click on a feature.
-The action will notify the controlling \cmv{} component.
-Actions may change data, and the changes will be passed to to all dependent views.
-These views are then re-rendered.
-
-Examples for the kind of data that might trigger a re-rendering of a view:
-\begin{itemize}
-  \item
-    The selected feature or a list of selected features
-  \item
-    A list of thresholds for certain features as a filter
-\end{itemize}
+% Examples for the kind of data that might trigger a re-rendering of a view:
+% \begin{itemize}
+%   \item
+%     The selected feature or a list of selected features
+%   \item
+%     A list of thresholds for certain features as a filter
+% \end{itemize}
 
 
 \section{Map Component}
 
-The geographical visualization is implemented as a \attr{Map} component of the React Leaflet library.
+The geographical visualization makes use of three components of the React Leaflet library:
+\attr{Map}, \attr{TileLayer} and \attr{GeoJSON}.
 Listing \ref{lst:implementation:render} shows the \attr{render} method of the component.
 
 \lstinputlisting[

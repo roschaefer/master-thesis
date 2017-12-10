@@ -4,9 +4,7 @@ import { MapComponent, MultiviewCoordinator} from 'urban-analytics-multiview-map
 
 let coordinator = new MultiviewCoordinator();
 
-
 ReactDOM.render(
   <MapComponent coordinator={coordinator}/>,
   document.getElementById('multiview-map-component')
 );
-
