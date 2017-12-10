@@ -48,15 +48,14 @@ In the course of this thesis the following interactions have been implemented:
 \end{itemize}
 \todo[inline]{If we still have time, add filter interaction here}
 
-\section{Overview of the Layout}
+\section{Coordinated Multiple View Layout}
 
 Figure~\ref{fig:implementation:layout} shows the layout of the different views from the user perspective.
-The \tmap{} is on the left while the \gv{} is on the right.
-Some additional views like the message log and a form to manually change the highlighted item are visible as well.
+The \tmap{} is on the left, the \gv{} is on the right and some additional views to inspect and manually publish messages are displayed.
 
-The figure shows a screenshot of the \visan{}, currently visualizing the data set ``Wahlkreise''.
+The currently visualized data set is called ``Wahlkreise'' and consists of German administrative districts.
 The \tmap{} is tiled based on unemployment rate and the colour is based on the percentage of high-school graduates.
-Currently the district ``Magdeburg'' is selected in the \gv{} with an unusually high percentage of graduates for its unemployment rate.
+District ``Magdeburg'' is selected in the \gv{} with an unusually high percentage of graduates compared to other districts with a similar unemployment rate.
 
 \begin{figure}[ht]
   \centering
@@ -68,20 +67,15 @@ Currently the district ``Magdeburg'' is selected in the \gv{} with an unusually 
 
 
 \section{Architecture}
-Figure~\ref{fig:implementation:architecture} shows classes and their relations in the \cmv{} implementation of \tmap{} and \gv{}.
-
-\attr{UAController} is a class of the existing \visan{} and controls the rendering of the \tmap{}.
-The rendering of the geographical visualization is controlled by the class \attr{MapComponent}.
+The architecture of the implementation is depicted in the class diagram in Figure~\ref{fig:implementation:architecture}.
+For each of the views in Figure~\ref{fig:implementation:layout} you can see a corresponding class in Figure~\ref{fig:implementation:architecture}, i.e.\ \attr{Treemap}, \attr{MapComponent}, \attr{MessageLog} and \attr{DebugView}.
 
 Classes with a \attr{render} method are views and can be rendered in place of a node inside the DOM tree.
 Those views are implemented as React components and therefore have a native update mechanism, i.e.\ they get automatically re-rendered if their internal state changes.
 Except of a dependency to a \attr{MultiviewCoordinator}, they are dependency free, which makes those classes easy to test.
 
-Additionally, there are two other views, \attr{DebugView} and \attr{MessageLog}.
-These views record interactions at runtime and can trigger and simulate an interaction.
-
-State and changes shared between views are controlled by the \attr{MultiviewCoordinator}.
-Every view has a reference to \attr{MultiviewCoordinator} in order to subscribe to interactions.
+All views have a reference to \attr{MultiviewCoordinator} in order to subscribe to interactions.
+The rendering \tmap{} is controlled by \attr{UAController}, thus it is connected to \attr{MultiviewCoordinator} through this class.
 The \attr{MultiviewCoordinator} itself does not have a visual representation.
 
 \begin{figure}[ht]
@@ -94,6 +88,54 @@ The \attr{MultiviewCoordinator} itself does not have a visual representation.
   \includegraphics[width=\textwidth]{figures/implementation/Architecture.pdf}
 \end{figure}
 
+\section{Notifications}
+
+In accordance to Chapter~\ref{sec:concept}, the class \attr{MultiviewCoordinator} implements the \attr{publish-subscribe} pattern for coordination and works as a broker for interactions across \cmvs{}.
+To achieve this, it uses the JavaScript library \attr{PubSubJS} which is an topic-based, asynchronous implementation of the pattern.
+
+Each view gets a reference to the coordinator, e.g. during initialization, and can subscribe to interactions as seen in Listing~\ref{lst:implementation:subscribe}.
+\attr{PubSubJS} allows nested topics, therefore categories and purposes are encoded as nested strings.
+Nested topics make it possible to subscribe to all interactions of category \attr{select}, e.g.\ \attr{mcv.select.highlight} and \attr{mcv.select.focus}, by subscribing to \attr{mcv.select}.
+
+Not only basic data types like numbers and strings can be published, as seen here, but also functions.
+If an interaction of type \attr{filter} is published, it is not necessary to publish all filtered ids of entities explicitly.
+Instead, the \attr{data} of the interaction can be a threshold function which, applied on an entity, returns whether or not the entity is filtered.
+
+\lstinputlisting[
+  label={lst:implementation:subscribe},
+  caption={
+    A simplified example how to subscribe to an interaction.
+  }
+]{listings/implementation/subscribe.js}
+
+
+\section{MultiviewCoordinator}
+
+As a central part of the implementation, the \attr{MultiviewCoordinator} is also used for certain performance optimizations and data integrity considerations.
+Therefore, it is responsible to query geometry data.
+
+Geometries are exchanged with \attr{GeoJSON}\footnotemark as data format.
+\footnotetext{
+  GeoJSON is a format for encoding a variety of geographic data structures~\cite{GeoJSON2017}.
+  Based on JSON, it can represent simple geographic features like points, lines and areas and reserves a properties object for non-spatial attributes.
+}
+
+If the user selects a different data set, the \attr{url} of the GeoJSON endpoint changes and an update of the geometry data is required.
+This behaviour is implemented by the \attr{MultiviewCoordinator} which observes all changes to the \attr{url} of the GeoJSON endpoint.
+If the \attr{url} changes, the coordinator fetches geometry data, publishes a change of the geometries and all subscribed views can re-render.
+This is also a performance optimization, as it reduces the number of requests to the \attr{GeoJSON} endpoint.
+
+An example of these geometries can be seen in listing~\ref{lst:geojson:example}.
+For convenience, the file includes the aggregated data in the \attr{properties} of each feature.
+In this case the colors the shapes of the \tmap{} are based on the value of \attr{user_count_normalized}.
+Each feature comes with a unique \attr{id} which is published when a user interacts with the feature.
+
+\lstinputlisting[
+  label={lst:geojson:example},
+  caption={
+    A GeoJSON example of a user distribution across German federal states, coordinates are omitted.
+  }
+]{listings/implementation/example.geojson}
 
 \section{Adding the views to the DOM}
 
@@ -128,45 +170,6 @@ The implementation exports typescript declaration and you can see an import of t
   It provides optional static typing, classes and interfaces and helps to reduce errors by raising type errors at compile time.
 }
 
-
-
-
-
-Event handlers just have to publish an interaction, if the view is subscribed to the same interaction, it will automatically re-render.
-
-\section{MultiviewCoordinator}
-
-
-The \attr{MultiviewCoordinator} uses the \attr{publish-subscribe} pattern for coordination and works as a broker for interactions across \cmvs{}.
-In order to accomplish that it uses the JavaScript library \attr{PubSubJS} which is an topic-based, asynchronous implementation of the pattern.
-
-Geometry data is exchanged with \attr{GeoJSON}\footnotemark as data format.
-\footnotetext{
-  GeoJSON is a format for encoding a variety of geographic data structures~\cite{GeoJSON2017}.
-  Based on JSON, it can represent simple geographic features like points, lines and areas and reserves a properties object for non-spatial attributes.
-}
-
-As the central part of the software, the \attr{MultiviewCoordinator} is also used for certain performance optimizations.
-The optimizations affect how often the geometries are reloaded, i.e.\ it reduces the number of requests to the \attr{GeoJSON} endpoint.
-
-
-\lstinputlisting[
-  label={lst:implementation:multiviewController},
-  caption={The \attr{multiviewController} avoids unnecessary requests to reload geometries}
-]{listings/implementation/multiviewController.tsx}
-
-As shown in Listing~\ref{lst:implementation:multiviewController}, the geometries depend on a change of the \attr{url} of the geometries.
-A change of the \attr{url} will automatically trigger an interaction of type \attr{reconfigure} to reload geometries.
-
-An example of these geometries can be seen in listing~\ref{lst:geojson:example}.
-For convenience, the file includes the aggregated data in the \attr{properties} of each feature.
-In this case the colors the shapes of the \tmap{} are based on the value of \attr{user_count_normalized}.
-Each feature comes with a unique \attr{id} which is published when a user interacts with the feature.
-
-\lstinputlisting[
-  label={lst:geojson:example},
-  caption={A truncated example of a user distribution across German federal states}
-]{listings/implementation/example.geojson}
 
 \section{Software patterns}\label{sec:implementation:patterns}
 Figure~\ref{fig:implementation:sequence-diagram} shows how \cmvs{} can be automatically updated even if the environment lacks a native update-mechanism.
