@@ -134,7 +134,7 @@ In this case we can see a very similar construction activity.
 \section{Performance Evaluation and Limitations}
 
 The following performance evaluation was carried out with the built-in runtime performance analysis feature of the Chrome browser.
-In particular, a Chromium Browser was used in Version 62.0 - 64 Bit.
+In particular, a Chromium Browser was used in Version 62.0 (64 Bit).
 The hardware specifications of the machine are listed in Table~\ref{tab:evaluation:performance:hardware}.
 
 \begin{table}[ht]
@@ -182,99 +182,83 @@ The data set with the highest number of features is called ``Immoscout Wohnungsa
 \end{table}
 
 
+\subsection{Immoscout}
 The slowest profiling is the visualization of data set ``Immoscout''.
 Chrome's runtime analysis shows a red bar at the top of the screen if the frames per second drop in such a way that it impairs the perceived interactivity.
-You can see a screenshot of the profiling of just the \tmap{} in Figure~\ref{fig:evaluation:performance:profiling:immoscout_tmap_only:fps}.
+You can see a screenshot of the analysis in Figure~\ref{fig:evaluation:performance:profiling:immoscout:fps}.
 
-\begin{figure}[h]
+
+\begin{figure}[ht]
   \centering
-  \caption{During profiling of the ``Immoscout'' data set, only 16 frames per second get rendered.}
-  \label{fig:evaluation:performance:profiling:immoscout_tmap_only:fps}
-  \includegraphics[width=\textwidth]{figures/evaluation/performance/profiles/immoscout_tmap_only/fps}
-\end{figure}
-
-\begin{figure}[h]
-  \centering
-  \caption{Visualizing just the \tmap{}, almost the entire CPU time is spent during Scripting.}
-  \label{fig:evaluation:performance:profiling:immoscout_tmap_only:summary}
-  \includegraphics[width=0.5\textwidth]{figures/evaluation/performance/profiles/immoscout_tmap_only/summary}
-\end{figure}
-
-The Timeline identifies the event handler of the ``mousemove'' event to be the cause of this slow scripting.
-In this event handler, the currently highlighted point or polygon is picked in order to get the feature id.
-Obviously, this is a performance problem.
-It is worth noting, that not the coordination of the interaction is responsible of the performance problem, but an internal implementation of one visualization.
-
-\begin{figure}[h]
-  \centering
-  \caption{
-    Every highlighting interaction comes with a spike of CPU time for rendering and painting.
-    Focusing on a feature redraws the background and leads to an increase of painting time.
-  }\label{fig:evaluation:performance:profiling:immoscout_both:fps}
+  \caption{During profiling of both \tmap{} and \gv{} visualizing the ``Immoscout'' data set, the frame per second rate drops to 1 FPS.}
+  \label{fig:evaluation:performance:profiling:immoscout:fps}
   \includegraphics[width=\textwidth]{figures/evaluation/performance/profiles/immoscout_both/fps}
 \end{figure}
 
-\begin{figure}[h]
+As you can see in Figure~\ref{fig:evaluation:performance:profiling:immoscout:summary} the \tmap{} spends almost the entire CPU time in scripting.
+The \gv{} has a more balanced CPU time, spending time for painting and rendering during focusing interactions.
+
+\begin{figure}[ht]
   \centering
   \caption{
-    The geographical visualization spends much more time during re-rendering and painting.
-  }\label{fig:evaluation:performance:profiling:immoscout_both:summary}
-  \includegraphics[width=0.5\textwidth]{figures/evaluation/performance/profiles/immoscout_both/summary}
+    Summary of profile data for data set ``Immoscout'' of \tmap{} only (left), both \tmap{} + \gv{} (center) and only \gv{} (right).
+  }\label{fig:evaluation:performance:profiling:immoscout:summary}
+  \includegraphics[width=\textwidth]{figures/evaluation/performance/summaries/immoscout}
 \end{figure}
 
-\begin{figure}[h]
-  \centering
-  \caption{
-    Event handler \attr{handleHighlight} takes about 90ms to finish.
-    During this time, the list of features is iterated and \attr{setStyle} executed.
-  }\label{fig:evaluation:performance:profiling:immoscout_both:callstack}
-  \includegraphics[width=\textwidth]{figures/evaluation/performance/profiles/immoscout_both/callstack}
-\end{figure}
+Going through the timeline, we can identify the handling of the ``mousemove'' event to be the likely cause of this slow scripting.
+The \tmap{} constantly checks the point or polygon which is under the mouse cursor.
+This is likely a performance problem.
 
 The profile summary looks totally different for the scenario of a \tmap{} along with a \gvis{}.
 Compared to just a \tmap{} only, much more time is spent during painting and rendering.
 This is caused by the fact, that LeafletJS moves the viewpoint and zooms if a feature is focused.
 This can cause a network request and will re-render background tiles.
 
-Figure~\ref{fig:evaluation:performance:profiling:immoscout_both:callstack} shows that most of the time is spent in the event handler for a highlighted feature.
-LeafletJS iterates through all circle markers in order to update the style, i.e.\ change the stroke width.
-Therefore, this is a costly operation for a large number of features.
+Note that not the communication between views hits the performance but rather the change of visual representation of views.
 
-The data set ``Landreise'' is the second slowest data set.
-It is larger than ``Immoscout'' but has fewer features.
-As you can see in Figure~\ref{fig:evaluation:performance:profiling:landkreise_both:fps} the geographical visualization can recover much faster if the data set has less features.
-About 10\% of the CPU time is spent idling, see Figure~\ref{fig:evaluation:performance:profiling:landkreise_both:summary}.
 
-\begin{figure}[h]
+\begin{figure}[ht]
   \centering
   \caption{
-    The number of features is crucial for the time spent during a highlighting interaction.
+    During a \attr{highlight} interaction all features of the \attr{GeoJSON} are iterated.
+  }\label{fig:evaluation:performance:profiling:immoscout_both:callstack}
+  \includegraphics[width=\textwidth]{figures/evaluation/performance/profiles/immoscout_geo_only/callstack}
+\end{figure}
+
+
+Figure~\ref{fig:evaluation:performance:profiling:immoscout:fps} shows spikes whenever an interaction is made.
+Most of these interactions are \attr{highlight} interactions, when the user moves the mouse cursor.
+Figure~\ref{fig:evaluation:performance:profiling:immoscout_both:callstack} shows the lower part of the callstack during such a \attr{highlight} interaction.
+
+We can identify the dominating subroutine to be \attr{setStyle} which spans almost the entire callstack.
+Below this subroutine, you can see a lot of quick calls for each layer.
+\attr{LeafletJS} iterates through all geographic features in order to update the style, e.g.\ change the stroke width.
+Therefore, \attr{setStyle} seems to be costly operation for a large number of features.
+This would explain why many small features have a stronger performance impact than fewer but larger features.
+
+
+\subsection{Landkreise}
+The profiling of data set ``Landkreise'' seems to support that assumption.
+This data set is larger than ``Immoscout'' but has fewer features.
+Nevertheless, the frame per second rate rarely drops in a way which has an impact on interactivity, as you can see in Figure~\ref{fig:evaluation:performance:profiling:landkreise_both:fps}.
+
+
+\begin{figure}[ht]
+  \centering
+  \caption{
+    Larger but fewer features seem to have positive effects on the frame rate.
   }\label{fig:evaluation:performance:profiling:landkreise_both:fps}
   \includegraphics[width=\textwidth]{figures/evaluation/performance/profiles/landkreise_both/fps}
 \end{figure}
 
-\begin{figure}[h]
+The \gv{} alone idles almost 50\% of the CPU time, as you can see on the right side of Figure~\ref{fig:evaluation:performance:profiling:landkreise:summary}.
+\begin{figure}[ht]
   \centering
   \caption{
-    Data set ``Landkreise'' shows less time spent on painting and rendering.
-  }\label{fig:evaluation:performance:profiling:landkreise_both:summary}
-  \includegraphics[width=0.5\textwidth]{figures/evaluation/performance/profiles/landkreise_both/summary}
-\end{figure}
-
-\begin{figure}[h]
-  \centering
-  \caption{
-    A timeline without any significant drop of frames per second is achieved with the geographical visualization without \tmap{} of the ``Landkreise'' data set.
-  }\label{fig:evaluation:performance:profiling:landkreise_geo_only:fps}
-  \includegraphics[width=\textwidth]{figures/evaluation/performance/profiles/landkreise_geo_only/fps}
-\end{figure}
-
-\begin{figure}[h]
-  \centering
-  \caption{
-    Without a \tmap{} the CPU is idling for almost 50\% of the time.
-  }\label{fig:evaluation:performance:profiling:landkreise_both:summary}
-  \includegraphics[width=0.5\textwidth]{figures/evaluation/performance/profiles/landkreise_geo_only/summary}
+    Summary of profile data for data set ``Landkreise'' of \tmap{} only (left), both \tmap{} + \gv{} (center) and only \gv{} (right).
+  }\label{fig:evaluation:performance:profiling:landkreise:summary}
+  \includegraphics[width=\textwidth]{figures/evaluation/performance/summaries/landkreise}
 \end{figure}
 
 
@@ -356,7 +340,7 @@ The glue code of a very simple example takes 132 lines of code.
 % The \riso{} data base is used in by local authorities to get insights about governmental KPIs to assist local and regional decision making.
 % It is a relational database and a part of the data base schema is shown as an ER diagram in Figure~\ref{fig:data:riso}.
 
-% \begin{figure}[h]
+% \begin{figure}[ht]
 %   \centering
 %   \includegraphics[width=\textwidth]{images/riso}
 %   \caption{Part of the \riso{} database schema. Primary keys are set in bold.}\label{fig:data:riso}
@@ -414,7 +398,7 @@ The glue code of a very simple example takes 132 lines of code.
 % The money will be stored in the column \attr{amount} of the \attr{selection}.
 % The sum of all amounts for one user will never exceed the virtual budget of 17.50€.
 
-% \begin{figure}[h]
+% \begin{figure}[ht]
 %   \centering
 %   \includegraphics[width=\textwidth]{images/er}
 %   \caption{Database schema of the \rufu{} application}\label{fig:data:rundfunk}
