@@ -1,10 +1,46 @@
 \chapter{Conceptual Framework}\label{sec:concept}
-Based on the findings in Chapter~\ref{sec:analysis} this chapter specifies a formal language and a conceptual framework for \cmvs{}.
-The approach involves the definition of the terminology and the basic components of the conceptual framework.
+Based on the findings in Chapter~\ref{sec:analysis} this chapter specifies a conceptual framework for \cmvs{}.
+The approach involves the definition of the terminology, a formalization of an interaction and the basic components of the conceptual framework.
+These components are derived from the interactions and the data structures discovered in Chapter~\ref{sec:analysis}.
 
-The first component is the shared data model on which all visualizations must agree on.
-Each interaction from Chapter~\ref{sec:analysis} is formalized as a mathematical function and these functions are grouped if they have the same input and output.
-As a last step, the communication pattern of the formalized language is layed out.
+\section{The Conceptual Framework from the User Perspective}
+
+Figure~\ref{fig:concept:component-diagram} shows a component diagram of the conceptual framework.
+The user interacts via input devices, e.g. mouse or keyboard, with a computer.
+In order to see the effect of the interaction the user oberserves an output device like a screen.
+
+The computer or the browser provides an API for these devices and the implementation of each view has access to this API.
+On the other side, views can communicate with each other through a coordinator.
+This is necessary in order to coordinate interactions.
+
+Each view can have multiple triggers and multiple effects.
+A trigger is the handling of an event, caused by a user interaction, e.g.\ a mouse click.
+A effect is the change of the visual representation of the view, in order to communicate the interaction.
+
+Each view is self-responsible for the implementation of triggers and effects.
+This is inevitable, as sometimes a view can not react to an interaction at all.
+E.g.\ a re-ordering in a parallel plot will not affect a scatter plot, where the position of items is contrained by coordinates.
+
+Interactions of the same category also need to be distinguishable.
+E.g.\ the user could select a group of items with a bounding box.
+Additionally, the user moves the mouse cursor on an item within that group in order to highlight the item.
+
+Therefore the message exchanged between views not only includes the interaction category and the relevant item but also an interaction purpose.
+
+Every view can subscribe to named interactions at the coordinator.
+The coordinator notifies all subscribed views when a named interaction happens.
+In order trigger an interaction, the visualization simply publishes the named interaction at the coordinator.
+This pattern is known as the \emph{Publish-subscribe pattern} and widely used in message queues.
+
+
+\begin{figure}[ht]
+  \centering
+  \caption{%
+    Component diagram of the conceptual framework.
+  }\label{fig:concept:component-diagram}
+  \includegraphics[width=\textwidth]{figures/concept/Concept}
+\end{figure}
+
 
 \section{Formalization of an interaction}
 
@@ -79,7 +115,8 @@ Categories can be classified with the interaction categories of \textcite{Yi2007
 A message is the required set of information to coordinate an interaction across multiple views.
 
 \section{Shared data model}\label{sec:concept:data-model}
-To account for the various data structures, we use an abstract data model that is inclusive enough to include tabular, hierarchical and relational data.
+The shared data model is a model of the data on which all visualizations must agree on.
+To account for various data structures discovered in Chapter~\ref{sec:analysis}, we use an abstract data model that is inclusive enough to include tabular, hierarchical and relational data.
 You can see a class diagram in figure~\ref{fig:concept:shared-data-model}.
 
 The \emph{entity} class is used to model the smallest distinguishable unit.
@@ -225,35 +262,4 @@ A view may show some controls to filter the data set, e.g.\ two sliders on an at
 When the user releases the mouse, an interaction with the function \emph{Filter} and the category \emph{Hide} will be triggered.  
 The function will then check the \attr{prize} of every entity and returns \attr{true} if the prize is within the given lower and upper limit, \attr{false} otherwise.
 
-\section{Communication pattern}
-
-In Section~\ref{sec:concept:categories} we discussed how we can describe the categories of the interaction.
-The category determines the signature of the function and describes the interaction itself.
-However a type does not define how interactions are \emph{coordinated} among views.
-E.g.\ what action in one view should lead to what kind of changes in what other views?
-What is the communication pattern or what is the protocol how messages are exchanged in the conceptual framework?
-
-Figure~\ref{fig:concept:communication-pattern} gives an overview on the message flow in the communication pattern.
-\begin{figure}[ht]
-  \centering
-  \caption{%
-    The message flow of the communication pattern:
-    A view can have multiple triggers and effects for one interaction.
-    Likewise, an interaction can be notified via subscriptions to many views.
-  }\label{fig:concept:communication-pattern}
-  \includegraphics[width=\textwidth]{figures/concept/Communication}
-\end{figure}
-
-Sometimes a visualization may not be able to interpret an interaction.
-E.g.\ a bar chart can re-arrange the bars along the x-axis in case of a \emph{Reconfigure} interaction.
-But a scatter plot constrains x- and y-coordinates of an entity on a certain data attribute.
-Therefore, not only the \emph{trigger} and \emph{effect} is implementation specific, but also the handling of the interaction itself.
-
-Every visualization decides on its own, how to react to a certain interaction.
-That leads us to distinguishable, named interactions.
-Every view can subscribe to certain interactions and receive messages in form of changed categories.
-In order trigger an interaction, the visualization simply publishes to the named interaction.
-
-This pattern is known as the \emph{Publish-subscribe pattern} and widely used in message queues.
-The term \emph{interaction} in our case is equivalent to the term \emph{channel} or \emph{topic} commonly used in message queues.
 
