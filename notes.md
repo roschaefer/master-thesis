@@ -79,4 +79,45 @@ vielleicht ein parallel plot anzeigen
 vielleicht beispiel ebay als detail view
 größere Minimap
 
+# 2017-12-12
 
+Bildunterschriften unter die Bilder
+
+Analyse die Interfaces benennen
+Input/Output Controller anstelle Computer
+Lieber FMC Diagramm
+View C in "View N" umbenennen mit Punkten
+"Ausprägung und Spezifikation" als Zusammenhang
+Das Abholen der Daten ist nicht spezifiziert
+Ein Datenmanager soll spezifiziert sein, GeoJSON endpoint eine Ausprägung davon
+
+User cases ~and discussion~ weg
+
+Im Kapitel Implementation eine Section reinbauen, welcher alle Zusammenhänge zu Kapitel Analyse enthält
+Kapitel Implementation
+Layout in die introduction
+Fig. 5.4 kleiner in Implementation
+Was ist mit level View/React gemeint? Noch erklären
+Architecture => System Overview
+Update mechanism in System Overview
+Architektur diagramm mit Superklasse
+Sequenzdiagram mit Subkomponenten (GeoJSON, Map)
+position Methode fehlt im Klassendiagramm
+Map Component zusammenschreiben (ambiguity)
+Architektur und Ablauf ausklamüsern
+GeojsonEndpoint im Zusammenhang mit Shared Data model erklären
+Coordinator macht requests zum Datenbackend
+MultiviewCoordinator, erster Satz ist ungeeignet, Titel umbenennen
+Jede Klasse mit Prosa beschreiben
+
+Treemap erklären, wie wird die angedockt?
+Layout ans Ende vielleicht
+
+Weniger Absätze!
+Anzahl features in Datenset Tabelle
+Datenset Tabelle, sortiert by Data Size
+Mit Gimp die Benennungen drunter schreiben
+Sätze und Bilder lieber zusammenhängend
+Inhalt von Future Work soll nach vorne
+Lieber "über den Tellerrand hinaus blicken" als Future Work
+Ans Postfach senden
