@@ -68,15 +68,10 @@ Another disadvantage of choropleth maps is the common error of incorrect encodin
 Such an incorrect encoding would be the display of absolute numbers, e.g.\ total population or proceeds of crime, rather than relative numbers, e.g.\ population density or unemployment rate.
 
 \begin{figure}[ht]
-  \centering
+  \includegraphics[width=\textwidth]{figures/related-work/choropleth}
   \caption{%
-    Choropleth Map of Obesity in the United States in 2008.
-    Present of population classified as ``obese'' (Body Mass Index greater than 30), by state.
+    Choropleth map of obese population, \gls{bmi} $ > 30 $, in the United States in 2008~\parencite{NCCDPHP2017}.
   }\label{fig:related-work:choropleth}
-  \copyrightbox[b]{%
-    \includegraphics[width=\textwidth]{figures/related-work/choropleth}}{%
-    \hfill National Center for Chronic Disease Prevention and Health Promotion~\parencite{NCCDPHP2017}
-  }
 \end{figure}
 
 This work uses a choropleth map for the geographic visualization because of its widespread recognition.
@@ -88,9 +83,9 @@ The visualization of hierarchical data has a long tradition.
 The traditional visual representation of a tree is a directed graph with the root node at the top, as seen in Figure~\ref{fig:related-work:tree-graph}.
 \begin{figure}[ht]
   \centering
+  \includegraphics[width=\textwidth]{figures/related-work/tree.pdf}
   \caption{Traditional visualization of a tree in form of a directed graph with edges and nodes and the root node at the top.}
   \label{fig:related-work:tree-graph}
-  \includegraphics[width=\textwidth]{figures/related-work/tree.pdf}
 \end{figure}
 An common use case is a directory tree of a file system, e.g.\ a file browser or the command line utility \texttt{tree} on UNIX based operating systems.
 As \textcite{Shneiderman1992} mentions, this visualization becomes increasingly large when displaying more than one level and soon exceeds the entire screen size.
@@ -114,23 +109,18 @@ If more and more nodes are displayed, the size of each tile will get smaller and
 You can see this problem occur in Figure~\ref{fig:related-work:treemap-german-exports-2}.
 \begin{figure}[ht]
     \centering
-    \caption{A two dimensional tree map of Germany's foreign trade quota of exports, showing only the first hierarchy level.}
+    \includegraphics[width=\textwidth]{figures/related-work/en_profile_country_deu.pdf}
+    \caption{A two dimensional tree map of Germany's foreign trade quota of exports, showing only the first hierarchy level~\parencite{Observatory2017}.}
     \label{fig:related-work:treemap-german-exports-1}
-    \copyrightbox[b]{%
-        \includegraphics[width=\textwidth]{figures/related-work/en_profile_country_deu.pdf}}{%
-        \hfill \ccAttribution{} \ccShareAlike{} Observatory of Economic Complexity~\parencite{Macro2017}
-    }
 \end{figure}
 
 \begin{figure}[ht]
     \centering
-    \caption{A two dimensional tree map of Germany's foreign trade quota of exports, showing a hierarchy of depth ``HS4''.}
+    \includegraphics[width=\textwidth]{figures/related-work/en_profile_country_deu_2.pdf}
+    \caption{A two dimensional tree map of Germany's foreign trade quota of exports, showing the second level of detail~\parencite{Observatory2017}.}
     \label{fig:related-work:treemap-german-exports-2}
-    \copyrightbox[b]{%
-        \includegraphics[width=\textwidth]{figures/related-work/en_profile_country_deu_2.pdf}}{%
-        \hfill \ccAttribution{} \ccShareAlike{} Observatory of Economic Complexity~\parencite{Macro2017}
-    }
 \end{figure}
+
 If tree maps are used to visualize geographic data like municipalities, real estates or streets, the placement of nodes depends on the tiling algorithm and not the geographic location on a map.
 Let's say a tree map visualizes a hierarchy of federal states and municipalities with the area of each tile mapped to the total population of administrative district.
 Even if the membership hierarchy is matched by the tree map, the placement of districts in the same hierarchy level is based on their total population and not their geographic location.
@@ -154,12 +144,9 @@ All three dimensional tree maps in this thesis are in fact \tmaps{} and therefor
 
 \begin{figure}[ht]
   \centering
-  \caption{Example of a \tmap{}.}
+  \includegraphics[width=\textwidth]{figures/related-work/2_5D_treemap_example}
+  \caption{Example of a \tmap{}~\parencite{Doellner2017}.}
   \label{fig:research:ua_treemap}
-  \copyrightbox[b]{%
-    \includegraphics[width=\textwidth]{figures/related-work/2_5D_treemap_example}}{%
-    \hfill \textcopyright{} Hasso-Plattner-Institut~\parencite{Doellner2017}
-  }
 \end{figure}
 
 
