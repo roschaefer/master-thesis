@@ -17,17 +17,17 @@
 
 %{\listoffigures \let\cleardoublepage\clearpage \listoftables}
 \begin{document}
-	\input{title}
+	\input{misc/title.tex}
 	% \pagestyle{empty}
 	\cleardoublepage
 
 	\pagestyle{fancy}
     \pagenumbering{roman}
-	\input{sections/abstract}
+	\input{misc/abstract}
 
 	\clearpage
-%	\input{sections/zusammenfassung}
-%	\input{sections/acknowledgment}
+%	\input{misc/zusammenfassung}
+%	\input{misc/acknowledgment}
 	\glsresetall
 	\setcounter{tocdepth}{4}
 	%\setcounter{secnumdepth}{4}
@@ -50,5 +50,5 @@
 %	\printglossary[type=\acronymtype,style=modsuper]
 	\printbibliography{}
 	% \input{chapters/appendix}
-	\input{sections/authorship}
+	\input{misc/authorship}
 \end{document}
