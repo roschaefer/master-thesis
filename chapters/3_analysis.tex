@@ -1,4 +1,7 @@
 \chapter{Analysis}\label{sec:analysis}
+The current treemap implementation and its set of possible interactions is described in Section~\ref{sec:analysis:existing-interactions}.
+For the implementation of the \gv{} several web frameworks are compared and advantages and disadvantages are contrasted in Section~\ref{sec:analysis:frontend-framework-comparison}.
+
 Sections~\ref{sec:analysis:examples:single} and~\ref{sec:analysis:examples:multiple} describe essential characteristics of interactions in single and multiple data visualizations.
 These characteristics are relevant for a formalized language of \cmvs{}.
 To accomplish this goal, the approach is to deduce the characteristics by a list of examples.
@@ -7,10 +10,138 @@ Which visual variables can be used to show the effect of an interaction?
 A list of possible interactions is given for each visualization.
 Those interactions will be classified according to \textcite{Yi2007} and the relevant subject of the interaction is specified.
 
-Section~\ref{sec:analysis:requirements} gives a set of requirements which can be used to evaluate a framework of \cmvs{}.
 
-Finally in Section~\ref{sec:analysis:frontend-framework-comparison} the advantages and disadvantages of several web frontend frameworks are contrasted.
-A final decision is made which framework will be used for the implementation of the conceptual framework.
+
+\section{Existing Interactions}\label{sec:analysis:existing-interactions}
+The current implementation comes with a visualization of a \tmap{} and should be complemented with a \gv{}.
+In this section, the set of already possible interactions are classified according to \textcite{Yi2007} as in Section~\ref{sec:related-work:interaction-theory:categories}.
+They fall into these categories: \emph{select}, \emph{explore}, \emph{reconfigure}, \emph{encode} and \emph{filter}.
+
+The user can \emph{select} one item in the view by clicking on it.
+The user can reveal a tooltip showing the item properties by moving the mouse cursor on the item, which is another \emph{select} interaction.
+
+The user can \emph{explore} the map in the usual manner:
+If the user drags with the mouse on the map, a panning operation is performed with the viewpoint focused on the \tmap{}, like a turntable.
+The zoom factor can be changed by scrolling with the mouse on the canvas of the map.
+
+\emph{Encode} and \emph{reconfigure} techniques are performed through a menu:
+The user can \emph{reconfigure} different data sets and the displayed diagram, e.g.\ a treemap visualization based on the geometry shape, cubes or voronoi regions.
+In a sub-menu the user can \emph{encode} properties of a data set in predefined visual variables, e.g.\ the height, color and texture of an item.
+A slider can be used to \emph{filter} the data set on a data attribute.
+When the user drags the slider and changes an upper or a lower limit, items with an attribute beyond this interval are filtered out.
+
+
+
+\section{Software Requirements for Coordinated Multiple Views}\label{sec:analysis:requirements}
+The existing implementation should be complemented with a coordinated multiple view layout.
+Next to the \tmap{} a \gv{} should appear, so that the user can understand the geographic context of items in the treemap.
+
+To ensure a future use of the software, this section provides a list of software requirements.
+Later in Chapter~\ref{sec:evaluation} these requirements will be reused to evaluate the system.
+
+\begin{enumerate}
+  \item Serialization
+
+    Serialization is the process of translating objects that can be stored or transmitted and reconstructed later.
+    In order to coordinate interactions among views, information needs to be passed from one view to another.
+    A framework for \cmvs{} should therefore find a serialization format for interactions which has
+    \begin{enumerate*}[label=(\arabic*)]
+      \item
+        small payloads and
+      \item
+        fast serialization and deserialization.
+    \end{enumerate*}
+
+  \item Reversibility
+
+  Reversibility means, in the context of \cmvs{}, the ability to undo the effect of an interaction.
+  Ideally, every interaction should be undoable.
+  If not every interaction is undoable, the cost to replay the interactions from the original state up to the point of the interaction should be minimized.
+
+\item Software Extensibility
+
+  Software extensibility means, in this thesis, the costs of changing behaviour.
+  How many views need to be touched, if a new interaction option is added to the system?
+  How much time and effort is necessary to implement the new feature?
+
+\item Maintainability
+
+  Maintainability means, in this thesis, the costs of changing the source code.
+  How error-prone is the system, will other views be affected if a new interaction is added to the system?
+
+\end{enumerate}
+
+
+
+\section{Considerations about client-side component frameworks}\label{sec:analysis:frontend-framework-comparison}
+
+This section evaluates the most suitable client-side rendering and component based JavaScript framework for \cmvs{} and whether or not to use web components.
+
+Three JavaScript frameworks have been evaluated:
+\begin{enumerate*}[label=(\arabic*)]
+  \item GlimmerJS
+  \item Google Polymer and
+  \item ReactJS.
+\end{enumerate*}
+Google Polymer is built on top of web components and GlimmerJS applications can be exported as a web component.
+React does not support web components.
+
+Critically, \cmvs{} require a means to exchange data between views, which is specific to interactions.
+The web component specification, unfortunately, does not specify how arbitrary JavaScript objects can be passed to web components.
+String based attributes are supported, as seen in Listing~\ref{lst:evaluation:web-components-data}.
+
+To pass rich data to components however, web component frameworks have to roll their own data flow and syntax.
+Google Polymer's syntax to pass rich data to a components is shown in Listing~\ref{lst:evaluation:polymer-data}.
+But this is a proprietary solution that abandons standard HTML.
+
+
+\lstinputlisting[
+  language=HTML,
+  label={lst:evaluation:web-components-data},
+  caption={An example of string based attributes of web components~\parencite{GoogleMapWebComponent2017}.}
+]{listings/evaluation/web-components-data.html}
+
+\lstinputlisting[
+  language=HTML,
+  label={lst:evaluation:polymer-data},
+  caption={An small syntax example how Google Polymer passes rich data to a component.}
+]{listings/evaluation/polymer-data.html}
+
+This raises some problems in existing applications:
+A particular component-based frontend framework can not be assumed, a lot of existing applications are also written without any JavaScript framework.
+Proprietary solutions like the one of Polymer reduce the main motivation of implementing against web components:
+Platform agnostic flexibility.
+
+As a summary, if there is
+\begin{enumerate*}[label=(\arabic*)]
+  \item no obligation to implement web components and
+  \item an easy integration into an existing application is necessary,
+\end{enumerate*}
+then React is the perfect choice for \cmvs{}.
+
+Table~\ref{tab:implementation:frontend-frameworks} shows the pros and cons of each framework for the use case.
+
+\begin{table}
+  \caption{Comparison of component based web frameworks, advantages highlighted in green, disadvantages highlighted in red.}
+  \label{tab:implementation:frontend-frameworks}
+  \begin{tabularx}{\textwidth}{a a a}
+\hline
+    \mc{2}{Web Components} & \mc{1}{Specific Framework}  \\
+\hline
+    \cellcolor{lightgreen}{standard} & \cellcolor{lightred}{string-based attributes} &  \cellcolor{lightred}{non-standard}   \\
+\hline
+    \mc{1}{GlimmerJS} & \mc{1}{Google Polymer} & \mc{1}{React} \\
+\hline
+  familiarity &  maturity &  maturity \\
+  &  documentation   & documentation  \\
+  &  great community & huge community \\
+  &  & declarative style  \\
+  &  & small size         \\
+  &  & integrability      \\
+\hline
+\hline
+\end{tabularx}
+\end{table}
 
 \section{Single View Interactions}\label{sec:analysis:examples:single}
 
@@ -401,158 +532,3 @@ A multiple visualization like that expects \emph{temporal} data.
 \end{table}
 
 
-\section{Requirements}\label{sec:analysis:requirements}
-In this subsection, a list of formal requirements is imposed on a conceptual \cmv{} framework.
-These requirements can be checked in Section~\ref{sec:evaluation} for further evaluation.
-
-\textbf{Serialization} is the process of translating objects that can be stored or transmitted and reconstructed later.
-In order to coordinate interactions among views, information needs to be passed from one view to another.
-A framework for \cmvs{} should therefore find a serialization format for interactions which has
-\begin{enumerate*}[label=(\arabic*)]
-  \item
-    small payloads and
-  \item 
-    fast serialization and deserialization.
-\end{enumerate*}
-
-\textbf{Reversibility} in the context of a \cmv{} framework means to undo the effect of an interaction if possible.
-Ideally, every interaction function should have a well-defined inverse.
-For every interaction that is not reversible, the computational cost to replay the interactions from the original state up to the point of the interaction should be minimal.
-
-\textbf{Extensibility} qualify how much time and effort is needed in order to develop new components for the \cmv{} framework.
-\todo[inline]{Write about software extensibility not data extensibility}
-% This is especially important if new interactions need
-% We consider good extensibility when
-% \begin{enumerate*}[label=(\arabic*)]
-%   \item
-%     additional data attributes can be added without lookup of corresponding items and
-%   \item
-%     no de-duplication steps are necessary when new items are added.
-% \end{enumerate*}
-
-
-
-\textbf{Maintainability} means in our case, how much other views are impacted by a change of an interaction in one view and how error-prone the framework is.
-In general it is hard to measure maintainability.
-For the \cmv{} framework we want to measure the
-\begin{enumerate*}[label=(\arabic*)]
-  \item
-    lines of code and the
-  \item
-    cycliomatic complexity. We will try to find a means to measure
-  \item
-    cohesion and
-  \item
-    coupling in the framework.
-\end{enumerate*}
-The assumption is that the amount of shared data between views is an indicator for high coupling.
-
-
-\section{Existing Interactions}
-In this section, the existing interactions are classified according to the classification by \textcite{Yi2007} of Section~\ref{sec:related-work:interaction-theory:categories}.
-
-In the existing \visan{} possible interactions can be categorized into the classes \emph{select}, \emph{explore}, \emph{reconfigure}, \emph{encode} and \emph{filter}.
-
-% As seen in Figure~\ref{fig:analysis:interaction:existing}
-The user can \emph{select} one item in the view by clicking on it.
-The user can reveal a tooltip showing the item properties by moving the mouse cursor on the item, which is another \emph{select} interaction.
-
-The user can \emph{explore} the map in the usual manner:
-If the user drags with the mouse on the map, a panning operation is performed with the viewpoint focused on Germany, i.e.\ the camera moves around like a turntable.
-The zoom factor can be changed by scrolling with the mouse on the canvas of the map.
-
-\emph{Encode} and \emph{reconfigure} techniques are performed through the menu on the left side:
-Under the ``features'' tab, the user can \emph{reconfigure} different data sets and the displayed diagram, e.g.\ a treemap visualization based on the geometry shape, cubes or voronoi regions.
-The tab ``Dimensions'' allows the user to \emph{encode} properties of a data set to visual attributes, e.g.\ the height, color and texture of an item.
-
-The tab ``Filter'' can be used to reduce the displayed data set to a range of continuous values.
-% Figure~\ref{fig:analysis:interaction:existing:filter} shows the range of visible values in the left menu.
-When the user drags the slider, the items in the map on the right side are \emph{filtered} accordingly.
-
-% \begin{figure}[h]
-%   \centering
-%   \includegraphics[width=\textwidth]{images/existing-interactions.png}
-%   \caption{%
-%     Items can be highlighted with a click, Bavaria is currently highlighted.
-%     A mouse over reveals a tooltip showing item properties.
-%     The menu on the left side allows to change the data set and the specific base visualization.
-%   }\label{fig:analysis:interaction:existing}
-% \end{figure}
-
-% \begin{figure}[h]
-%   \centering
-%   \includegraphics[width=\textwidth]{images/existing-interactions-filter.png}
-%   \caption{%
-%     Only gas stations with a price for E10 within 1.349 Euro and 1.589 Euro are displayed in the map
-%   }\label{fig:analysis:interaction:existing:filter}
-% \end{figure}
-
-\section{Comparison of client-side component frameworks}\label{sec:analysis:frontend-framework-comparison}
-
-This section evaluates the most suitable client-side rendering and component based JavaScript framework for \cmvs{} and whether or not to use web components.
-
-Three JavaScript frameworks have been evaluated:
-\begin{enumerate*}[label=(\arabic*)]
-  \item GlimmerJS
-  \item Google Polymer and
-  \item ReactJS.
-\end{enumerate*}
-Google Polymer is built on top of web components and GlimmerJS applications can be exported as a web component.
-React does not support web components.
-
-Critically, \cmvs{} require a means to exchange data between views, which is specific to interactions.
-The web component specification, unfortunately, does not specify how arbitrary JavaScript objects can be passed to web components.
-String based attributes are supported, as seen in Listing~\ref{lst:evaluation:web-components-data}.
-
-To pass rich data to components however, web component frameworks have to roll their own data flow and syntax.
-Google Polymer's syntax to pass rich data to a components is shown in Listing~\ref{lst:evaluation:polymer-data}.
-But this is a proprietary solution that abandons standard HTML.
-
-
-\lstinputlisting[
-  language=HTML,
-  label={lst:evaluation:web-components-data},
-  caption={An example of string based attributes of web components~\parencite{GoogleMapWebComponent2017}.}
-]{listings/evaluation/web-components-data.html}
-
-\lstinputlisting[
-  language=HTML,
-  label={lst:evaluation:polymer-data},
-  caption={An small syntax example how Google Polymer passes rich data to a component.}
-]{listings/evaluation/polymer-data.html}
-
-This raises some problems in existing applications:
-A particular component-based frontend framework can not be assumed, a lot of existing applications are also written without any JavaScript framework.
-Proprietary solutions like the one of Polymer reduce the main motivation of implementing against web components:
-Platform agnostic flexibility.
-
-As a summary, if there is
-\begin{enumerate*}[label=(\arabic*)]
-  \item no obligation to implement web components and
-  \item an easy integration into an existing application is necessary,
-\end{enumerate*}
-then React is the perfect choice for \cmvs{}.
-
-Table~\ref{tab:implementation:frontend-frameworks} shows the pros and cons of each framework for the use case.
-
-\begin{table}
-  \caption{Comparison of component based web frameworks, advantages highlighted in green, disadvantages highlighted in red.}
-  \label{tab:implementation:frontend-frameworks}
-  \begin{tabularx}{\textwidth}{a a a}
-\hline
-    \mc{2}{Web Components} & \mc{1}{Specific Framework}  \\
-\hline
-    \cellcolor{lightgreen}{standard} & \cellcolor{lightred}{string-based attributes} &  \cellcolor{lightred}{non-standard}   \\
-\hline
-    \mc{1}{GlimmerJS} & \mc{1}{Google Polymer} & \mc{1}{React} \\
-\hline
-  familiarity &  maturity &  maturity \\
-  &  documentation   & documentation  \\
-  &  great community & huge community \\
-  &  & declarative style  \\
-  &  & small size         \\
-  &  & integrability      \\
-\hline
-\hline
-\end{tabularx}
-\end{table}
