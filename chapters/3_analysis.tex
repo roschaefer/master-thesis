@@ -32,7 +32,7 @@ When the user drags the slider and changes an upper or a lower limit, items with
 
 
 
-\section{Software Requirements for Coordinated Multiple Views}\label{sec:analysis:requirements}
+\section{Software Requirements for \gls{cmv}s}\label{sec:analysis:requirements}
 The existing implementation should be complemented with a coordinated multiple view layout.
 Next to the \tmap{} a \gv{} should appear, so that the user can understand the geographic context of items in the treemap.
 
@@ -73,9 +73,15 @@ Later in Chapter~\ref{sec:evaluation} these requirements will be reused to evalu
 
 
 
-\section{Considerations about client-side component frameworks}\label{sec:analysis:frontend-framework-comparison}
+\section{Component pattern and Web Frameworks}\label{sec:analysis:frontend-framework-comparison}
 
-This section evaluates the most suitable client-side rendering and component based JavaScript framework for \cmvs{} and whether or not to use web components.
+The current \visan{} is a web application and the complementing \gls{cmv} extension should be based on web technologies, too.
+Many popular web frameworks like Angular, Ember, React and Vue have developed mechanisms to update UI elements during user interactions.
+Because a view in a \cmv{} is a UI element as well, it is worth to consider one of these web frameworks for the implementation of the \cmv{}.
+
+One software pattern, which is a commonly used update mechanism e.g.\ in Ember and React, is the so-called ``component'' pattern.
+It has become so widespread and prevalent that it triggered even a web specification called “web components”.
+This section evaluates the most suitable component based JavaScript framework for \cmvs{} and whether or not to follow the ``web components'' web specification.
 
 Three JavaScript frameworks have been evaluated:
 \begin{enumerate*}[label=(\arabic*)]
@@ -83,16 +89,18 @@ Three JavaScript frameworks have been evaluated:
   \item Google Polymer and
   \item ReactJS.
 \end{enumerate*}
-Google Polymer is built on top of web components and GlimmerJS applications can be exported as a web component.
-React does not support web components.
+GlimmerJS is the templating engine of Ember, the framework which the author of this thesis is most familiar with.
+Applications written with GlimmerJS can be built and exported as web components.
+Google Polymer is the most popular framework for web components.
+React is another very popular framework developed by Facebook, but does not support web components at all.
 
-Critically, \cmvs{} require a means to exchange data between views, which is specific to interactions.
+Most importantly, \cmvs{} require a way to exchange data between views, which is specific to interactions.
 The web component specification, unfortunately, does not specify how arbitrary JavaScript objects can be passed to web components.
 String based attributes are supported, as seen in Listing~\ref{lst:evaluation:web-components-data}.
 
 To pass rich data to components however, web component frameworks have to roll their own data flow and syntax.
-Google Polymer's syntax to pass rich data to a components is shown in Listing~\ref{lst:evaluation:polymer-data}.
-But this is a proprietary solution that abandons standard HTML.
+Google Polymer's own syntax to pass rich data to a components is shown in Listing~\ref{lst:evaluation:polymer-data}.
+But this is a custom solution that abandons standard HTML.
 
 
 \lstinputlisting[
@@ -109,7 +117,7 @@ But this is a proprietary solution that abandons standard HTML.
 
 This raises some problems in existing applications:
 A particular component-based frontend framework can not be assumed, a lot of existing applications are also written without any JavaScript framework.
-Proprietary solutions like the one of Polymer reduce the main motivation of implementing against web components:
+Custom solutions like the one of Polymer reduce the main motivation of implementing against web components:
 Platform agnostic flexibility.
 
 As a summary, if there is
