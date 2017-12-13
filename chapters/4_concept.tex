@@ -203,7 +203,7 @@ The following is a list of functions describing the categories based on the afor
 
   An example of the latter:
   A geographical map could move the viewpoint position and the zoom level such that all focused entities in $Select()$ are visible.
-  Hierarchical visualizations, e.g.\ tree maps or sunburst maps, may choose a single focused entity to be the root node of the currently displayed subtree.
+  Hierarchical visualizations, e.g.\ treemaps or sunburst maps, may choose a single focused entity to be the root node of the currently displayed subtree.
 
 \begin{equation} Filter: \mathbb{E} \rightarrow \{ \bot, \top \} \end{equation}
   The $Filter$ function describes which entities are part of the visualization.
@@ -227,7 +227,7 @@ The following is a list of functions describing the categories based on the afor
   We have three degrees of freedom, so we would map \attr{latitude}, \attr{longitude} and \attr{zoom} to three values in $(lat,long,z) \in \mathbb{R}$.
   In a calendar we map \attr{fromDay}, \attr{toDay}, \attr{fromHour} and \attr{toHour} to define the currently visible time section.
   A special attribute of our shared data model is the height of the subtree of an entity, i.e.\ how many nested series we have below that entity.
-  Therefore we can also map \attr{height} to a single value to define the maximum depth of the currently visible subtree in a tree map.
+  Therefore we can also map \attr{height} to a single value to define the maximum depth of the currently visible subtree in a treemap.
 
 \begin{equation} Order: \mathbb{E} \times \mathbb{E} \rightarrow \mathbb{R} \end{equation}
   The $Order$ function is used to order two arbitrary entities $e1, e2 \in \mathbb{E}$.
@@ -244,7 +244,7 @@ The following is a list of functions describing the categories based on the afor
   E.g.\ bar charts, line diagrams, histograms and bubble charts can change the attribute mapped to the \attr{y} and \attr{x} axes.
   Bubble charts can encode a different data attribute in the \attr{size} of the bubbles.
   Choropleth maps, treemaps and bubble charts can map a different attribute to the \attr{colour}.
-  A specialized version of this function may return the attribute that is used for the \attr{layout} of the tiling algorithm in tree maps.
+  A specialized version of this function may return the attribute that is used for the \attr{layout} of the tiling algorithm in treemaps.
   Note that parallel plots have arbitrary many \attr{y} axes.
   To define the order of dimensions displayed in a parallel plot, each dimension will be mapped to a named \attr{y} axis, e.g. $y1, y2 ... y3$ and so on.
 
