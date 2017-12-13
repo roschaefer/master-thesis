@@ -59,10 +59,10 @@ District ``Magdeburg'' is selected in the \gv{} with an unusually high percentag
 
 \begin{figure}[ht]
   \centering
+  \includegraphics[width=\textwidth]{figures/implementation/Layout}
   \caption{%
     This Figure shows the layout of the \cmv{}, red lines indicate the borders of different views.
   }\label{fig:implementation:layout}
-  \includegraphics[width=\textwidth]{figures/implementation/Layout}
 \end{figure}
 
 
@@ -87,12 +87,12 @@ If the Geometries of the visualized data set are updated, that will change the \
 
 \begin{figure}[ht]
   \centering
+  \includegraphics[width=\textwidth]{figures/implementation/Architecture.pdf}
   \caption{%
     Architecture of components.
     Every class with a \attr{render} method is a React component.
     \attr{MultiviewCoordinator} is used to coordinate \tmap{} and \gv{} as well as to load geometry data.
   }\label{fig:implementation:architecture}
-  \includegraphics[width=\textwidth]{figures/implementation/Architecture.pdf}
 \end{figure}
 
 \section{Notifications}
@@ -111,10 +111,10 @@ You can see this scenario in the sequence diagram in Figure~\ref{fig:implementat
 
 \begin{figure}[ht]
   \centering
+  \includegraphics[width=\textwidth]{figures/implementation/SequenceDiagram}
   \caption{%
     This sequence diagram shows the notification of different components during a common usage scenario.
   }\label{fig:implementation:sequence-diagram}
-  \includegraphics[width=\textwidth]{figures/implementation/SequenceDiagram}
 \end{figure}
 
 
@@ -130,10 +130,10 @@ Figure~\ref{fig:implementation:encoding} gives an example of a select interactio
 
 \begin{figure}[ht]
   \centering
+  \includegraphics[width=0.5\textwidth]{figures/implementation/Encoding}
   \caption{%
     Example of the encoding of interaction category and purpose.
   }\label{fig:implementation:encoding}
-  \includegraphics[width=\textwidth]{figures/implementation/Encoding}
 \end{figure}
 
 Not only basic data types like numbers and strings can be published, as seen in Listing~\ref{lst:implementation:subscribe}, but also functions.

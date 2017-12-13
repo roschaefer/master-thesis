@@ -38,12 +38,12 @@ These gas stations are slightly more expensive in general and significantly more
 
 \begin{figure}
   \centering
-  \caption{
-    Expensive gas stations, compared to other gas stations of the same brand, are often located next to highways.
-  }\label{fig:evaluation:use-cases:gas-prices}
   \subfloat[Tree map]{{\includegraphics[width=0.4\textwidth]{figures/evaluation/use-cases/1-tmap} }}%
   \qquad
   \subfloat[Point of interest visualization]{{\includegraphics[width=0.4\textwidth]{figures/evaluation/use-cases/1-map} }}%
+  \caption{
+    Expensive gas stations, compared to other gas stations of the same brand, are often located next to highways.
+  }\label{fig:evaluation:use-cases:gas-prices}
 \end{figure}
 
 \subsection{Multi-Select in \tmap{}}\label{sec:evaluation:use-cases:multiselect}
@@ -73,23 +73,23 @@ These districts are in the vicinity of Munich, as we can see in Figure~\ref{fig:
 
 \begin{figure}
   \centering
-  \caption{
-    The orange coloured group on the left, districts with a moderate decline of inhabitants and large population density, are all districts of the Ruhr area.
-  }\label{fig:evaluation:cases:multiselect:1}
   \subfloat[Tree map]{{\includegraphics[width=0.4\textwidth]{figures/evaluation/use-cases/2-tmap} }}%
   \qquad
   \subfloat[Orange group]{{\includegraphics[width=0.4\textwidth]{figures/evaluation/use-cases/2-map-ruhr} }}%
+  \caption{
+    The orange coloured group on the left, districts with a moderate decline of inhabitants and large population density, are all districts of the Ruhr area.
+  }\label{fig:evaluation:cases:multiselect:1}
 \end{figure}
 
 \begin{figure}
   \centering
+  \subfloat[White group]{{\includegraphics[width=0.4\textwidth]{figures/evaluation/use-cases/2-map-east} }}%
+  \qquad
+  \subfloat[Purple group]{{\includegraphics[width=0.4\textwidth]{figures/evaluation/use-cases/2-map-munich} }}%
   \caption{
     The sparsely populated districts with a serious decline of inhabitants are all located in the east of Germany.
     The few districts with a low population density and high increase of population are all located in the vicinity of Munich.
   }\label{fig:evaluation:cases:multiselect:2}
-  \subfloat[White group]{{\includegraphics[width=0.4\textwidth]{figures/evaluation/use-cases/2-map-east} }}%
-  \qquad
-  \subfloat[Purple group]{{\includegraphics[width=0.4\textwidth]{figures/evaluation/use-cases/2-map-munich} }}%
 \end{figure}
 
 \subsection{Bounding Box Selection in \gv{}}\label{sec:evaluation:use-cases:bounding-box}
@@ -104,12 +104,12 @@ But as we can see in Figure~\ref{fig:evaluation:cases:bounding-box} (a), the dis
 
 \begin{figure}
   \centering
-  \caption{
-    A bounding box multiple select in the \gv{} can reveal a non-geographic context in the \tmap{}
-  }\label{fig:evaluation:cases:bounding-box}
   \subfloat[Tree map]{{\includegraphics[width=0.4\textwidth]{figures/evaluation/use-cases/3-tmap} }}%
   \qquad
   \subfloat[Geographic map]{{\includegraphics[width=0.4\textwidth]{figures/evaluation/use-cases/3-map} }}%
+  \caption{
+    A bounding box multiple select in the \gv{} can reveal a non-geographic context in the \tmap{}
+  }\label{fig:evaluation:cases:bounding-box}
 \end{figure}
 
 \subsection{Use case summary}
@@ -190,9 +190,9 @@ You can see a screenshot of the analysis in Figure~\ref{fig:evaluation:performan
 
 \begin{figure}[ht]
   \centering
+  \includegraphics[width=\textwidth]{figures/evaluation/performance/profiles/immoscout_both/fps}
   \caption{During profiling of both \tmap{} and \gv{} visualizing the ``Immoscout'' data set, the frame per second rate drops to 1 FPS.}
   \label{fig:evaluation:performance:profiling:immoscout:fps}
-  \includegraphics[width=\textwidth]{figures/evaluation/performance/profiles/immoscout_both/fps}
 \end{figure}
 
 As you can see in Figure~\ref{fig:evaluation:performance:profiling:immoscout:summary} the \tmap{} spends almost the entire CPU time in scripting.
@@ -200,10 +200,10 @@ The \gv{} has a more balanced CPU time, spending time for painting and rendering
 
 \begin{figure}[ht]
   \centering
+  \includegraphics[width=\textwidth]{figures/evaluation/performance/summaries/immoscout}
   \caption{
     Summary of profile data for data set ``Immoscout'' of \tmap{} only (left), both \tmap{} + \gv{} (center) and only \gv{} (right).
   }\label{fig:evaluation:performance:profiling:immoscout:summary}
-  \includegraphics[width=\textwidth]{figures/evaluation/performance/summaries/immoscout}
 \end{figure}
 
 Going through the timeline, we can identify the handling of the ``mousemove'' event to be the likely cause of this slow scripting.
@@ -220,10 +220,10 @@ Note that not the communication between views hits the performance but rather th
 
 \begin{figure}[ht]
   \centering
-  \caption{
-    During a \attr{highlight} interaction all features of the \attr{GeoJSON} are iterated.
-  }\label{fig:evaluation:performance:profiling:immoscout_both:callstack}
   \includegraphics[width=\textwidth]{figures/evaluation/performance/profiles/immoscout_geo_only/callstack}
+  \caption{
+    The sawtooth pattern of the callstack during a \attr{highlight} interaction indicates an expensive iteration of all features of the \attr{GeoJSON}.
+  }\label{fig:evaluation:performance:profiling:immoscout_both:callstack}
 \end{figure}
 
 
@@ -255,10 +255,10 @@ Nevertheless, the frame per second rate rarely drops in a way which has an impac
 The \gv{} alone idles almost 50\% of the CPU time, as you can see on the right side of Figure~\ref{fig:evaluation:performance:profiling:landkreise:summary}.
 \begin{figure}[ht]
   \centering
+  \includegraphics[width=\textwidth]{figures/evaluation/performance/summaries/landkreise}
   \caption{
     Summary of profile data for data set ``Landkreise'' of \tmap{} only (left), both \tmap{} + \gv{} (center) and only \gv{} (right).
   }\label{fig:evaluation:performance:profiling:landkreise:summary}
-  \includegraphics[width=\textwidth]{figures/evaluation/performance/summaries/landkreise}
 \end{figure}
 
 
