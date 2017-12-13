@@ -49,14 +49,15 @@ These visual variables are used in cartography but can also be applied to data v
 \textcite{Carpendale2003} explains in detail their use in computational information instead of printed cartography.
 \textcite{Garlandini2009} put these visual variables under systematic validation procedures.
 The authors conclude that the variable \attr{size} provides the most accurate and efficient performance while the variable \attr{orientation} provides the least performance.
-\begin{figure}[ht]
+Bertin's visual variable play a role in interaction aspects of \cmvs{} as they are used to communicate the effect of an interaction.
+A highlighted data point can be highlighted by changing the colour of an area or increasing the size of a point.
+
+\begin{figure}
   \centering
   \includegraphics[width=\textwidth]{figures/related-work/visual-variables}
   \caption{Bertin's original visual variables~\parencite{Foster2017}.}
   \label{fig:related-work:visual-variables}
 \end{figure}
-Bertin's visual variable play a role in interaction aspects of \cmvs{} as they are used to communicate the effect of an interaction.
-A highlighted data point can be highlighted by changing the colour of an area or increasing the size of a point.
 
 \subsection{Choropleth maps}
 Choropleth maps are thematic maps in which areas are shaded or patterned in proportion to the statistical variables being displayed on the map.
@@ -67,7 +68,7 @@ A downside of choropleth maps is that larger regions may appear more emphasized 
 Another disadvantage of choropleth maps is the common error of incorrect encoding:
 Such an incorrect encoding would be the display of absolute numbers, e.g.\ total population or proceeds of crime, rather than relative numbers, e.g.\ population density or unemployment rate.
 
-\begin{figure}[ht]
+\begin{figure}
   \includegraphics[width=\textwidth]{figures/related-work/choropleth}
   \caption{%
     Choropleth map of obese population, \gls{bmi} $ > 30 $, in the United States in 2008~\parencite{NCCDPHP2017}.
@@ -79,7 +80,11 @@ This work uses a choropleth map for the geographic visualization because of its 
 \section{Information Visualization of Hierarchic Data}
 The visualization of hierarchical data has a long tradition.
 The traditional visual representation of a tree is a directed graph with the root node at the top, as seen in Figure~\ref{fig:related-work:tree-graph}.
-\begin{figure}[ht]
+
+An common use case is a directory tree of a file system, e.g.\ a file browser or the command line utility \texttt{tree} on UNIX based operating systems.
+As \textcite{Shneiderman1992} mentions, this visualization becomes increasingly large when displaying more than one level and soon exceeds the entire screen size.
+
+\begin{figure}
   \centering
   \includegraphics[width=0.6\textwidth]{figures/related-work/Treegraph}
   \caption{
@@ -88,8 +93,6 @@ The traditional visual representation of a tree is a directed graph with the roo
   }
   \label{fig:related-work:tree-graph}
 \end{figure}
-An common use case is a directory tree of a file system, e.g.\ a file browser or the command line utility \texttt{tree} on UNIX based operating systems.
-As \textcite{Shneiderman1992} mentions, this visualization becomes increasingly large when displaying more than one level and soon exceeds the entire screen size.
 
 \subsection{Tree Maps}
 \textcite{Johnson1991} propose the treemap visualization technique, in which each node is a rectangle whose area is proportional to a specified dimension.
@@ -108,14 +111,15 @@ Thus, a treemap can display even more information than a traditional graph repre
 A disadvantage of treemaps is the variable size of each node.
 If more and more nodes are displayed, the size of each tile will get smaller and smaller and there might not be enough space to display a label.
 You can see this problem occur in Figure~\ref{fig:related-work:treemap-german-exports-2}.
-\begin{figure}[ht]
+
+\begin{figure}
     \centering
     \includegraphics[width=\textwidth]{figures/related-work/en_profile_country_deu_1}
     \caption{A two dimensional treemap of Germany's foreign trade quota of exports, showing only the first hierarchy level~\parencite{Observatory2017}.}
     \label{fig:related-work:treemap-german-exports-1}
 \end{figure}
 
-\begin{figure}[ht]
+\begin{figure}
     \centering
     \includegraphics[width=\textwidth]{figures/related-work/en_profile_country_deu_2}
     \caption{Second level of detail of the treemap in Figure~\ref{fig:related-work:treemap-german-exports-1}~\parencite{Observatory2017}.}
@@ -143,7 +147,7 @@ A \tmap{} is just an ordinary 3D treemap, but it has all blocks attached to the 
 We can see an example of a \tmap{} in figure~\ref{fig:research:ua_treemap}.
 All three dimensional treemaps in this thesis are in fact \tmaps{} and therefore this term is used for the rest of this work.
 
-\begin{figure}[ht]
+\begin{figure}
   \centering
   \includegraphics[width=\textwidth]{figures/related-work/2_5D_treemap_example}
   \caption{Example of a \tmap{}~\parencite{Doellner2017}.}
@@ -156,22 +160,16 @@ All three dimensional treemaps in this thesis are in fact \tmaps{} and therefore
 According to \textcite{Roberts2007} \cmvs{} is just ``a specific exploratory visualization technique that enables users to explore their data''.
 Because ``the overall premise for the technique is that users understand their data better if they interact with the presented information and view it through different representations.''~\parencite{Roberts2007}
 
-We can see an example of a \cmv{} in Figure~\ref{fig:related-work:cmv}
+We can see an example of a \cmv{} in Figure~\ref{fig:related-work:cmv}.
 It displays spatial and temporal attributes of pictures from a picture database, as well as continuous attributes like popularity and number of comments.
-\begin{figure}[h]
+The user can move the mouse cursor over each item in the scatter plot and the graduated symbol map and the corresponding item is highlighted with a larger stroke in all other views.
+On the time line below, the user can also filter for pictures in a certain time frame by dragging the mouse from lower to upper limit.
+
+\begin{figure}
   \centering
   \includegraphics[width=\textwidth]{figures/related-work/cmv}
   \caption{\gls{cmv} displaying the popularity, number of comments, location and time of pictures in a picture data base~\parencite{Dukevis2017}.}
   \label{fig:related-work:cmv}
-\end{figure}
-The user can move the mouse cursor over each item in the scatter plot and the graduated symbol map and the corresponding item is highlighted with a larger stroke in all other views.
-On the time line below, the user can also filter for pictures in a certain time frame by dragging the mouse from lower to upper limit.
-
-\begin{figure}[h]
-  \centering
-  \includegraphics[width=\textwidth]{figures/related-work/brushing_linking}
-  \caption{Airline on-time performance: Correlation of time of day with arrival delay. Most recent flight with a delay of more than 100 minutes selected~\parencite{Bostock2017}.}
-  \label{fig:research:brushing-linking}
 \end{figure}
 
 \subsection{Brushing and Linking}
@@ -196,6 +194,13 @@ This technique of propagating interactions to other views is called ``linking''.
 
 Figure~\ref{fig:research:brushing-linking} shows a filter for travels with a long delay, i.e.\ from 120 minutes to the maximum value, see the selection in the upper center.
 In the view in the upper left corner in Figure~\ref{fig:research:brushing-linking}, we can see a correlation of long delays with the time of the day.
+
+\begin{figure}
+  \centering
+  \includegraphics[width=\textwidth]{figures/related-work/brushing_linking}
+  \caption{Airline on-time performance: Correlation of time of day with arrival delay. Most recent flight with a delay of more than 100 minutes selected~\parencite{Bostock2017}.}
+  \label{fig:research:brushing-linking}
+\end{figure}
 
 \section{Technologies}
 
