@@ -136,13 +136,13 @@ Table~\ref{tab:implementation:frontend-frameworks} shows the pros and cons of ea
 \hline
     \mc{2}{Web Components} & \mc{1}{Specific Framework}  \\
 \hline
-    \cellcolor{lightgreen}{standard} & \cellcolor{lightred}{string-based attributes} &  \cellcolor{lightred}{non-standard}   \\
+    \cellcolor{lightgreen}{standard} & \cellcolor{lightred}{string-based attributes} &  \cellcolor{lightred}{no standard}   \\
 \hline
     \mc{1}{GlimmerJS} & \mc{1}{Google Polymer} & \mc{1}{React} \\
 \hline
   familiarity &  maturity &  maturity \\
   &  documentation   & documentation  \\
-  &  great community & huge community \\
+  &  community & large community \\
   &  & declarative style  \\
   &  & small size         \\
   &  & integrability      \\
@@ -153,9 +153,15 @@ Table~\ref{tab:implementation:frontend-frameworks} shows the pros and cons of ea
 
 \section{Single View Interactions}\label{sec:analysis:examples:single}
 
-The data visualization catalogue by Severino Ribecca lists many of the most used data visualizations\parencite{VisualizationCatalogue2017}.
-This section covers a list of common data visualizations from that catalogue as examples.
-The expected data structure and a list of possible interactions are systematically analysed.
+Even though the use case of the \cmv{} is focused on a \tmap{} and a \gv{}, the implementation should allow any kind of data visualizations to be added and coordinated as well.
+Instead of implementing as many data visualizations as possible, the approach in this thesis is to analyse many data visualization techniques theoretically.
+The goal is to come up with a set of formal requirements and a specification that anticipates additional data visualizations.
+With regard to the software requirements in Section~\ref{sec:analysis:requirements}, the \cmv{} framework needs to be extensible and maintainable.
+
+The data visualization catalogue by Severino Ribecca lists many of the most used data visualizations~\parencite{VisualizationCatalogue2017}.
+This section covers a selection of data visualization techniques from that catalogue.
+For each technique the expected data structure is examined and a list of plausible interactions is systematically analysed.
+The gathered knowledge is a preparation of the conceptual framework in Section~\ref{sec:concept}.
 
 \subsection{Line Graphs}
 \begin{figure}
