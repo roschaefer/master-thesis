@@ -75,7 +75,7 @@ Table~\ref{tab:analysis:line-graph:interactions} shows a list of plausible inter
     \subfloat[Bar Chart or column graph]{{\includegraphics[width=0.4\textwidth]{figures/analysis/bar-chart} }}%
     \qquad
     \subfloat[Multi set bar Chart]{{\includegraphics[width=0.4\textwidth]{figures/analysis/multiset-bar-chart} }}%
-    \caption{A multi set bar charts is a variation of a bar chart.}
+    \caption{A multi set bar charts is a variation of a bar chart~\parencite{VisualizationCatalogue2017}.}
     \label{fig:analysis:bar-charts}
   \end{center}
 \end{figure}
@@ -126,13 +126,15 @@ Table~\ref{tab:analysis:bar-charts:interactions} lists some possible interaction
 
 \begin{figure}
   \centering
-  \label{fig:analysis:histograms}
+  \subfloat[Histogram]{{\includegraphics[width=0.4\textwidth]{figures/analysis/histogram} }}%
+  \qquad
+  \subfloat[Population Pyramid]{{\includegraphics[width=0.4\textwidth]{figures/analysis/population-pyramid} }}%
   \caption{A histogram is a bar chart over a continuous interval~\parencite{VisualizationCatalogue2017}.}%
-  \includegraphics[width=0.4\textwidth]{figures/analysis/histogram.png}%
+  \label{fig:analysis:histograms}
 \end{figure}
 
-Histograms visualize the distribution of data over a continuous interval or a certain time period.
-A special type is the population pyramid, which is a pair of back-to-back histograms, one for each sex, as seen in Figure~\ref{fig:analysis:population-pyramid}.
+Histograms, as shown in Figure~\ref{fig:analysis:histograms} visualize the distribution of data over a continuous interval or a certain time period.
+A special type is the population pyramid, which is a pair of back-to-back histograms, one for each sex.
 
 Histograms and bar charts expect the same kind of data, i.e.\ a \emph{tabular} data structure.
 Almost the same interactions as in Table~\ref{tab:analysis:bar-charts:interactions} can be applied to histograms, except a re-ordering of bars along the x-axis.
@@ -183,15 +185,8 @@ As we can see in Table~\ref{tab:analysis:bubble-charts:interactions}, interactio
   \subfloat[Stacked bar chart]{{\includegraphics[width=0.3\textwidth]{figures/analysis/stacked-bar-without-baseline.png} }}%
   \qquad
   \subfloat[.. with baseline]{{\includegraphics[width=0.3\textwidth]{figures/analysis/stacked-bar-with-baseline.png} }}%
-  \caption{Stacked bar charts can be ordered along a baseline or stretch to 100\% width to show the percentage-of-the-whole of each group~\parencite{VisualizationCatalogue2017}.}%
+  \caption{Stacked bar charts can be ordered along a baseline or stretch to 100\% width to show the percentage-of-the-whole of each group~\parencite{Mann2017}~\parencite{Peltier2017}.}%
   \label{fig:analysis:stacked-bar-chart}
-\end{figure}
-
-\begin{figure}
-  \centering
-  \includegraphics[width=0.4\textwidth]{figures/analysis/population-pyramid.png}%
-  \caption{A population pyramid is a pair of histograms and can also be modeled as a stacked bar chart~\parencite{VisualizationCatalogue2017}.}%
-  \label{fig:analysis:population-pyramid}
 \end{figure}
 
 Unlike a multi-set bar graph which displays bars side-by-side, stacked bar graphs segment their bars of multiple datasets on top of each other.
