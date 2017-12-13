@@ -538,12 +538,26 @@ As a summary, if there is
 \end{enumerate*}
 then React is the perfect choice for \cmvs{}.
 
-Figure~\ref{fig:implementation:frontend-frameworks} shows the pros and cons of each framework for the use case.
+Table~\ref{tab:implementation:frontend-frameworks} shows the pros and cons of each framework for the use case.
 
-\begin{figure}[h]
-  \centering
-  \includegraphics[width=\textwidth]{images/frontend-frameworks.png}
+\begin{table}
   \caption{Comparison of component based web frameworks, advantages highlighted in green, disadvantages highlighted in red.}
-  \label{fig:implementation:frontend-frameworks}
-\end{figure}
-
+  \label{tab:implementation:frontend-frameworks}
+  \begin{tabularx}{\textwidth}{a a a}
+\hline
+    \mc{2}{Web Components} & \mc{1}{Specific Framework}  \\
+\hline
+    \cellcolor{lightgreen}{standard} & \cellcolor{lightred}{string-based attributes} &  \cellcolor{lightred}{non-standard}   \\
+\hline
+    \mc{1}{GlimmerJS} & \mc{1}{Google Polymer} & \mc{1}{React} \\
+\hline
+  familiarity &  maturity &  maturity \\
+  &  documentation   & documentation  \\
+  &  great community & huge community \\
+  &  & declarative style  \\
+  &  & small size         \\
+  &  & integrability      \\
+\hline
+\hline
+\end{tabularx}
+\end{table}

@@ -216,19 +216,11 @@
 \newcommand{\attr}[1]{\texttt{\detokenize{#1}}}
 \newcommand{\gvis}{\hmm{g}eographical visualization}
 
-\newcommand{\conceptTable}[3]{%
-    \begin{center}
-    {\small
-        \begin{tabulary}{\textwidth}{ll}
-            \bf Data structure & #1 \\
+\newcommand{\mc}[2]{\multicolumn{#1}{c}{#2}}
+\definecolor{lightgreen}{RGB}{217 234 211}
+\definecolor{lightred}{RGB}{244 204 204}
 
-            \bf Dependent visual attributes & #2 \\
-
-            \bf Independent visual attributes & #3  \\
-        \end{tabulary}
-    }
-    \end{center}
-}
+\newcolumntype{a}{>{\columncolor{lightgreen}}X}
 
 \hyphenation{geo-gra-phic}
 \hyphenation{to-po-lo-gi-cal}
