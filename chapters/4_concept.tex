@@ -1,15 +1,15 @@
 \chapter{Conceptual Framework}\label{sec:concept}
-Based on the findings in Chapter~\ref{sec:analysis} this chapter specifies a conceptual framework for \cmvs{}.
+Based on the preparations in Chapter~\ref{sec:analysis:examples} this chapter specifies a conceptual framework for \cmvs{}.
 The approach involves the definition of the terminology, a formalization of an interaction and the basic components of the conceptual framework.
 These components are derived from the interactions and the data structures discovered in Chapter~\ref{sec:analysis}.
 
-\section{The Conceptual Framework from the User Perspective}
+\section{The Conceptual Framework from the User Perspective}\label{sec:concept:framework}
 
 Figure~\ref{fig:concept:component-diagram} shows a component diagram of the conceptual framework.
 The user interacts via input devices, e.g. mouse or keyboard, with a computer.
 In order to see the effect of the interaction the user oberserves an output device like a screen.
 
-The computer or the browser provides an API for these devices and the implementation of each view has access to this API.
+The computer or the browser provides an \gls{api} for these devices and the implementation of each view has access to this \gls{api}.
 On the other side, views can communicate with each other through a coordinator.
 This is necessary in order to coordinate interactions.
 
@@ -42,50 +42,57 @@ This pattern is known as the \emph{Publish-subscribe pattern} and widely used in
 \end{figure}
 
 
-\section{Formalization of an interaction}
-
-The formalization of an interaction $I$ is defined as follows:
-\begin{equation}
-  I(T, M(C,P,IS), E)
-\end{equation}
-For a trigger $T$, a message $M$ and the effect $E$.
-The message $M$ is composed of a category $C$, an application specific purpose $P$ and an interaction subject $IS$.
-The part of the interaction which is shared among multiple views is the message $M$.
-
-The category $C$ is defined by the triggering view at runtime.
-E.g.\ when a parallel plot rearranges the list of attributes, the exact order will be determined by the view itself, during the handling of the drag-and-drop action.
-
-
-\subsection{Trigger}
-A trigger describes the event that starts an interaction.
-As we have seen in Section~\ref{sec:analysis} every interaction is started by a user action.
-
-The user e.g.\ clicks on a shape in the view, hovers over an area, selects an item from a dropdown menu, turns around a mobile device, speaks into the microphone or makes a particular gesture.
-If the event of action is handled by a view and causes an interaction, we call this handling a \emph{trigger}.
-
-Every view is responsible of its \emph{triggers}.
-These are implementation details and are not shared by other views.
-
-\subsection{Effect}
-The effect is the change of the visual representation subsequent to the interaction.
-In order to be perceivable by the user, the interaction must have some visual effect, i.e.\ a change in the visual representation of the data.
-
-Examples are:
-A change of colour of a selected bubble, a movement of the viewpoint, a rearrangement of attributes in a parallel plot or a higher level of detail in a \tmap{}.
-
-Every view is responsible of its visual \emph{effects}.
-Obviously visual effects are not shared, as it depends on the visualization technique if visual variables are available to express a visual effect.
-A re-order interaction will not have an effect in bubble charst, as position is constrained by the type of visualization.
-
-In single visualizations, interactions consist of at least of a trigger and an effect:
+\subsection{Interaction}
+In single views, an interaction $I$ consists of at least a trigger and an effect:
 \begin{equation}
   I(T, E)
 \end{equation}
-The meaning of the interaction in a single view can be implicit.
+The purpose of the interaction in a single view does not need to be explicitly stated as such.
 E.g.\ hovering over a geographic area changes the background colour of the polygon and the user can identify the interaction as a \emph{highlighting}.
+This implicit meaning gets explicit in the described conceptual framework, so that views are able to react reasonably to interactions in other, outside views.
 
-This implicit meaning gets explicit in \cmvs{} so that other views are able to react appropriately.
+\subsection{Interaction in Coordinated Multiple Views}\label{sec:concept:framework:interaction}
+An interaction $I$ in \cmvs{} is formalized as
+\begin{equation}
+  I(T, M(C,P,S), E)
+\end{equation}
+for a trigger $T$, a message $M$ and the effect $E$.
+The message $M$ is defined by a category $C$, an application specific purpose $P$ as well as an interaction subject $S$.
+The shared part of the interaction among multiple views is the message $M$.
 
+\subsection{View}
+A view is the section of the screen in which the user can see a data visualization.
+A \cmv{} system shows multiple views, either side by side on a single screen or on different screens which are physically placed next to each other.
+
+
+\subsection{Trigger}
+If the event of a user action is handled by a view and causes an interaction, this handling is called a \emph{trigger}.
+The user e.g.\ clicks on a shape in the view, hovers over an area, selects an item from a dropdown menu, turns around a mobile device, speaks into the microphone or makes a particular gesture.
+As described in the introduction, views are responsible of their \emph{triggers}.
+
+
+\subsection{Effect}
+The effect is the change of the visual representation subsequent to the interaction.
+In order to be perceivable by the user, the interaction must have some visual effect, e.g.\ a change of a visual variable according to \textcite{Bertin2010}.
+
+Some examples are:
+A change of colour of a selected bubble, a movement of the viewpoint, a rearrangement of attributes in a parallel plot or a higher level of detail in a \tmap{}.
+
+Similar to a \emph{trigger}, a view is self-responsible of its visual \emph{effects}.
+Obviously visual effects are not shared, as a visual variable might be constrained due to the nature of the visualization technique itself.
+A re-ordering interaction in a parallel plot will not have an effect in bubble charts, as position is constrained by the type of visualization.
+
+\subsection{Category}
+An category is the declaration and definition how the subject of the interaction should be changed.
+The aforementioned explicit meaning of the interaction is the smallest unit of information of the interaction.
+Some examples of categories include: Selection, Deletion, Point-of-Interest, Filtering, Reordering, Re-encoding.
+Categories can be classified with the interaction categories of \textcite{Yi2007}.
+
+\subsection{Purpose}
+The \emph{purpose} describes the interaction in the context of a task or an application specific intention.
+A developer may want to have many \emph{select} interactions.
+E.g.\ the user desires to select a detail view of an item under the mouse cursor from a previously selected set of already highlighted items.
+Therefore two interactions of the same category can be distinguished by a user-defined \emph{purpose}.
 
 \subsection{Subject}
 A subject refers to the target of the interaction.
@@ -94,30 +101,12 @@ E.g.\ when a user moves the mouse cursor on a line in the line diagram, that cou
 Therefore we call the object affected of an interaction the interaction \emph{subject}.
 A subject can be a data point, a list of data points, a position of the viewpoint, a certain order of attributes or a mapping of attributes to visual variables.
 
-\subsection{Purpose}
-The purpose refers to the application specific purpose of the interaction.
 
-A developer may want to have many \emph{select} interactions.
-E.g.\ the user desires to select a detail view of an item under the mouse cursor from a previously selected set of already highlighted items.
-
-Therefore we allow for a user-defined \emph{purpose}.
-The purpose describes the interaction in the context of a task or an intention that is intrinsic to the application the interaction happens in.
-
-\subsection{Category}
-An category is the declaration and definition how the subject of the interaction should be changed.
-The aforementioned explicit meaning of the interaction is the smallest unit of information of the interaction.
-
-Some examples of categories include: Selection, Deletion, Point-of-Interest, Filtering, Reordering, Re-encoding.
-Categories can be classified with the interaction categories of \textcite{Yi2007}.
-
-
-\subsection{Message}
-A message is the required set of information to coordinate an interaction across multiple views.
 
 \section{Shared data model}\label{sec:concept:data-model}
 The shared data model is a model of the data on which all visualizations must agree on.
 To account for various data structures discovered in Chapter~\ref{sec:analysis}, we use an abstract data model that is inclusive enough to include tabular, hierarchical and relational data.
-You can see a class diagram in figure~\ref{fig:concept:shared-data-model}.
+You can see a class diagram of this data model in Figure~\ref{fig:concept:shared-data-model}.
 
 The \emph{entity} class is used to model the smallest distinguishable unit.
 All entities can be identified and retrieved via the \emph{id}.
@@ -154,9 +143,14 @@ These attributes may describe e.g.\ the weight of an edge in a flow map.
 
 
 
-\section{Predefined categories}\label{sec:concept:categories}
+\section{Encoding of Interaction Subjects}\label{sec:concept:message-interface}
 
-It turns out that we can describe the categories of an interaction as a mathematical function.
+As described in Section~\ref{sec:concept:framework:interaction}, a message consists of the interaction \emph{category}, \emph{purpose} and \emph{subject}.
+Category and purpose are just identifiers and can be encoded with a number or a string.
+The subject is a highly variable object, that can be a number, a word, a list, a dictionary and so on.
+To account for diversity, the approach in this thesis is to model the subject as a mathematical function.
+This function is defined at runtime and the return type can be any of the classes already stated.
+
 These functions operates on the ids of \emph{entities}, \emph{series}, and \emph{relations} or their respective \emph{attributes}.
 The name of the function is the \emph{category} and the function domain being the \emph{subject} of the interaction.
 Thus, we can describe interaction through a change of its semantic but we ignore implementation details of specific visualizations.
