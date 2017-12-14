@@ -2,7 +2,7 @@
 The current treemap implementation and its set of possible interactions is described in Section~\ref{sec:analysis:existing-interactions}.
 For the implementation of the \gv{} several web frameworks are compared and advantages and disadvantages are contrasted in Section~\ref{sec:analysis:frontend-framework-comparison}.
 
-Sections~\ref{sec:analysis:examples:single} and~\ref{sec:analysis:examples:multiple} describe essential characteristics of interactions in single and multiple data visualizations.
+Sections~\ref{sec:analysis:examples} and~\ref{sec:analysis:examples:multiple} describe essential characteristics of interactions in single and multiple data visualizations.
 These characteristics are relevant for a formalized language of \cmvs{}.
 To accomplish this goal, the approach is to deduce the characteristics by a list of examples.
 What are the expected data structures for each visualization?
@@ -151,7 +151,7 @@ Table~\ref{tab:implementation:frontend-frameworks} shows the pros and cons of ea
 \end{tabularx}
 \end{table}
 
-\section{Single View Interactions}\label{sec:analysis:examples:single}
+\section{Arbitrary Data Visualization Techniques}\label{sec:analysis:examples}
 
 Even though the use case of the \cmv{} is focused on a \tmap{} and a \gv{}, the implementation should allow any kind of data visualizations to be added and coordinated as well.
 Instead of implementing as many data visualizations as possible, the approach in this thesis is to analyse many data visualization techniques theoretically.
@@ -289,9 +289,9 @@ This is not possible, because the histogram constrains the position of bars alon
 
 \begin{figure}
   \centering
-  \subfloat[Bubble Chart]{{\includegraphics[width=0.4\linewidth]{figures/analysis/bubble-chart.png} }}%
+  \subfloat[Bubble Chart]{{\includegraphics[width=0.4\linewidth]{figures/analysis/bubble-chart} }}%
   \qquad
-  \subfloat[Scatter plot]{{\includegraphics[width=0.4\linewidth]{figures/analysis/scatter-plot.png} }}%
+  \subfloat[Scatter plot]{{\includegraphics[width=0.4\linewidth]{figures/analysis/scatter-plot} }}%
   \caption{Bubble charts and scatter plots are similar regarding interactions~\parencite{VisualizationCatalogue2017}.}%
   \label{fig:analysis:bubble-chart}
 \end{figure}
@@ -327,9 +327,9 @@ As we can see in Table~\ref{tab:analysis:bubble-charts:interactions}, interactio
 
 \begin{figure}
   \centering
-  \subfloat[Stacked bar chart]{{\includegraphics[width=0.3\linewidth]{figures/analysis/stacked-bar-without-baseline.png} }}%
+  \subfloat[Stacked bar chart]{{\includegraphics[width=0.3\linewidth]{figures/analysis/stacked-bar-without-baseline} }}%
   \qquad
-  \subfloat[.. with baseline]{{\includegraphics[width=0.3\linewidth]{figures/analysis/stacked-bar-with-baseline.png} }}%
+  \subfloat[.. with baseline]{{\includegraphics[width=0.3\linewidth]{figures/analysis/stacked-bar-with-baseline} }}%
   \caption{Stacked bar charts can be ordered along a baseline or stretch to 100\% width to show the percentage-of-the-whole of each group~\parencite{Mann2017}~\parencite{Peltier2017}.}%
   \label{fig:analysis:stacked-bar-chart}
 \end{figure}
@@ -365,9 +365,9 @@ Table~\ref{tab:analysis:stacked-bar-chart:interactions} shows possible interacti
 
 \begin{figure}
   \centering
-  \subfloat[Tree map]{{\includegraphics[width=0.4\linewidth]{figures/analysis/treemap.png} }}%
+  \subfloat[Tree map]{{\includegraphics[width=0.4\linewidth]{figures/analysis/treemap} }}%
   \qquad
-  \subfloat[Sunburst diagram]{{\includegraphics[width=0.4\linewidth]{figures/analysis/sunburst.png} }}%
+  \subfloat[Sunburst diagram]{{\includegraphics[width=0.4\linewidth]{figures/analysis/sunburst} }}%
   \caption{Tree maps and sunburst diagrams are ideal to show hierarchies~\parencite{VisualizationCatalogue2017}.}%
   \label{fig:analysis:hierarchies}
 \end{figure}
@@ -409,9 +409,9 @@ Table~\ref{tab:analysis:hierarchies:interactions} gives a more comprehensive lis
 
 \begin{figure}
   \centering
-  \subfloat[Choropleth map]{{\includegraphics[width=0.4\linewidth]{figures/analysis/choropleth-map.png} }}%
+  \subfloat[Choropleth map]{{\includegraphics[width=0.4\linewidth]{figures/analysis/choropleth-map} }}%
   \qquad
-  \subfloat[Flow map]{{\includegraphics[width=0.4\linewidth]{figures/analysis/flow-map.png} }}%
+  \subfloat[Flow map]{{\includegraphics[width=0.4\linewidth]{figures/analysis/flow-map} }}%
   \caption{Choropleth maps focus on a density while flow maps show a migration of data~\parencite{VisualizationCatalogue2017}.}%
   \label{fig:analysis:geographical}
 \end{figure}
@@ -445,20 +445,22 @@ Thus, it also expects \emph{relational} data in form of a graph
   \label{tab:analysis:geographical:interactions}
 \end{table}
 
-\textbf{Activity diagrams}
+\textbf{Temporal Data Visualizations}
 \begin{figure}
   \centering
-  \subfloat[Calendar]{{\includegraphics[width=0.4\linewidth]{figures/analysis/calendar.png} }}%
+  \subfloat[Calendar]{{\includegraphics[width=0.4\linewidth]{figures/analysis/calendar} }}%
   \qquad
-  \subfloat[Gantt chart]{{\includegraphics[width=0.4\linewidth]{figures/analysis/gantt-chart.png} }}%
+  \subfloat[Gantt chart]{{\includegraphics[width=0.4\linewidth]{figures/analysis/gantt-chart} }}%
   \caption{Similar to a calendar, a gantt chart shows activities and the progress along a time line~\parencite{VisualizationCatalogue2017}.}%
   \label{fig:analysis:temporal}
 \end{figure}
 
-In activity diagrams, each feature is represented as a rectangle, with the duration of the activity mapped to size and position.
+Activity diagrams and timelines are temporal visualizations.
+Most of these techniques have in common that each feature is represented as a rectangle, with the duration of the feature mapped to size and position.
 Calendars and gantt charts could not only read the data from the data source, but also add new features to the data set or update metadata of a feature, e.g.\ the progress of the activity.
 Calendars and gantt charts expect \emph{tabular} data, although data points might reoccur on a regular schedule.
 So some data points, i.e.\ events, might repeat infinitely.
+A very common interaction is the filtering of the data set by selecting an interval over a timeline visualization, e.g. by dragging the mouse from left to right.
 
 % \conceptTable{Temporal data, each feature has a time interval.}{Position, Size, orientation.}{Color, shape, texture.}
 
@@ -474,75 +476,77 @@ So some data points, i.e.\ events, might repeat infinitely.
     Encode & Change color of categories or activities & id of data series + colour \\
     Encode & Change data attribute used for colour & data attribute \\
     Filter & Remove a calendar or a category & id of data series \\
+    Filter & Filter data set by time interval & upper and lower limit \\
   \end{tabularx}
 \end{table}
 
-\section{Multiple View Interactions}\label{sec:analysis:examples:multiple}
+% \section{Multiple View Interactions}\label{sec:analysis:examples:multiple}
 
-This section covers examples of multiple data visualizations.
-Combination of views are often very specific to certain use cases.
-That's why the examples in this section are tied to a use case in contrast to the more generic examples in Section~\ref{sec:analysis:examples:single}.
+% This section covers examples of multiple data visualizations.
+% Combination of views are often very specific to certain use cases.
+% That's why the examples in this section are tied to a use case in contrast to the more generic examples in Section~\ref{sec:analysis:examples}.
 
 
-\subsection{Detail view and Mini View}
-\begin{figure}
-  \centering
-  \subfloat[Detail view]{ \includegraphics[width=0.4\linewidth]{figures/analysis/detail-view} }%
-  \qquad
-  \subfloat[Mini view]{\includegraphics[width=0.4\linewidth]{figures/analysis/mini-view}}%
-  \caption{
-    The screenshot-tool ``Shutter'' shows a magnified detail view of the area around the mouse cursor in the lower left corner of the screen.
-  The opposite approach is e.g.\ ``Leaflet-Minimap'' that shows the map at a larger scale in the lower right.
-  }
-  \label{fig:analysis:detail}
-\end{figure}
+% \subsection{Detail view and Mini View}
+% \begin{figure}
+%   \centering
+%   \subfloat[Detail view]{ \includegraphics[width=0.4\linewidth]{figures/analysis/detail-view} }%
+%   \qquad
+%   \subfloat[Mini view]{\includegraphics[width=0.4\linewidth]{figures/analysis/mini-view}}%
+%   \caption{
+%     The screenshot-tool ``Shutter'' shows a magnified detail view of the area around the mouse cursor in the lower left corner of the screen.
+%   The opposite approach is e.g.\ ``Leaflet-Minimap'' that shows the map at a larger scale in the lower right.
+%   }
+%   \label{fig:analysis:detail}
+% \end{figure}
 
-Detail views show a magnification of the surrounding area of a cursor in a secondary view.
-The resolution of the primary view is too high for the user to distinguish individual pixels.
-The detail view helps to select items.
-Popular use cases are screenshot tools, as seen on the left in Figure~\ref{fig:analysis:detail}, or image processing application.
+% Detail views show a magnification of the surrounding area of a cursor in a secondary view.
+% The resolution of the primary view is too high for the user to distinguish individual pixels.
+% The detail view helps to select items.
+% Popular use cases are screenshot tools, as seen on the left in Figure~\ref{fig:analysis:detail}, or image processing application.
 
-The opposite of a detail view is the mini view.
-You can see an example on the right side of Figure~\ref{fig:analysis:detail}.
-This secondary view shows a larger surrounding of the primary view, if the primary view shows only a section of the entire space.
-Use cases are geographic visualizations and therefore the expected data structure is a map with coordinates of the viewpoint and a zoom factor for each view.
+% The opposite of a detail view is the mini view.
+% You can see an example on the right side of Figure~\ref{fig:analysis:detail}.
+% This secondary view shows a larger surrounding of the primary view, if the primary view shows only a section of the entire space.
+% Use cases are geographic visualizations and therefore the expected data structure is a map with coordinates of the viewpoint and a zoom factor for each view.
 
-\begin{table}[H]
-  \caption{Plausible interactions for detail and mini views.}%
-  \label{fig:analysis:detail:interactions}
-  \begin{tabularx}{\linewidth}{lXX}
-    \bf Category & \bf Description & \bf Required information \\
-    \hline
-    Explore & Move secondary viewpoint & Latitude + Longitude \\
-    Explore & Move primary viewpoint through secondary view & Latitude + Longitude \\
-    Explore & Accelerate scrolling via secondary view & Zoom factor \\
-  \end{tabularx}
-\end{table}
+% \begin{table}[H]
+%   \caption{Plausible interactions for detail and mini views.}%
+%   \label{fig:analysis:detail:interactions}
+%   \begin{tabularx}{\linewidth}{lXX}
+%     \bf Category & \bf Description & \bf Required information \\
+%     \hline
+%     Explore & Move secondary viewpoint & Latitude + Longitude \\
+%     Explore & Move primary viewpoint through secondary view & Latitude + Longitude \\
+%     Explore & Accelerate scrolling via secondary view & Zoom factor \\
+%   \end{tabularx}
+% \end{table}
 
-\subsection{Timeline}
 
-\begin{figure}
-  \centering
-    \includegraphics[width=\linewidth]{figures/analysis/profiler}
-  \caption{Multiple views of Chromium's runtime analysis tool can be focused on a selected time span.}
-  \label{fig:analysis:timeline}
-\end{figure}
-Figure~\ref{fig:analysis:timeline} shows the runtime analysis of the Chromium browser.
-Multiple views show different granularities of the same data.
-At the top, the entire profiling time frame is visualized, with a screenshot of one step in the middle.
-The development of memory is displayed on the third row while a summary is on the bottom.
-The user can select a window on the top line and the data for the other views is reduced according to the selected window.
-A multiple visualization like that expects \emph{temporal} data.
+% \subsection{Timeline}
 
-\begin{table}[H]
-  \caption{Plausible interactions for timelines.}%
-  \label{fig:analysis:timeline:interactions}
-  \begin{tabularx}{\linewidth}{lXX}
-    \bf Category & \bf Description & \bf Required information \\
-    \hline
-    Filter & Filter data by time span & Upper and lower limit \\
-    Select & Display screenshot a certain time & Timestamp  \\
-  \end{tabularx}
-\end{table}
+% \begin{figure}
+%   \centering
+%     \includegraphics[width=\linewidth]{figures/analysis/profiler}
+%   \caption{Multiple views of Chromium's runtime analysis tool can be focused on a selected time span.}
+%   \label{fig:analysis:timeline}
+% \end{figure}
+% Figure~\ref{fig:analysis:timeline} shows the runtime analysis of the Chromium browser.
+% Multiple views show different granularities of the same data.
+% At the top, the entire profiling time frame is visualized, with a screenshot of one step in the middle.
+% The development of memory is displayed on the third row while a summary is on the bottom.
+% The user can select a window on the top line and the data for the other views is reduced according to the selected window.
+% A multiple visualization like that expects \emph{temporal} data.
+
+% \begin{table}[H]
+%   \caption{Plausible interactions for timelines.}%
+%   \label{fig:analysis:timeline:interactions}
+%   \begin{tabularx}{\linewidth}{lXX}
+%     \bf Category & \bf Description & \bf Required information \\
+%     \hline
+%     Filter & Filter data by time span & Upper and lower limit \\
+%     Select & Display screenshot a certain time & Timestamp  \\
+%   \end{tabularx}
+% \end{table}
 
 
