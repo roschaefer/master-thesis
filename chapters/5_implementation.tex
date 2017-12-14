@@ -75,7 +75,7 @@ The rendering \tmap{} is controlled by \attr{UAController}, thus it is connected
 The \attr{MultiviewCoordinator} itself does not have a visual representation.
 
 \subsection{Update mechanisms}
-In Figure~\ref{fig:implementation:architecture} views with a \attr{render} are implemented as React components and can be rendered in place of a node inside the DOM tree.
+In Figure~\ref{fig:implementation:architecture} views with a \attr{render} are implemented as React components and can be rendered in place of a node inside the \gls{dom} tree.
 React components and their dependant components get automatically re-rendered if their internal state changes.
 
 E.g. if the position of the view point of the \attr{MapComponent} changes, that will re-render the included \attr{Map} which depends on the position.
@@ -97,7 +97,7 @@ If the Geometries of the visualized data set are updated, that will change the \
 
 \section{Notifications}
 
-The automatic update mechanism works only within the virtual DOM of React components.
+The automatic update mechanism works only within the virtual \gls{dom} of React components.
 Updates on view level need to be implemented manually.
 
 In accordance to Chapter~\ref{sec:concept}, the class \attr{MultiviewCoordinator} implements the \attr{publish-subscribe} pattern for coordination and works as a broker for interactions across \cmvs{}.
@@ -177,10 +177,10 @@ Each feature comes with a unique \attr{id} which is published when a user intera
   }
 ]{listings/implementation/example.geojson}
 
-\section{Render views in the DOM}
+\section{Render views in the \gls{dom}}
 
-Adding the \gv{} to the DOM is straightforward.
-Listing~\ref{lst:implementation:dom} shows an example how to use React's low-level API to render components inside the DOM.
+Adding the \gv{} to the \gls{dom} is straightforward.
+Listing~\ref{lst:implementation:dom} shows an example how to use React's low-level API to render components inside the \gls{dom}.
 It uses a HTML id \attr{multiview-map-component} to reference a particular node in the HTML document.
 The HTML document needs to import three JavaScript files, i.e.\ two imported libraries required by React and the compiled JavaScript application.
 
@@ -189,7 +189,7 @@ The HTML document needs to import three JavaScript files, i.e.\ two imported lib
   lastline=12,
   caption={
     Example application written in TypeScript.
-    Views can be added to the DOM individually.
+    Views can be added to the \gls{dom} individually.
     The implementation exposes convenient TypeScript declarations, here \attr{MultiviewCoordinator} and \attr{MapComponent} are imported.
   }
 ]{listings/implementation/dom.tsx}
@@ -256,7 +256,7 @@ Listing \ref{lst:implementation:render} shows the \attr{render} method of the co
 ]{listings/implementation/MapComponent.tsx}
 
 The \attr{render} method is the only required method of a React component.
-It will be invoked on the initial rendering of the component of the \attr{DOM} and on every update of the component's properties.
+It will be invoked on the initial rendering of the component of the \gls{dom} and on every update of the component's properties.
 
 React's templating language ``\attr{JSX}'' allows to nest other child components into the React parent component.
 In this case the \attr{Map} component includes a \attr{TileLayer} \attr{GeoJSON} component from the \attr{react-leaflet} library.

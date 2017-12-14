@@ -1,5 +1,5 @@
 %!TEX TS-program = pdflatex
-\input{header}
+\input{misc/preamble}
 
 \newcommand{\TITLE}{\fontsize{30}{28}\selectfont Multiple Coordinated Views on Massive Geo Data}
 
@@ -22,7 +22,7 @@
 	\cleardoublepage
 
 	\pagestyle{fancy}
-    \pagenumbering{roman}
+	\pagenumbering{roman}
 	\input{misc/abstract}
 
 	\clearpage
@@ -31,7 +31,9 @@
 	\glsresetall
 	\setcounter{tocdepth}{4}
 	%\setcounter{secnumdepth}{4}
+	\printglossaries
 	\tableofcontents
+
 	\glsresetall
 	\glsresetall
 	\pagenumbering {arabic}
@@ -47,7 +49,6 @@
 	\input{chapters/7_conclusion}
 
 	\clearpage
-%	\printglossary[type=\acronymtype,style=modsuper]
 	\printbibliography{}
 	% \input{chapters/appendix}
 	\input{misc/authorship}

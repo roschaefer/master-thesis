@@ -2,7 +2,7 @@
 The current treemap implementation and its set of possible interactions is described in Section~\ref{sec:analysis:existing-interactions}.
 For the implementation of the \gv{} several web frameworks are compared and advantages and disadvantages are contrasted in Section~\ref{sec:analysis:frontend-framework-comparison}.
 
-Sections~\ref{sec:analysis:examples} and~\ref{sec:analysis:examples:multiple} describe essential characteristics of interactions in single and multiple data visualizations.
+Section~\ref{sec:analysis:examples} describes essential characteristics of interactions in single and multiple data visualizations.
 These characteristics are relevant for a formalized language of \cmvs{}.
 To accomplish this goal, the approach is to deduce the characteristics by a list of examples.
 What are the expected data structures for each visualization?
@@ -174,6 +174,7 @@ The gathered knowledge is a preparation of the conceptual framework in Section~\
 \end{figure}
 
 Line graphs display how quantitative values have changed over time.
+You can see an example in Figure~\ref{fig:analysis:line-graphs}.
 They are perfectly suited to show trends or compare multiple series of data with each other.
 Line graphs visualize one or many series of data in parallel and therefore the expected data format is \emph{tabular}.
 
@@ -184,7 +185,7 @@ Thus,
     \item orientation and
     \item texture
 \end{enumerate*}
-are constrained by the nature of the visualization.
+are constrained by the visualization technique.
 However, an interaction with the line graph can alter the
 \begin{enumerate*}[label=(\arabic*)]
     \item shape
