@@ -153,11 +153,9 @@ Instead, the \attr{data} of the interaction can be a threshold function which, a
 As a central part of the implementation, the \attr{MultiviewCoordinator} is also used for certain performance optimizations and data integrity considerations.
 Therefore, it is responsible to query geometry data.
 
-Geometries are exchanged with \attr{GeoJSON}\footnotemark as data format.
-\footnotetext{
-  GeoJSON is a format for encoding a variety of geographic data structures~\parencite{GeoJSON2017}.
-  Based on JSON, it can represent simple geographic features like points, lines and areas and reserves a properties object for non-spatial attributes.
-}
+Geometries are exchanged with \attr{GeoJSON} as data format.
+GeoJSON is a format for encoding a variety of geographic data structures~\parencite{GeoJSON2017}.
+Based on JSON, it can represent simple geographic features like points, lines and areas and reserves a properties object for non-spatial attributes.
 
 If the user selects a different data set, the \attr{url} of the GeoJSON endpoint changes and an update of the geometry data is required.
 This behaviour is implemented by the \attr{MultiviewCoordinator} which observes all changes to the \attr{url} of the GeoJSON endpoint.
@@ -194,12 +192,10 @@ The HTML document needs to import three JavaScript files, i.e.\ two imported lib
   }
 ]{listings/implementation/dom.tsx}
 
-The reference implementation of the conceptual framework is written in \attr{TypeScript}\footnotemark.
+The implementation of the conceptual framework is written in \attr{TypeScript}.
+TypeScript is a typed superset of JavaScript that compiles to plain JavaScript.
+It provides optional static typing, classes and interfaces and helps to reduce errors by raising type errors at compile time.
 The implementation exports typescript declaration and you can see an import of the classes \attr{MapComponent} and \attr{MultiviewCoordinator} on lines 1 to 3 in Listing~\ref{lst:implementation:dom}.
-\footnotetext{
-  TypeScript is a typed superset of JavaScript that compiles to plain JavaScript.
-  It provides optional static typing, classes and interfaces and helps to reduce errors by raising type errors at compile time.
-}
 
 
 % \section{Software patterns}\label{sec:implementation:patterns}
