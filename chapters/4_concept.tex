@@ -176,9 +176,11 @@ Visual variables according to \textcite{Bertin2010} as in in Section~\ref{sec:re
 
 \subsection{Function declarations}
 The functions $Select$ and $Filter$ operate on entities and can be used interchangeably:
-\begin{equation} Select: \varnothing \rightarrow \mathcal{P}(\mathbb{E}) \end{equation}
-\begin{equation} Filter: \mathbb{E} \rightarrow \{ \bot, \top \} \end{equation}
-  Its domain is the empty set $\varnothing$ and the set of all subsets of $E$ is written as $ \mathcal{P}(\mathbb{E})$.
+\begin{equation}
+\begin{split} Select: \varnothing \rightarrow \mathcal{P}(\mathbb{E}) \end{split}\qquad
+\begin{split} Filter: \mathbb{E} \rightarrow \{ \bot, \top \} \end{split}
+\end{equation}
+  The empty set is written as $\varnothing$ and the set of all subsets of $E$ is written as $ \mathcal{P}(\mathbb{E})$.
 
   $Select$ just returns a subset of entities explicitly and expects no input.
   It can be used to highlight or focus entities, mark them for deletion or show details of an entity.
@@ -187,7 +189,32 @@ The functions $Select$ and $Filter$ operate on entities and can be used intercha
   Instead of an explicitly defined set of filtered entities, entities are defined implicitly.
   A good example would be a filter function checking upper and lower limit for each entity and a dimension called \attr{price}.
 
-\begin{equation} Window: \mathbb{D} \rightarrow W, W = \{w | w \subseteq Space(d), d \in \mathbb{D}\} \end{equation}
+\begin{equation}
+\begin{split} Order: \varnothing \rightarrow \mathbb{E}^* \end{split}\qquad
+\begin{split} Sort:  \mathbb{E} \times \mathbb{E} \rightarrow \mathbb{R} \end{split}
+\end{equation}
+
+  The functions $Order$ and $Sort$ are used to order two entities $e1, e2 \in \mathbb{E}$.
+  The following equivalencies hold for $Sort$:
+  \begin{align*}
+     e1 < e2 \quad\Leftrightarrow\quad Sort(e1,e2) < 0 \\
+     e1 = e2 \quad\Leftrightarrow\quad Sort(e1,e2) = 0 \\
+     e1 > e2 \quad\Leftrightarrow\quad Sort(e1,e2) > 0
+  \end{align*}
+
+  Similar to $Select$ and $Filter$, these order functions can be implemented either explicitly or implicitly.
+  $Order$ explicitly returns a sequence of entities, e.g.\ $(e4, e2, e5, e1, e3)$.
+  $Sort$ implicitly orders two entities $e1$ and $e2$ based on their dimensions.
+  E.g.\ ordering entities based on the alphabetical order of their name would be an example of the latter.
+
+\begin{equation} Encode: \mathbb{D} \rightarrow \mathbb{V} \end{equation}
+  The $Encode$ function can be used to change the mapping of dimension to a visual variable.
+  E.g.\ bar charts, line diagrams, histograms and bubble charts can change the dimension mapped to their coordinate axes.
+  Bubble charts can encode a different dimension in the \attr{size} of the bubbles.
+  Choropleth maps, treemaps and bubble charts can map a different attribute to \attr{colour}.
+  A specialized version of this function may return the attribute that is used for the layout algorithm in treemaps.
+
+\begin{equation} Window: \mathbb{D} \rightarrow W, \quad W = \{w | w \subseteq Space(d), d \in \mathbb{D}\} \end{equation}
   For each of the dimensions in $\mathbb{D}$, the function returns the currently visible subset.
   E.g.\ a zooming or panning operation in a \gv{} would result in a change of \attr{latitude}, \attr{longitude} and \attr{zoom} of the viewpoint and therefore the currently visible section of the geographic vector space.
   The subset $w$ can be encoded implicitly or explicitly.
@@ -195,37 +222,19 @@ The functions $Select$ and $Filter$ operate on entities and can be used intercha
   E.g.\ in a calendar we map \attr{fromDay}, \attr{toDay}, \attr{fromHour} and \attr{toHour} to define the currently visible time section.
   If a dimension has discrete values, subset $w$ could also be encoded with all values explicitly stated.
 
-\begin{equation} Order: \mathbb{E} \times \mathbb{E} \rightarrow \mathbb{R} \end{equation}
-  The $Order$ function is used to order two arbitrary entities $e1, e2 \in \mathbb{E}$.
-  If $e1 < e2$ then the return value $r$ will be $ r < 0 $.
-  For $e1 = e2$ the statement $r = 0$ holds and for $e1 > e2$ then $r > 0$.
 
-  Similar to $Filter$, the $Order$ function can either be implemented explicity or implicitly.
-  An explicit implementation returns a value $r$ based on the relative position of $e1$ to $e1$ in a given sequence.
-  An implicit implementation would return a value $r$ based on some computation of dimensions of $e1$ and $e2$.
-  E.g.\ ordering entities based on the alphabetical order of their name would be an example of the latter.
+% Let's have some examples how these functions can be applied on coordinated interactions:
 
-\begin{equation} Encode: \mathbb{D} \rightarrow \mathbb{V} \end{equation}
-  The $Encode$ function can be used to change any mapping of dimension to any visual variable.
-  E.g.\ bar charts, line diagrams, histograms and bubble charts can change the attribute mapped to the \attr{y} and \attr{x} axes.
-  Bubble charts can encode a different dimension in the \attr{size} of the bubbles.
-  Choropleth maps, treemaps and bubble charts can map a different attribute to the \attr{colour}.
-  A specialized version of this function may return the attribute that is used for the \attr{layout} of the tiling algorithm in treemaps.
-  Note that parallel plots have arbitrary many \attr{y} axes.
-  To define the order of dimensions displayed in a parallel plot, each dimension will be mapped to a named \attr{y} axis, e.g. $y1, y2 ... y3$ and so on.
+% A user clicks on a bar in a bar chart and this feature then changes its background colour.
+% To coordinate the highlighting, the bar chart view will formulate a new message composed of a \emph{Select} function and the category \emph{highlight}.
+% The function returns the set with the highlighted entity.
 
-Let's have some examples how these functions can be applied on coordinated interactions:
+% Let's say, a geographical map should move the position of the viewpoint on a entity.
+% The triggering view will use a function \emph{Select} this time with a category \emph{focus}.
+% A treemap as a third view could pick up that interaction and show a subtree with the focused entity as root node. 
 
-A user clicks on a bar in a bar chart and this feature then changes its background colour.
-To coordinate the highlighting, the bar chart view will formulate a new message composed of a \emph{Select} function and the category \emph{highlight}.
-The function returns the set with the highlighted entity.
-
-Let's say, a geographical map should move the position of the viewpoint on a entity.
-The triggering view will use a function \emph{Select} this time with a category \emph{focus}.
-A treemap as a third view could pick up that interaction and show a subtree with the focused entity as root node. 
-
-A view may show some controls to filter the data set, e.g.\ two sliders on an attribute called \attr{prize}.
-When the user releases the mouse, an interaction with the function \emph{Filter} and the category \emph{Hide} will be triggered.  
-The function will then check the \attr{prize} of every entity and returns \attr{true} if the prize is within the given lower and upper limit, \attr{false} otherwise.
+% A view may show some controls to filter the data set, e.g.\ two sliders on an attribute called \attr{prize}.
+% When the user releases the mouse, an interaction with the function \emph{Filter} and the category \emph{Hide} will be triggered.  
+% The function will then check the \attr{prize} of every entity and returns \attr{true} if the prize is within the given lower and upper limit, \attr{false} otherwise.
 
 
