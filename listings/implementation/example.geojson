@@ -3,6 +3,7 @@
   "features": [
     {
       "type": "Feature",
+      "id": 0,
       "geometry": {
         "type": "MultiPolygon",
         "coordinates": [...]
@@ -12,8 +13,7 @@
         "state_code": "BW",
         "user_count_total": "34",
         "user_count_normalized": "0.10149253731343283"
-      },
-      "id": 0
+      }
     }
   ]
 }

@@ -66,13 +66,21 @@ In the course of this thesis the following interactions have been implemented:
 This section is intended to show precisely, how the specification of Chapter~\ref{sec:concept} is implemented and translated to actual code.
 As you recall, an interaction is defined as $I(T,(M(C,P,S),E))$, the message $M$ is the part that is communicated between views.
 This message is published to a \attr{publish-subscribe} broker.
+In Chapter~\ref{sec:concept} in Figure~\ref{fig:concept:component-diagram} this component is called \attr{MultiviewCoordinator} and conveniently, the class has the same name in the actual code base.
+The coordinator has access to a database backend, just like in the component diagram, and the data will be fetched at runtime with an \gls{ajax} call.
+The \attr{Input/Output} middleware in our case is the browser, as we develop a web based application.
+The browser provides an \gls{api} for the mouse, keyboard, microphone and even the webcam.
 
-\subsection{Encoding of category, purpose and subject}
+\subsection{PubSubJS as implementation for publish-subscribe}
 In accordance to Chapter~\ref{sec:concept}, the implementation makes use of the \attr{publish-subscribe} pattern for coordination.
 To achieve this, it uses the JavaScript library \attr{PubSubJS} which is an topic-based, asynchronous implementation of the pattern.
-\attr{PubSubJS} allows nested topics, so categories and purposes are encoded as nested strings.
-A view can subscribe to a group of interactions, e.g.\ the group \attr{mcv.select} includes both \attr{mcv.select.highlight} and \attr{mcv.select.focus}.
-This approach gives views more flexibility, because they can either subscribe to all interactions or just a few specific interactions.
+\attr{PubSubJS} allows nested topics, i.e.\ topics and sub-topics, and a subscriber will be notified if a topic or any of its sub-topics is published.
+This means, a view can subscribe to a group of interactions.
+E.g.\ the group \attr{mcv.select} includes both \attr{mcv.select.highlight} and \attr{mcv.select.focus}.
+
+\subsection{Encoding of category and purpose as topic and sub-topic}
+\attr{PubSubJS}'s nested topics can be used to encode categories and purposes.
+This approach gives views more flexibility, because they can either subscribe to every interaction, all interactions of a category, or just a few specific interactions.
 Figure~\ref{fig:implementation:encoding} gives an example of a select interaction with the purpose to focus on three entities.
 
 \begin{figure}[ht]
@@ -83,9 +91,11 @@ Figure~\ref{fig:implementation:encoding} gives an example of a select interactio
   }\label{fig:implementation:encoding}
 \end{figure}
 
+\subsection{Encoding of the subject as a JavaScript callback}
 Not only basic data types like numbers and strings can be published, as seen in Listing~\ref{lst:implementation:subscribe}, but also functions.
-If an interaction of type \attr{filter} is published, it is not necessary to publish all filtered ids of entities explicitly.
-Instead, the \attr{data} of the interaction can be a threshold function which, applied on an entity, returns whether or not the entity is filtered.
+In javascript, these functions are called ``callbacks''.
+If an interaction of type \attr{filter} is published, the \attr{data} parameter of the subscription callback is itself a callback.
+This callback would be a threshold function expecting an entity as parameter and returns whether or not the entity is filtered.
 
 \lstinputlisting[
   label={lst:implementation:subscribe},
@@ -94,14 +104,26 @@ Instead, the \attr{data} of the interaction can be a threshold function which, a
   }
 ]{listings/implementation/subscribe.js}
 
-\subsection{GeoJSON Endpoint}
+\subsection{Data Model implemented as GeoJSON}
 
 \attr{GeoJSON} is used as implementation of the shared data model.
 The format is used to encode a variety of geographic data structures~\parencite{GeoJSON2017}.
 Based on JSON, it can represent simple geographic features like points, lines and areas and reserves a properties object for non-spatial attributes.
 
 GeoJSON allows to encode an \attr{id} as a member in the feature object, which can be used to encode the \attr{id} of the entity.
-Data attributes of entities are encoded as properties and a hierarchic structure can be encoded in feature collections.
+Data attributes of entities are encoded as properties and hierarchic relationships are expressed via feature collections.
+
+A GeoJSON example can be seen in listing~\ref{lst:geojson:example}, coordinates are ommited for brevity.
+The GeoJSON property \attr{user_count_normalized} encodes a percentage of a user base per region.
+This is one of the attributes that can be mapped to the colour of a \tmap{}.
+
+\lstinputlisting[
+  label={lst:geojson:example},
+  caption={
+    A GeoJSON example of a user distribution across German federal states.
+    Coordinates are omitted.
+  }
+]{listings/implementation/example.geojson}
 
 
 \section{Architecture}
@@ -164,19 +186,6 @@ If the user selects a different data set, the \attr{url} of the GeoJSON endpoint
 This behaviour is implemented by the \attr{MultiviewCoordinator} which observes all changes to the \attr{url} of the GeoJSON endpoint.
 If the \attr{url} changes, the coordinator fetches geometry data, publishes a change of the geometries and all subscribed views can re-render.
 This is also a performance optimization, as it reduces the number of requests to the \attr{GeoJSON} endpoint.
-
-An example of these geometries can be seen in listing~\ref{lst:geojson:example}.
-For convenience, the file includes the aggregated data in the \attr{properties} of each feature.
-In this case the colors the shapes of the \tmap{} are based on the value of \attr{user_count_normalized}.
-Each feature comes with a unique \attr{id} which is published when a user interacts with the feature.
-
-\lstinputlisting[
-  label={lst:geojson:example},
-  caption={
-    A GeoJSON example of a user distribution across German federal states.
-    Coordinates are omitted.
-  }
-]{listings/implementation/example.geojson}
 
 \section{Render views in the \gls{dom}}
 
