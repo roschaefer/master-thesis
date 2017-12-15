@@ -81,17 +81,11 @@ größere Minimap
 
 # 2017-12-12
 
-Bildunterschriften unter die Bilder
-
 Analyse die Interfaces benennen
-Input/Output Controller anstelle Computer
 Lieber FMC Diagramm
-View C in "View N" umbenennen mit Punkten
 "Ausprägung und Spezifikation" als Zusammenhang
-Das Abholen der Daten ist nicht spezifiziert
 Ein Datenmanager soll spezifiziert sein, GeoJSON endpoint eine Ausprägung davon
 
-User cases ~and discussion~ weg
 
 Im Kapitel Implementation eine Section reinbauen, welcher alle Zusammenhänge zu Kapitel Analyse enthält
 Kapitel Implementation
