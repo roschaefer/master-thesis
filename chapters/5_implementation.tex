@@ -62,6 +62,46 @@ In the course of this thesis the following interactions have been implemented:
 \todo[inline]{If we still have time, add filter interaction here}
 
 
+\section{Implementation of the Conceptual Framework}
+This section is intended to show precisely, how the specification of Chapter~\ref{sec:concept} is implemented and translated to actual code.
+As you recall, an interaction is defined as $I(T,(M(C,P,S),E))$, the message $M$ is the part that is communicated between views.
+This message is published to a \attr{publish-subscribe} broker.
+
+\subsection{Encoding of category, purpose and subject}
+In accordance to Chapter~\ref{sec:concept}, the implementation makes use of the \attr{publish-subscribe} pattern for coordination.
+To achieve this, it uses the JavaScript library \attr{PubSubJS} which is an topic-based, asynchronous implementation of the pattern.
+\attr{PubSubJS} allows nested topics, so categories and purposes are encoded as nested strings.
+A view can subscribe to a group of interactions, e.g.\ the group \attr{mcv.select} includes both \attr{mcv.select.highlight} and \attr{mcv.select.focus}.
+This approach gives views more flexibility, because they can either subscribe to all interactions or just a few specific interactions.
+Figure~\ref{fig:implementation:encoding} gives an example of a select interaction with the purpose to focus on three entities.
+
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=0.5\textwidth]{figures/implementation/Encoding}
+  \caption{%
+    Example of the encoding of interaction category and purpose.
+  }\label{fig:implementation:encoding}
+\end{figure}
+
+Not only basic data types like numbers and strings can be published, as seen in Listing~\ref{lst:implementation:subscribe}, but also functions.
+If an interaction of type \attr{filter} is published, it is not necessary to publish all filtered ids of entities explicitly.
+Instead, the \attr{data} of the interaction can be a threshold function which, applied on an entity, returns whether or not the entity is filtered.
+
+\lstinputlisting[
+  label={lst:implementation:subscribe},
+  caption={
+    A simplified example how to subscribe to an interaction.
+  }
+]{listings/implementation/subscribe.js}
+
+\subsection{GeoJSON Endpoint}
+
+\attr{GeoJSON} is used as implementation of the shared data model.
+The format is used to encode a variety of geographic data structures~\parencite{GeoJSON2017}.
+Based on JSON, it can represent simple geographic features like points, lines and areas and reserves a properties object for non-spatial attributes.
+
+GeoJSON allows to encode an \attr{id} as a member in the feature object, which can be used to encode the \attr{id} of the entity.
+Data attributes of entities are encoded as properties and a hierarchic structure can be encoded in feature collections.
 
 
 \section{Architecture}
@@ -96,10 +136,8 @@ If the Geometries of the visualized data set are updated, that will change the \
 \section{Notifications}
 
 The automatic update mechanism works only within the virtual \gls{dom} of React components.
-Updates on view level need to be implemented manually.
-
-In accordance to Chapter~\ref{sec:concept}, the class \attr{MultiviewCoordinator} implements the \attr{publish-subscribe} pattern for coordination and works as a broker for interactions across \cmvs{}.
-To achieve this, it uses the JavaScript library \attr{PubSubJS} which is an topic-based, asynchronous implementation of the pattern.
+Updates on view level need to be implemented manually
+For this purpose, the class \attr{MultiviewCoordinator} wraps the library \attr{PubSubJS} and works as a broker for interactions across \cmvs{}.
 
 Let's take an example from a common usage scenario:
 During initialization, all views subscribe to \attr{MultiviewCoordinator} in order to re-render after interactions.
@@ -116,44 +154,11 @@ You can see this scenario in the sequence diagram in Figure~\ref{fig:implementat
 \end{figure}
 
 
-\subsection{Encoding of interaction category and purpose}
-Each view gets a reference to the coordinator, e.g. during initialization, and can subscribe to interactions as seen in Listing~\ref{lst:implementation:subscribe}.
-
-\attr{PubSubJS} allows nested topics, so categories and purposes are encoded as nested strings.
-A view can subscribe to a group of interactions, e.g.\ the group \attr{mcv.select} includes both \attr{mcv.select.highlight} and \attr{mcv.select.focus}.
-This approach gives each view self-responsibility of the implementation of individual interactions.
-
-According to Chapter~\ref{sec:concept}, categories and purposes are encoded with nested strings.
-Figure~\ref{fig:implementation:encoding} gives an example of a select interaction with the purpose to focus on three entities.
-
-\begin{figure}[ht]
-  \centering
-  \includegraphics[width=0.5\textwidth]{figures/implementation/Encoding}
-  \caption{%
-    Example of the encoding of interaction category and purpose.
-  }\label{fig:implementation:encoding}
-\end{figure}
-
-Not only basic data types like numbers and strings can be published, as seen in Listing~\ref{lst:implementation:subscribe}, but also functions.
-If an interaction of type \attr{filter} is published, it is not necessary to publish all filtered ids of entities explicitly.
-Instead, the \attr{data} of the interaction can be a threshold function which, applied on an entity, returns whether or not the entity is filtered.
-
-\lstinputlisting[
-  label={lst:implementation:subscribe},
-  caption={
-    A simplified example how to subscribe to an interaction.
-  }
-]{listings/implementation/subscribe.js}
-
-
 \section{MultiviewCoordinator}
 
+Each view gets a reference to the \attr{MultiviewCoordinator}, e.g. during initialization, and can subscribe to interactions as seen in Listing~\ref{lst:implementation:subscribe}.
 As a central part of the implementation, the \attr{MultiviewCoordinator} is also used for certain performance optimizations and data integrity considerations.
 Therefore, it is responsible to query geometry data.
-
-Geometries are exchanged with \attr{GeoJSON} as data format.
-GeoJSON is a format for encoding a variety of geographic data structures~\parencite{GeoJSON2017}.
-Based on JSON, it can represent simple geographic features like points, lines and areas and reserves a properties object for non-spatial attributes.
 
 If the user selects a different data set, the \attr{url} of the GeoJSON endpoint changes and an update of the geometry data is required.
 This behaviour is implemented by the \attr{MultiviewCoordinator} which observes all changes to the \attr{url} of the GeoJSON endpoint.
