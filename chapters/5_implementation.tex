@@ -6,6 +6,20 @@ Finally, the resulting architecture is explained for every component and the int
 
 \section{Implemented interactions}
 
+Figure~\ref{fig:implementation:layout} shows a screenshot of the final \cmv{} application.
+Different views are labeled and separated by red lines.
+The \tmap{} is on the left, the \gv{} is on the right and some additional views to inspect and manually publish messages are below the \gv{}.
+
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=\textwidth]{figures/implementation/Layout}
+  \caption{%
+    This Figure shows the layout of the \cmv{}, red lines separating different views.
+    The currently visualized data set is called ``Wahlkreise'' and consists of German administrative districts.
+    The layout of the \tmap{} is based on the unemployment rate, the colour is based on the percentage of high-school graduates.
+  }\label{fig:implementation:layout}
+\end{figure}
+
 In the course of this thesis the following interactions have been implemented:
 \begin{itemize}
   \item
@@ -17,6 +31,8 @@ In the course of this thesis the following interactions have been implemented:
         The corresponding block or geographic feature will be highlighted respectively.
       \item
         A click on a block in the \tmap{} selects this entity in the \gv{} and vice versa.
+        In Figure~\ref{fig:implementation:layout}, district ``Magdeburg'' is selected in the \gv{}.
+        This district has an unusually high percentage of graduates compared to other districts with a similar unemployment rate.
       \item
         Holding the control key, multiple clicks on a block in the \tmap{} creates a group of selected entities.
         Corresponding geographic feature or blocks in the \tmap{} or \gv{} are selected as well.
@@ -45,22 +61,7 @@ In the course of this thesis the following interactions have been implemented:
 \end{itemize}
 \todo[inline]{If we still have time, add filter interaction here}
 
-\section{Coordinated Multiple View Layout}
 
-Figure~\ref{fig:implementation:layout} shows the layout of the different views from the user perspective.
-The \tmap{} is on the left, the \gv{} is on the right and some additional views to inspect and manually publish messages are displayed.
-
-The currently visualized data set is called ``Wahlkreise'' and consists of German administrative districts.
-The \tmap{} is tiled based on unemployment rate and the colour is based on the percentage of high-school graduates.
-District ``Magdeburg'' is selected in the \gv{} with an unusually high percentage of graduates compared to other districts with a similar unemployment rate.
-
-\begin{figure}[ht]
-  \centering
-  \includegraphics[width=\textwidth]{figures/implementation/Layout}
-  \caption{%
-    This Figure shows the layout of the \cmv{}, red lines indicate the borders of different views.
-  }\label{fig:implementation:layout}
-\end{figure}
 
 
 \section{Architecture}
