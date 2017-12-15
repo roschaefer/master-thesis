@@ -146,82 +146,54 @@ These attributes may describe e.g.\ the weight of an edge in a flow map.
 \section{Encoding of Interaction Subjects}\label{sec:concept:message-interface}
 
 As described in Section~\ref{sec:concept:framework:interaction}, a message consists of the interaction \emph{category}, \emph{purpose} and \emph{subject}.
-Category and purpose are just identifiers and can be encoded with a number or a string.
-The subject is a highly variable object, that can be a number, a word, a list, a dictionary and so on.
-To account for diversity, the approach in this thesis is to model the subject as a mathematical function.
-This function is defined at runtime and the return type can be any of the classes already stated.
+Category and purpose are just identifiers and can be encoded as a number or a string.
+The subject is a highly variable object.
+It could define some state, e.g.\ explicitly stating the id of an entity or the name of an attribute.
+Alternatively, it could define some behaviour, e.g.\ implicitly defining if an entity is filtered based on its dimensions.
+Therefore, the approach in this thesis is to model the subject as a mathematical function.
+If the function has no input parameter, it just returns some state, i.e.\ the ids of \emph{entities}, \emph{series}, and \emph{relations} or their respective \emph{attributes}.
+If the function depends on input parameters, it may return e.g.\ \attr{true} or \attr{false} or define a sort order.
 
-These functions operates on the ids of \emph{entities}, \emph{series}, and \emph{relations} or their respective \emph{attributes}.
-The name of the function is the \emph{category} and the function domain being the \emph{subject} of the interaction.
-Thus, we can describe interaction through a change of its semantic but we ignore implementation details of specific visualizations.
-
-
-These function are derived from specific interactions of the examples in Section~\ref{sec:analysis}.
+In this section, a couple of function declarations are derived from the examples in Section~\ref{sec:analysis:examples}.
 Domain and range of these functions refer to the objects defined in the data model in Section~\ref{sec:concept:data-model}.
-To declare the functions explicitly, we define a couple of sets:
 
+\subsection{Set definitions}
+The set of all entities $E$ in our subject space is defined as:
 \begin{equation} \mathbb{E} : \mathbb{E} \subseteq \mathbb{N}  \end{equation}
-  The set of all entities in our subject space.
-  Each entity can be represented by its \attr{id}, so for simplicity $\mathbb{E}$ is a subset all natural numbers in $\mathbb{N}$.
+Each entity can be represented by its \attr{id}, so for simplicity $\mathbb{E}$ is a subset all natural numbers in $\mathbb{N}$.
 
+The set of all dimensions $D$ in our shared data model is defined as:
 \begin{equation} \mathbb{D} : \mathbb{D} \subseteq \Sigma^* \end{equation}
-  The set of all dimensions in our shared data model.
-  Dimensions of a data set are the attributes of our data model and both terms are used synonymously in the following.
+For simplicity, each dimension is represented as a sequence of characters, with the set of all sequences of characters written as $ \Sigma^*$.
 
-\begin{equation} Space(\mathbb{D}) \end{equation}
-  Where $Space$ is the range of values of a dimension $d \in \mathbb{D}$.
+The set of all values of a dimension $d$ is defined as:
+\begin{equation} Space(d), d \in \mathbb{D} \end{equation}
+So for an attribute \attr{name}, $Space(name)$ would be the set of all strings.
 
-  For convenience, we define this set with a function $Space$ which maps the name of a dimension $d$ to its set of possible data values.
-  So for an attribute \attr{name} that would be the set of all strings.
-  For continuous values, that would be the set of all real numbers $\mathbb{R}$.
-  But $Space(D)$ also includes the set of all possible discrete values of dimension. 
+Visual variables according to \textcite{Bertin2010} as in in Section~\ref{sec:related-work:visual-variables} are defined as:
+\begin{equation} \mathbb{V} = \{position, size, shape, value, hue, orientation, texture\} \end{equation}
 
-\begin{equation} \mathbb{V} = \{x,y,y2,y3\ldots{}yn,z,height,colour,size,shape,orientation\ldots{}\} \end{equation}
-  A discrete set to capture visual variables position, size, orientation, texture, colour and shape, as described in Section~\ref{sec:related-work:visual-variables}.
-  It is required to allow for \emph{encoding} interactions, that change the mapping of a dimension to a visual variable.
 
-Note about notation:
-The power set of all entities in $E$ is written as $ \mathcal{P}(\mathbb{E})$ and is the set of all subsets of $E$.
-The list of all sequences of all entities in $E$ is written as $ \mathbb{E^*} $ and includes all enumerations of $\mathcal{P}(E)$.
-The empty set is written as $\varnothing$.
-If a function has the empty set as its domain, it expects no arguments.
-Such a function is also called a constant.
-
-The following is a list of functions describing the categories based on the aforementioned sets:
-
+\subsection{Function declarations}
+The functions $Select$ and $Filter$ operate on entities and can be used interchangeably:
 \begin{equation} Select: \varnothing \rightarrow \mathcal{P}(\mathbb{E}) \end{equation}
-  The constant $Select$ takes no arguments and returns a subset of selected entities.
-  A $Select$ can be used to highlight entities or to show details of entities.
-  It can be used to mark entities for deletion or to temporarily hide entities.
-  In addition it possible to focus the visualization on these entities.
-
-  An example of the latter:
-  A geographical map could move the viewpoint position and the zoom level such that all focused entities in $Select()$ are visible.
-  Hierarchical visualizations, e.g.\ treemaps or sunburst maps, may choose a single focused entity to be the root node of the currently displayed subtree.
-
 \begin{equation} Filter: \mathbb{E} \rightarrow \{ \bot, \top \} \end{equation}
-  The $Filter$ function describes which entities are part of the visualization.
-  It can be implemented explicitly or implicitly.
-  An explicit implementation would returns \attr{true} or \attr{false} based on the fact if an entity is part of an already known set.
-  Implicit implementations would be based on the values of the dimensions of the entity.
-  A threshold function is a good example of an implicit implementation.
+  Its domain is the empty set $\varnothing$ and the set of all subsets of $E$ is written as $ \mathcal{P}(\mathbb{E})$.
 
-\begin{equation} Window: \mathbb{D} \rightarrow \mathcal{P}(Space(\mathbb{D})) \end{equation}
-  This function defines the currently visible section of the vector space of the dimensions in $\mathbb{D}$.
+  $Select$ just returns a subset of entities explicitly and expects no input.
+  It can be used to highlight or focus entities, mark them for deletion or show details of an entity.
+
+  $Filter$ returns for every entity either \attr{true} or \attr{false}, depending on the entity and the value of its dimensions.
+  Instead of an explicitly defined set of filtered entities, entities are defined implicitly.
+  A good example would be a filter function checking upper and lower limit for each entity and a dimension called \attr{price}.
+
+\begin{equation} Window: \mathbb{D} \rightarrow W, W = \{w | w \subseteq Space(d), d \in \mathbb{D}\} \end{equation}
   For each of the dimensions in $\mathbb{D}$, the function returns the currently visible subset.
-
-  The subset can be defined implicitly or explicitly:
-  For charts with continuous values along the x- and y-axes, the function returns the representatives \attr{from} and \attr{to}.
-  These representatives implicitly define the interval in $Space(\mathbb{D})$.
-  If a dimension has discrete values, this function can also return an explicit set of values.
-
-  Scatter plots, bar charts, line diagrams, bubble charts all have two coordinate axes.
-  Therefore \attr{x} and \attr{y} will each be mapped to a pair of values $(from,to) \in \mathbb{R}$.
-  Geographical visualizations have the camera pointing to the center of the earth.
-  We have three degrees of freedom, so we would map \attr{latitude}, \attr{longitude} and \attr{zoom} to three values in $(lat,long,z) \in \mathbb{R}$.
-  In a calendar we map \attr{fromDay}, \attr{toDay}, \attr{fromHour} and \attr{toHour} to define the currently visible time section.
-  A special attribute of our shared data model is the height of the subtree of an entity, i.e.\ how many nested series we have below that entity.
-  Therefore we can also map \attr{height} to a single value to define the maximum depth of the currently visible subtree in a treemap.
+  E.g.\ a zooming or panning operation in a \gv{} would result in a change of \attr{latitude}, \attr{longitude} and \attr{zoom} of the viewpoint and therefore the currently visible section of the geographic vector space.
+  The subset $w$ can be encoded implicitly or explicitly.
+  For continuous values two representatives \attr{from} and \attr{to} could define an interval.
+  E.g.\ in a calendar we map \attr{fromDay}, \attr{toDay}, \attr{fromHour} and \attr{toHour} to define the currently visible time section.
+  If a dimension has discrete values, subset $w$ could also be encoded with all values explicitly stated.
 
 \begin{equation} Order: \mathbb{E} \times \mathbb{E} \rightarrow \mathbb{R} \end{equation}
   The $Order$ function is used to order two arbitrary entities $e1, e2 \in \mathbb{E}$.
@@ -236,7 +208,7 @@ The following is a list of functions describing the categories based on the afor
 \begin{equation} Encode: \mathbb{D} \rightarrow \mathbb{V} \end{equation}
   The $Encode$ function can be used to change any mapping of dimension to any visual variable.
   E.g.\ bar charts, line diagrams, histograms and bubble charts can change the attribute mapped to the \attr{y} and \attr{x} axes.
-  Bubble charts can encode a different data attribute in the \attr{size} of the bubbles.
+  Bubble charts can encode a different dimension in the \attr{size} of the bubbles.
   Choropleth maps, treemaps and bubble charts can map a different attribute to the \attr{colour}.
   A specialized version of this function may return the attribute that is used for the \attr{layout} of the tiling algorithm in treemaps.
   Note that parallel plots have arbitrary many \attr{y} axes.
