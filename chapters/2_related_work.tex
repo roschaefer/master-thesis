@@ -154,6 +154,24 @@ All three dimensional treemaps in this thesis are in fact \tmaps{} and therefore
   \label{fig:research:ua_treemap}
 \end{figure}
 
+\subsection{Spatially Consistent Treemaps}
+When visualizing geographical data with a treemap, e.g.\ census data, it is desired to have a spatially consistent visualizations
+The layout of hierarchical administrative subdivisions should approximately match a \gv{} of these subdivisions.
+An early algorithm for geographically consistent treemaps is called ``Spatially Ordered Treemaps'' by \textcite{Wood2008}.
+It is a modification of the ``Squarified Treemap Algorithm''~\cite{Bruls2000}.
+This modification places nodes based on their distance to the enclosing rectangle to be filled, rather than in the weight sequence order.
+As \textcite{Ghoniem2015} demonstrate, this algorithm shows undesirable fragmentation for large, flat hierarchies.
+
+Less fragmented but also less consistent regarding the geographic correctness are ``Histomaps'' by \textcite{Keim2002}.
+This treemap algorithm sorts nodes such that their direction in the layout approximates their direction with regard to latitude and longitude.
+This does not lead to fragmentation, but also does not guarantee geographic correctness.
+
+\textcite{Ghoniem2015} developed ``Weighted Maps'' which are considered to be a trade-off algorithm for ``HistoMaps''.
+This trade-off is between aspect ratio and geographic correctness.
+Generally speaking, these treemap algorithms suffer because two unrelated circumstances are visualized in the same view.
+For that reason, the approach in this paper is to establish the geographic context in a separate view and let treemaps excel in what they are best:
+Visualizing hierarchic data.
+
 
 \section{Coordinated Multiple Views}\label{sec:related-work:cmvs}
 \cmvs{} are a combination of data visualizations of the same data set in multiple views, often side-by-side.
