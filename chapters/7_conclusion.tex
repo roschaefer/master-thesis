@@ -1,41 +1,45 @@
 \chapter{Summary and Conclusion}\label{sec:conclusion}
 
 This thesis demonstrates how \cmvs{} can be used to improve comprehensibility and interactivity of \tmaps{}.
-In particular, the approach was applied on multi-dimensional, geographical data with one additional, coordinated geographical visualization.
-Apart from the specific use case, interactions in \cmvs{} were formally described and a conceptual framework was developed that can be used for arbitrary data visualizations.
+A \cmv{} was developed to visualize multi-dimensional, hierarchic and geographical data.
+A treemap provided the technical context while the \gv{} next to it established the geographic context.
+Focusing on a section of a map by clicking on an item in the treemap was discovered as an investigation technique.
+It was possible to guess the reason for outliers in the data set by exploring the geographic surrounding.
+Furthermore, selecting a group of items in the treemap could reveal geographic correlations in the \gv{}.
 
-Data analysts can use the new knowledge by applying \tmaps{} in the context of \dss{}.
+Apart from the specific use case, interactions in \cmvs{} were formalized.
+Precisely, a shared data model, an encoding of the different parts of the interaction and a communication pattern was specified.
+This specification provided the basis for the actual implementation.
+By that, it should be easy to add additional data visualizations to the system.
+The specification also may help future developments of \cmv{} frameworks.
+
+A \cmv{} of treemap and a \gv{} do not compromise geographical or non-geographical correctness.
+Other algorithms like ``Weighted Maps'' or ``HistoMaps'' are constrained to a single view and offer a trade-off between treemap layout and geographical correctness.
+
+Data analysts can use the new knowledge by applying treemaps in the context of \dss{}.
 This applies especially in application scenarios with a strong geographical context, e.g. local administration and urban planning.
-It was shown that a coordinated geographical visualization can improve usability by providing orientation and a better recognition of regions and locations in \tmaps{}.
-The enrichment of the original data set by adding geographical information, which is not present in the data set itself, turned out to be a great improvement.
-
-The formalization of an interaction in \cmvs{} and the subsequent development of a conceptual framework is helpful for researchers and developers of visualization frameworks.
+The specification of \cmvs{} and the subsequent development of a conceptual framework is helpful for researchers and developers of visualization frameworks.
 While \cmvs{} are a well researched topic, research was missing regarding a formalization of coordinated interactions.
-Developers can built frameworks based on the conceptual framework specified in Chapter~\ref{sec:concept}.
+Developers can built frameworks based on the specification.
 
 As described in Chapter~\ref{sec:evaluation}, the framework is lightweight, has good scalability and loose coupling.
-With respect to the requirements of a framework of \cmvs{} it shows good serialization and data extensibility.
+With respect to the requirements of a framework of \cmvs{} it shows good serialization and extensibility.
 But the framework is responsible only to coordinate interactions, so the main effort of implementing interactions is still there.
+
+Some issues became apparent in the performance analysis.
+Re-rendering of views gets slow for large data sets with many features, as every feature is iterated.
+The \tmap{} spends too much time during picking which is caused by an unnecessary expensive lookup of feature ids.
+Especially for frequent interactions like highlighting, this can impair the interactivity and leads to poor user experience.
+This performance issue could be fixed by selectively updating only those features which have been changed.
 
 \section{Future Work}
 
+The developed \cmv{} framework provides a basis for additional data visualizations and more coordinated interactions.
 In the future, the conceptual framework should be validated and tested with more data visualizations.
-Chapter~\ref{sec:analysis} has a long list of examples of interactions which can be implemented for validation.
-
-Chapter~\ref{sec:evaluation} suggests two approaches to implement reversibility of interactions.
-An implementation and comparison of these approaches could be carried out.
+This is necessary as new use case scenarios often reveal unidentified problems.
 
 Not in scope of this thesis but nevertheless relevant is the configuration and layout of multiple views next to each other.
-This configuration could be completed with a feature to save these layouts to and load them from disk respectively.
-
-Chapter~\ref{sec:evaluation} lists several performance issues in the handling of \attr{onmousemove} events.
-The \tmap{} spends too much time during picking which is caused by an unnecessary expensive lookup of feature ids.
-The performance of the \gv{} suffers on large data sets with many features, when all of them get updated.
-This could be improved by selectively updating only those features, which have been changed.
-
-
-\todo[inline]{Did we achieve our goals?}
-\todo[inline]{Is the concept sane in regarding the implementation?}
-
-\todo[inline]{List stuff which was not accomplished in this master thesis}
+Information visualization often provides the ability to explore and discover unanticipated correlations and anomalies.
+If the user could add additional data visualizations on the fly this would open up more opportunities for data exploration.
+This functionality could be completed with a feature to save these layouts to and load them from disk respectively.
 
