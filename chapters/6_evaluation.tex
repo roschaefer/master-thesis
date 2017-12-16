@@ -49,7 +49,7 @@ These gas stations are slightly more expensive in general and significantly more
 \subsection{Multi-Select in \tmap{}}\label{sec:evaluation:use-cases:multiselect}
 
 This use case demonstrates the benefit of a multiple select and the ability to relate interesting features with their geographic context.
-Figure~\ref{fig:evaluation:cases:multiselect:1} (a) shows a \tmap{} with the following configuration:
+Figure~\ref{fig:evaluation:cases:multiselect:1} (a) shows a \tmap{} visualizing German constituencies with the following configuration:
 The layout is based on the population density, large clusters on the right are sparsely populated districts.
 Colour is based on the increase or decrease of inhabitants, a red colour indicating a growth of inhabitants.
 
@@ -131,7 +131,7 @@ Identify a non-geographic relation in the \tmap{} by selecting geographically re
 In this case we can see a very similar construction activity.
 
 
-\section{Performance Evaluation and Limitations}
+\section{Performance Evaluation and Limitations}\label{sec:evaluation:performance}
 
 The following performance evaluation was carried out with the built-in runtime performance analysis feature of the Chrome browser.
 In particular, a Chromium Browser was used in Version 62.0 (64 Bit).
@@ -263,203 +263,49 @@ The \gv{} alone idles almost 50\% of the CPU time, as you can see on the right s
 
 
 
-\section{Evaluation of Requirements}\label{sec:evaluation:requirements}
+\section{Discussion of Requirements}\label{sec:evaluation:requirements}
 In this section, the reference implementation is evaluated based on the requirements from Section~\ref{sec:analysis:requirements}.
 
-\textbf{Serialization} of interactions depends on the published interaction data.
-The interaction type is just a string and therefore trivial to serialize.
-But the payload of the interaction can be an arbitrary JavaScript object, so the serialization depends on the serialization of that data.
+\textbf{Serialization} of interactions depends on the serialization of the published message $(M,C,P)$ as defined in Chapter~\ref{sec:concept}.
+The interaction category and purpose are just strings and therefore trivial to serialize, as shown in Section~\ref{sec:implementation:concept:translation:subject-purpose}.
+The interaction subject, however, can be an arbitrary JavaScript object.
+The estimated size and data type of that object determines how graciously a message can be serialized.
 
-In our case, the largest JavaScript object that is published as interaction data are the geometries during initialization.
-This step is necessary as there is no shared state of data between visualizations and every view needs to hold its own data.
-Only identifiers are valid across multiple views, but each view is allowed to have its own internal structure of data.
+In our case, the largest JavaScript object that is transmitted between views are geometries during initialization.
+The largest data set in Table~\ref{tab:evaluation:performance:data-sets} is called ``Immoscout Wohnungsangebote'' with a file size of 2.1 MiB.
+Geometries and meta data serialize well in form of GeoJSON.
+The performance analysis in Section~\ref{sec:evaluation:performance} does not indicate a large impact during initialization.
+Apparently, geometries seem not to be the bottleneck.
 
-The largest data set of geometries at hand is called ``Immoscout Wohnungsangebote'' and consists of 8617 geographical features with a total size of 2.1 MB on disk.
-These geometries are stored as GeoJSON, wich is based on \gls{json}.
+Instead, the analysis shows a performance impact for very frequent interactions, e.g.\ highlighting of entities.
+Yet, the interaction subject is a list of a few ids, in most cases just one, and is therefore easy to serialize with a small resulting size.
+The impact on performance is caused rather by data sets with a high number of features.
 
-After the initialization, data transmission between views can be reduced by exchanging implicit functions instead of explicit data sets.
-E.g.\ if some data points shall be hidden, the threshold function can be published instead of a set of entity ids that are hidden.
+As an alternative to explicitly specifying the interaction subject, a interaction subject can be specified as a function.
 In JavaScript, functions can be serialized with \attr{toString()} and deserialized with \attr{eval}.
+So the serialization for callbacks is straightforward, although the use of \attr{eval} is considered unsafe.
 
-
-\textbf{Reversibility} of interactions also does not depend on the interaction framework but rather on the implementation of the participating visualizations.
+\textbf{Reversibility} is connected to the serialization of interaction messages, too.
 The undoing of an interaction needs to be implemented in each view separately.
 If the interaction framework is used to publish an \attr{undo} interaction, there are two possible implementations:
 \begin{enumerate*}[label=(\arabic*)]
   \item
-    Each visualizations keeps a record of every past interaction and can replay the record up to the desired step
+    Each subscribed view keeps a record of every received interaction in the past and can replay these interactions up to the desired step
     \item
-    or the mathematical inverse of the function is published.
+    if the effect of the interaction is reversible, e.g.\ the inverse of a function exists, the inverse of a function is published.
 \end{enumerate*}
-Both options have an undesired impact on the required memory, because data needs to be kept in memory for every visualization.
-If the record of interactions is long, the first implementation will take a long time to replay every interaction up to the desired state.
+Both options have an undesired impact on the required memory, because a record of published messages needs to be kept in memory.
+If that record is long, it will take a long time to replay every interaction up to the desired step.
+As a result, reversibility is non-trivial to implement and has a potential performance impact.
 
-If past interactions are mathematically reversible, e.g.\ a threshold function for a filter interaction, the \attr{undo} interaction only needs to publish the inverse function.
-The number of interactions does not have an impact on the performance, but if more than just one interaction shall be reversed, a record of past interactions need to be stored.
-
-\textbf{Data extensibility} of interactions is enabled with arbitrary JavaScript objects.
-In Section~\ref{sec:analysis:requirements} good extensibility is present when
-\begin{enumerate*}[label=(\arabic*)]
-  \item
-    additional data attributes can be added without lookup of corresponding items and
-  \item
-    no de-duplication steps are necessary when new items are added.
-\end{enumerate*}
-Since every entity in the data set is considered to be identifiable, a lookup of additional data can be accomplished a request with the entity id.
-Entity ids are unique, so no de-duplication is necessary.
-Since attributes have a unique name, the value of an attribute for the entity can be replaced without de-duplication.
-
-\textbf{Development costs} do not diminish significantly.
-The framework design assumes loose coupling, independent views and no shared state.
-It is lightweight, has a low complexity and scales well.
-The downside of this approach is that it does not come with a huge simplification of implementing visual changes and event handlers in single views.
-Implementing the correct trigger and effect of interactions stays to be the main burden of work.
+\textbf{Extensibility}
+The \cmv{} system is designed for loose coupling, independent views and almost no shared state.
+It is lightweight and has a low complexity.
+The downside of this approach is that it does not come with a huge simplification of the implementation effort in individual views.
+Therefore, the system is very extensible and scales well, but the development effort for each interaction remains high.
 
 \textbf{Maintainability} as described in Section~\ref{sec:analysis:requirements} means how much other parts of the code are impacted by an interaction and how error-prone the framework is.
 The framework benefits of the main advantages of the publish-subscribe pattern, i.e.\ loose coupling and scalability.
 On the other hand, it suffers from the main disadvantages of this software pattern, the decoupling of publisher and subscriber.
-Debugging the connections can be quite cumbersome and the asynchronous publishing can lead to further errors.
-
-The geographical visualization is 873 lines long which is quite small.
-The glue code of a very simple example takes 132 lines of code.
-
-% \subsection{Data Sets}
-% For our uses cases, we have two different data sets:
-% One data set consists of a user ranking of public broadcasting in Germany, i.e.\ entities, mostly TV and radio broadcasts, are liked or disliked by people.
-% This data is public data and can be used by media researchers of broadcasting corporations but also targets media journalists and the general audience.
-% The other set, called \riso{}, consists of statistical data from various German administrations and is used by the authorities for urban planning and policy strategies.
-
-% Both data sets share some characteristics.
-% The administrative data connects certain features with certain regions of Germany.
-% As Germany is a federal state, larger regions consist of many other smaller regions.
-
-% The second one consists of user data that was collected through a web application called \rufu{}.
-
-% \subsubsection{RISO}
-
-% The \riso{} data base is used in by local authorities to get insights about governmental KPIs to assist local and regional decision making.
-% It is a relational database and a part of the data base schema is shown as an ER diagram in Figure~\ref{fig:data:riso}.
-
-% \begin{figure}[ht]
-%   \centering
-%   \includegraphics[width=\textwidth]{images/riso}
-%   \caption{Part of the \riso{} database schema. Primary keys are set in bold.}\label{fig:data:riso}
-% \end{figure}
-
-% The largest table is called \attr{data} with approximately 10,466,600 records, which holds all values along with the survey date.
-% \textbf{Features}
-% This data is connected to a feature table through a foreign key called \attr{id_mm}.
-% In the feature table we can find the description for every referenced feature, e.g.\ population density, working population in agriculture, education spending.
-% The \riso{} system groups all features in a 4-level hierarchy:
-% \begin{enumerate}
-%   \item
-%     \attr{katalog_daten_1_kategorien}
-%   \item
-%     \attr{katalog_daten_2_themenfelder}
-%   \item
-%     \attr{katalog_daten_3_themen}
-%   \item
-%     \attr{katalog_daten_4_merkmale}
-% \end{enumerate}
-% The actual features table is the last one in the list.
-% At the lowest level within the hierarchy, this is the largest table with 1234 records.
-
-
-% \textbf{Regions}
-% On the other side, the geographical data is stored in the \attr{regions} table.
-% The geometry data for each region is stored in the \attr{geojson} column and as the name suggests, the data type is a \attr{geojson}.
-% The foreign keys that connect the tables \attr{data} and \attr{regions} are called \attr{id_re} and \attr{regs}.
-% Unlike the feature table, the regions are grouped through the \attr{id_re} that indicates the hierarchy level.
-% So the values of the \attr{id_re} column denominate the level of the hierarchy.
-% E.g.\ a region with a \attr{id_re} of $1$ is a federal state of Germany, a region with id $13$ is a constituency.
-% A textual description for the hierarchy level can be found in the \attr{katalog_raumebenen} table in column \attr{raumebene}.
-% Both column \attr{id_re} and \attr{regs} belong to the primary key of the regions table, so there will never be two regions on the same hierarchy level with the same \attr{regs} id.
-
-% \textbf{Characteristics}
-% As we can see, the schema of the \riso{} database follows a rather denormalized approach.
-% The schema does not make a lot of assumptions regarding the input data.
-% It allows to add data of arbitrary size, features and completeness as long as there is some kind of numerical data associated with some kind of geographical unit.
-% This approach is suitable for a data base that incorporates data from different sources, as it is the case with the \riso{} data base.
-
-
-% \subsubsection{\rufu{}}
-% Unlike the \riso{} database, the data base of \rufu{} is used as persistence layer.
-% For that reason the data base schema follows the requirements of a web application in production.
-
-% As outlined in Section~\ref{sec:outline} \rufu{} is an evaluation platform for public broadcasting in Germany.
-% First, users vote on broadcasts, i.e.\ they decide if they want to support broadcast or if they do not want to support.
-% As a next step, user can define a weighting by distributing a virtual, monthly budget among the chosen broadcasts.
-
-% Figure~\ref{fig:data:rundfunk} shows the data base schema of the application.
-% A \attr{user} is connected to \attr{broadcast} through a \attr{selection}.
-% If the \attr{user} supports some a broadcast, the \attr{response} on the given \attr{selection} will be `positive'.
-% If the \attr{user} does not wish to support a \attr{broadcast}, the \attr{response} will be `neutral'.
-% The \attr{user} can allocate virtual money to supported broadcasts.
-% The money will be stored in the column \attr{amount} of the \attr{selection}.
-% The sum of all amounts for one user will never exceed the virtual budget of 17.50€.
-
-% \begin{figure}[ht]
-%   \centering
-%   \includegraphics[width=\textwidth]{images/er}
-%   \caption{Database schema of the \rufu{} application}\label{fig:data:rundfunk}
-% \end{figure}
-
-% \textbf{Features}
-% We have both numerical as well as nominal features.
-% A numerical feature could be the number of supporters from an area in Germany.
-% A nominal feature could be a list of the most supported broadcasts from an area in Germany.
-% Numerical and nominal features can be combined, so we could request for every region, a distribution of the desired expenditure for radio, TV, online and other broadcasts.
-
-% \textbf{Regions}
-% \rufu{} stores the geometry for each region in \attr{geojson} files.
-% These files hold a \attr{FeatureCollection}.
-% Every \attr{Feature} is a region, the identifier is stored as a property.
-% We merge the geometry data with features for every request.
-% To be precise: We get all the user data, group it by the identifier \attr{state_code} and merge it with the geometry in the \attr{geojson}.
-
-% \textbf{Characteristics}
-% The data base schema is a result of the specific requirements of the persistence layer.
-% Changes in the source code may require a migration of the data base schema.
-
-% However, we can ask a lot of questions already with common data base queries or standard data analysis tools:
-% \begin{enumerate}
-%   \item
-%     How does the actual support of a broadcast compare to the average support of a broadcast?
-%   \item
-%     What are the most popular broadcasts in Berlin?
-%   \item
-%     What is the desired ratio of genres of supported broadcasts? How important is education compared to sport?
-%   \item
-%     How does the support of a broadcast change over time?
-%   \item
-%     According to the user ranking, which broadcasts are similar to each other?
-% \end{enumerate}
-
-
-
-% \section{Planned Interactions}
-% We have a focus on coordinated multiple views consisting of a treemap and a geographical map.
-% Let's have some examples how an interaction between a \tmap{} and a \map{} might work:
-
-%     \begin{enumerate}
-%       \item
-%         User selects a feature set from the drop down in the menu. This will trigger a \emph{Reconfigure} interaction. A data set consisting of all features and their ids, geometries and metadata is transferred. The receiving components are both the \tmap{} and the \map{} which will rerender the entire visualization.
-%       \item
-%         User hovers with a mouse over a polygon in the \map{}. This will trigger a \emph{Select} interaction. The data is a single feature id that will be transferred to the \tmap{}, which will change the color of an box.
-%       \item
-%         Rotate or zoom the \tmap{}. This will also rotate or zoom the \map{}. The interaction would fall into \emph{Explore} and the shared information is the orientation of the camera and the zoom level.
-%       \item
-%         A click in the \tmap{} will trigger an \emph{Explore} interaction. The data is a single feature id sent to the \map{}. The map will center the viewport on the center of geometry of the respective feature.
-%       \item
-%         The user selects many features at once in the \map{} by dragging a rectangle. The ids of all features within the rectangle are sent to the \tmap{}. All features will be highlighted with a different color, which is therefore a \emph{Select} interaction.
-%       \item
-%         \emph{Reconfigure} the layouting of the \tmap{} by choosing a different hierarchy level. This increased granularity may lead to an increased granularity in the \map{}, e.g.\ show postal codes instead of federal states. The changed data are additional items, that are nested in the former items.
-%       \item
-%         \emph{Encode} the \tmap{} by a different attribute mapping like color, height or texture. If the \map{} has no geometry data that defines the shape of a feature, it can also display a larger point marker.
-%       \item
-%         Apply a \emph{Filter} and reduce the data set by choosing only items with metadata beyond a certain treshold. The reduced data leads to a full re-render of all data visualizations. The message contains the updated item list
-%   \item
-%     Show a \emph{Connect} by highlighting boxes of the same subtree in the \tmap{}. The respective connected items would be highlighted in the \map{} as well. Here the data is a relation between items.
-%     \end{enumerate}
-% \todo[inline]{What are the key interactions in our use case?}
-
+Therefore, a proper debugging of all components in the whole system is necessary.
+Nevertheless, each view in the \cmv{} system has small dependencies and is therefore easy to maintain and test.

@@ -62,7 +62,7 @@ In the course of this thesis the following interactions have been implemented:
 \todo[inline]{If we still have time, add filter interaction here}
 
 
-\section{Implementation of the Conceptual Framework}
+\section{Implementation of the Conceptual Framework}\label{sec:implementation:concept-translation}
 This section is intended to show precisely, how the specification of Chapter~\ref{sec:concept} is implemented and translated to actual code.
 As you recall, an interaction is defined as $I(T,(M(C,P,S),E))$, the message $M$ is the part that is communicated between views.
 This message is published to a \attr{publish-subscribe} broker.
@@ -78,7 +78,7 @@ To achieve this, it uses the JavaScript library \attr{PubSubJS} which is an topi
 This means, a view can subscribe to a group of interactions.
 E.g.\ the group \attr{mcv.select} includes both \attr{mcv.select.highlight} and \attr{mcv.select.focus}.
 
-\subsection{Encoding of category and purpose as topic and sub-topic}
+\subsection{Encoding of category and purpose as topic and sub-topic}\label{sec:implementationnceptual Framework}\label{sec:implementation:concept:translation:subject-purpose}
 \attr{PubSubJS}'s nested topics can be used to encode categories and purposes.
 This approach gives views more flexibility, because they can either subscribe to every interaction, all interactions of a category, or just a few specific interactions.
 Figure~\ref{fig:implementation:encoding} gives an example of a select interaction with the purpose to focus on three entities.
