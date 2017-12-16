@@ -37,28 +37,28 @@ They have not gained research interest yet, probably because of the very recent 
 \section{Problem Statement}
 \begin{tcolorbox}
 \textbf{Problem Statement} \\
-A \tmap{} of geographic data may loose the geographic context if the tiling algorithm is based on non-geographic attributes.
+A treemap of geographic data may loose the geographic context if the tiling algorithm is based on non-geographic attributes.
 \end{tcolorbox}
 
 Let's take the visualization of administrative districts in Germany as an example.
-An  district that is located in the east of a second district may be placed in the \tmap{} left of it instead of being placed on the right side.
+An  district that is located in the east of a second district may be placed in the treemap left of it instead of being placed on the right side.
 If the tiling algorithm uses a non-geographic hierarchy, the geographic context will be lost entirely.
-Items that should belong together according to their geographic circumstances may be scattered across the \tmap{}.
-Users have a hard time to recognize geographic areas and locations which deteriorates the comprehensibility of the \tmap{}.
-Selecting and grouping items based on their geographic proximity becomes increasingly difficult if the items are scattered across the \tmap{}.
+Items that should belong together according to their geographic circumstances may be scattered across the treemap.
+Users have a hard time to recognize geographic areas and locations which deteriorates the comprehensibility of the treemap.
+Selecting and grouping items based on their geographic proximity becomes increasingly difficult if the items are scattered across the treemap.
 
 
 \section{Hypothesis}\label{sec:introduction:hypothesis}
 
 \begin{tcolorbox}
 \textbf{Hypothesis} \\
-A second, \gv{} next to the \tmap{} can preserve the geographic context if these two views are combined in a \cmv{}.
+A second, \gv{} next to the treemap can preserve the geographic context if these two views are combined in a \cmv{}.
 \end{tcolorbox}
 
-The user can relate an item in the \tmap{} if the item is linked with the corresponding item in the \gv{} and vice versa.
+The user can relate an item in the treemap if the item is linked with the corresponding item in the \gv{} and vice versa.
 Many items can be selected in the geographic map based on their proximity by dragging a bounding box around them.
-In the \tmap{} the user can select many items based on their proximity in a non-geographic dimension and see the selection in the \gv{}.
-Essentially,  the limitations of a single \tmap{} or a single \gv{} can be overcome by splitting up the interaction:
+In the treemap the user can select many items based on their proximity in a non-geographic dimension and see the selection in the \gv{}.
+Essentially,  the limitations of a single treemap or a single \gv{} can be overcome by splitting up the interaction:
 The user can trigger the interaction in one view and see the effect, i.e.\ the change of visual representation, in another view.
 
 
@@ -73,7 +73,7 @@ The user can trigger the interaction in one view and see the effect, i.e.\ the c
   \item A formalization of interaction aspects in the field of data visualizations
   \item A conceptual framework for \cmvs{} of arbitrary data visualizations
   \item An implementation of the conceptual framework for the present use case of geographic and hierarchic data
-  \item A proof of concept how \tmap{} and \gv{} can be combined to overcome limitations of each visualization respectively
+  \item A proof of concept how treemap and \gv{} can be combined to overcome limitations of each visualization respectively
 		\end{enumerate}
 	\end{tcolorbox}
 \end{minipage} \\
@@ -122,7 +122,7 @@ In Section~\ref{sec:implementation} we describe the implementation of the concep
 This implementation serves as reference implementation, to prove feasibility of the conceptual framework.
 The implementation includes the necessary interactions to demonstrate the advantage of \cmvs{} for hierarchic and geographic data.
 It also serves to validate or invalidate the hypothesis in Section~\ref{sec:introduction:hypothesis}.
-In Section~\ref{sec:evaluation} the implementation is tested for typical visual analytics tasks and it is demonstrated that additional value can be generated from the combination of \tmap{} and \gv{}.
+In Section~\ref{sec:evaluation} the implementation is tested for typical visual analytics tasks and it is demonstrated that additional value can be generated from the combination of treemap and \gv{}.
 A performance analysis of the implementation is carried out to demonstrate the feasibility of the conceptual framework.
 \todo[inline]{Check design criteria or rephrase/delete this sentence}
 Based on the test data sets, the \cmv{} implementation is examined and evaluated for design criteria~\parencite{Baldonado2000} and general usability aspects~\parencite{Roberts2007}.
