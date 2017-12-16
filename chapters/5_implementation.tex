@@ -176,7 +176,7 @@ You can see this scenario in the sequence diagram in Figure~\ref{fig:implementat
 \end{figure}
 
 
-\section{MultiviewCoordinator}
+\section{Performance Optimizations in the MultiviewCoordinator}
 
 Each view gets a reference to the \attr{MultiviewCoordinator}, e.g. during initialization, and can subscribe to interactions as seen in Listing~\ref{lst:implementation:subscribe}.
 As a central part of the implementation, the \attr{MultiviewCoordinator} is also used for certain performance optimizations and data integrity considerations.
@@ -250,7 +250,7 @@ The implementation exports typescript declaration and you can see an import of t
 % \end{itemize}
 
 
-\section{Map Component}
+\section{MapComponent}
 
 The geographical visualization makes use of three components of the React Leaflet library:
 \attr{Map}, \attr{TileLayer} and \attr{GeoJSON}.

@@ -50,24 +50,9 @@ Den Absatz über Treemaps leichter verständlich erklären, mit Bild!
 # 2017-12-05 (Benjamin)
 
 Zusammenhang kommt nicht raus in dem Text bei den Detailstufen der tree maps
-Latex tabelle statt bild für die Comparison
-Überhaupt wenn's geht UML bearbeiten
-Eigenständigkeitserklärung fehlt
-Was ist eigentlich eine View? => Konzept
-Wer kommuniziert eigentlich mit wem im Communication pattern?
-Communication part nach vorne holen
-Implementierungsteil noch mau
-Das Abstrakte aus dem Implementierungsteil rausnehmen
-Evtl die Architektur rausnehmen und in den Konzeptteil packen
 schreib hin, was die Komponenten im Implementierungsteil machen, Zuständigkeiten
-Notification ist ein wesentlicher Punkt, eigenen Absatz daraus machen
-Software pattern umbenennen in Notification
-Patterns sind gar nicht so wichtig
-Implemented interactions noch ausführlicher machen
-Für jede Interaktion einen Screenshot machen
+(?) Für jede Interaktion einen Screenshot machen
 Wieviel Code ist notwendig um eine neue Interaktion einzubauen? => Zeigen
-Wie hängt Concept mit Implementierung zusammen?
-Wie ist das Mapping?
 Requirements: Mit "Extensibility" war nicht Data Extensibility sondern "Software
 extensibility" gemeint
 
@@ -76,8 +61,6 @@ Titelseite anpassen
 # 2017-12-06 (Gerd)
 
 vielleicht ein parallel plot anzeigen
-vielleicht beispiel ebay als detail view
-größere Minimap
 
 # 2017-12-12
 
@@ -89,27 +72,20 @@ Ein Datenmanager soll spezifiziert sein, GeoJSON endpoint eine Ausprägung davon
 
 Im Kapitel Implementation eine Section reinbauen, welcher alle Zusammenhänge zu Kapitel Analyse enthält
 Kapitel Implementation
-Layout in die introduction
-Fig. 5.4 kleiner in Implementation
 Was ist mit level View/React gemeint? Noch erklären
 Architecture => System Overview
 Update mechanism in System Overview
 Architektur diagramm mit Superklasse
 Sequenzdiagram mit Subkomponenten (GeoJSON, Map)
 position Methode fehlt im Klassendiagramm
-Map Component zusammenschreiben (ambiguity)
 Architektur und Ablauf ausklamüsern
-GeojsonEndpoint im Zusammenhang mit Shared Data model erklären
 Coordinator macht requests zum Datenbackend
-MultiviewCoordinator, erster Satz ist ungeeignet, Titel umbenennen
 Jede Klasse mit Prosa beschreiben
 
 Treemap erklären, wie wird die angedockt?
-Layout ans Ende vielleicht
 
 Weniger Absätze!
 Anzahl features in Datenset Tabelle
-Datenset Tabelle, sortiert by Data Size
 Mit Gimp die Benennungen drunter schreiben
 Sätze und Bilder lieber zusammenhängend
 Inhalt von Future Work soll nach vorne
