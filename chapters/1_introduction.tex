@@ -1,14 +1,14 @@
 \chapter{Introduction}
 The human brain processes visual information better than it processes text.
 As a result, data scientists often communicate their results with data visualizations.
-These visualizations make the data accessible to readers and help them to spot anomalies.
+These visualizations make the data easier accessible to readers and help them to spot anomalies.
 
 Data visualizations on a computer allow the user to interact with the data and explore different levels of granularity.
 Users can use an input device like a mouse or a keyboard to trigger an interaction and the visual representation of the data will change accordingly.
 In many cases a great interactivity results in a great user experience, as the user can change the visual representation as desired.
 
 There is a wide range of existing frameworks and implementations for data visualizations.
-These frameworks often support interactions with additional controls and event handlers like mouse click events.
+These frameworks often support interactions with additional controls and provide an \gls{api} and event handlers for input devices.
 
 A few specific use cases extend these frameworks to show multiple views next to each other, with controls and event handlers to manipulate multiple views.
 The user experience is even better compared with single data visualizations but the development effort for multiple views is high.
@@ -21,16 +21,16 @@ Currently, there is no dedicated or prevalent framework that helps to implement 
 % \todo[inline]{5. What kind of validation was carried out?}
 
 \section{Motivation}\label{sec:outline}
-Many research papers in the field of \cmvs{} have focused more on visual representations than interaction aspects.
+Many research papers in the field of \cmvs{} are more focused on visual representations than interaction aspects.
 Even though interaction aspects give a great user experience and enable the user to find complex connections involving multiple views.
 \textcite{Ho2013} assumes this may ``originate from the fact that the implementation of interaction techniques and interactive features normally takes much more time than the implementation of visual representations''.
-Obviously, there is a lot of existing research in the area but a lack of research regarding interactions in particular.
+There is a lot of existing research in the area but a lack of research regarding interactions in particular.
 This could also explain why hardly any general-purpose implementation exists to coordinate multiple views, that focuses on interactions.
 It is for this reason that this thesis develops an interaction model for \cmvs{}, so future implementations can use this model as a specification.
 
 Another motivation to do research in that particular area is a recent development in web application frameworks:
 Many popular frameworks like Angular, Ember, React and Vue have developed mechanisms to update \gls{ui} elements during user interactions.
-These patterns and mechanisms have become so widespread and prevalent that they triggered even a web specification called ``web components''.
+These patterns and mechanisms have become so widespread and prevalent that they triggered even a web specification of the \gls{w3c} called ``web components''.
 Obviously, these update mechanisms are a promising choice for \cmvs{}.
 They have not gained research interest yet, probably because of the very recent development.
 

@@ -75,8 +75,6 @@ Kapitel Implementation
 Was ist mit level View/React gemeint? Noch erklären
 Architecture => System Overview
 Update mechanism in System Overview
-Architektur diagramm mit Superklasse
-position Methode fehlt im Klassendiagramm
 Architektur und Ablauf ausklamüsern
 Coordinator macht requests zum Datenbackend
 Jede Klasse mit Prosa beschreiben
