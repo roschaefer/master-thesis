@@ -76,13 +76,11 @@ Was ist mit level View/React gemeint? Noch erklären
 Architecture => System Overview
 Update mechanism in System Overview
 Architektur und Ablauf ausklamüsern
-Coordinator macht requests zum Datenbackend
 Jede Klasse mit Prosa beschreiben
 
 Treemap erklären, wie wird die angedockt?
 
 Weniger Absätze!
-Anzahl features in Datenset Tabelle
 Mit Gimp die Benennungen drunter schreiben
 Sätze und Bilder lieber zusammenhängend
 Inhalt von Future Work soll nach vorne

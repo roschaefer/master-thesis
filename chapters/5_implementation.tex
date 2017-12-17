@@ -134,16 +134,21 @@ All views have a reference to \attr{MultiviewCoordinator} in order to subscribe 
 The rendering \tmap{} is controlled by \attr{UAController}, thus it is connected to \attr{MultiviewCoordinator} through this class.
 The \attr{MultiviewCoordinator} itself does not have a visual representation.
 
-\subsection{Update mechanisms}
-In Figure~\ref{fig:implementation:architecture} views with a \attr{render} are implemented as React components and can be rendered in place of a node inside the \gls{dom} tree.
-React components and their dependant components get automatically re-rendered if their internal state changes.
+\subsection{UAController}
+Written in plain TypeScript, the UAController handles mouse events and updates the 3D Canvas with \gls{webgl}.
+The treemap is shown on the left side in Figure~\ref{fig:implementation:layout}.
+Click and mouse move events already highlight the respective item or show a detail view of the item.
+It is part of the existing code base and so the only applied change to the UAController is the support of publications and subscriptions.
+The \gv{} on the other hand needs to be implemented from scratch.
+
+\subsection{Geographic Visualization with React Components}
+The \gv{} is implemented with React components, Figure~\ref{fig:implementation:architecture} shows the superclass \attr{ReactComponent} of the classes \attr{MapComponent}, \attr{MessageView} and \attr{DebugView}.
+Every React components have a \attr{render} method which is called for ever re-rendering of the component in the virtual \gls{dom}.
+This re-rendering gets triggered if the properties of a component change.
+Thus, if the properties of the parent component get passed to a child component, this child component will also re-render.
 
 E.g. if the position of the view point of the \attr{MapComponent} changes, that will re-render the included \attr{Map} which depends on the position.
 If the Geometries of the visualized data set are updated, that will change the \attr{GeoJSON} component but not the \attr{Map}.
-
-% Views implemented with React are dependency free except for a reference to a \attr{MultiviewCoordinator}.
-% This makes those classes very easy to test.
-
 
 \begin{figure}[ht]
   \centering
@@ -158,7 +163,7 @@ If the Geometries of the visualized data set are updated, that will change the \
 \section{Notifications}
 
 The automatic update mechanism works only within the virtual \gls{dom} of React components.
-Updates on view level need to be implemented manually
+Interactions among \cmvs{} need to be implemented manually.
 For this purpose, the class \attr{MultiviewCoordinator} wraps the library \attr{PubSubJS} and works as a broker for interactions across \cmvs{}.
 
 Let's take an example from a common usage scenario:
@@ -177,7 +182,7 @@ You can see this scenario in the sequence diagram in Figure~\ref{fig:implementat
 \end{figure}
 
 
-\section{Performance Optimizations in the MultiviewCoordinator}
+\section{Querying the GeoJSON endpoint}
 
 Each view gets a reference to the \attr{MultiviewCoordinator}, e.g. during initialization, and can subscribe to interactions as seen in Listing~\ref{lst:implementation:subscribe}.
 As a central part of the implementation, the \attr{MultiviewCoordinator} is also used for certain performance optimizations and data integrity considerations.
