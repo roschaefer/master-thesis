@@ -13,7 +13,7 @@ The following three use case scenarios demonstrate how more insights can be gain
 
 \tmaps{} can have outliers, i.e.\ unusual local maxima of a certain attribute.
 If the attribute is mapped to the height of the corresponding block, a local maximum is identifiable by a block that protrudes from a group of evenly leveled blocks.
-We can see such an example in Figure~\ref{fig:evaluation:use-cases:gas-prices}.
+Such an example is shown in Figure~\ref{fig:evaluation:use-cases:gas-prices}.
 
 The data set of the visualizations in the figure includes gas stations in Berlin.
 The \tmap{} is configured as follows:
@@ -61,14 +61,14 @@ There are three groups of items in the \tmap{} that catch our interest:
 \end{enumerate*}
 
 Districts in the orange group are rather densely populated and show a decline of population.
-But as we can see in Figure~\ref{fig:evaluation:cases:multiselect:1} (b) the districts of this group have a geographic context:
+But as seen in Figure~\ref{fig:evaluation:cases:multiselect:1} (b) the districts of this group have a geographic context:
 They are all located in the Ruhr area.
 
 A similar observation can be made about the white group, i.e.\ sparsely populated districts with a serious decline of population:
 These districts are all located in the east of Germany, see Figure~\ref{fig:evaluation:cases:multiselect:2} (a).
 
 And finally, even the three purple districts in the cluster of sparsely populated districts are geographically related as well:
-These districts are in the vicinity of Munich, as we can see in Figure~\ref{fig:evaluation:cases:multiselect:2} (b).
+These districts are in the vicinity of Munich, as seen in Figure~\ref{fig:evaluation:cases:multiselect:2} (b).
 
 
 \begin{figure}
@@ -97,10 +97,10 @@ Similar to the multiple select in Section~\ref{sec:evaluation:use-cases:multisel
 
 The layout of the \tmap{} in Figure~\ref{fig:evaluation:cases:bounding-box} (a) is based on construction activity, i.e.\ the number of completed accommodations per capita.
 The colour is mapped to the increase of population.
-As Berlin is known for quickly rising rents and real estate speculation we select all districts in Berlin with a bounding box.
+As Berlin is known for quickly rising rents and real estate speculation, all districts in Berlin are selected with a bounding box.
 All selected districts are placed in the center right group of the \tmap{}.
 They are the dark red items next to the currently highlighted item in Figure~\ref{fig:evaluation:cases:bounding-box} (a).
-But as we can see in Figure~\ref{fig:evaluation:cases:bounding-box} (a), the districts are not in the group with the highest construction activity at the very top.
+But as seen in Figure~\ref{fig:evaluation:cases:bounding-box} (a), the districts are not in the group with the highest construction activity at the very top.
 
 \begin{figure}
   \centering
@@ -126,7 +126,7 @@ However, it is not possible to see the geographic relation between those items i
 The \gv{} makes the geographic context visible.
 In this scenario, the multiple selection really helps to select items of the white group, which is scattered across the \tmap{}.
 
-Finally, in the scenario of Section~\ref{sec:evaluation:use-cases:bounding-box}, we can also do the reverse:
+Finally, in the scenario of Section~\ref{sec:evaluation:use-cases:bounding-box}, the reverse is also possible:
 Identify a non-geographic relation in the \tmap{} by selecting geographically related items with a bounding box.
 In this case we can see a very similar construction activity.
 
@@ -158,7 +158,7 @@ A couple of data sets were used in three different scenarios:
 \end{enumerate*}
 
 In the first and second scenario, the data set is loaded, some data points are highlighted and then some data points are focused with a single-select and a multi-select holding the control-key.
-In the second scenario and third scenarios, which have a geographical visualization, we also select many items with a select box, holding the shift-key.
+In the second scenario and third scenarios, which have a geographical visualization, many items are selected with a select box while holding the shift-key.
 For every scenario there are six data sets, that is 18 profilings, and each scenario profiling took about 60 seconds to finish.
 
 Table~\ref{tab:evaluation:performance:data-sets} shows the list of data sets used for profiling the performance of the reference implementation.
@@ -206,7 +206,7 @@ The \gv{} has a more balanced CPU time, spending time for painting and rendering
   }\label{fig:evaluation:performance:profiling:immoscout:summary}
 \end{figure}
 
-Going through the timeline, we can identify the handling of the ``mousemove'' event to be the likely cause of this slow scripting.
+Going through the timeline, the handling of the ``mousemove'' event can be identified to be the likely cause of this slow scripting.
 The \tmap{} constantly checks the point or polygon which is under the mouse cursor.
 This is likely a performance problem.
 
@@ -231,7 +231,7 @@ Figure~\ref{fig:evaluation:performance:profiling:immoscout:fps} shows spikes whe
 Most of these interactions are \attr{highlight} interactions, when the user moves the mouse cursor.
 Figure~\ref{fig:evaluation:performance:profiling:immoscout_both:callstack} shows the lower part of the callstack during such a \attr{highlight} interaction.
 
-We can identify the dominating subroutine to be \attr{setStyle} which spans almost the entire callstack.
+The dominating subroutine is identified as \attr{setStyle} which spans almost the entire callstack.
 Below this subroutine, you can see a lot of quick calls for each layer.
 \attr{LeafletJS} iterates through all geographic features in order to update the style, e.g.\ change the stroke width.
 Therefore, \attr{setStyle} seems to be costly operation for a large number of features.

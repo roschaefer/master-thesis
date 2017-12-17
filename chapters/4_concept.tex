@@ -96,16 +96,16 @@ Therefore two interactions of the same category can be distinguished by a user-d
 
 \subsection{Subject}
 A subject refers to the target of the interaction.
-We must define what data or meta-data is affected by the interaction.
+It defines what data or meta-data is affected by the interaction.
 E.g.\ when a user moves the mouse cursor on a line in the line diagram, that could highlight the \emph{data point} under the cursor as well as the entire \emph{data series}.
-Therefore we call the object affected of an interaction the interaction \emph{subject}.
+Therefore the object affected of an interaction is called the interaction \emph{subject}.
 A subject can be a data point, a list of data points, a position of the viewpoint, a certain order of attributes or a mapping of attributes to visual variables.
 
 
 
 \section{Shared data model}\label{sec:concept:data-model}
 The shared data model is a model of the data on which all visualizations must agree on.
-To account for various data structures discovered in Chapter~\ref{sec:analysis}, we use an abstract data model that is inclusive enough to include tabular, hierarchical and relational data.
+To account for various data structures discovered in Chapter~\ref{sec:analysis}, the shared data model is inclusive enough for tabular, hierarchical and relational data.
 You can see a class diagram of this data model in Figure~\ref{fig:concept:shared-data-model}.
 
 The \emph{entity} class is used to model the smallest distinguishable unit.
@@ -119,18 +119,18 @@ So if you want to get the \emph{latitude} value of an entity, you can retrieve t
 
 Entities can also be \emph{series} of other entities.
 A series contains an ordered list of contained entities.
-As series can also contain other series, so we can model a hierarchy relation.
+Series can also contain other series, this way a hierarchy relation can be modeled.
 
 Every entity has a \emph{parent} which is the series it is contained in.
 The root entity of the hierarchy has a parent which is \attr{nil}.
 Every series has a special attribute \attr{height} that describes the number of nested series or the height of the subtree.
 
-If we just want to display tabular data, we just have one or two levels of hierarchy.
+To display tabular data only one or two levels of hierarchy are necessary.
 E.g.\ one level of hierarchy for a histogram and two levels of hierarchy for a stacked bar chart.
 
 Other relations than hierarchical relations can be modeled as a \emph{relation} entity.
 It represents a directed edge in a graph and must have incoming and outgoing entity.
-Since every \emph{relation} is an \emph{entity} as well, we can add \emph{attributes} to the relation.
+Since every \emph{relation} is an \emph{entity} as well, it can have \emph{attributes}.
 These attributes may describe e.g.\ the weight of an edge in a flow map.
 
 \begin{figure}[ht]
@@ -219,7 +219,7 @@ The functions $Select$ and $Filter$ operate on entities and can be used intercha
   E.g.\ a zooming or panning operation in a \gv{} would result in a change of \attr{latitude}, \attr{longitude} and \attr{zoom} of the viewpoint and therefore the currently visible section of the geographic vector space.
   The subset $w$ can be encoded implicitly or explicitly.
   For continuous values two representatives \attr{from} and \attr{to} could define an interval.
-  E.g.\ in a calendar we map \attr{fromDay}, \attr{toDay}, \attr{fromHour} and \attr{toHour} to define the currently visible time section.
+  E.g.\ in a calendar the attributes \attr{fromDay}, \attr{toDay}, \attr{fromHour} and \attr{toHour} define the currently visible time section.
   If a dimension has discrete values, subset $w$ could also be encoded with all values explicitly stated.
 
 

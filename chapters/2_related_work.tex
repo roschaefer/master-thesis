@@ -44,7 +44,7 @@ The entities of geospatial data may include buildings, streets, landmasses, terr
 
 \subsection{Visual Variables}\label{sec:related-work:visual-variables}
 French cartographer Jaques Bertin introduced seven visual variables in 1967~\parencite{Bertin2010}.
-We can see an example for each in Figure~\ref{fig:related-work:visual-variables}.
+Figure~\ref{fig:related-work:visual-variables} shows these visual variables.
 These visual variables are used in cartography but can also be applied to data visualization in general.
 \textcite{Carpendale2003} explains in detail their use in computational information instead of printed cartography.
 \textcite{Garlandini2009} put these visual variables under systematic validation procedures.
@@ -62,7 +62,7 @@ A highlighted data point can be highlighted by changing the colour of an area or
 \subsection{Choropleth maps}
 Choropleth maps are thematic maps in which areas are shaded or patterned in proportion to the statistical variables being displayed on the map.
 A popular use case is the display of population density or per-capita income.
-We can see an example of a choropleth map in Figure~\ref{fig:related-work:choropleth}, showing the percentage of obese population in the US\@.
+There is an example of a choropleth map in Figure~\ref{fig:related-work:choropleth}, showing the percentage of obese population in the US\@.
 Choropleth maps are very popular and therefore many people are familiar with them already.
 A downside of choropleth maps is that larger regions may appear more emphasized than smaller ones, since the entire area of regions is coloured.
 Another disadvantage of choropleth maps is the common error of incorrect encoding:
@@ -99,7 +99,7 @@ As \textcite{Shneiderman1992} mentions, this visualization becomes increasingly 
 In treemaps every node is visualized as a tile.
 The membership relationship is expressed with tiles containing other tiles, thus representing the hierarchy.
 
-We can see two examples of treemaps in Figures~\ref{fig:related-work:treemap-german-exports-1} and~\ref{fig:related-work:treemap-german-exports-2}.
+Figures~\ref{fig:related-work:treemap-german-exports-1} shows an example of a treemap and Figure~\ref{fig:related-work:treemap-german-exports-2} shows the same treemap in another level of detail.
 German exports are divided in generic groups like ``Machines'' and ``Chemical Products'' and include more specific groups like ``Cars'' and ``Packaged Medicaments''.
 The user can click on a drop-down menu to change the current level of hierarchy, only leaf nodes are displayed at a time.
 
@@ -144,7 +144,7 @@ The navigation of the view point itself is an increase of complexity not present
 
 The term \tmap{} was coined by \textcite{Limberger2016} in 2016.
 A \tmap{} is just an ordinary 3D treemap, but it has all blocks attached to the ground, or more specifically, attached to the parent block.
-We can see an example of a \tmap{} in figure~\ref{fig:research:ua_treemap}.
+An example of a \tmap{} is shown in Figure~\ref{fig:research:ua_treemap}.
 All three dimensional treemaps in this thesis are in fact \tmaps{} and therefore this term is used for the rest of this work.
 
 \begin{figure}
@@ -178,7 +178,7 @@ Visualizing hierarchic data.
 According to \textcite{Roberts2007} \cmvs{} is just ``a specific exploratory visualization technique that enables users to explore their data''.
 Because ``the overall premise for the technique is that users understand their data better if they interact with the presented information and view it through different representations.''~\parencite{Roberts2007}
 
-We can see an example of a \cmv{} in Figure~\ref{fig:related-work:cmv}.
+An example of a \cmv{} is shown in Figure~\ref{fig:related-work:cmv}.
 It displays spatial and temporal attributes of pictures from a picture database, as well as continuous attributes like popularity and number of comments.
 The user can move the mouse cursor over each item in the scatter plot and the graduated symbol map and the corresponding item is highlighted with a larger stroke in all other views.
 On the time line below, the user can also filter for pictures in a certain time frame by dragging the mouse from lower to upper limit.
@@ -194,7 +194,7 @@ On the time line below, the user can also filter for pictures in a certain time 
 Brushing and linking is a common interaction pattern found in \cmvs{} and often a crucial part of these visualizations.
 ``The technique of brushing is the principle approach, where elements are selected (and highlighted) in one display, concurrently the same information in any other linked display is also highlighted.''~\parencite{Roberts2007}
 
-We can see an example in Figure~\ref{fig:research:brushing-linking}.
+An example is given in Figure~\ref{fig:research:brushing-linking}.
 It displays an on-time performance of airlines, visualized with the ``Crossfilter'' javascript library.
 
 This library is also one of the very few examples of an interaction framework for \cmvs{}.
@@ -211,7 +211,7 @@ The user can further filter for items by dragging another interval in one of the
 This technique of propagating interactions to other views is called ``linking''.
 
 Figure~\ref{fig:research:brushing-linking} shows a filter for travels with a long delay, i.e.\ from 120 minutes to the maximum value, see the selection in the upper center.
-In the view in the upper left corner in Figure~\ref{fig:research:brushing-linking}, we can see a correlation of long delays with the time of the day.
+In the view in the upper left corner in Figure~\ref{fig:research:brushing-linking} long delays correlate with the time of the day.
 
 \begin{figure}
   \centering
@@ -374,7 +374,7 @@ The authors of the paper distinguish first-level and second-level information vi
 \begin{equation}
   IV([D], V, I)
 \end{equation}
-If $I$ affects $[D]$ we can manipulate the underlying data set.
+If $I$ affects $[D]$ the underlying data set can be manipulated.
 Examples would be changes in a spreadsheet editor, or a change of the start and end date of an appointment in a calendar.
 
 If $V$ is affected by $I$ the user can manipulate $IV$ in order to change the way $[D]$ is represented.

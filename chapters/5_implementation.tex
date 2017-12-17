@@ -68,7 +68,7 @@ As you recall, an interaction is defined as $I(T,(M(C,P,S),E))$, the message $M$
 This message is published to a \attr{publish-subscribe} broker.
 In Chapter~\ref{sec:concept} in Figure~\ref{fig:concept:component-diagram} this component is called \attr{MultiviewCoordinator} and conveniently, the class has the same name in the actual code base.
 The coordinator has access to a database backend, just like in the component diagram, and the data will be fetched at runtime with an \gls{ajax} call.
-The \attr{Input/Output} middleware in our case is the browser, as we develop a web based application.
+The \attr{Input/Output} middleware in our case is the browser because a web based application is developed.
 The browser provides an \gls{api} for the mouse, keyboard, microphone and even the webcam.
 
 \subsection{PubSubJS as implementation for publish-subscribe}
@@ -216,46 +216,6 @@ It provides optional static typing, classes and interfaces and helps to reduce e
 The implementation exports typescript declaration and you can see an import of the classes \attr{MapComponent} and \attr{MultiviewCoordinator} on lines 1 to 3 in Listing~\ref{lst:implementation:dom}.
 
 
-% \section{Software patterns}\label{sec:implementation:patterns}
-
-% \textbf{The Observer pattern} allows multiple \emph{observers} to react to changes of an observed state.
-% In our case, the observed state is the \attr{MultiviewCoordinator}.
-% Any change to the \attr{MultiviewCoordinator} will subsequently be broadcasted to all connected views.
-
-
-% \textbf{Publisher subscriber}
-% In our particular case we apply a special form of the observer pattern, the so called ``Publish-subscribe'' pattern\parencite{Eugster2003}.
-% Publish-subscribe is a messaging pattern which is widely used in message queues.
-% In this scenario, senders of messages simply categorize their messages which will be consumed by subscribers of the category.
-% The scenario has very low coupling, publishers do not even need to know the existence of subscribers.
-
-% \textbf{Component pattern}
-% State-of-the-art JavaScript component frameworks like ReactJS and EmberJS follow the component pattern for the architecture of a single page web application.
-% The component pattern imposes a hierarchical structure on a website.
-% Each component is responsible for a task and may contain other components.
-% The components are joined at the root node of the page.
-
-% This pattern is very applicable to \cmvs{}.
-% The different views of \cmvs{} share state, i.e.\ the feature, that is currently highlighted or the applied filter on the data.
-% So the views are components and their closest common ancestor is the \cmv{} itself, controlling state and passing user interaction down to it's children.
-
-% \textbf{Actions up --- Data down}
-
-% Version 2.0 of Ember introduced a common phrase how to use this pattern effectively: ``Data down, actions up''\parencite{Emberigniter2017}
-% In the domain of \cmvs{} actions would mean user interactions, e.g.\ a click on a feature.
-% The action will notify the controlling \cmv{} component.
-% Actions may change data, and the changes will be passed to to all dependent views.
-% These views are then re-rendered.
-
-% Examples for the kind of data that might trigger a re-rendering of a view:
-% \begin{itemize}
-%   \item
-%     The selected feature or a list of selected features
-%   \item
-%     A list of thresholds for certain features as a filter
-% \end{itemize}
-
-
 \section{MapComponent}
 
 The geographical visualization makes use of three components of the React Leaflet library:
@@ -307,7 +267,7 @@ Listing \ref{lst:implementation:onEachFeature} shows the event handlers added to
   caption={\attr{onEachFeature} callback, adding handlers for mouse events.}
 ]{listings/implementation/onEachFeature.tsx}
 
-First we cache all layers in the internal state of the \attr{Map} component.
+First all layers in the internal state of the \attr{Map} component are cached.
 On each \attr{mouseover} event, the \attr{id} of the feature is published as \attr{mcv.select.highlight} interaction.
 A \attr{click} event is distinguished if the control key is pressed or not.
 In the latter case, the id of the feature is either added or removed from the list of focused ids and then the list of focused ids is published as \attr{mcv.select.focus} interaction.
@@ -326,8 +286,8 @@ Likewise, if the feature is currently highlighted, the polygon has a white, soli
   caption={\attr{pointToLayer} callback, if a feature of \attr{GeoJSON} has a point geometry, it will be shown as a circle.}
 ]{listings/implementation/pointToLayer.tsx}
 
-Finally, we configure how to display point geometries in callback \attr{poinToLayer}.
-Since normal markers do not have a configurable color and style, we instruct the \attr{GeoJSON} component to render a \attr{CircleMarker} for each point geometry instead.
+Finally, it is configured how to display point geometries in callback \attr{poinToLayer}.
+Since normal markers do not have a configurable color and style, the \attr{GeoJSON} component is instructed to render a \attr{CircleMarker} for each point geometry instead.
 This way, the same options of \attr{featureStyle} can be applied to both point and area geometries.
 
 

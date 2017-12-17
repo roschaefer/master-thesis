@@ -80,45 +80,15 @@ The user can trigger the interaction in one view and see the effect, i.e.\ the c
 
 
 
-% \section{Methodological Approach}
-%
-% A literature research is used to gather knowledge about the current state of the art with respect to \cmvs{}.
-% Existing concepts and implementations available on the internet are examined and reused if possible.
-% Interviews of people from the target group are conducted and the define the requirements for the application.
-% A minimal viable product is developed to further validate the user requirements.
-% Also, common user behaviour is observed during user tests.
-% The prototype is continuously developed to allow for further experimentation.
-%
-% \paragraph{Scenarios}
-% While implementing more features, we have two scenarios with different kind of data and different user requirements:
-% \begin{itemize}
-%   \item
-%     In our work on the project \rufu{} we design and prototype visualizations for media researchers.
-%     We fully control the database and the database schema as well as on the user facing application on top of it.
-%     User requirements are tied to journalists, media researchers, broadcasting corporations.
-%     The data has geographical, hierarchical, temporal and correlated characteristics.
-%   \item
-%     The \visan{} for administrative data is used as a more general purpose application.
-%     There is no single database schema but combatibility with many sources or services.
-%     User requirements are potentially unknown and part of the resarch.
-%     The usage focuses especially on geographical and hierarchical data.
-% \end{itemize}
-%
-% For the scope of this master thesis we therefore compare implemented visualization and views.
-% How do both approaches differ in development speed, value for the customer?
-% What considerations need to be done regarding the database schema?
-%
-% \todo[inline]{What are the areas of research, in which this thesis can be placed into?}
-
 \section{Structure of the Work}
 
-In Section~\ref{sec:related-work} we introduce basic terminology of \cmvs{} and the theoretical background in this area of research.
+In Section~\ref{sec:related-work} the basic terminology of \cmvs{} is introduced and the theoretical background in this area of research.
 This Section also covers the state of the art and research on multiple views and coordinated interactions.
-In Section~\ref{sec:analysis} we analyze a set of data visualizations and their interactions by example.
+In Section~\ref{sec:analysis} a set of data visualizations is analyzed and their interactions by example.
 Each interaction is further examined to identify the relevant information that need to be communicated in a \cmv{}.
 The gained knowledge from that section is used in the following Section~\ref{sec:concept} to develop a conceptual framework that can be used for future implementations of \cmvs{}.
 This conceptual framework includes a data model shared between all views, a suggested communication protocol as well as a formalization of an interaction.
-In Section~\ref{sec:implementation} we describe the implementation of the conceptual framework for the present use case.
+In Section~\ref{sec:implementation} the implementation of the conceptual framework is described for the present use case.
 This implementation serves as reference implementation, to prove feasibility of the conceptual framework.
 The implementation includes the necessary interactions to demonstrate the advantage of \cmvs{} for hierarchic and geographic data.
 It also serves to validate or invalidate the hypothesis in Section~\ref{sec:introduction:hypothesis}.
