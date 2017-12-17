@@ -6,14 +6,14 @@ After introducing visualization techniques, related work on interaction aspects 
 
 
 \section{Information visualization}
-Information visualization is a means of visual communication and have steadily developed since the 16th century~\parencite{Friendly2001}.
-It is a generic term, expressing all kinds of effort to put data into visual context to help people understand the significance of data~\parencite{Rose2017}.
-Information visualization today goes beyond standard charts and graphs used in spreadsheet applications and covers also infographics, heat maps, geographic visualizations and treemaps.
+Information visualization is a means of visual communication and has steadily developed since the 16th century~\parencite{Friendly2001}.
+It is a generic term, expressing all kinds of effort to put data into visual context to help people understand the significance of data.
+Information visualization today goes beyond standard charts and graphs used in spreadsheet applications and covers also infographics, heat maps, geographic visualizations and treemaps~\parencite{Rouse2017}.
 Otherwise abstract information is visually represented, making complex data more accessible, understandable and usable.
 
 \textcite{Kusinitz2014} mentions that the human brain processes visual information 60,000 times faster than text and visual content makes up even 93\% of all human communication.
 According to the Interaction Design Foundation the purpose of data visualizations is twofold:
-Sense-making and communication.
+Sense-making and communication~\parencite{Few2013}.
 
 Statistical information is abstract and in data visualization ``we must find a way to give form to that which has none.''~\parencite{Few2013}
 Successful data visualizations helps the human user to derive knowledge and meta data from the visualization itself.
@@ -50,7 +50,7 @@ These visual variables are used in cartography but can also be applied to data v
 \textcite{Garlandini2009} put these visual variables under systematic validation procedures.
 The authors conclude that the variable \attr{size} provides the most accurate and efficient performance while the variable \attr{orientation} provides the least performance.
 Bertin's visual variable play a role in interaction aspects of \cmvs{} as they are used to communicate the effect of an interaction.
-A highlighted data point can be highlighted by changing the colour of an area or increasing the size of a point.
+A highlighted data point can be highlighted by changing the colour or increasing the size of a point.
 
 \begin{figure}
   \centering
@@ -62,7 +62,7 @@ A highlighted data point can be highlighted by changing the colour of an area or
 \subsection{Choropleth maps}
 Choropleth maps are thematic maps in which areas are shaded or patterned in proportion to the statistical variables being displayed on the map.
 A popular use case is the display of population density or per-capita income.
-There is an example of a choropleth map in Figure~\ref{fig:related-work:choropleth}, showing the percentage of obese population in the US\@.
+An example of a choropleth map is shown in Figure~\ref{fig:related-work:choropleth}, visualizing the percentage of obese population in the US\@.
 Choropleth maps are very popular and therefore many people are familiar with them already.
 A downside of choropleth maps is that larger regions may appear more emphasized than smaller ones, since the entire area of regions is coloured.
 Another disadvantage of choropleth maps is the common error of incorrect encoding:
@@ -77,7 +77,7 @@ Such an incorrect encoding would be the display of absolute numbers, e.g.\ total
 
 This work uses a choropleth map for the geographic visualization because of its widespread recognition.
 
-\section{Information Visualization of Hierarchic Data}
+\section{Information Visualization of Hierarchical Data}
 The visualization of hierarchical data has a long tradition.
 The traditional visual representation of a tree is a directed graph with the root node at the top, as seen in Figure~\ref{fig:related-work:tree-graph}.
 
@@ -109,7 +109,7 @@ A treemap will, unlike a graph representation of a tree, never exceed the size o
 The area of the tiles can be mapped to a data attribute, e.g.\ the file size on disk or, in cases of Figures~\ref{fig:related-work:treemap-german-exports-1} and~\ref{fig:related-work:treemap-german-exports-2}, the percentage of export quota.
 Thus, a treemap can display even more information than a traditional graph representation.
 A disadvantage of treemaps is the variable size of each node.
-If more and more nodes are displayed, the size of each tile will get smaller and smaller and there might not be enough space to display a label.
+If more and more nodes are displayed, the size of each tile will get smaller and smaller and e.g.\ there might not be enough space to display a label.
 You can see this problem occur in Figure~\ref{fig:related-work:treemap-german-exports-2}.
 
 \begin{figure}
@@ -130,37 +130,14 @@ If treemaps are used to visualize geographic data like municipalities, real esta
 Let's say a treemap visualizes a hierarchy of federal states and municipalities with the area of each tile mapped to the total population of administrative district.
 Even if the membership hierarchy is matched by the treemap, the placement of districts in the same hierarchy level is based on their total population and not their geographic location.
 
-\subsection{3D treemaps and \tmaps{}}
-3D treemaps are a concept introduced by \textcite{Bladh2004} in 2004.
-The authors transfer the concept of treemaps from two dimensional into three dimensional space, transforming tiles to blocks.
-They introduce ``StepTree''~\parencite{Bladh2004}, which is a three dimensional treemap to display a directory layout of a file system.
-It ``differs from treemaps in that it employs three dimensions by stacking each subdirectory on top of its parent directory.''
-
-3D treemaps are superior to 2D treemaps for tasks with a pronounced topological challenge.
-User perform significantly better in interpreting the hierarchical structure.
-However, 3D visualizations also introduce some disadvantages.
-Blocks can superimpose each other, forcing the user to navigate the view point.
-The navigation of the view point itself is an increase of complexity not present in two dimensional treemaps.
-
-The term \tmap{} was coined by \textcite{Limberger2016} in 2016.
-A \tmap{} is just an ordinary 3D treemap, but it has all blocks attached to the ground, or more specifically, attached to the parent block.
-An example of a \tmap{} is shown in Figure~\ref{fig:research:ua_treemap}.
-All three dimensional treemaps in this thesis are in fact \tmaps{} and therefore this term is used for the rest of this work.
-
-\begin{figure}
-  \centering
-  \includegraphics[width=\textwidth]{figures/related-work/2_5D_treemap_example}
-  \caption{Example of a \tmap{}~\parencite{Doellner2017}.}
-  \label{fig:research:ua_treemap}
-\end{figure}
-
 \subsection{Spatially Consistent Treemaps}
 When visualizing geographical data with a treemap, e.g.\ census data, it is desired to have a spatially consistent visualizations
 The layout of hierarchical administrative subdivisions should approximately match a \gv{} of these subdivisions.
 An early algorithm for geographically consistent treemaps is called ``Spatially Ordered Treemaps'' by \textcite{Wood2008}.
-It is a modification of the ``Squarified Treemap Algorithm''~\cite{Bruls2000}.
+It is a modification of the ``Squarified Treemap Algorithm''~\parencite{Bruls2000}.
 This modification places nodes based on their distance to the enclosing rectangle to be filled, rather than in the weight sequence order.
 As \textcite{Ghoniem2015} demonstrate, this algorithm shows undesirable fragmentation for large, flat hierarchies.
+One especially serious manifestation of this problem is visible in Figure~\label{fig:related-work:spatially-ordered-treemap}.
 
 Less fragmented but also less consistent regarding the geographic correctness are ``Histomaps'' by \textcite{Keim2002}.
 This treemap algorithm sorts nodes such that their direction in the layout approximates their direction with regard to latitude and longitude.
@@ -170,8 +147,40 @@ This does not lead to fragmentation, but also does not guarantee geographic corr
 This trade-off is between aspect ratio and geographic correctness.
 Generally speaking, these treemap algorithms suffer because two unrelated circumstances are visualized in the same view.
 For that reason, the approach in this paper is to establish the geographic context in a separate view and let treemaps excel in what they are best:
-Visualizing hierarchic data.
+Visualizing hierarchical data.
 
+\begin{figure}
+  \centering
+  \includegraphics[width=\textwidth]{figures/related-work/spatiallyOrderedTreemap}
+  \caption{
+    A ``Spatially Ordered Treemap'' by \textcite{Wood2008} visualizing the population in 3,109 counties in the USA~\parencite{Ghoniem2015}.
+    This algorithm shows severe fragmentation for large, flat hierarchies.
+  }\label{fig:related-work:spatially-ordered-treemap}
+\end{figure}
+
+
+\subsection{3D treemaps and \tmaps{}}
+3D treemaps are a concept introduced by \textcite{Bladh2004} in 2004.
+The authors transfer the concept of treemaps from two dimensional into three-dimensional space, transforming tiles to blocks.
+They introduce ``StepTree''~\parencite{Bladh2004}, which is a three-dimensional treemap to display a directory layout of a file system.
+It ``differs from treemaps in that it employs three dimensions by stacking each subdirectory on top of its parent directory.''
+
+3D treemaps are superior to 2D treemaps for tasks with a pronounced topological challenge.
+Users perform significantly better in interpreting the hierarchical structure.
+However, 3D visualizations also introduce some disadvantages.
+Blocks can superimpose each other, forcing the user to navigate the view point.
+The navigation of the view point itself is an increase of complexity not present in two dimensional treemaps.
+
+The term \tmap{} was coined by \textcite{Limberger2016} in 2016.
+A \tmap{} is just an ordinary 3D treemap, but it has all blocks attached to the ground, or more specifically, attached to the parent block.
+An example of a \tmap{} is shown in Figure~\ref{fig:research:ua_treemap}.
+
+\begin{figure}
+  \centering
+  \includegraphics[width=\textwidth]{figures/related-work/2_5D_treemap_example}
+  \caption{Example of a \tmap{}~\parencite{Doellner2017}.}
+  \label{fig:research:ua_treemap}
+\end{figure}
 
 \section{Coordinated Multiple Views}\label{sec:related-work:cmvs}
 \cmvs{} are a combination of data visualizations of the same data set in multiple views, often side-by-side.
