@@ -75,8 +75,6 @@ Such an incorrect encoding would be the display of absolute numbers, e.g.\ total
   }\label{fig:related-work:choropleth}
 \end{figure}
 
-This work uses a choropleth map for the geographic visualization because of its widespread recognition.
-
 \section{Information Visualization of Hierarchical Data}
 The visualization of hierarchical data has a long tradition.
 The traditional visual representation of a tree is a directed graph with the root node at the top, as seen in Figure~\ref{fig:related-work:tree-graph}.
@@ -137,7 +135,7 @@ An early algorithm for geographically consistent treemaps is called ``Spatially 
 It is a modification of the ``Squarified Treemap Algorithm''~\parencite{Bruls2000}.
 This modification places nodes based on their distance to the enclosing rectangle to be filled, rather than in the weight sequence order.
 As \textcite{Ghoniem2015} demonstrate, this algorithm shows undesirable fragmentation for large, flat hierarchies.
-One especially serious manifestation of this problem is visible in Figure~\label{fig:related-work:spatially-ordered-treemap}.
+One especially serious manifestation of this problem is visible in Figure~\ref{fig:related-work:spatially-ordered-treemap}.
 
 Less fragmented but also less consistent regarding the geographic correctness are ``Histomaps'' by \textcite{Keim2002}.
 This treemap algorithm sorts nodes such that their direction in the layout approximates their direction with regard to latitude and longitude.
@@ -184,18 +182,18 @@ An example of a \tmap{} is shown in Figure~\ref{fig:research:ua_treemap}.
 
 \section{Coordinated Multiple Views}\label{sec:related-work:cmvs}
 \cmvs{} are a combination of data visualizations of the same data set in multiple views, often side-by-side.
-According to \textcite{Roberts2007} \cmvs{} is just ``a specific exploratory visualization technique that enables users to explore their data''.
-Because ``the overall premise for the technique is that users understand their data better if they interact with the presented information and view it through different representations.''~\parencite{Roberts2007}
+According to \textcite{Roberts2007} \cmvs{} are just ``a specific exploratory visualization technique that enables users to explore their data.
+The overall premise for the technique is that users understand their data better if they interact with the presented information and view it through different representations.''~\parencite{Roberts2007}
 
-An example of a \cmv{} is shown in Figure~\ref{fig:related-work:cmv}.
-It displays spatial and temporal attributes of pictures from a picture database, as well as continuous attributes like popularity and number of comments.
+Some \cmvs{} are shown in Figure~\ref{fig:related-work:cmv}.
+They display spatial and temporal attributes of pictures from a picture database as well as continuous attributes like popularity and number of comments.
 The user can move the mouse cursor over each item in the scatter plot and the graduated symbol map and the corresponding item is highlighted with a larger stroke in all other views.
 On the time line below, the user can also filter for pictures in a certain time frame by dragging the mouse from lower to upper limit.
 
 \begin{figure}
   \centering
   \includegraphics[width=\textwidth]{figures/related-work/cmv}
-  \caption{\gls{cmv} displaying the popularity, number of comments, location and time of pictures in a picture data base~\parencite{Dukevis2017}.}
+  \caption{\cmvs{} displaying the popularity, number of comments, location and time of pictures in a picture data base~\parencite{Dukevis2017}.}
   \label{fig:related-work:cmv}
 \end{figure}
 
@@ -204,10 +202,7 @@ Brushing and linking is a common interaction pattern found in \cmvs{} and often 
 ``The technique of brushing is the principle approach, where elements are selected (and highlighted) in one display, concurrently the same information in any other linked display is also highlighted.''~\parencite{Roberts2007}
 
 An example is given in Figure~\ref{fig:research:brushing-linking}.
-It displays an on-time performance of airlines, visualized with the ``Crossfilter'' javascript library.
-
-This library is also one of the very few examples of an interaction framework for \cmvs{}.
-However, this library is unmaintained as of December 2017, the most recent commit dating back to March 2016.
+It displays an on-time performance of airlines, visualized with the ``Crossfilter'' JavaScript library.
 
 Each of the flight in the data set has an hour and a date for departure, an arrival delay, which can also be negative, and a traveled distance in miles.
 The user can ``brush'' the data by selecting an interval by dragging the mouse.
@@ -229,12 +224,14 @@ In the view in the upper left corner in Figure~\ref{fig:research:brushing-linkin
   \label{fig:research:brushing-linking}
 \end{figure}
 
-\section{Technologies}
+\section{Related Technologies for Coordinated Multiple Views}
+This section introduces relevant libraries, frameworks and standards.
+These technologies are either considered or used for the implementation of the \cmv{} system in Chapter~\ref{sec:implementation}.
 
-\todo[inline]{
-  This section is a stub, because I guess it will be removed.
-  Do we actually need to introduce these technologies in this chapter?
-}
+\textbf{CrossfilterJS}
+The Crossfilter library is one of the very few examples of an interaction framework for \cmvs{}.
+It simplifies the implementation of brushing and linking interactions among several timeline visualizations of tabular data.
+However, this library is unmaintained as of December 2017, the most recent commit dating back to March 2016.
 
 \textbf{Leaflet}
 Leaflet is the leading open-source JavaScript library for mobile-friendly interactive maps~\parencite{Leaflet2017}.
@@ -271,19 +268,18 @@ Furthermore, topics are published asynchronously, so if the user interacts with 
 
 
 
-\section{Interaction Theory}\label{sec:related-work:interaction-theory}
+\section{Interaction Aspects}\label{sec:related-work:interaction-aspects}
 According to \textcite{Ho2013} interactions are a crucial part of data visualizations, yet most research in the area still focuses on visual representations.
 Roughly speaking, research on interaction falls into these groups:
 How to categorize interaction techniques?
 How to find new interaction techniques and apply those to visualizations?
 
-The following sections will give an overview of the current research of interaction aspects for each group.
+The following sections will give an overview of relevant research in interaction aspects for each group.
 
-\section{Interaction Categories}\label{sec:related-work:interaction-theory:categories}
-This section covers the larger part of research on interactions in \cmvs{}:
-High-level classification and categorization.
+\section{Interaction Categories}\label{sec:related-work:interaction-aspects:categories}
+This section covers high-level classification and categorization of interactions in \cmvs{}.
 
-In 1996 \textcite{Shneiderman1996} classified interactions into these groups:
+In 1996 \textcite{Shneiderman1996} classified interactions into six groups:
 \begin{enumerate*}[label=(\arabic*)]
   \item
     Gain an \emph{overview} of the entire collection,
@@ -315,7 +311,7 @@ Two years later, \textcite{Dix1998} identified these categories:
     \emph{link representations} to determine the relationship between items.
 \end{enumerate*}
 
-In 2002, \textcite{Keim2002} comes up with the following classification:
+In 2002, \textcite{Keim2002} defined the following classification:
 \begin{enumerate*}[label=(\arabic*)]
   \item
     Dynamic \emph{projection} to show all combination of data attributes mapped to the axis of a diagram,
@@ -348,9 +344,8 @@ The most recent classification was done in 2007 by \textcite{Yi2007} listing sev
 \end{enumerate*}
 
 It is noticeable that all of these classifications of interactions are redundant.
+E.g. there is a \emph{zoom} interaction for the first three classifications and all of them have a category similar to \emph{select}.
 In this work the classification of \textcite{Yi2007} is used for the remaining parts because it is the most recent classification and it is based on the precursors.
-
-\todo[inline]{Shall I give an example for each category of \textcite{Yi2007} classification?}
 
 \section{Formalization of Interactions}
 This section covers the smaller part of research in \cmvs{}, research that is \emph{not} related to a high-level classification of interactions.
@@ -363,8 +358,7 @@ On a low level an interaction technique ``is modeled as a set of filters connect
 These filters are the smallest process unit in the data flow.
 Composed of input and output ports, they communicate with other filters, to receive data input from predecessors and send data output to successors.
 
-The framework specifies and stores the interaction techniques along with its filters, the execution model and the scene in XML documents.
-The authors chose XML because it can be parsed easily and they generate code in order to target various virtual reality toolkits and environments.
+The framework specifies and stores the interaction techniques along with its filters, the execution model and the scene in \gls{xml} documents.
 
 Even though the system describes interactions in an abstract way, the domain of the framework is clearly the interaction of a human body within a 3D virtual reality.
 Certain assumptions are made, including the data model, which is the 3D scene, and human computer interaction devices, like the user's hand or the user's head.
@@ -376,22 +370,24 @@ Most importantly, the framework describes interaction techniques for a single vi
 
 \textbf{A framework for Focus+Context Visualization} by \textcite{Bjork1999} is one of the few formalizations of interactions in data visualizations.
 
-The idea behind the concept of focus and context visualization is to present the object of primary interest in full detail while at the same time giving a overview of the surroundings.
+The idea behind Focus+Context visualizations is to present the object of primary interest in full detail while at the same time giving a overview of the surroundings.
 
-The authors of the paper distinguish first-level and second-level information visualizations:
-\subparagraph{Visualizations} referred to as $IV$, are triples of a set $[D]$ of underlying data, a visual representation $V$ and $I$ which is the possible interaction or manipulation.
+The authors of the paper distinguish visualizations and second-level visualizations:
+Visualizations, referred to as $IV$, are triples of a set $[D]$ of underlying data, a visual representation $V$ and $I$ which is the possible interaction or manipulation.
 \begin{equation}
   IV([D], V, I)
+  \label{eq:focus-context:visualization}
 \end{equation}
 If $I$ affects $[D]$ the underlying data set can be manipulated.
 Examples would be changes in a spreadsheet editor, or a change of the start and end date of an appointment in a calendar.
 
-If $V$ is affected by $I$ the user can manipulate $IV$ in order to change the way $[D]$ is represented.
-This statement holds e.g.\ for an interaction in which the user increases the visible level of hierarchy in a treemap, which is an \attr{abstract/elaborate} interaction according to \textcite{Yi2007}.
+If $I$ affects $V$ the user can manipulate $IV$ in order to change the way $[D]$ is represented.
+This statement holds e.g.\ for an interaction in which the user increases the visible level of hierarchy in a treemap.
+According to \textcite{Yi2007} this would be an \emph{abstract/elaborate} interaction.
 The effect of such an interaction is depicted by the change from Figure~\ref{fig:related-work:treemap-german-exports-1} to Figure~\ref{fig:related-work:treemap-german-exports-2} in Section~\ref{sec:related-work:cmvs}.
 
-\subparagraph{Second-level Visualizations} are information visualizations consecutively applied.
-The underlying data set $[D]$ of the previous formula is replaced with some information visualization $IV$, which is compatible with $IV'$.
+Second-level Visualizations are information visualizations consecutively applied.
+The underlying data set $[D]$ of the formula in Equation~\ref{eq:focus-context:visualization} is replaced with some information visualization $IV$, which is compatible with $IV'$.
 \begin{equation}
   IV'(IV, V', I')
 \end{equation}
@@ -401,6 +397,6 @@ An example given by the authors is the  ``rubbersheet'' visualization, that visu
 Regions of primary interest are distorted to appear magnified, while the remaining regions are minified.
 
 The provided formalizations are a good starting point.
-Yet, they only consider interactions in the domain of focus and context visualizations, not in data visualization in general.
+Yet, they only consider interactions in the domain of Focus+Context visualizations, not in data visualization in general.
 
 
