@@ -30,7 +30,7 @@ Therefore the message exchanged between views not only includes the interaction 
 Every view can subscribe to named interactions at the coordinator.
 The coordinator notifies all subscribed views when a named interaction happens.
 In order trigger an interaction, the visualization simply publishes the named interaction at the coordinator.
-This pattern is known as the \emph{Publish-subscribe pattern} and widely used in message queues.
+This pattern is known as the \attr{publish-subscribe} pattern and widely used in message queues.
 
 
 \begin{figure}[ht]
@@ -48,7 +48,7 @@ In single views, an interaction $I$ consists of at least a trigger and an effect
   I(T, E)
 \end{equation}
 The purpose of the interaction in a single view does not need to be explicitly stated as such.
-E.g.\ hovering over a geographic area changes the background colour of the polygon and the user can identify the interaction as a \emph{highlighting}.
+E.g.\ hovering over a geographic area changes the background colour of the polygon and the user can identify the interaction as a highlighting.
 This implicit meaning gets explicit in the described conceptual framework, so that views are able to react reasonably to interactions in other, outside views.
 
 \subsection{Interaction in Coordinated Multiple Views}\label{sec:concept:framework:interaction}
@@ -66,71 +66,71 @@ A \cmv{} system shows multiple views, either side by side on a single screen or 
 
 
 \subsection{Trigger}
-If the event of a user action is handled by a view and causes an interaction, this handling is called a \emph{trigger}.
+If the event of a user action is handled by a view and causes an interaction, this handling is called a trigger.
 The user e.g.\ clicks on a shape in the view, hovers over an area, selects an item from a dropdown menu, turns around a mobile device, speaks into the microphone or makes a particular gesture.
-As described in the introduction, views are responsible of their \emph{triggers}.
+As described in the introduction, views are responsible of their triggers.
 
 
 \subsection{Effect}
-The effect is the change of the visual representation subsequent to the interaction.
+The effect is the change of the visual representation subsequent to an interaction.
 In order to be perceivable by the user, the interaction must have some visual effect, e.g.\ a change of a visual variable according to \textcite{Bertin2010}.
 
 Some examples are:
 A change of colour of a selected bubble, a movement of the viewpoint, a rearrangement of attributes in a parallel plot or a higher level of detail in a \tmap{}.
 
-Similar to a \emph{trigger}, a view is self-responsible of its visual \emph{effects}.
+Similar to a trigger, a view is self-responsible of its visual effects.
 Obviously visual effects are not shared, as a visual variable might be constrained due to the nature of the visualization technique itself.
 A re-ordering interaction in a parallel plot will not have an effect in bubble charts, as position is constrained by the type of visualization.
 
-\subsection{Category}
-An category is the declaration and definition how the subject of the interaction should be changed.
+\subsection{Interaction Category}
+An interaction category is the declaration and definition how the subject of the interaction should be changed.
 The aforementioned explicit meaning of the interaction is the smallest unit of information of the interaction.
 Some examples of categories include: Selection, Deletion, Point-of-Interest, Filtering, Reordering, Re-encoding.
 Categories can be classified with the interaction categories of \textcite{Yi2007}.
 
-\subsection{Purpose}
-The \emph{purpose} describes the interaction in the context of a task or an application specific intention.
-A developer may want to have many \emph{select} interactions.
+\subsection{Interaction Purpose}
+The interaction purpose describes the interaction in the context of a task or an application specific intention.
+A developer may want to have many select interactions.
 E.g.\ the user desires to select a detail view of an item under the mouse cursor from a previously selected set of already highlighted items.
-Therefore two interactions of the same category can be distinguished by a user-defined \emph{purpose}.
+Therefore two interactions of the same category can be distinguished by a user-defined purpose.
 
-\subsection{Subject}
-A subject refers to the target of the interaction.
+\subsection{Interaction Subject}
+The interaction subject refers to the target of the interaction.
 It defines what data or meta-data is affected by the interaction.
-E.g.\ when a user moves the mouse cursor on a line in the line diagram, that could highlight the \emph{data point} under the cursor as well as the entire \emph{data series}.
-Therefore the object affected of an interaction is called the interaction \emph{subject}.
+E.g.\ when a user moves the mouse cursor on a line in the line diagram, that could highlight the data point under the cursor as well as the entire data series.
+Therefore the object affected of an interaction is called the interaction subject.
 A subject can be a data point, a list of data points, a position of the viewpoint, a certain order of attributes or a mapping of attributes to visual variables.
 
 
 
 \section{Shared data model}\label{sec:concept:data-model}
 The shared data model is a model of the data on which all visualizations must agree on.
-To account for various data structures discovered in Chapter~\ref{sec:analysis}, the shared data model is inclusive enough for tabular, hierarchical and relational data.
+To account for  data structures discovered in Chapter~\ref{sec:analysis}, the shared data model is inclusive enough for tabular, hierarchical and relational data.
 You can see a class diagram of this data model in Figure~\ref{fig:concept:shared-data-model}.
 
-The \emph{entity} class is used to model the smallest distinguishable unit.
-All entities can be identified and retrieved via the \emph{id}.
-An entity is defined to be any object that can have data attributes attached as \emph{dimensions}.
+The entity class is used to model the smallest distinguishable unit.
+All entities can be identified and retrieved via the id.
+An entity is defined to be any object that can have data attributes attached as dimensions.
 
-While entities describe what an object \emph{is}, a \emph{dimension} describes what it \emph{has}.
+While entities describe what an object \emph{is}, a dimension describes what it \emph{has}.
 
 An entity can have arbitrary many attributes and each value can be accessed by the name of the attribute.
-So if you want to get the \emph{latitude} value of an entity, you can retrieve the value with a call to the dimension \emph{latitude}.
+So if you want to get the latitude value of an entity, you can retrieve the value with a call to the dimension \attr{latitude}.
 
-Entities can also be \emph{series} of other entities.
+Entities can also be series of other entities.
 A series contains an ordered list of contained entities.
 Series can also contain other series, this way a hierarchy relation can be modeled.
 
-Every entity has a \emph{parent} which is the series it is contained in.
+Every entity has a parent which is the series it is contained in.
 The root entity of the hierarchy has a parent which is \attr{nil}.
 Every series has a special attribute \attr{height} that describes the number of nested series or the height of the subtree.
 
 To display tabular data only one or two levels of hierarchy are necessary.
 E.g.\ one level of hierarchy for a histogram and two levels of hierarchy for a stacked bar chart.
 
-Other relations than hierarchical relations can be modeled as a \emph{relation} entity.
+Other relations than hierarchical relations can be modeled as a relation entity.
 It represents a directed edge in a graph and must have incoming and outgoing entity.
-Since every \emph{relation} is an \emph{entity} as well, it can have \emph{attributes}.
+Since every relation is an entity as well, it can have attributes.
 These attributes may describe e.g.\ the weight of an edge in a flow map.
 
 \begin{figure}[ht]
@@ -145,28 +145,28 @@ These attributes may describe e.g.\ the weight of an edge in a flow map.
 
 \section{Encoding of Interaction Subjects}\label{sec:concept:message-interface}
 
-As described in Section~\ref{sec:concept:framework:interaction}, a message consists of the interaction \emph{category}, \emph{purpose} and \emph{subject}.
+As described in Section~\ref{sec:concept:framework:interaction}, a message consists of the interaction category, purpose and subject.
 Category and purpose are just identifiers and can be encoded as a number or a string.
 The subject is a highly variable object.
 It could define some state, e.g.\ explicitly stating the id of an entity or the name of an attribute.
 Alternatively, it could define some behaviour, e.g.\ implicitly defining if an entity is filtered based on its dimensions.
 Therefore, the approach in this thesis is to model the subject as a mathematical function.
-If the function has no input parameter, it just returns some state, i.e.\ the ids of \emph{entities}, \emph{series}, and \emph{relations} or their respective \emph{attributes}.
+If the function has no input parameter, it just returns some state, i.e.\ the ids of entities, series, and relations or their respective attributes.
 If the function depends on input parameters, it may return e.g.\ \attr{true} or \attr{false} or define a sort order.
 
 In this section, a couple of function declarations are derived from the examples in Section~\ref{sec:analysis:examples}.
 Domain and range of these functions refer to the objects defined in the data model in Section~\ref{sec:concept:data-model}.
 
 \subsection{Set definitions}
-The set of all entities $E$ in our subject space is defined as:
+The set of all entities $\mathbb{E}$ in our subject space is defined as:
 \begin{equation} \mathbb{E} : \mathbb{E} \subseteq \mathbb{N}  \end{equation}
 Each entity can be represented by its \attr{id}, so for simplicity $\mathbb{E}$ is a subset all natural numbers in $\mathbb{N}$.
 
-The set of all dimensions $D$ in our shared data model is defined as:
+The set of all data dimensions $D$ in our shared data model is defined as:
 \begin{equation} \mathbb{D} : \mathbb{D} \subseteq \Sigma^* \end{equation}
 For simplicity, each dimension is represented as a sequence of characters, with the set of all sequences of characters written as $ \Sigma^*$.
 
-The set of all values of a dimension $d$ is defined as:
+The set of all values of a data dimension $d$ is defined as:
 \begin{equation} Space(d), d \in \mathbb{D} \end{equation}
 So for an attribute \attr{name}, $Space(name)$ would be the set of all strings.
 
@@ -185,7 +185,7 @@ The functions $Select$ and $Filter$ operate on entities and can be used intercha
   $Select$ just returns a subset of entities explicitly and expects no input.
   It can be used to highlight or focus entities, mark them for deletion or show details of an entity.
 
-  $Filter$ returns for every entity either \attr{true} or \attr{false}, depending on the entity and the value of its dimensions.
+  $Filter$ returns for every entity either \attr{true} or \attr{false}, written as $\top$ and $\bot$, depending on the entity and the value of its dimensions.
   Instead of an explicitly defined set of filtered entities, entities are defined implicitly.
   A good example would be a filter function checking upper and lower limit for each entity and a dimension called \attr{price}.
 
@@ -195,7 +195,7 @@ The functions $Select$ and $Filter$ operate on entities and can be used intercha
 \end{equation}
 
   The functions $Order$ and $Sort$ are used to order two entities $e1, e2 \in \mathbb{E}$.
-  The following equivalencies hold for $Sort$:
+  The following equivalencies are valid for $Sort$:
   \begin{align*}
      e1 < e2 \quad\Leftrightarrow\quad Sort(e1,e2) < 0 \\
      e1 = e2 \quad\Leftrightarrow\quad Sort(e1,e2) = 0 \\
@@ -221,20 +221,5 @@ The functions $Select$ and $Filter$ operate on entities and can be used intercha
   For continuous values two representatives \attr{from} and \attr{to} could define an interval.
   E.g.\ in a calendar the attributes \attr{fromDay}, \attr{toDay}, \attr{fromHour} and \attr{toHour} define the currently visible time section.
   If a dimension has discrete values, subset $w$ could also be encoded with all values explicitly stated.
-
-
-% Let's have some examples how these functions can be applied on coordinated interactions:
-
-% A user clicks on a bar in a bar chart and this feature then changes its background colour.
-% To coordinate the highlighting, the bar chart view will formulate a new message composed of a \emph{Select} function and the category \emph{highlight}.
-% The function returns the set with the highlighted entity.
-
-% Let's say, a geographical map should move the position of the viewpoint on a entity.
-% The triggering view will use a function \emph{Select} this time with a category \emph{focus}.
-% A treemap as a third view could pick up that interaction and show a subtree with the focused entity as root node. 
-
-% A view may show some controls to filter the data set, e.g.\ two sliders on an attribute called \attr{prize}.
-% When the user releases the mouse, an interaction with the function \emph{Filter} and the category \emph{Hide} will be triggered.  
-% The function will then check the \attr{prize} of every entity and returns \attr{true} if the prize is within the given lower and upper limit, \attr{false} otherwise.
 
 
