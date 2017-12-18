@@ -5,7 +5,7 @@ First, a couple of use cases are described and how a geographical visualization 
 A performance evaluation is carried out, to discover technical limitations and to find performance bottlenecks.
 As a last step, the requirements of Chapter~\ref{sec:analysis} are used to validate the conceptual framework and the reference implementation.
 
-\section{Use Case Scenarios}\label{sec:use-case}
+\section{Use Case Scenarios}\label{sec:evaluation:use-cases}
 
 The following three use case scenarios demonstrate how more insights can be gained with \gv{} next to the \tmap{}.
 
@@ -129,6 +129,20 @@ In this scenario, the multiple selection really helps to select items of the whi
 Finally, in the scenario of Section~\ref{sec:evaluation:use-cases:bounding-box}, the reverse is also possible:
 Identify a non-geographic relation in the \tmap{} by selecting geographically related items with a bounding box.
 In this case we can see a very similar construction activity.
+
+\section{Evaluation According to Guidelines}
+\textcite{Baldonado2000} introduced eight rules for multiple views.
+This section checks the use case scenarios in Section~\ref{sec:evaluation:use-cases} according to these guidelines and if a positive impact on utility could be achieved.
+
+A positive example are the rules of diversity, complementary and decomposition to improve memory and comparison~\parencite{Baldonado2000}.
+Their benefits are apparent in the use case of the visualization of gas stations in Section~\ref{sec:evaluation:use-cases:gas-stations}.
+The \gv{} reveals a hidden correlation, decomposes complex data into chunks and provides additional insights.
+Less apparent are the benefits of the rules of self-evidence and parsimony.
+In the mentioned use cases in Section~\ref{sec:evaluation:use-cases} insights are not self-evident but must be revealed with the right configuration.
+Another positive example is the rule of attention management.
+If the user selects one or many administrative districts in the treemap in Section~\ref{sec:evaluation:use-cases:multiselect}, the \gv{} next to it zooms on it.
+In summary, the benefit of a support of learning and comparison outweighs the drawback of computational overhead.
+
 
 
 \section{Performance Evaluation and Limitations}\label{sec:evaluation:performance}
@@ -312,3 +326,5 @@ The framework benefits of the main advantages of the publish-subscribe pattern, 
 On the other hand, it suffers from the main disadvantages of this software pattern, the decoupling of publisher and subscriber.
 Therefore, a proper debugging of all components in the whole system is necessary.
 Nevertheless, each view in the \cmv{} system has small dependencies and is therefore easy to maintain and test.
+
+

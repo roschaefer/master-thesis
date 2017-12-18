@@ -266,6 +266,32 @@ A subscription to topic \attr{mcv.select.focus} will be notified only for \attr{
 Furthermore, topics are published asynchronously, so if the user interacts with a visualization, that does not block code execution.
 
 
+\section{Guidelines for Multiple Views}\label{sec:related-work:guidelines}
+\textcite{Baldonado2000} established 8 rules as guidelines for multiple views.
+These guidelines can be used to either choose a \cmv{} for an application or to improve the user experience for existing \cmv{} applications.
+Each rule comes with a set of defined positive impacts on utility as well as negative impacts on utility.
+Following these rules, designers and developers can tell whether the benefits of multiple views outweigh their drawbacks.
+
+The eight rules are as follows:
+\begin{enumerate}
+  \item
+    The rule of diversity: Use multiple views when there is a diversity of attributes.
+  \item
+    Complementarity: Use multiple views when different views bring out correlations or disparities.
+  \item
+    Decomposition: Partition complex data into multiple views to create manageable chunks.
+  \item
+    Parsimony: Use multiple views minimally.
+  \item
+    Space/Time Resource Optimization: Balance the costs of presenting multiple views with the benefits of using them.
+  \item
+    Self-Evidence: Use perceptual cues to make relationships more apparent.
+  \item
+    Consistency: Make the interfaces and states for multiple views consistent.
+  \item
+    Attention Management: Focus the attention of the user on the right view at the right time.
+\end{enumerate}
+
 
 
 \section{Interaction Aspects}\label{sec:related-work:interaction-aspects}
@@ -276,7 +302,7 @@ How to find new interaction techniques and apply those to visualizations?
 
 The following sections will give an overview of relevant research in interaction aspects for each group.
 
-\section{Interaction Categories}\label{sec:related-work:interaction-aspects:categories}
+\subsection{Interaction Categories}\label{sec:related-work:interaction-aspects:categories}
 This section covers high-level classification and categorization of interactions in \cmvs{}.
 
 In 1996 \textcite{Shneiderman1996} classified interactions into six groups:
@@ -347,7 +373,7 @@ It is noticeable that all of these classifications of interactions are redundant
 E.g. there is a \emph{zoom} interaction for the first three classifications and all of them have a category similar to \emph{select}.
 In this work the classification of \textcite{Yi2007} is used for the remaining parts because it is the most recent classification and it is based on the precursors.
 
-\section{Formalization of Interactions}
+\subsection{Formalization of Interactions}
 \todo[inline]{Mehr related work on interaction aspects, Konferenz erwähnen}
 
 This section covers the smaller part of research in \cmvs{}, research that is \emph{not} related to a high-level classification of interactions.
