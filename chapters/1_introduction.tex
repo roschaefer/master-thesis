@@ -1,9 +1,7 @@
 \chapter{Introduction}
-\todo[inline]{Introduction überarbeiten}
-\todo[inline]{Die bestehende Implementierung erwähnen, und sagen was dazu implementiert wird}
 The human brain processes visual information better than it processes text.
-As a result, data scientists often communicate their results with data visualizations.
-These visualizations make the data easier accessible to readers and help them to spot anomalies.
+As a result, data scientists, journalists and designers often communicate their results with data visualizations.
+These visualizations make the data easier accessible to readers and help them e.g.\ to spot correlations, disparities or anomalies.
 
 Data visualizations on a computer allow the user to interact with the data and explore different levels of granularity.
 Users can use an input device like a mouse or a keyboard to trigger an interaction and the visual representation of the data will change accordingly.
@@ -12,8 +10,12 @@ In many cases a great interactivity results in a great user experience, as the u
 There is a wide range of existing frameworks and implementations for data visualizations.
 These frameworks often support interactions with additional controls and provide an \gls{api} and event handlers for input devices.
 
-A few specific use cases extend these frameworks to show multiple views next to each other, with controls and event handlers to manipulate multiple views.
-The user experience is even better compared with single data visualizations but the development effort for multiple views is high.
+In some examples, these frameworks are extended to show multiple views next to each other, with controls and event handlers to manipulate multiple views.
+When visualizing the same data set, these visualizations are called \cmvs{}.
+The user experience is often better compared to single data visualizations but the computational overhead for multiple views is high.
+
+Research in the area of \cmvs{} often presents a successful application of a \cmv{} for a specific use case.
+In most cases, the presented application is intended for the use case only and therefore these applications are not reused in any other environment.
 Currently, there is no dedicated or prevalent framework that helps to implement interactions in multiple visualizations of the same data.
 
 % \todo[inline]{1. Research domain}
@@ -23,6 +25,16 @@ Currently, there is no dedicated or prevalent framework that helps to implement 
 % \todo[inline]{5. What kind of validation was carried out?}
 
 \section{Motivation}\label{sec:outline}
+An existing \visan{} visualizes multi-dimensional, hierarchical and spatial data in form of 3D treemaps.
+The input for this application is e.g.\ census data, real estate data or infrastructure data.
+Because this data has a geographic context in many cases, the treemap visualization should be supported by a second \gv{}.
+Both visualizations should be incorporated in a \cmv{} layout and interactions in the treemap should be reflected in the \gv{} and vice versa.
+
+Besides the goal of implementing an application of a \cmv{} with a treemap and a \gv{}, the resulting software should be easily extensible.
+Adding more interactions and more data visualizations should be possible with little effort.
+Until now, the type of additional data visualizations and interactions is unknown.
+Therefore the approach is to anticipate future data visualizations and interactions by analysing their characteristics.
+
 Many research papers in the field of \cmvs{} are more focused on visual representations than interaction aspects.
 Even though interaction aspects give a great user experience and enable the user to find complex connections involving multiple views.
 \textcite{Ho2013} assumes this may ``originate from the fact that the implementation of interaction techniques and interactive features normally takes much more time than the implementation of visual representations''.
@@ -30,28 +42,31 @@ There is a lot of existing research in the area but a lack of research regarding
 This could also explain why hardly any general-purpose implementation exists to coordinate multiple views, that focuses on interactions.
 It is for this reason that this thesis develops an interaction model for \cmvs{}, so future implementations can use this model as a specification.
 
-Another motivation to do research in that particular area is a recent development in web application frameworks:
-Many popular frameworks like Angular, Ember, React and Vue have developed mechanisms to update \gls{ui} elements during user interactions.
+Another motivation is a recent development in the industry:
+Many popular web frameworks have developed mechanisms to update \gls{ui} elements during user interactions.
 These patterns and mechanisms have become so widespread and prevalent that they triggered even a web specification of the \gls{w3c} called ``web components''.
-Obviously, these update mechanisms are a promising choice for \cmvs{}.
-They have not gained research interest yet, probably because of the very recent development.
+These update mechanisms are a promising choice for \cmvs{} and it seems, they have not been applied for this purpose.
 
 \section{Problem Statement}
+When visualizing e.g.\ administrative districts, an ordinary treemap adequately visualizes membership relationships.
+But the layout of nodes may be geographically inconsistent, especially if the treemap layout algorithm does not take into account the spatial data.
 \begin{tcolorbox}
 \textbf{Problem Statement} \\
-A treemap of geographic data may loose the geographic context if the tiling algorithm is based on non-geographic attributes.
+A treemap of geographic data may loose the geographic context if the treemap layout algorithm is based on non-geographic attributes.
 \end{tcolorbox}
-
-Let's take the visualization of administrative districts in Germany as an example.
-An  district that is located in the east of a second district may be placed in the treemap left of it instead of being placed on the right side.
-If the tiling algorithm uses a non-geographic hierarchy, the geographic context will be lost entirely.
+A node may be placed in the top left corner of the treemap although a node is geographically located in the south-east.
 Items that should belong together according to their geographic circumstances may be scattered across the treemap.
-Users have a hard time to recognize geographic areas and locations which deteriorates the comprehensibility of the treemap.
+The comprehensibility and interactivity can suffer in such a case.
+Users have a hard time to recognize geographic areas and locations.
 Selecting and grouping items based on their geographic proximity becomes increasingly difficult if the items are scattered across the treemap.
+
+Some treemap layout algorithms try to layout nodes more geographically consistent as described in Section~\ref{sec:related-work:spatially-consistent-treemaps}.
+But this consistency comes with a price.
+In some cases, these algorithms render severely fragmented treemaps that are even harder to understand.
 
 
 \section{Hypothesis}\label{sec:introduction:hypothesis}
-
+The hypothesis of this work is:
 \begin{tcolorbox}
 \textbf{Hypothesis} \\
 A second, \gv{} next to the treemap can preserve the geographic context if these two views are combined in a \cmv{}.
