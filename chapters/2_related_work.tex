@@ -224,33 +224,20 @@ In the view in the upper left corner in Figure~\ref{fig:research:brushing-linkin
   \label{fig:research:brushing-linking}
 \end{figure}
 
-\section{Related Technologies for Coordinated Multiple Views}
-This section introduces relevant libraries, frameworks and standards.
-These technologies are either considered or used for the implementation of the \cmv{} system in Chapter~\ref{sec:implementation}.
+\section{Modern Web Technologies}
+This section introduces some state-of-the-art libraries, frameworks and standards for web development, as the existing \visan{} is a web application.
+While not dedicated for \cmvs{} only, these technologies are either considered or used for the implementation of the additional \gv{}, as described in Chapter~\ref{sec:implementation}.
 
-\textbf{CrossfilterJS}
-The Crossfilter library is one of the very few examples of an interaction framework for \cmvs{}.
+\textbf{CrossfilterJS} is one of the very few libraries dedicated for \cmvs{}.
 It simplifies the implementation of brushing and linking interactions among several timeline visualizations of tabular data.
 However, this library is unmaintained as of December 2017, the most recent commit dating back to March 2016.
 
-\textbf{Leaflet}
-Leaflet is the leading open-source JavaScript library for mobile-friendly interactive maps~\parencite{Leaflet2017}.
+\textbf{Leaflet} is the leading open-source JavaScript library for mobile-friendly interactive maps~\parencite{Leaflet2017}.
 It has support for GeoJSON which makes it very easy to display tiled web maps with interactive overlays.
 
 \textbf{Web components} is a recent standard of the \textcite{W3C2017} to bring component-based software engineering to the world wide web.
 Web components are a set of web platform APIs to create new custom, reusable, encapsulated HTML tags that can be used in web pages and web applications~\parencite{WebComponents2017}.
-If \cmvs{} are implemented in JavaScript based web applications, web components are a promising choice, to allow arbitrary views to be put together.
-
-\textbf{GlimmerJS} is the rendering enginge of EmberJS~\parencite{Glimmer2017}.
-In 2017 it was released as a standalone component framework.
-Applications written in GlimmerJS can be exported as web components.
-These web components can be included in any website, which makes GlimmerJS a reasonable choice to build high-quality widgets for user interfaces.
-GlimmerJS also uses handlebars~\parencite{Handlebars2017}, a user-friendly templating language.
-The downside of GlimmerJS is the current lack of documentation and immaturity due to the recent first release this year.
-
-\textbf{Google Polymer} is another popular library to build web components~\parencite{Polymer2017}.
-With 18,469 stars on Github it is the most popular framework for web components at the time of writing.
-Polymer has a large community and comprehensive documentation and therefore more suitable than GlimmerJS to build \cmvs{}.
+Because of their encapsulation and reusability, web components are a promising choice for \cmvs{} that are implemented in JavaScript based web applications.
 
 \textbf{ReactJS} is an open-source JavaScript library to build user interfaces and allows to create reusable UI components.
 React renders HTML on the client, it changes the page without reloading the page.
@@ -258,7 +245,16 @@ The framework corresponds with the View in the Model-View-Controller pattern.
 React components are structured hierarchically, with each component having dedicated responsibility.
 React is explicitly not implementing web components and is not going to implement web components in the future.
 It has, in return, a well-known way of integrating the component framework into a legacy application built with e.g.\ jQuery.
-Along with its major advantage of easy integration, it has a striving community, lots of documentation and tutorials and it is well tested.
+
+\textbf{GlimmerJS} is the rendering enginge of EmberJS~\parencite{Glimmer2017}.
+In 2017 it was released as a standalone component framework.
+Applications written in GlimmerJS can be exported as web components.
+These web components can be included in any website, which makes GlimmerJS a reasonable choice to build high-quality widgets for user interfaces.
+
+\textbf{Google Polymer} is another popular library to build web components~\parencite{Polymer2017}.
+With 18,469 stars on Github it is the most popular framework for web components at the time of writing.
+Polymer has a large community and comprehensive documentation and therefore more suitable than GlimmerJS to build \cmvs{}.
+
 
 \textbf{PubSubJS} is a topic-based publish/subscribe library written in JavaScript~\parencite{PubSubJS2017}.
 Topics can be registered hierarchically, with subtopics delimited by dots.
@@ -266,7 +262,17 @@ A subscription to topic \attr{mcv.select.focus} will be notified only for \attr{
 Furthermore, topics are published asynchronously, so if the user interacts with a visualization, that does not block code execution.
 
 
-\section{Guidelines for Multiple Views}\label{sec:related-work:guidelines}
+\section{Related Work on Coordinated Multiple Views}\label{sec:related-work:guidelines}
+The annual conference ``International Conference on Coordinated and Multiple Views in Exploratory Visualization'' provides a good selection of scientific papers in the area of \cmvs{}.
+E.g.\ four papers of the conference of 2007 provide an introduction into the area of research:
+``Coordinated Multiple Views: a Critical View'' by \textcite{Andrienko2007},
+``State of the Art: Coordinated \& Multiple Views in Exploratory Visualization'' by \textcite{Roberts2007},
+``The Future of CMV'' by \textcite{Erbacher2007} and
+``Is coordination a means to collaboration?'' by \textcite{Weaver2007}.
+Other papers present specific applications of \cmvs{} or user studies.
+Relevant for this thesis are interaction aspects, in order to develop a conceptual framework of \cmvs{}, and guidelines for multiple views, to evaluate the system.
+
+\subsection{Guidelines for Multiple Views}\label{sec:related-work:guidelines}
 \textcite{Baldonado2000} established 8 rules as guidelines for multiple views.
 These guidelines can be used to either choose a \cmv{} for an application or to improve the user experience for existing \cmv{} applications.
 Each rule comes with a set of defined positive impacts on utility as well as negative impacts on utility.
@@ -294,7 +300,7 @@ The eight rules are as follows:
 
 
 
-\section{Interaction Aspects}\label{sec:related-work:interaction-aspects}
+\subsection{Interaction Aspects}\label{sec:related-work:interaction-aspects}
 According to \textcite{Ho2013} interactions are a crucial part of data visualizations, yet most research in the area still focuses on visual representations.
 Roughly speaking, research on interaction falls into these groups:
 How to categorize interaction techniques?
@@ -302,7 +308,7 @@ How to find new interaction techniques and apply those to visualizations?
 
 The following sections will give an overview of relevant research in interaction aspects for each group.
 
-\subsection{Interaction Categories}\label{sec:related-work:interaction-aspects:categories}
+\subsubsection{Interaction Categories}\label{sec:related-work:interaction-aspects:categories}
 This section covers high-level classification and categorization of interactions in \cmvs{}.
 
 In 1996 \textcite{Shneiderman1996} classified interactions into six groups:
@@ -373,8 +379,7 @@ It is noticeable that all of these classifications of interactions are redundant
 E.g. there is a \emph{zoom} interaction for the first three classifications and all of them have a category similar to \emph{select}.
 In this work the classification of \textcite{Yi2007} is used for the remaining parts because it is the most recent classification and it is based on the precursors.
 
-\subsection{Formalization of Interactions}
-\todo[inline]{Mehr related work on interaction aspects, Konferenz erwähnen}
+\subsubsection{Formalization of Interactions}
 
 This section covers the smaller part of research in \cmvs{}, research that is \emph{not} related to a high-level classification of interactions.
 Not only interactions in \cmvs{} are considered but any kind of a formalization of interaction that may be used as the starting point for a framework for \cmvs{}.
@@ -427,5 +432,5 @@ Regions of primary interest are distorted to appear magnified, while the remaini
 The formalization of \textcite{Bjork1999} is suitable to describe multiple information visualizations applied one after another.
 Yet, it is specialized on Focus+Context interactions.
 It does not describe any kind of interaction in arbitrary information visualizations like line or bar charts.
-This is also the reason why the formalization does not describe the exchanged data between views, like identifiers of data points.
+This is also the reason why the formalization does not describe the exchanged data between views like identifiers of data points.
 
