@@ -228,39 +228,44 @@ In the view in the upper left corner in Figure~\ref{fig:research:brushing-linkin
 This section introduces some state-of-the-art libraries, frameworks and standards for web development, as the existing \visan{} is a web application.
 While not dedicated for \cmvs{} only, these technologies are either considered or used for the implementation of the additional \gv{}, as described in Chapter~\ref{sec:implementation}.
 
-\textbf{CrossfilterJS} is one of the very few libraries dedicated for \cmvs{}.
+\subsection{CrossfilterJS}
+CrossfilterJS is one of the very few libraries dedicated for \cmvs{}.
 It simplifies the implementation of brushing and linking interactions among several timeline visualizations of tabular data.
 However, this library is unmaintained as of December 2017, the most recent commit dating back to March 2016.
 
-\textbf{Leaflet} is the leading open-source JavaScript library for mobile-friendly interactive maps~\parencite{Leaflet2017}.
+\subsection{Leaflet}
+Leaflet is the leading open-source JavaScript library for mobile-friendly interactive maps~\parencite{Leaflet2017}.
 It has support for GeoJSON which makes it very easy to display tiled web maps with interactive overlays.
 
-\textbf{Web components} is a recent standard of the \textcite{W3C2017} to bring component-based software engineering to the world wide web.
+\subsection{Web Components}
+Web Components is a recent standard of the \textcite{W3C2017} to bring component-based software engineering to the world wide web.
 Web components are a set of web platform APIs to create new custom, reusable, encapsulated \gls{html} tags that can be used in web pages and web applications~\parencite{WebComponents2017}.
 Because of their encapsulation and reusability, web components are a promising choice for \cmvs{} that are implemented in JavaScript based web applications.
 
-\textbf{ReactJS} is an open-source JavaScript library to build user interfaces and allows to create reusable UI components.
+\subsection{ReactJS}
+ReactJS is an open-source JavaScript library to build user interfaces and allows to create reusable \gls{ui} components.
 React renders \gls{html} on the client, it changes the page without reloading the page.
 The framework corresponds with the View in the Model-View-Controller pattern.
 React components are structured hierarchically, with each component having dedicated responsibility.
 React is explicitly not implementing web components and is not going to implement web components in the future.
 It has, in return, a well-known way of integrating the component framework into a legacy application built with e.g.\ jQuery.
 
-\textbf{GlimmerJS} is the rendering enginge of EmberJS~\parencite{Glimmer2017}.
+\subsection{GlimmerJS} 
+GlimmerJS is the rendering enginge of EmberJS~\parencite{Glimmer2017}.
 In 2017 it was released as a standalone component framework.
 Applications written in GlimmerJS can be exported as web components.
 These web components can be included in any website, which makes GlimmerJS a reasonable choice to build high-quality widgets for user interfaces.
 
-\textbf{Google Polymer} is another popular library to build web components~\parencite{Polymer2017}.
+\subsection{Google Polymer}
+Google Polymer is another popular library to build web components~\parencite{Polymer2017}.
 With 18,469 stars on Github it is the most popular framework for web components at the time of writing.
 Polymer has a large community and comprehensive documentation and therefore more suitable than GlimmerJS to build \cmvs{}.
 
-
-\textbf{PubSubJS} is a topic-based publish/subscribe library written in JavaScript~\parencite{PubSubJS2017}.
+\subsection{PubSubJS}
+PubSubJS is a topic-based publish/subscribe library written in JavaScript~\parencite{PubSubJS2017}.
 Topics can be registered hierarchically, with subtopics delimited by dots.
 A subscription to topic \attr{mcv.select.focus} will be notified only for \attr{focus} interactions whereas a subscription of \attr{mcv.select} will be notified for both \attr{focus} and \attr{highlight} interactions.
 Furthermore, topics are published asynchronously, so if the user interacts with a visualization, that does not block code execution.
-
 
 \section{Related Work on Coordinated Multiple Views}\label{sec:related-work:cmv}
 The annual conference ``International Conference on Coordinated and Multiple Views in Exploratory Visualization'' provides a good selection of scientific papers in the area of \cmvs{}.
@@ -276,7 +281,7 @@ Relevant for this thesis are interaction aspects, in order to develop a conceptu
 \textcite{Baldonado2000} established 8 rules as guidelines for multiple views.
 These guidelines can be used to either choose a \cmv{} for an application or to improve the user experience for existing \cmv{} applications.
 Each rule comes with a set of defined positive impacts on utility as well as negative impacts on utility.
-Following these rules, designers and developers can tell whether the benefits of multiple views outweigh their drawbacks.
+Following these rules, designers and developers can tell whether the benefits of multiple views outweigh their drawbacks for the application.
 
 The eight rules are as follows:
 \begin{enumerate}
@@ -384,7 +389,8 @@ In this work the classification of \textcite{Yi2007} is used for the remaining p
 This section covers the smaller part of research in \cmvs{}, research that is \emph{not} related to a high-level classification of interactions.
 Not only interactions in \cmvs{} are considered but any kind of a formalization of interaction that may be used as the starting point for a framework for \cmvs{}.
 
-\textbf{ITlib~\parencite{Figueroa2001}} is an architecture and a framework of interaction techniques for virtual reality applications, designed to be extensible and flexible.
+\subsection{ITlib}
+ITlib~\parencite{Figueroa2001} is an architecture and a framework of interaction techniques for virtual reality applications, designed to be extensible and flexible.
 New interaction techniques can easily be added and application specific code is seamlessly integrated.
 
 On a low level an interaction technique ``is modeled as a set of filters connected in a small data flow''~\parencite[p.~2]{Figueroa2001}.
@@ -401,7 +407,8 @@ In this case, the data model is the 3D scene and the goal is to manipulate the 3
 
 Most importantly, the framework describes interaction techniques for a single viewpoint but not for coordinated multiple views.
 
-\textbf{A framework for Focus+Context Visualization} by \textcite{Bjork1999} is one of the few formalizations of interactions in data visualizations.
+\subsection{Focus+Context Visualization}
+``A framework for Focus+Context Visualization'' by \textcite{Bjork1999} is one of the few formalizations of interactions in data visualizations.
 
 The idea behind Focus+Context visualizations is to present the object of primary interest in full detail while at the same time giving a overview of the surroundings.
 

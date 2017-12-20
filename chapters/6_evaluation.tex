@@ -9,7 +9,7 @@ As a last step, the requirements of Chapter~\ref{sec:analysis} are used to valid
 
 The following three use case scenarios demonstrate how more insights can be gained with \gv{} next to the \tmap{}.
 
-\subsection{Explain outliers}\label{sec:evaluation:use-cases:gas-stations}
+\subsection{Explain Outliers}\label{sec:evaluation:use-cases:gas-stations}
 
 \tmaps{} can have outliers, i.e.\ unusual local maxima of a certain attribute.
 If the attribute is mapped to the height of the corresponding block, a local maximum is identifiable by a block that protrudes from a group of evenly levelled blocks.
@@ -46,7 +46,7 @@ These gas stations are slightly more expensive in general and significantly more
   }\label{fig:evaluation:use-cases:gas-prices}
 \end{figure}
 
-\subsection{Multi-Select in \tmap{}}\label{sec:evaluation:use-cases:multiselect}
+\subsection{Multi-Select in the Treemap}\label{sec:evaluation:use-cases:multiselect}
 
 This use case demonstrates the benefit of a multiple select and the ability to relate interesting features with their geographic context.
 Figure~\ref{fig:evaluation:cases:multiselect:1} (a) shows a \tmap{} visualizing German constituencies with the following configuration:
@@ -92,7 +92,7 @@ These districts are in the vicinity of Munich, as seen in Figure~\ref{fig:evalua
   }\label{fig:evaluation:cases:multiselect:2}
 \end{figure}
 
-\subsection{Bounding Box Selection in \gv{}}\label{sec:evaluation:use-cases:bounding-box}
+\subsection{Bounding Box Selection in the Geographic Visualization}\label{sec:evaluation:use-cases:bounding-box}
 Similar to the multiple select in Section~\ref{sec:evaluation:use-cases:multiselect}, multiple selects can be carried out by a bounding box in the \gv{}.
 
 The layout of the \tmap{} in Figure~\ref{fig:evaluation:cases:bounding-box} (a) is based on construction activity, i.e.\ the number of completed accommodations per capita.
@@ -112,7 +112,7 @@ But as seen in Figure~\ref{fig:evaluation:cases:bounding-box} (a), the districts
   }\label{fig:evaluation:cases:bounding-box}
 \end{figure}
 
-\subsection{Use case summary}
+\subsection{Use Case Summary}
 
 The scenario in Section~\ref{sec:evaluation:use-cases:gas-stations} is a great example how a \gv{} can create more insights.
 The \tmap{} alone allows to identify the outliers and also shows a possible correlation of price and brand.
@@ -299,10 +299,13 @@ Yet, the interaction subject is a list of a few ids, in most cases just one, and
 The impact on performance is caused rather by data sets with a high number of features.
 
 As an alternative to explicitly specifying the interaction subject, a interaction subject can be specified as a function.
-In JavaScript, functions can be serialized with \attr{toString()} and deserialized with \attr{eval}.
-So the serialization for callbacks is straightforward, although the use of \attr{eval} is considered unsafe.
+The serialization of functions in JavaScript is straightforward:
+They can be serialized with \attr{toString()} and deserialized with \attr{eval}.
 
-\textbf{Reversibility} is connected to the serialization of interaction messages, too.
+\begin{enumerate}
+\item Reversibility
+
+Reversibility is connected to the serialization of interaction messages, too.
 The undoing of an interaction needs to be implemented in each view separately.
 If the interaction framework is used to publish an \attr{undo} interaction, there are two possible implementations:
 \begin{enumerate*}[label=(\arabic*)]
@@ -315,16 +318,20 @@ Both options have an undesired impact on the required memory, because a record o
 If that record is long, it will take a long time to replay every interaction up to the desired step.
 As a result, reversibility is non-trivial to implement and has a potential performance impact.
 
-\textbf{Extensibility}
+\item Extensibility
+
 The \cmv{} system is designed for loose coupling, independent views and almost no shared state.
 It is lightweight and has a low complexity.
 The downside of this approach is that it does not come with a huge simplification of the implementation effort in individual views.
-Therefore, the system is very extensible and scales well, but the development effort for each interaction remains high.
+Therefore, the system is very extensible and scales well, but the development effort for each interaction remains high.\\\\
 
-\textbf{Maintainability} as described in Section~\ref{sec:analysis:requirements} means how much other parts of the code are impacted by an interaction and how error-prone the framework is.
+
+\item Maintainability
+
+Maintainability as described in Section~\ref{sec:analysis:requirements} means how much other parts of the code are impacted by an interaction and how error-prone the framework is.
 The framework benefits of the main advantages of the publish-subscribe pattern, i.e.\ loose coupling and scalability.
 On the other hand, it suffers from the main disadvantages of this software pattern, the decoupling of publisher and subscriber.
 Therefore, a proper debugging of all components in the whole system is necessary.
 Nevertheless, each view in the \cmv{} system has small dependencies and is therefore easy to maintain and test.
 
-
+\end{enumerate}
