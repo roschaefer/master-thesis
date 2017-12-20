@@ -1,28 +1,28 @@
 \chapter{Summary and Conclusion}\label{sec:conclusion}
 
-In thesis a \cmv{} was developed to visualize multi-dimensional, hierarchical and geographical data.
+In this thesis, a \cmv{} was developed to visualize multi-dimensional, hierarchical and geographical data.
 An existing treemap implementation was complemented with a \gv{}.
-Interactions in the categories \emph{Select}, \emph{Explore} and \emph{Reconfigure} were coordinated betweeen these views.
+Interactions in the categories \emph{Select}, \emph{Explore} and \emph{Reconfigure} were coordinated between these views.
 
 Apart from the specific use case, interactions in \cmvs{} were formalized.
-Precisely, a shared data model, an encoding of the different parts of the interaction and a communication pattern was specified.
+Precisely, a shared data model, an encoding of the different parts of the interaction and a communication pattern were specified.
 This specification provides the basis for the actual implementation, making the system extensible for additional data visualizations and interactions.
 The specification itself may help developers of future \cmv{} frameworks.
 
 The actual implementation is lightweight, scales well and has loose coupling.
-With respect to the requirements of a framework of \cmvs{} it shows good serialization and extensibility.
-Yet, the framework is responsible only to coordinate interactions among views, it does not reduce effort of implementing interactions within views.
+With regard to the requirements of a framework of \cmvs{}, it shows good serialization and extensibility.
+Yet, the framework is responsible only to coordinate interactions among views, it does not reduce the effort of implementing interactions within views.
 
 Some issues became apparent in the performance analysis.
 Re-rendering of views gets slow for large data sets with many features, as every feature is iterated.
-The \tmap{} spends too much time during picking which is caused by an unnecessary expensive lookup of feature ids.
+The \tmap{} spends too much \gls{cpu} time during picking which is caused by an unnecessary expensive lookup of feature ids.
 Especially for frequent interactions like highlighting, this can impair the interactivity and leads to poor user experience.
 This performance issue could be fixed by selectively updating only those features which have been changed.
 
-It was demonstrated how a \cmv{} can be used to improve comprehensibility and interactivity of \tmaps{}.
-A treemap provides the technical context while the \gv{} next to it establishes the geographic context.
-Focusing on a section of a map by clicking on an item in the treemap was discovered as an investigation technique.
-It was possible to guess the reason for outliers in the data set by exploring the geographic surrounding.
+It was demonstrated, how a \cmv{} can be used to improve comprehensibility and interactivity of \tmaps{}.
+A treemap provides the technical context, while the \gv{} next to it establishes the geographic context.
+Focusing on a section of the \gv{} by clicking on an item in the \tmap{} was discovered as new technique to reason about the data.
+It was possible to find out the reason for outliers in the data set by exploring the geographic surrounding.
 Furthermore, selecting a group of items in the treemap could reveal correlations in the \gv{}.
 
 Data analysts can use the new knowledge by applying treemaps in the context of \dss{}.
@@ -35,7 +35,7 @@ The developed \cmv{} framework provides a basis for additional data visualizatio
 In the future, the conceptual framework should be validated and tested with more data visualizations.
 This is necessary as new use case scenarios often reveal unidentified problems.
 
-Out of scope of this thesis is the configuration and layout of multiple views next to each other.
+Out of scope of this thesis are configuration and layout of multiple views next to each other.
 Information visualization often provides the ability to explore and discover unanticipated correlations and anomalies.
 More opportunities for data exploration would be generated if the user could add additional data visualizations on the fly.
 In this case, a change of the use case or group of coordinated visualization techniques would not require a change to the code base.

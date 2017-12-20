@@ -92,7 +92,7 @@ Figure~\ref{fig:implementation:encoding} gives an example of a select interactio
 
 \subsection{Encoding of the subject as a JavaScript callback}
 Not only basic data types like numbers and strings can be published, as seen in Listing~\ref{lst:implementation:subscribe}, but also functions.
-In javascript, these functions are called ``callbacks''.
+In JavaScript, these functions are called ``callbacks''.
 If an interaction of type \attr{filter} is published, the \attr{data} parameter of the subscription callback is itself a callback.
 This callback would be a threshold function expecting an entity as parameter and returns whether or not the entity is filtered.
 
@@ -107,12 +107,12 @@ This callback would be a threshold function expecting an entity as parameter and
 
 \attr{GeoJSON} is used as implementation of the shared data model.
 The format is used to encode a variety of geographic data structures~\parencite{GeoJSON2017}.
-Based on JSON, it can represent simple geographic features like points, lines and areas and reserves a properties object for non-spatial attributes.
+Based on \gls{json}, it can represent simple geographic features like points, lines and areas and reserves a properties object for non-spatial attributes.
 
 GeoJSON allows to encode an \attr{id} as a member in the feature object, which can be used to encode the \attr{id} of the entity.
 Data attributes of entities are encoded as properties and hierarchical relationships are expressed via feature collections.
 
-A GeoJSON example can be seen in listing~\ref{lst:geojson:example}, coordinates are ommited for brevity.
+A GeoJSON example can be seen in listing~\ref{lst:geojson:example}, coordinates are omitted for brevity.
 The GeoJSON property \attr{user\_count\_normalized} encodes a percentage of a user base per region.
 This is one of the attributes that can be mapped to the colour of a \tmap{}.
 
@@ -195,9 +195,9 @@ This is also a performance optimization, as it reduces the number of requests to
 \section{Render views in the \gls{dom}}
 
 Adding the \gv{} to the \gls{dom} is straightforward.
-Listing~\ref{lst:implementation:dom} shows an example how to use React's low-level API to render components inside the \gls{dom}.
-It uses a HTML id \attr{multiview-map-component} to reference a particular node in the HTML document.
-The HTML document needs to import three JavaScript files, i.e.\ two imported libraries required by React and the compiled JavaScript application.
+Listing~\ref{lst:implementation:dom} shows an example how to use React's low-level \gls{api} to render components inside the \gls{dom}.
+It uses a \gls{html} id \attr{multiview-map-component} to reference a particular node in the \gls{html} document.
+The \gls{html} document needs to import three JavaScript files, i.e.\ two imported libraries required by React and the compiled JavaScript application.
 
 \lstinputlisting[
   label={lst:implementation:dom},
@@ -231,7 +231,7 @@ Listing \ref{lst:implementation:render} shows the \attr{render} method of the co
 The \attr{render} method is the only required method of a React component.
 It will be invoked on the initial rendering of the component of the \gls{dom} and on every update of the component's properties.
 
-React's templating language ``\attr{JSX}'' allows to nest other child components into the React parent component.
+React's templating language \gls{jsx} allows to nest other child components into the React parent component.
 In this case the \attr{Map} component includes a \attr{TileLayer} \attr{GeoJSON} component from the \attr{react-leaflet} library.
 This library conveniently provides ``React components for Leaflet maps.''~\parencite{ReactLeaflet2017}.
 

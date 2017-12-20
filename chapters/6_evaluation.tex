@@ -1,8 +1,8 @@
 \chapter{Evaluation and Discussion}\label{sec:evaluation}
 
 In this chapter the reference implementation of the conceptual framework is evaluated.
-First, a couple of use cases are described and how a geographical visualization can create more value.
-A performance evaluation is carried out, to discover technical limitations and to find performance bottlenecks.
+At first, with the aid of three use cases it is described how a geographical visualization can create more value.
+A performance analysis is conducted, to discover technical limitations and to find performance bottlenecks.
 As a last step, the requirements of Chapter~\ref{sec:analysis} are used to validate the conceptual framework and the reference implementation.
 
 \section{Use Case Scenarios}\label{sec:evaluation:use-cases}
@@ -12,7 +12,7 @@ The following three use case scenarios demonstrate how more insights can be gain
 \subsection{Explain outliers}\label{sec:evaluation:use-cases:gas-stations}
 
 \tmaps{} can have outliers, i.e.\ unusual local maxima of a certain attribute.
-If the attribute is mapped to the height of the corresponding block, a local maximum is identifiable by a block that protrudes from a group of evenly leveled blocks.
+If the attribute is mapped to the height of the corresponding block, a local maximum is identifiable by a block that protrudes from a group of evenly levelled blocks.
 Such an example is shown in Figure~\ref{fig:evaluation:use-cases:gas-prices}.
 
 The data set of the visualizations in the figure includes gas stations in Berlin.
@@ -62,7 +62,7 @@ There are three groups of items in the \tmap{} that catch our interest:
 
 Districts in the orange group are rather densely populated and show a decline of population.
 But as seen in Figure~\ref{fig:evaluation:cases:multiselect:1} (b) the districts of this group have a geographic context:
-They are all located in the Ruhr area.
+They are all located in the area of the river ``Ruhr'', a former center of the German metal processing industry.
 
 A similar observation can be made about the white group, i.e.\ sparsely populated districts with a serious decline of population:
 These districts are all located in the east of Germany, see Figure~\ref{fig:evaluation:cases:multiselect:2} (a).
@@ -158,13 +158,13 @@ The hardware specifications of the machine are listed in Table~\ref{tab:evaluati
   \centering
   \caption{Hardware specifications.}%
   \label{tab:evaluation:performance:hardware}
-  \begin{tabular}{ll}
+  \begin{tabularx}{\linewidth}{ll}
     Device name: & LENOVO ThinkPad L540 \\
-    CPU type: & Intel i3-4100M CPU @ 2.50GHz \\
-    \#CPUs: & 4 \\
+    \gls{cpu} type: & Intel i3-4100M \gls{cpu} @ 2.50GHz \\
+    \#\gls{cpu}s: & 4 \\
     Main memory: & 8GiB \\
     Graphics card: & Intel 4th Gen Core Processor Integrated Graphics Controller \\
-  \end{tabular}
+  \end{tabularx}
 \end{table}
 
 A couple of data sets were used in three different scenarios:
@@ -212,8 +212,8 @@ You can see a screenshot of the analysis in Figure~\ref{fig:evaluation:performan
   \label{fig:evaluation:performance:profiling:immoscout:fps}
 \end{figure}
 
-As you can see in Figure~\ref{fig:evaluation:performance:profiling:immoscout:summary} the \tmap{} spends almost the entire CPU time in scripting.
-The \gv{} has a more balanced CPU time, spending time for painting and rendering during focusing interactions.
+As you can see in Figure~\ref{fig:evaluation:performance:profiling:immoscout:summary} the \tmap{} spends almost the entire \gls{cpu} time in scripting.
+The \gv{} has a more balanced \gls{cpu} time, spending time for painting and rendering during focusing interactions.
 
 \begin{figure}[ht]
   \centering
@@ -269,7 +269,7 @@ Nevertheless, the frame per second rate rarely drops in a way which has an impac
   \includegraphics[width=\textwidth]{figures/evaluation/performance/profiles/landkreise_both/fps}
 \end{figure}
 
-The \gv{} alone idles almost 50\% of the CPU time, as you can see on the right side of Figure~\ref{fig:evaluation:performance:profiling:landkreise:summary}.
+The \gv{} alone idles almost 50\% of the \gls{cpu} time, as you can see on the right side of Figure~\ref{fig:evaluation:performance:profiling:landkreise:summary}.
 \begin{figure}[ht]
   \centering
   \includegraphics[width=\textwidth]{figures/evaluation/performance/summaries/landkreise}

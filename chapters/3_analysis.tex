@@ -75,8 +75,8 @@ In Chapter~\ref{sec:evaluation} these requirements are reused to evaluate the sy
 \section{Component Pattern and Web Frameworks}\label{sec:analysis:frontend-framework-comparison}
 
 The current \visan{} is a web application and the complementing \gls{cmv} extension should be based on web technologies, too.
-Many popular web frameworks like Angular, Ember, React and Vue have developed mechanisms to update UI elements during user interactions.
-Because a view in a \cmv{} is a UI element as well, it is worth to consider one of these web frameworks for the implementation of the \cmv{}.
+Many popular web frameworks like Angular, Ember, React and Vue have developed mechanisms to update \gls{ui} elements during user interactions.
+Because a view in a \cmv{} is a \gls{ui} element as well, it is worth to consider one of these web frameworks for the implementation of the \cmv{}.
 
 One software pattern, which is a commonly used update mechanism e.g.\ in Ember and React, is the so-called ``component'' pattern.
 It has become so widespread and prevalent that it triggered even a web specification called “web components”.
@@ -99,7 +99,7 @@ String based attributes are supported, as seen in Listing~\ref{lst:evaluation:we
 
 To pass rich data to components however, web component frameworks have to roll their own data flow and syntax.
 Google Polymer's own syntax to pass rich data to a components is shown in Listing~\ref{lst:evaluation:polymer-data}.
-But this is a custom solution that abandons standard HTML.
+But this is a custom solution that abandons standard \gls{html}.
 
 
 \lstinputlisting[
@@ -192,7 +192,7 @@ Table~\ref{tab:analysis:line-graph:interactions} shows a list of plausible inter
   \begin{center}
     \subfloat[Line charts]{{\includegraphics[width=0.4\linewidth]{figures/analysis/line-graphs} }}%
     \qquad
-  \caption{Line charts connect data points in a cartesian coordinate system and are used to display trends.}
+  \caption{Line charts connect data points in a Cartesian coordinate system and are used to display trends.}
   \label{fig:analysis:line-graphs}
   \end{center}
 \end{figure}
@@ -318,7 +318,7 @@ As seen in Table~\ref{tab:analysis:bubble-charts:interactions}, interactions als
     \hline
     Select & Highlight a bubble & id of data point \\
     Explore & Zoom in, zoom out & width and height of window \\
-    Explore & Move viewpoint position & x- and y-coordinates of viewport \\
+    Explore & Move viewpoint position & x- and y-coordinates of viewpoint\\
     Encode & Change colour mapping & id of data series + colour \\
     Encode & Change colour function & mapping function of value to colour \\
     Encode & Change mapping of size & mapping function of value to size \\
@@ -433,7 +433,7 @@ Thus, it also expects \emph{relational} data in form of a graph
     \bf Category & \bf Description & \bf Required information \\
     \hline
     Select & Highlight a feature & id of data point \\
-    Explore & Move viewport & latitude and longitude of viewpoint \\
+    Explore & Move viewpoint & latitude and longitude of viewpoint \\
     Explore & Zoom in, zoom out & zoom factor \\
     Encode & Change shape of marker & data id  shape \\
     Encode & Change mapping of category to colour & id of data series + colour \\
@@ -449,7 +449,7 @@ Thus, it also expects \emph{relational} data in form of a graph
 Activity diagrams, like calendars and gantt charts, and timelines are temporal visualizations.
 Gantt charts and timelines have in common that each feature is represented as a rectangle, with the duration of the feature mapped to size and position.
 A calendar, as shown in Figure~\ref{fig:analysis:temporal}, may show the event as a single marker for brevity.
-Calendars and gantt charts could not only read the data from the data source, but also add new features to the data set or update metadata of a feature, e.g.\ the progress of the activity.
+Calendars and gantt charts could not only read the data from the data source, but also add new features to the data set or update meta-data of a feature, e.g.\ the progress of the activity.
 Calendars and gantt charts expect \emph{tabular} data, although data points might reoccur on a regular schedule.
 So some data points, i.e.\ events, might repeat infinitely.
 A very common interaction is the filtering of the data set by selecting an interval over a timeline visualization, e.g. by dragging the mouse from left to right.
